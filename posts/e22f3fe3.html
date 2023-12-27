@@ -1,0 +1,310 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>E9安装手册 | 時光的博客园子</title><meta name="author" content="時光"><meta name="copyright" content="時光"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="referrer" content="no-referrer"><meta name="description" content="E9安装手册安装包获取安装所需文件可在泛微emobile技术门户获取，泛微会定期维护  自动部署1、通过 SSH 工具连接上 linux，创建应用程序目录 可根据客户实际要求创建在任何路径下，保证有足够的空间即可，相关命令为： 1mkdir -p &#x2F;usr&#x2F;weaver  2、通过 FTP 工具上传程序 将本地的 ECOLOGY相关程序上传到创建好的 weaver 目录下。共四个，JDK，RESI">
+<meta property="og:type" content="article">
+<meta property="og:title" content="E9安装手册">
+<meta property="og:url" content="https://blog.shiguangcoding.eu.org/posts/e22f3fe3.html">
+<meta property="og:site_name" content="時光的博客园子">
+<meta property="og:description" content="E9安装手册安装包获取安装所需文件可在泛微emobile技术门户获取，泛微会定期维护  自动部署1、通过 SSH 工具连接上 linux，创建应用程序目录 可根据客户实际要求创建在任何路径下，保证有足够的空间即可，相关命令为： 1mkdir -p &#x2F;usr&#x2F;weaver  2、通过 FTP 工具上传程序 将本地的 ECOLOGY相关程序上传到创建好的 weaver 目录下。共四个，JDK，RESI">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.shiguangcoding.eu.org/img/avatar.png">
+<meta property="article:published_time" content="2023-12-26T14:53:42.917Z">
+<meta property="article:modified_time" content="2023-12-26T15:34:58.183Z">
+<meta property="article:author" content="時光">
+<meta property="article:tag" content="Ecology">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.shiguangcoding.eu.org/img/avatar.png"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://blog.shiguangcoding.eu.org/posts/e22f3fe3.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'E9安装手册',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-12-26 23:34:58'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/atom.xml" title="時光的博客园子" type="application/atom+xml">
+</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">80</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">74</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/top_1.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="時光的博客园子"><span class="site-name">時光的博客园子</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">E9安装手册</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-12-26T14:53:42.917Z" title="发表于 2023-12-26 22:53:42">2023-12-26</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-12-26T15:34:58.183Z" title="更新于 2023-12-26 23:34:58">2023-12-26</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/">安装教程</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="E9安装手册"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="E9安装手册"><a href="#E9安装手册" class="headerlink" title="E9安装手册"></a>E9安装手册</h1><h2 id="安装包获取"><a href="#安装包获取" class="headerlink" title="安装包获取"></a>安装包获取</h2><p>安装所需文件可在泛微emobile技术门户获取，泛微会定期维护</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202311/2233039-20231114224500581-1299887758.png" alt="image-20231114224459866"></p>
+<h2 id="自动部署"><a href="#自动部署" class="headerlink" title="自动部署"></a>自动部署</h2><h3 id="1、通过-SSH-工具连接上-linux，创建应用程序目录"><a href="#1、通过-SSH-工具连接上-linux，创建应用程序目录" class="headerlink" title="1、通过 SSH 工具连接上 linux，创建应用程序目录"></a>1、通过 SSH 工具连接上 linux，创建应用程序目录</h3><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202311/2233039-20231114182415612-2082326022.png" alt="image-20231114182416386"></p>
+<p>可根据客户实际要求创建在任何路径下，保证有足够的空间即可，相关命令为：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p /usr/weaver</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、通过-FTP-工具上传程序"><a href="#2、通过-FTP-工具上传程序" class="headerlink" title="2、通过 FTP 工具上传程序"></a>2、通过 FTP 工具上传程序</h3><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202311/2233039-20231114183225920-1661277848.png" alt="image-20231114183226839"></p>
+<p>将本地的 ECOLOGY相关程序上传到创建好的 weaver 目录下。共四个，JDK，RESIN，ECOLOGY 和 Ecology_setup_forLinux_*.py 文件。<strong>（JDK 必须提前下载好）</strong></p>
+<h3 id="3、执行-Ecology-setup-forLinux-py"><a href="#3、执行-Ecology-setup-forLinux-py" class="headerlink" title="3、执行 Ecology_setup_forLinux_*.py"></a>3、执行 Ecology_setup_forLinux_*.py</h3><p>即输入命令：python Ecology_setup_forLinux_*.py 回车，此处我使用的版本为v2.66</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python Ecology_setup_forLinux_v2<span class="number">.66</span>.py</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202311/2233039-20231114183453528-1838303529.png" alt="image-20231114183454149"></p>
+<p>如果选择 1 自动执行以下三步操作： </p>
+<p>第一步：解压缩。（Linux 必须支持 unzip 及 tar 命令，没有需要提前安装好，否则无法解压） </p>
+<p>第二步：给 ecology、jdk、resin 三个目录赋权。 </p>
+<p>第三步：修改配置文件。设置路径、内存、端口。（内存和端口可在安装过程中进行调整）。 </p>
+<p>如果选择 2 自动解压缩失败可在手动解压好的情况下，进行第二步和第三步配置。 </p>
+<p>如果选择 3 查看配置好的相关参数，仅查看，若要调整，可再选择 2 或手动调整。</p>
+<p>此处输入1</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202311/2233039-20231114184102932-842439474.png" alt="image-20231114184103511"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202311/2233039-20231114184352271-147344098.png" alt="image-20231114184352829"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202311/2233039-20231114184505473-1544093421.png" alt="image-20231114184506165"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202311/2233039-20231114193416303-1152725752.png" alt="image-20231114193414751"></p>
+<p>本页面为配置完成后，切换到 Resin4&#x2F;bin (或者Resin&#x2F;bin) 目录后，启动 resin 服务。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/weaver/Resin4/bin</span><br><span class="line">./startresin.sh</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202311/2233039-20231114193716924-2136306748.png" alt="image-20231114193711901"></p>
+<p>服务启动好后，访问服务器ip及刚才设置的端口即可进入数据库初始化页面</p>
+<p>能打开此页面代表Resin服务部署成功</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202311/2233039-20231114221800304-1317730758.png" alt="image-20231114221759787"></p>
+<p>如果 自动部署操作不成功，那就只能手动部署。 </p>
+<h2 id="手动部署"><a href="#手动部署" class="headerlink" title="手动部署"></a>手动部署</h2><h3 id="（1）端口（三个端口）"><a href="#（1）端口（三个端口）" class="headerlink" title="（1）端口（三个端口）"></a>（1）端口（三个端口）</h3><p>http 端口（Resin&#x2F;conf&#x2F;resin.properties）浏览器访问时用到的端口，根据实际调整 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.http : 80</span><br></pre></td></tr></table></figure>
+
+<p>server 端口（Resin&#x2F;conf&#x2F;resin.properties）默认不需要修改 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app_servers : 127.0.0.1:6800</span><br></pre></td></tr></table></figure>
+
+<p>watchdog 端口（Resin&#x2F;conf&#x2F;resin.xml）默认不需要修改 </p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">server-multi</span> <span class="attr">id-prefix</span>=<span class="string">&quot;app-&quot;</span> <span class="attr">address-list</span>=<span class="string">&quot;$&#123;app_servers&#125;&quot;</span> <span class="attr">port</span>=<span class="string">&quot;6800&quot;</span>&gt;</span></span><br><span class="line">	    <span class="tag">&lt;<span class="name">watchdog-port</span>&gt;</span>6600<span class="tag">&lt;/<span class="name">watchdog-port</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">server-multi</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="（2）内存（Resin-conf-resin-properties）"><a href="#（2）内存（Resin-conf-resin-properties）" class="headerlink" title="（2）内存（Resin&#x2F;conf&#x2F;resin.properties）"></a>（2）内存（Resin&#x2F;conf&#x2F;resin.properties）</h3><p>根据实际可用内存调整，不要低于 3550</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Arg passed directly to the JVM</span><br><span class="line"> jvm_args  : -Xmx5550m -Xms5550m -XX:CompileThreshold=100000 -XX:ReservedCodeCacheSize=512m -XX:ParallelGCThreads=20 -XX:+UseConcMarkSweepGC -XX:-OmitStackTraceInFastThrow -XX:+UseParNewGC -XX:+DisableExplicitGC -javaagent:wagent.jar -javaagent:stophotdeploy.jar -Djdk.tls.ephemeralDHKeySize=2048 -Dfile.encoding=GBK -javaagent:rasp/rasp.jar</span><br></pre></td></tr></table></figure>
+
+<h3 id="（3）路径（两个路径）"><a href="#（3）路径（两个路径）" class="headerlink" title="（3）路径（两个路径）"></a>（3）路径（两个路径）</h3><p>JDK 路径（Resin&#x2F;conf&#x2F;resin.xml）根据实际调整</p>
+<p>官方部署文档：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--</span><br><span class="line"> - You can change the compiler to &quot;javac&quot;, &quot;eclipse&quot; or &quot;internal&quot;.</span><br><span class="line"> --&gt;</span><br><span class="line"> &lt;javac compiler=&quot;/usr/weaver/jdk1.8.0_151/bin/javac&quot; args=&quot;-encoding UTF-8&quot;/&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>我本地实际为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--</span><br><span class="line">     - You can change the compiler to &quot;javac&quot;, &quot;eclipse&quot; or &quot;internal&quot;.</span><br><span class="line">    --&gt;</span><br><span class="line">   &lt;javac compiler=&quot;internal&quot; args=&quot;-encoding UTF-8&quot;/&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>应用程序路径（Resin&#x2F;conf&#x2F;resin.xml）根据实际调整</p>
+<p><code>&lt;web-app id=&quot;/&quot; root-directory=&quot;/usr/weaver/ecology&quot;&gt;</code></p>
+<p>官方部署文档：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- the default host, matching any host name --&gt;</span><br><span class="line"> &lt;host id=&quot;&quot; root-directory=&quot;.&quot;&gt;</span><br><span class="line"> &lt;!--</span><br><span class="line"> - webapps can be overridden/extended in the resin.xml</span><br><span class="line"> --&gt;</span><br><span class="line"> &lt;web-app id=&quot;/&quot; root-directory=&quot;/usr/weaver/ecology&quot;&gt;</span><br><span class="line">&lt;servlet-mapping url-pattern=&#x27;/weaver/*&#x27; servlet-name=&#x27;invoker&#x27;/&gt;</span><br><span class="line"> &lt;/web-app&gt;</span><br><span class="line"> &lt;/host&gt;</span><br></pre></td></tr></table></figure>
+
+<p>我本地实际为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;host id=&quot;&quot; root-directory=&quot;.&quot;&gt;</span><br><span class="line"></span><br><span class="line">   &lt;access-log path=&quot;logs/access.log&quot; archive-format=&quot;access-%Y%m%d.log.gz&quot; format=&#x27;%s` %&#123;loginidweaver&#125;c` %D` %h` %n` %u` &quot;%t&quot;` &quot;%r&quot;`  &quot;%&#123;Referer&#125;i&quot;&#x27; rollover-period=&quot;1D&quot;&gt;</span><br><span class="line">	   &lt;exclude&gt;\.gif$&lt;/exclude&gt;</span><br><span class="line">	   &lt;exclude&gt;\.jpg$&lt;/exclude&gt;</span><br><span class="line">	   &lt;exclude&gt;\.png$&lt;/exclude&gt;</span><br><span class="line">	   &lt;exclude&gt;\.js$&lt;/exclude&gt;</span><br><span class="line">	   &lt;exclude&gt;\.css$&lt;/exclude&gt;</span><br><span class="line">	   &lt;exclude&gt;\.html$&lt;/exclude&gt;</span><br><span class="line">	   &lt;exclude&gt;\.htm$&lt;/exclude&gt;</span><br><span class="line">	   &lt;exclude&gt;\.swf$&lt;/exclude&gt;</span><br><span class="line">	   &lt;exclude&gt;\.cur$&lt;/exclude&gt;</span><br><span class="line">	&lt;/access-log&gt;</span><br><span class="line"></span><br><span class="line">	&lt;stdout-log path=&quot;log/stdout.log&quot; archive-format=&quot;stdout-%Y%m%d.log.gz&quot; timestamp=&quot;[%Y.%m.%d %H:%M:%S.%s]&quot; rollover-period=&quot;1D&quot;/&gt;</span><br><span class="line">	&lt;stderr-log path=&quot;log/stderr.log&quot; archive-format=&quot;stderr-%Y%m%d.log.gz&quot; timestamp=&quot;[%Y.%m.%d %H:%M:%S.%s]&quot; rollover-period=&quot;1D&quot;/&gt;</span><br><span class="line"></span><br><span class="line">      &lt;!--</span><br><span class="line">         - webapps can be overridden/extended in the resin.xml</span><br><span class="line">        --&gt;</span><br><span class="line">      &lt;web-app id=&quot;/&quot; root-directory=&quot;/usr/weaver/ecology&quot;&gt;</span><br><span class="line">			&lt;servlet-mapping url-pattern=&#x27;/weaver/*&#x27; servlet-name=&#x27;invoker&#x27;/&gt;</span><br><span class="line">			&lt;form-parameter-max&gt;100000&lt;/form-parameter-max&gt;</span><br><span class="line">      &lt;/web-app&gt;</span><br><span class="line"></span><br><span class="line">    &lt;/host&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="（4）-服务（三个文件）"><a href="#（4）-服务（三个文件）" class="headerlink" title="（4） 服务（三个文件）"></a>（4） 服务（三个文件）</h3><p>resin.sh(Resin4&#x2F;bin&#x2F;resin.sh)根据实际设置 JDK 路径 </p>
+<p>JAVA_HOME&#x3D;<font color = red><strong>&#x2F;usr&#x2F;weaver&#x2F;jdk1.8.0_151</strong></font></p>
+<p>startresin.sh(Resin4&#x2F;bin&#x2F;startresin.sh)根据实际设置 resin.sh 路径 </p>
+<p>ulimit -n 65535 </p>
+<p>export LC_ALL&#x3D;zh_CN.gbk </p>
+<p>export LANG&#x3D;zh_CN.gbk</p>
+<p> <font color = red>&#x2F;usr&#x2F;weaver&#x2F;Resin4&#x2F;bin&#x2F;resin.sh</font>&gt; start </p>
+<p><strong>stopresin.sh</strong>(Resin4&#x2F;bin&#x2F;stopresin.sh) 根据实际设置 resin.sh 路径 </p>
+<p><font color = red>&#x2F;usr&#x2F;weaver&#x2F;Resin4&#x2F;bin&#x2F;resin.sh</font> stop</p>
+<h3 id="（5）-检查字符集"><a href="#（5）-检查字符集" class="headerlink" title="（5） 检查字符集"></a>（5） 检查字符集</h3><p><font color=red>不建议修改，修改后Linux环境会乱码，可跳过</font></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202311/2233039-20231115214450615-1786737702.png" alt="image-20231115214449680"></p>
+<p>检查当前系统是不是使用 zh_CN.gbk </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">env | grep LANG</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202311/2233039-20231114214458667-1551846510.png" alt="image-20231114214453735"></p>
+<p>若不是 zh_CN.gbk 字符集，则通过 <code>export LANG=zh_CN.gbk</code> 命令来指定</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202311/2233039-20231114214607453-1678677455.png" alt="image-20231114214606820"></p>
+<p>这种方式在重启系统后将失效，若要一直有效，可编辑<code>/etc/profile</code> 文件</p>
+<p>在最后添加 <code>export LANG=zh_CN.gbk</code></p>
+<h3 id="（6）对目录赋予权限"><a href="#（6）对目录赋予权限" class="headerlink" title="（6）对目录赋予权限"></a>（6）对目录赋予权限</h3><p>对Resin 和 jdk 目录使用 <code>chmod +x </code>赋予可执行权限</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202311/2233039-20231114215811531-645230160.png" alt="image-20231114215810827"></p>
+<p>命令如下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/weaver/</span><br><span class="line">chmod +x Resin4/*</span><br><span class="line">chmod +x jdk1.8.0_151/*</span><br></pre></td></tr></table></figure>
+
+<h3 id="（7）检查文件格式"><a href="#（7）检查文件格式" class="headerlink" title="（7）检查文件格式"></a>（7）检查文件格式</h3><p>（在 windows 下编写的脚本文件，放到 Linux 中无法识别）</p>
+<p>切换到Resin的bin目录，使用 <code>vi</code>命令查看shell脚本内容 </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/weaver/Resin4/bin</span><br><span class="line">vi startresin.sh </span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202311/2233039-20231114220051926-1511995118.png" alt="image-20231114220051405"></p>
+<p>显示内容如下</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202311/2233039-20231114220549524-1712176701.png" alt="image-20231114220548940"></p>
+<p>如果是这个结果，则代表文件格式是正确的，直接输入<code>:q!</code> (冒号+q+感叹号表示不保存修) 改直接退出 vi 操作</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202311/2233039-20231114220638753-1823912521.png" alt="image-20231114220638213"></p>
+<p>如果是这个结果，则代表文件格式是错误的，需要转换格式，否则无法启动</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202311/2233039-20231114220713509-403661258.png" alt="image-20231114220713062"></p>
+<p>输入<code>:set ff=unix</code> (冒号+set+空格+ff 等于 unix 表示把文件格式由 dos 转换为 unix)</p>
+<p> 回车后再输入<code>:wq</code> (冒号+w+q 表示保存之前的修改并退出 vi 操作)</p>
+<p> 除了 startresin.sh 外，resin.sh 和 stopresin.sh 也必须检查，保证文件格式正确</p>
+<h2 id="初始化数据库"><a href="#初始化数据库" class="headerlink" title="初始化数据库"></a>初始化数据库</h2><h3 id="修改验证码"><a href="#修改验证码" class="headerlink" title="修改验证码"></a>修改验证码</h3><p>为方便记忆及日后license维护，可以修改验证码默认值为1</p>
+<p>验证码默认值为<code>wEAver2018</code>可在文件 <code>ecology\WEB-INF\code.key</code> 中查看</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202311/2233039-20231114222545494-920588789.png" alt="image-20231114222537960"></p>
+<p>可直接修改<code>code.key</code> 文件，也可通过初始化页面修改</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202311/2233039-20231114222716045-1613342454.png" alt="image-20231114222715608"></p>
+<h3 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h3><p>因为无论是否使用现有数据库，数据库均需手动到数据库中创建，程序无法自动生成</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202311/2233039-20231114223330170-2022909818.png" alt="image-20231114223322650"></p>
+<p>手动创建数据库</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202311/2233039-20231114223233386-79675942.png" alt="image-20231114223232833"></p>
+<p>创建好后即可开始初始化数据库，初始化耗时较长，需耐心等待</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202311/2233039-20231114223529763-1002787339.png" alt="image-20231114223529239"></p>
+<p>若想重新初始化数据库将<code>ecology\WEB-INF\prop\weaver.properties</code>文件内容清空</p>
+<p>重启服务后重新访问OA地址即可重新进入初始化界面</p>
+<p>当然，也可直接修改数据库连接地址，数据库名，用户名，密码等配置信息</p>
+<p>数据库初始化完成之后重新登录系统即可,管理员初始密码为 <code>Weaver@2001</code>,可通过sql改为1</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 将用户登录密码改为1   默认密码 Weaver@2001</span></span><br><span class="line"><span class="keyword">update</span> hrmresource <span class="keyword">set</span> password<span class="operator">=</span><span class="string">&#x27;C4CA4238A0B923820DCC509A6F75849B&#x27;</span> </span><br><span class="line"><span class="comment">-- 系统管理员登录密码改为1</span></span><br><span class="line"><span class="keyword">update</span> hrmresourcemanager <span class="keyword">set</span> password<span class="operator">=</span><span class="string">&#x27;C4CA4238A0B923820DCC509A6F75849B&#x27;</span> </span><br></pre></td></tr></table></figure>
+
+
+
+<p>首次登录需要提交license授权文件，授权后会进入Ecology升级确认页面，按操作指引操作即可</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202311/2233039-20231115125011991-1623633147.png" alt="image-20231115125011884"></p>
+<h2 id="启用非标功能"><a href="#启用非标功能" class="headerlink" title="启用非标功能"></a>启用非标功能</h2><h3 id="申请非标包"><a href="#申请非标包" class="headerlink" title="申请非标包"></a>申请非标包</h3><p>可通过<code>Ecology功能及版本升级申请流程</code> 申请本地DEMO非标包</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202311/2233039-20231115131356664-529486860.png" alt="image-20231115131356893"></p>
+<p>申请时需注意以下信息</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202311/2233039-20231115131226869-1922554369.png" alt="image-20231115131226722"></p>
+<h3 id="升级非标"><a href="#升级非标" class="headerlink" title="升级非标"></a>升级非标</h3><p>将非标包解压后直接覆盖到ecology目录，重启Resin服务</p>
+<p>重启后重新访问OA进入升级页面</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202311/2233039-20231115220236614-1231633897.png" alt="image-20231115220235973"></p>
+<p>使用系统管理员账号登录，进行升级操作</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202311/2233039-20231115220326442-1582505146.png" alt="image-20231115220325965"></p>
+<p>填写数据库地址后六位信息及数据库名后三位</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202311/2233039-20231115220737085-1842553394.png" alt="image-20231115220736382"></p>
+<p>详细信息可在 <code>ecology/WEB-INF/prop/weaver.properties</code> 中查看</p>
+<p>以我本地服务为例，数据库地址为 127.0.0.1，后六位为 .0.0.1；数据库名为ecology,后三位为ogy</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202311/2233039-20231115221002253-1830263147.png" alt="image-20231115221001654"></p>
+<p>重要提醒确认</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202311/2233039-20231115221154375-881579704.png" alt="image-20231115221153868"></p>
+<p>确认其他配置</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202311/2233039-20231115221214671-1405785337.png" alt="image-20231115221214071"></p>
+<p>点击确定后开始执行sql脚本</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202311/2233039-20231115221319940-1568502724.png" alt="image-20231115221319203"></p>
+<p>脚本执行完毕后重新登录OA进入<strong>Ecology升级完成确认页面</strong>，按照操作指引一次点击下一步即可</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202311/2233039-20231115223622481-1394942944.png" alt="image-20231115223621537"></p>
+<h3 id="启用非标"><a href="#启用非标" class="headerlink" title="启用非标"></a>启用非标</h3><p>使用系统管理员登录OA后右上角设置按钮点击授权信息</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202311/2233039-20231115223817514-1164129625.png" alt="image-20231115223816956"></p>
+<p>此时非标功能启用情况已启用数量为0</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202311/2233039-20231115223907249-868811263.png" alt="image-20231115223906464"></p>
+<p>点击蓝色链接进入非标功能管理界面，勾选需要启用的非标进行启用</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202311/2233039-20231115224035412-509391539.png" alt="image-20231115224034684"></p>
+<p>启用时会有相应提醒</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202311/2233039-20231115224133592-5872113.png" alt="image-20231115224132848"></p>
+<p>启用后可重新查看已启用数量确认</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202311/2233039-20231115224239180-1488921123.png" alt="image-20231115224238550"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://blog.shiguangcoding.eu.org">時光</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://blog.shiguangcoding.eu.org/posts/e22f3fe3.html">https://blog.shiguangcoding.eu.org/posts/e22f3fe3.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.shiguangcoding.eu.org" target="_blank">時光的博客园子</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Ecology/">Ecology</a></div><div class="post_share"><div class="social-share" data-image="/img/avatar.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/da9d62dc.html" title="Git常用命令速查"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Git常用命令速查</div></div></a></div><div class="next-post pull-right"><a href="/posts/76390e98.html" title="Docker简介"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Docker简介</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">時光</div><div class="author-info__description">一个乐于分享的小白</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">80</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">74</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/shiguang-coding"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/shiguang-coding" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:an_shiguang@163.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#E9%E5%AE%89%E8%A3%85%E6%89%8B%E5%86%8C"><span class="toc-number">1.</span> <span class="toc-text">E9安装手册</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E5%8C%85%E8%8E%B7%E5%8F%96"><span class="toc-number">1.1.</span> <span class="toc-text">安装包获取</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2"><span class="toc-number">1.2.</span> <span class="toc-text">自动部署</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E9%80%9A%E8%BF%87-SSH-%E5%B7%A5%E5%85%B7%E8%BF%9E%E6%8E%A5%E4%B8%8A-linux%EF%BC%8C%E5%88%9B%E5%BB%BA%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E7%9B%AE%E5%BD%95"><span class="toc-number">1.2.1.</span> <span class="toc-text">1、通过 SSH 工具连接上 linux，创建应用程序目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E9%80%9A%E8%BF%87-FTP-%E5%B7%A5%E5%85%B7%E4%B8%8A%E4%BC%A0%E7%A8%8B%E5%BA%8F"><span class="toc-number">1.2.2.</span> <span class="toc-text">2、通过 FTP 工具上传程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81%E6%89%A7%E8%A1%8C-Ecology-setup-forLinux-py"><span class="toc-number">1.2.3.</span> <span class="toc-text">3、执行 Ecology_setup_forLinux_*.py</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%8B%E5%8A%A8%E9%83%A8%E7%BD%B2"><span class="toc-number">1.3.</span> <span class="toc-text">手动部署</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E7%AB%AF%E5%8F%A3%EF%BC%88%E4%B8%89%E4%B8%AA%E7%AB%AF%E5%8F%A3%EF%BC%89"><span class="toc-number">1.3.1.</span> <span class="toc-text">（1）端口（三个端口）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E5%86%85%E5%AD%98%EF%BC%88Resin-conf-resin-properties%EF%BC%89"><span class="toc-number">1.3.2.</span> <span class="toc-text">（2）内存（Resin&#x2F;conf&#x2F;resin.properties）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E8%B7%AF%E5%BE%84%EF%BC%88%E4%B8%A4%E4%B8%AA%E8%B7%AF%E5%BE%84%EF%BC%89"><span class="toc-number">1.3.3.</span> <span class="toc-text">（3）路径（两个路径）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%884%EF%BC%89-%E6%9C%8D%E5%8A%A1%EF%BC%88%E4%B8%89%E4%B8%AA%E6%96%87%E4%BB%B6%EF%BC%89"><span class="toc-number">1.3.4.</span> <span class="toc-text">（4） 服务（三个文件）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%885%EF%BC%89-%E6%A3%80%E6%9F%A5%E5%AD%97%E7%AC%A6%E9%9B%86"><span class="toc-number">1.3.5.</span> <span class="toc-text">（5） 检查字符集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%886%EF%BC%89%E5%AF%B9%E7%9B%AE%E5%BD%95%E8%B5%8B%E4%BA%88%E6%9D%83%E9%99%90"><span class="toc-number">1.3.6.</span> <span class="toc-text">（6）对目录赋予权限</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%887%EF%BC%89%E6%A3%80%E6%9F%A5%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.3.7.</span> <span class="toc-text">（7）检查文件格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">1.4.</span> <span class="toc-text">初始化数据库</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E9%AA%8C%E8%AF%81%E7%A0%81"><span class="toc-number">1.4.1.</span> <span class="toc-text">修改验证码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">1.4.2.</span> <span class="toc-text">创建数据库</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%AF%E7%94%A8%E9%9D%9E%E6%A0%87%E5%8A%9F%E8%83%BD"><span class="toc-number">1.5.</span> <span class="toc-text">启用非标功能</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%B3%E8%AF%B7%E9%9D%9E%E6%A0%87%E5%8C%85"><span class="toc-number">1.5.1.</span> <span class="toc-text">申请非标包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%87%E7%BA%A7%E9%9D%9E%E6%A0%87"><span class="toc-number">1.5.2.</span> <span class="toc-text">升级非标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%AF%E7%94%A8%E9%9D%9E%E6%A0%87"><span class="toc-number">1.5.3.</span> <span class="toc-text">启用非标</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/59241ebb.html" title="IDEA远程Debug调试配置">IDEA远程Debug调试配置</a><time datetime="2023-12-26T14:53:43.093Z" title="发表于 2023-12-26 22:53:43">2023-12-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/222d2de8.html" title="投屏神器Scrcpy基本使用">投屏神器Scrcpy基本使用</a><time datetime="2023-12-26T14:53:43.075Z" title="发表于 2023-12-26 22:53:43">2023-12-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/34bcc8fe.html" title="私有化部署LobeChat">私有化部署LobeChat</a><time datetime="2023-12-26T14:53:43.070Z" title="发表于 2023-12-26 22:53:43">2023-12-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/a327d8e1.html" title="基于Notion搭建个人博客">基于Notion搭建个人博客</a><time datetime="2023-12-26T14:53:43.064Z" title="发表于 2023-12-26 22:53:43">2023-12-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/9a6fc6fc.html" title="缺少MSVCP140.dll导致软件无法打开">缺少MSVCP140.dll导致软件无法打开</a><time datetime="2023-12-26T14:53:43.051Z" title="发表于 2023-12-26 22:53:43">2023-12-26</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By 時光</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"></div><div class="aplayer no-destroy" data-id="8152976493" data-server="netease" data-type="playlist"   data-order="list" data-fixed="true" data-preload="auto" data-autoplay="false" data-mutex="true" ></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="true" data-click="true"></script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="true"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/"});</script></body></html>

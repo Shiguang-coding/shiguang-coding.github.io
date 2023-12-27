@@ -1,0 +1,283 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>SVN 安装配置 | 時光的博客园子</title><meta name="author" content="時光"><meta name="copyright" content="時光"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="referrer" content="no-referrer"><meta name="description" content="SVN 安装配置SVN的安装分为2部分，第一部分是服务端安装，第二部分的客户端安装。 一般情况下，只需要安装客户端即可，因为在企业中服务端是由运维来维护的，我们只需要开通一个账号即可。 常用的客户端又分为两种：安装在操作系统中的客户端、Eclipse的插件 一、服务端安装官网下载服务端 visualsvn  也可直接通过链接 https:&#x2F;&#x2F;www.visualsvn.com&#x2F;files&#x2F;Visu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SVN 安装配置">
+<meta property="og:url" content="https://blog.shiguangcoding.eu.org/posts/15ecac42.html">
+<meta property="og:site_name" content="時光的博客园子">
+<meta property="og:description" content="SVN 安装配置SVN的安装分为2部分，第一部分是服务端安装，第二部分的客户端安装。 一般情况下，只需要安装客户端即可，因为在企业中服务端是由运维来维护的，我们只需要开通一个账号即可。 常用的客户端又分为两种：安装在操作系统中的客户端、Eclipse的插件 一、服务端安装官网下载服务端 visualsvn  也可直接通过链接 https:&#x2F;&#x2F;www.visualsvn.com&#x2F;files&#x2F;Visu">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.shiguangcoding.eu.org/img/avatar.png">
+<meta property="article:published_time" content="2023-03-19T07:04:00.000Z">
+<meta property="article:modified_time" content="2023-12-26T15:34:58.198Z">
+<meta property="article:author" content="時光">
+<meta property="article:tag" content="svn">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.shiguangcoding.eu.org/img/avatar.png"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://blog.shiguangcoding.eu.org/posts/15ecac42.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'SVN 安装配置',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-12-26 23:34:58'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/atom.xml" title="時光的博客园子" type="application/atom+xml">
+</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">80</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">74</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/top_1.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="時光的博客园子"><span class="site-name">時光的博客园子</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">SVN 安装配置</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-03-19T07:04:00.000Z" title="发表于 2023-03-19 15:04:00">2023-03-19</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-12-26T15:34:58.198Z" title="更新于 2023-12-26 23:34:58">2023-12-26</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/">安装教程</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="SVN 安装配置"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="SVN-安装配置"><a href="#SVN-安装配置" class="headerlink" title="SVN 安装配置"></a>SVN 安装配置</h1><p>SVN的安装分为2部分，第一部分是服务端安装，第二部分的客户端安装。</p>
+<p>一般情况下，只需要安装客户端即可，因为在企业中服务端是由运维来维护的，我们只需要开通一个账号即可。</p>
+<p>常用的客户端又分为两种：安装在操作系统中的客户端、Eclipse的插件</p>
+<h2 id="一、服务端安装"><a href="#一、服务端安装" class="headerlink" title="一、服务端安装"></a>一、服务端安装</h2><p>官网下载服务端 <a target="_blank" rel="noopener" href="https://www.visualsvn.com/server/download/">visualsvn</a> </p>
+<p>也可直接通过链接 <a target="_blank" rel="noopener" href="https://www.visualsvn.com/files/VisualSVN-Server-5.1.1-x64.msi">https://www.visualsvn.com/files/VisualSVN-Server-5.1.1-x64.msi</a> 下载</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.vika.cn/space/2023/03/20/5be4c48fafc14347b3080c26eef226ae" alt="image-20230205084005275"></p>
+<p>下载的程序如下所示,双击运行安装</p>
+<p>无脑下一步</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.vika.cn/space/2023/03/20/849c918120754c209d525dfccf7c0d87" alt="image-20230205084238027"></p>
+<p>接受协议，无脑下一步</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.vika.cn/space/2023/03/20/db3126d897dc4979ad4cfafb77552635" alt="image-20230205084454087"></p>
+<p>保留默认设置（选择visualVSN服务器和管理控制台），并添加到系统环境变量</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.vika.cn/space/2023/03/20/e048000469c24fe4a6695c431aed1538" alt="image-20230205084619412"></p>
+<p>安装配置</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.vika.cn/space/2023/03/20/f3c550e2d18f4e11a0431c0485fa8035" alt="image-20230205090521727"></p>
+<p>若端口被占用，可调整为其他端口，例如 8843</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.vika.cn/space/2023/03/20/008b1bb25f6d4545a05af0c372b58c4d" alt="image-20230205090726009"></p>
+<p>可使用cmd命令 <code>netstat -oan</code> 查看被占用端口的程序，可以看到 443端口被 pid 为 4460的进程占用</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.vika.cn/space/2023/03/20/e1e076f126ec483cb2a8e1d7048ab0fb" alt="image-20230205085746068"></p>
+<p>使用 <code>tasklist /FI &quot;PID eq xx&quot;</code> 查看详细进程信息   xx为要查看的pid</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.vika.cn/space/2023/03/20/26b0d8aab4d341089685cc8f9755f567" alt="image-20230205090241358"></p>
+<p>相关参考</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Jw_1201/article/details/124846832">https://blog.csdn.net/Jw_1201/article/details/124846832</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/cyyljw/p/6918037.html">https://www.cnblogs.com/cyyljw/p/6918037.html</a></p>
+</blockquote>
+<p>继续无脑下一步</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.vika.cn/space/2023/03/20/183b86f95ea344c2ae5519d0e4484167" alt="image-20230205091241962"></p>
+<p>选择服务器对用户进行身份验证的方式</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.vika.cn/space/2023/03/20/6d741af93849447b8fdeca9f7b6e6ff3" alt="image-20230205091638977"></p>
+<p>至此，安装向导已完成，点击Install 安装即可</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.vika.cn/space/2023/03/20/819ca28261584700a062d67eb11f3133" alt="image-20230205091803713"></p>
+<p>安装好后点击 Finish 即可</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.vika.cn/space/2023/03/20/081a7288266a4bdc9c572e86c66c7c42" alt="image-20230205091940283"></p>
+<h2 id="二、客户端安装"><a href="#二、客户端安装" class="headerlink" title="二、客户端安装"></a>二、客户端安装</h2><p>官网下载客户端 <a target="_blank" rel="noopener" href="https://www.visualsvn.com/visualsvn/download/">visualsvn</a></p>
+<p>也可通过链接  <a target="_blank" rel="noopener" href="https://www.visualsvn.com/files/TortoiseSVN-1.14.5.29465-x64-svn-1.14.2.msi">https://www.visualsvn.com/files/TortoiseSVN-1.14.5.29465-x64-svn-1.14.2.msi</a>  进行下载</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.vika.cn/space/2023/03/20/dfc095b375214f74bf4686cda5532d41" alt="image-20230205093835931"></p>
+<p>双击运行</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.vika.cn/space/2023/03/20/718cd37ec6ba40d684db67af9c1d6563" alt="image-20230205094043724"></p>
+<p>无脑下一步</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.vika.cn/space/2023/03/20/a3782abf91054b3a9b413edfe7b08932" alt="image-20230205094113919"></p>
+<p>继续无脑下一步</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.vika.cn/space/2023/03/20/a307588cf1eb47ccb38a2725b2c41b00" alt="image-20230205094441591"></p>
+<p>一路无脑下一步</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.vika.cn/space/2023/03/20/d2470a8c3bd14776b5aae8d9030bf103" alt="image-20230205094532646"></p>
+<p>点击 Install 安装即可</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.vika.cn/space/2023/03/20/da473b10603948bc806da597a8121a99" alt="image-20230205094610279"></p>
+<h2 id="三、SVN-服务配置与使用"><a href="#三、SVN-服务配置与使用" class="headerlink" title="三、SVN 服务配置与使用"></a>三、SVN 服务配置与使用</h2><p>启动 VisualSVN Server Manager</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.vika.cn/space/2023/03/20/9f8e01bbc2754291a83383e623ff87c4" alt="image-20230205094913369"></p>
+<p>在 Repositories 上右键 &gt; 新建 &gt; Repository</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.vika.cn/space/2023/03/20/0aaddd20c253446086c506f942402424" alt="image-20230205095205241"></p>
+<p>选择常规FSFS存储库,默认保持不动，无脑下一步</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.vika.cn/space/2023/03/20/787e4dac867e45a8a08df82a6a4dc04b" alt="image-20230205095305736"></p>
+<p>输入仓库名称</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.vika.cn/space/2023/03/20/b6c48b3051384872a4b088ac1368617f" alt="image-20230205095447097"></p>
+<p>可根据需要选择</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.vika.cn/space/2023/03/20/f9253ecf18d74ae297b854f3c9237e85" alt="image-20230205095816648"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.vika.cn/space/2023/03/20/99791d3777b949de805c291d458756c1" alt="image-20230205100045808"></p>
+<p>创建新存储库，点击Create进行创建</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.vika.cn/space/2023/03/20/64a5b4c45956465ebd611951dc56c5a8" alt="image-20230205100146911"></p>
+<p>创建完成后会提示仓库地址</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.vika.cn/space/2023/03/20/43ea1230a26a41998edf9395baf029ab" alt="image-20230205100327545"></p>
+<p>在服务端也能看到新创建的仓库</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.vika.cn/space/2023/03/20/6614346059ab489e8af5d79d5b706c70" alt="image-20230205100444275"></p>
+<p>在Users 上右键添加用户</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.vika.cn/space/2023/03/20/aee65899f43840258e414cf40ba66cd7" alt="image-20230205100543811"></p>
+<p>设置用户名密码</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.vika.cn/space/2023/03/20/bc2fcaacaa2744e59d8a7454054b4760" alt="image-20230205100707354"></p>
+<p>若密码不符合复杂度要求，点击继续此设置</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.vika.cn/space/2023/03/20/f00896991a53410d86cde5f2a933e1c4" alt="image-20230205100805631"></p>
+<p>新用户创建成功</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.vika.cn/space/2023/03/20/83252e9688cf405abb03588547184bdc" alt="image-20230205100846952"></p>
+<p>在 Groups 上 创建组 或者新建 &gt; Group</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.vika.cn/space/2023/03/20/dad029427e344dc8ae5268a03f8f6ac7" alt="image-20230205101106818"></p>
+<p>设置组名称，选择该组下的成员</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.vika.cn/space/2023/03/20/8fe9b46a15064af2a641c85e0af0898c" alt="image-20230205101234420"></p>
+<p>创建好后如下所示</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.vika.cn/space/2023/03/20/37cea76989d24ada914ac345c191a637" alt="image-20230205101405882"></p>
+<p>设置权限</p>
+<p>在仓库上右键 &gt; Properties</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.vika.cn/space/2023/03/20/8c3dee950925470c80ea8c82a9f8e33d" alt="image-20230205101540976"></p>
+<p>可以选择赋予用户不同的权限</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.vika.cn/space/2023/03/20/24c61d4661f94a66906b4a7177579e61" alt="image-20230205101837575"></p>
+<p>从远程拉取代码并上传本地文件</p>
+<p>创建一个测试目录</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.vika.cn/space/2023/03/20/83abb49ae4964ab3b4ec9fa9fdb05ed1" alt="image-20230205102045196"></p>
+<p>复制参考地址</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.vika.cn/space/2023/03/20/808e490442c54f5aa24a9e611ca79108" alt="image-20230205102247506"></p>
+<p>在任意目录右键，SVN Checkout 拉取仓库代码</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.vika.cn/space/2023/03/20/8b87744e8f7f4004aa8eebfdb793fdcb" alt="image-20230205102352511"></p>
+<p>输入仓库地址和本地保存目录</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.vika.cn/space/2023/03/20/5c9f8f9a96954a68861a6f4d7ec97f83" alt="image-20230205102535027"></p>
+<p>输入有权限访问的账号密码</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.vika.cn/space/2023/03/20/da1089d929f44d139efd1e559fb96b05" alt="image-20230205102631117"></p>
+<p>代码拉取成功后本地会生成指定目录，由于我的目前时空仓库，只有一个 .svn 的隐藏目录</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.vika.cn/space/2023/03/20/9549957d344946c6a967d9956e3b0b5d" alt="image-20230205102811583"></p>
+<p>在该目录创建两个文件，模拟要上传的本地文件</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.vika.cn/space/2023/03/20/c5a53fb27f7a4c33965d314c4cb1d9c5" alt="image-20230205103018496"></p>
+<p>在该目录右键 &gt; SVN Commit 提交文件</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.vika.cn/space/2023/03/20/39f2b32262904129a88ba9882d6e31eb" alt="image-20230205103120010"></p>
+<p>本地创建了两个文件，先只提交一个进行测试</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.vika.cn/space/2023/03/20/039b9c7791cd4af28c7a0fefa3dbd248" alt="image-20230205103413241"></p>
+<p>提交成功</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.vika.cn/space/2023/03/20/0b887e14053248929e8f6a713436574a" alt="image-20230205103500891"></p>
+<p>刷新一下仓库，可以看到文件上传成功</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.vika.cn/space/2023/03/20/ff62bcc0ba6f457e8b0f13dbd2a9a60b" alt="image-20230205103550836"></p>
+<p>也可以在浏览器查看</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.vika.cn/space/2023/03/20/b179a171024344b89ef1835415c3841d" alt="image-20230205103655248"></p>
+<p>输入账号密码进行访问，可以看到刚才上传的文件</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.vika.cn/space/2023/03/20/720e90062df04fa9b9f9d57e837e0c49" alt="image-20230205103752122"></p>
+<p>往远程仓库导入本地目录及文件</p>
+<p>在本地创建目录及文件 </p>
+<p>此处我创建了个 test2目录，test2中包含 test2.1目录和 test2.txt ,test2.1目录中包含 test2.1.1.txt和test2.1.2.txt</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.vika.cn/space/2023/03/20/83da1267f48f49dba7d03dbd901aaa10" alt="image-20230205104619766"></p>
+<p>在 test2 目录内右键 &gt; TortoiseSVN &gt; Import </p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.vika.cn/space/2023/03/20/af0f7888c88048d59140aa7f74a59328" alt="image-20230205104832893"></p>
+<p>注意导入的仓库地址要在远程目录的后面加上本地目录名称，这样才能保持远程目录与本地目录层次结构一致</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.vika.cn/space/2023/03/20/0fa80a43d1924c9b8d84440c93c5a11a" alt="image-20230205105022669"></p>
+<p>导入成功</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.vika.cn/space/2023/03/20/252993340f3d471d8be3911970a701ab" alt="image-20230205105211304"></p>
+<p>刷线一下仓库</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://s1.vika.cn/space/2023/03/20/16d7c644e4974d4fa62f058a5dfb3c2c" alt="image-20230205105310142"></p>
+<p>参考</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Ruishine/article/details/121467191">https://blog.csdn.net/Ruishine/article/details/121467191</a></p>
+</blockquote>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://blog.shiguangcoding.eu.org">時光</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://blog.shiguangcoding.eu.org/posts/15ecac42.html">https://blog.shiguangcoding.eu.org/posts/15ecac42.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.shiguangcoding.eu.org" target="_blank">時光的博客园子</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/svn/">svn</a></div><div class="post_share"><div class="social-share" data-image="/img/avatar.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/7c6bee1a.html" title="java替换第N次出现的字符串"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">java替换第N次出现的字符串</div></div></a></div><div class="next-post pull-right"><a href="/posts/71c52a96.html" title="Server SSL certificate verification failed  certificate issued for a different hostname, issuer is not trusted"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Server SSL certificate verification failed  certificate issued for a different hostname, issuer is not trusted</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/posts/71c52a96.html" title="Server SSL certificate verification failed  certificate issued for a different hostname, issuer is not trusted"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-19</div><div class="title">Server SSL certificate verification failed  certificate issued for a different hostname, issuer is not trusted</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">時光</div><div class="author-info__description">一个乐于分享的小白</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">80</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">74</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/shiguang-coding"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/shiguang-coding" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:an_shiguang@163.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SVN-%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE"><span class="toc-number">1.</span> <span class="toc-text">SVN 安装配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%AE%89%E8%A3%85"><span class="toc-number">1.1.</span> <span class="toc-text">一、服务端安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%AE%89%E8%A3%85"><span class="toc-number">1.2.</span> <span class="toc-text">二、客户端安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81SVN-%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%BD%BF%E7%94%A8"><span class="toc-number">1.3.</span> <span class="toc-text">三、SVN 服务配置与使用</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/59241ebb.html" title="IDEA远程Debug调试配置">IDEA远程Debug调试配置</a><time datetime="2023-12-26T14:53:43.093Z" title="发表于 2023-12-26 22:53:43">2023-12-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/222d2de8.html" title="投屏神器Scrcpy基本使用">投屏神器Scrcpy基本使用</a><time datetime="2023-12-26T14:53:43.075Z" title="发表于 2023-12-26 22:53:43">2023-12-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/34bcc8fe.html" title="私有化部署LobeChat">私有化部署LobeChat</a><time datetime="2023-12-26T14:53:43.070Z" title="发表于 2023-12-26 22:53:43">2023-12-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/a327d8e1.html" title="基于Notion搭建个人博客">基于Notion搭建个人博客</a><time datetime="2023-12-26T14:53:43.064Z" title="发表于 2023-12-26 22:53:43">2023-12-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/9a6fc6fc.html" title="缺少MSVCP140.dll导致软件无法打开">缺少MSVCP140.dll导致软件无法打开</a><time datetime="2023-12-26T14:53:43.051Z" title="发表于 2023-12-26 22:53:43">2023-12-26</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By 時光</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"></div><div class="aplayer no-destroy" data-id="8152976493" data-server="netease" data-type="playlist"   data-order="list" data-fixed="true" data-preload="auto" data-autoplay="false" data-mutex="true" ></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="true" data-click="true"></script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="true"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/"});</script></body></html>

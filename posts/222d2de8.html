@@ -1,0 +1,438 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>投屏神器Scrcpy基本使用 | 時光的博客园子</title><meta name="author" content="時光"><meta name="copyright" content="時光"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="referrer" content="no-referrer"><meta name="description" content="github: https:&#x2F;&#x2F;github.com&#x2F;Genymobile&#x2F;scrcpy   选择下载版本  下载操作系统相应的安装包  Scrcpy 基本简介简单地来说，scrcpy就是通过adb调试的方式来将手机屏幕投到电脑上，并可以通过电脑控制您的Android设备。它可以通过USB连接，也可以通过Wifi连接（类似于隔空投屏），而且不需要任何root权限，不需要在手机里安装任何程序。sc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="投屏神器Scrcpy基本使用">
+<meta property="og:url" content="https://blog.shiguangcoding.eu.org/posts/222d2de8.html">
+<meta property="og:site_name" content="時光的博客园子">
+<meta property="og:description" content="github: https:&#x2F;&#x2F;github.com&#x2F;Genymobile&#x2F;scrcpy   选择下载版本  下载操作系统相应的安装包  Scrcpy 基本简介简单地来说，scrcpy就是通过adb调试的方式来将手机屏幕投到电脑上，并可以通过电脑控制您的Android设备。它可以通过USB连接，也可以通过Wifi连接（类似于隔空投屏），而且不需要任何root权限，不需要在手机里安装任何程序。sc">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.shiguangcoding.eu.org/img/avatar.png">
+<meta property="article:published_time" content="2023-12-26T14:53:43.075Z">
+<meta property="article:modified_time" content="2023-12-26T15:34:58.233Z">
+<meta property="article:author" content="時光">
+<meta property="article:tag" content="Scrcpy">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.shiguangcoding.eu.org/img/avatar.png"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://blog.shiguangcoding.eu.org/posts/222d2de8.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '投屏神器Scrcpy基本使用',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-12-26 23:34:58'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/atom.xml" title="時光的博客园子" type="application/atom+xml">
+</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">80</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">74</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/top_1.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="時光的博客园子"><span class="site-name">時光的博客园子</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">投屏神器Scrcpy基本使用</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-12-26T14:53:43.075Z" title="发表于 2023-12-26 22:53:43">2023-12-26</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-12-26T15:34:58.233Z" title="更新于 2023-12-26 23:34:58">2023-12-26</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%B0%8F%E6%8A%80%E8%83%BD/">小技能</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="投屏神器Scrcpy基本使用"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><blockquote>
+<p><strong>github</strong>: <a target="_blank" rel="noopener" href="https://github.com/Genymobile/scrcpy">https://github.com/Genymobile/scrcpy</a></p>
+</blockquote>
+<p> <strong>选择下载版本</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/8b269d3465464b31a11a69b2c1e39b8d.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5pmC5YWJ5b-D5ZCR6Ziz,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"></p>
+<p><strong>下载操作系统相应的安装包</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/8d63811ef1c84149b89d3b92ba9624fc.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5pmC5YWJ5b-D5ZCR6Ziz,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="Scrcpy-基本简介"><a href="#Scrcpy-基本简介" class="headerlink" title="Scrcpy 基本简介"></a>Scrcpy 基本简介</h2><p>简单地来说，scrcpy就是通过adb调试的方式来将手机屏幕投到电脑上，并可以通过电脑控制您的Android设备。它可以通过USB连接，也可以通过Wifi连接（类似于隔空投屏），而且不需要任何root权限，不需要在手机里安装任何程序。scrcpy同时适用于GNU &#x2F; Linux，Windows和macOS。</p>
+<p><strong>更多详细介绍见</strong> ：<a target="_blank" rel="noopener" href="https://github.com/Genymobile/scrcpy#readme">README.md</a></p>
+<h2 id="Scrcpy-特征"><a href="#Scrcpy-特征" class="headerlink" title="Scrcpy 特征"></a>Scrcpy 特征</h2><p>它专注于：</p>
+<ul>
+<li><strong>亮度</strong>：原生，仅显示设备屏幕</li>
+<li><strong>性能</strong>：30~120fps，取决于设备</li>
+<li><strong>画质</strong>：1920×1080或以上</li>
+<li><strong>低延迟</strong>：<a target="_blank" rel="noopener" href="https://github.com/Genymobile/scrcpy/pull/646">35~70ms</a></li>
+<li><strong>启动时间短</strong>：显示第一张图像约 1 秒</li>
+<li><strong>非侵入性</strong>：设备上没有安装任何东西</li>
+<li><strong>用户权益</strong>：无账户、无广告、无需网络</li>
+<li><strong>自由</strong>：自由和开源软件</li>
+</ul>
+<p>其特点包括：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/Genymobile/scrcpy#recording">记录</a></li>
+<li>在<a target="_blank" rel="noopener" href="https://github.com/Genymobile/scrcpy#turn-screen-off">设备屏幕关闭的情况下进行</a>镜像</li>
+<li>双向<a target="_blank" rel="noopener" href="https://github.com/Genymobile/scrcpy#copy-paste">复制粘贴</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/Genymobile/scrcpy#capture-configuration">可配置的质量</a></li>
+<li>设备屏幕<a target="_blank" rel="noopener" href="https://github.com/Genymobile/scrcpy#v4l2loopback">作为网络摄像头 (V4L2)</a>（仅限 Linux）</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/Genymobile/scrcpy#physical-keyboard-simulation-hid">物理键盘模拟 (HID)</a> （仅限 Linux）</li>
+<li>和更多…</li>
+</ul>
+<h2 id="使用要求"><a href="#使用要求" class="headerlink" title="使用要求"></a>使用要求</h2><ol>
+<li>Android设备至少需要API 21（Android 5.0以上版本）;</li>
+<li>确保在您的设备上启用了<a target="_blank" rel="noopener" href="https://developer.android.com/studio/command-line/adb.html#Enabling">adb调试</a>;</li>
+<li>在某些设备上，您还需要启用<a target="_blank" rel="noopener" href="https://github.com/Genymobile/scrcpy/issues/70#issuecomment-373286323">其他选项</a>以使用键盘和鼠标控制它。</li>
+</ol>
+<p>adb调试的开启一般是多次点击手机系统版本，</p>
+<p>例如我的是  系统设置 &gt; 关于手机 &gt; 版本信息 &gt;  多次点击软件版本号，直到提示您已处于开发者模式，无需进行此操作</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th align="center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/7201b49ff8d94c218f981fa0de1dad03.png#pic_center" alt="在这里插入图片描述"></th>
+<th></th>
+</tr>
+</thead>
+</table>
+<p>然后到系统设置 &gt; 开发者选项 &gt; 开启开发者选项 &gt;开启USB调试，如果有USB调试(安全模式)，一定要打开，开启USB调试，USB配置选择文件传输</p>
+<table>
+<thead>
+<tr>
+<th><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/12ebfa2c4daf40ed9a44344a9aedb802.png#pic_center" alt="在这里插入图片描述"></th>
+<th><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202311/2233039-20231118160704909-1457463838.png" alt="image-20231118160704772"></th>
+<th><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/37a9751c754b495490687df732815a80.png#pic_center" alt="在这里插入图片描述"></th>
+</tr>
+</thead>
+</table>
+<h2 id="USB连接"><a href="#USB连接" class="headerlink" title="USB连接"></a>USB连接</h2><ol>
+<li><p>手机通过USB连接电脑，首次连接会弹出是否信任该电脑，点击始终信任即可。</p>
+</li>
+<li><p>文件解压后在当前目录地址栏中输入<code>cmd</code>回车打开cmd窗口<br> <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/eed7023ae12b4bcf8baccc81843e36ba.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5pmC5YWJ5b-D5ZCR6Ziz,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"></p>
+<p>  或者 <a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_50082325/article/details/121687653?spm=1001.2014.3001.5502">配置系统环境变量</a> 后 使用 Win + R 输入cmd 回车打开cmd窗口</p>
+</li>
+<li><p>执行命令 <code>adb usb</code> 查看是否连接成功</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">D:\Program Files (x86)\scrcpy<span class="literal">-win64-v1</span>.<span class="number">21</span>&gt;adb usb</span><br><span class="line">restarting <span class="keyword">in</span> USB mode</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>输入命令 <code>scrcpy</code> 即可</p>
+</li>
+</ol>
+<h2 id="无线连接"><a href="#无线连接" class="headerlink" title="无线连接"></a>无线连接</h2><p>1.确保手机与电脑在同一局域网中(ip的前三段相同)</p>
+<pre><code>电脑可通过 `ipconfig` 查看，此处我的为 `192.168.5.236` ,上方显示 `VMware Network Adapter   `为虚拟机ip
+</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/eb28cb2bbc0643f2be320d4b16c114c1.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5pmC5YWJ5b-D5ZCR6Ziz,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"></p>
+<pre><code>    手机可通过 WLAN &gt; 已连接网络 &gt; IP 查看
+
+
+ &lt;img src=&quot;https://img-blog.csdnimg.cn/4c45f0c67d574db7b0759d49f0fd05a8.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5pmC5YWJ5b-D5ZCR6Ziz,size_13,color_FFFFFF,t_70,g_se,x_16#pic_center&quot; alt=&quot;image-20211202230435688&quot; style=&quot;zoom:50%;&quot; /&gt;                &lt;img src=&quot;https://img-blog.csdnimg.cn/ff75391524654429a895a155fb85c443.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5pmC5YWJ5b-D5ZCR6Ziz,size_13,color_FFFFFF,t_70,g_se,x_16#pic_center&quot; alt=&quot;image-20211202230300907&quot; style=&quot;zoom:50%;&quot; /&gt;     
+
+    此处我电脑和手机的ip段均为  `192.168.5`  属于同一ip段，所以在同一局域网中
+</code></pre>
+<ol start="2">
+<li><p>手机先通过USB连接电脑(让电脑知道连接那台设备)</p>
+</li>
+<li><p>在scrcpy目录打开cmd窗口，参见上文</p>
+</li>
+<li><p>执行命令 <code>adb tcpip 端口号</code> 默认端口号为5555</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">D:\Program Files (x86)\scrcpy<span class="literal">-win64-v1</span>.<span class="number">21</span>&gt;adb tcpip <span class="number">5555</span></span><br><span class="line">restarting <span class="keyword">in</span> TCP mode port: <span class="number">5555</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>断开USB连接</p>
+</li>
+<li><p>执行命令 <code>adb connect ip : 端口</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">D:\Program Files (x86)\scrcpy-win64-v1.21&gt;adb connect 192.168.5.126:5555</span><br><span class="line">connected to 192.168.5.126:5555</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>执行命令 <code>scrcpy</code> 进行无线连接即可</p>
+</li>
+</ol>
+<h2 id="录制屏幕"><a href="#录制屏幕" class="headerlink" title="录制屏幕"></a>录制屏幕</h2><p>分为两种情况，一种是投屏状态下录屏：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scrcpy --record file.mp4</span><br><span class="line">scrcpy -r file.mkv</span><br></pre></td></tr></table></figure>
+
+<p>一种是非投屏状态下录屏：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scrcpy --no-display --record file.mp4</span><br><span class="line">scrcpy -Nr file.mkv</span><br></pre></td></tr></table></figure>
+
+<h2 id="快捷方式"><a href="#快捷方式" class="headerlink" title="快捷方式"></a>快捷方式</h2><p>在下面的列表中，MOD是快捷方式修饰符。<strong>默认情况下，它是 <code>(left)Alt</code>或 (left) Super</strong>。<br>可以使用 进行更改<code>--shortcut-mod</code>。可能的键<code>lctrl</code>，<code>rctrl</code>， <code>lalt</code>，<code>ralt</code>，<code>lsuper</code>和<code>rsuper</code>。例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#使用 RCtrl 作为快捷方式</span><br><span class="line">scrcpy --shortcut-mod=rctrl  #使用右侧ctrl作为快捷方式</span><br><span class="line">scrcpy --shortcut-mod=lctrl+lalt,lsuper  #使用 LCtrl+LAlt 或 LSuper 作为快捷方式</span><br></pre></td></tr></table></figure>
+
+<p><em><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Super_key_(keyboard_button)">Super</a>通常是Windows或Cmd键。</em></p>
+<table>
+<thead>
+<tr>
+<th>行动</th>
+<th>捷径</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>切换全屏模式</td>
+<td>MOD+f</td>
+</tr>
+<tr>
+<td>向左旋转显示</td>
+<td>MOD+ ← <em>（左）</em></td>
+</tr>
+<tr>
+<td>向右旋转显示</td>
+<td>MOD+ → <em>（右）</em></td>
+</tr>
+<tr>
+<td>将窗口大小调整为 1:1（像素完美）</td>
+<td>MOD+g</td>
+</tr>
+<tr>
+<td>调整窗口大小以去除黑色边框</td>
+<td>MOD+ w| <em>双击左键¹</em></td>
+</tr>
+<tr>
+<td>点击 <code>HOME</code>         （主页）</td>
+<td>MOD+ h| <em>单击中键</em></td>
+</tr>
+<tr>
+<td>点击 <code>BACK</code>            （返回）</td>
+<td>MOD+ b| <em>右键单击²</em></td>
+</tr>
+<tr>
+<td>点击 <code>APP_SWITCH</code>       （多任务栏）</td>
+<td>MOD+ s| <em>第四次点击³</em></td>
+</tr>
+<tr>
+<td>点击<code>MENU</code>（解锁屏幕）</td>
+<td>MOD+m</td>
+</tr>
+<tr>
+<td>点击 <code>VOLUME_UP</code>      （音量+）</td>
+<td>MOD+ ↑ <em>（向上）</em></td>
+</tr>
+<tr>
+<td>点击 <code>VOLUME_DOWN</code>          （音量-）</td>
+<td>MOD+ ↓ <em>（下）</em></td>
+</tr>
+<tr>
+<td>点击 <code>POWER</code></td>
+<td>MOD+p</td>
+</tr>
+<tr>
+<td>打开</td>
+<td><em>右键单击²</em></td>
+</tr>
+<tr>
+<td>关闭设备屏幕（保持镜像）</td>
+<td>MOD+o</td>
+</tr>
+<tr>
+<td>打开设备屏幕</td>
+<td>MOD+Shift+o</td>
+</tr>
+<tr>
+<td>旋转设备屏幕</td>
+<td>MOD+r</td>
+</tr>
+<tr>
+<td>展开通知面板</td>
+<td>MOD+ n| <em>第 5 次点击³</em></td>
+</tr>
+<tr>
+<td>展开设置面板</td>
+<td>MOD+ n+ n| <em>双击 5 次点击³</em></td>
+</tr>
+<tr>
+<td>折叠面板</td>
+<td>MOD+Shift+n</td>
+</tr>
+<tr>
+<td>复制到剪贴板⁴</td>
+<td>MOD+c</td>
+</tr>
+<tr>
+<td>剪切到剪贴板⁴</td>
+<td>MOD+x</td>
+</tr>
+<tr>
+<td>同步剪贴板和粘贴⁴</td>
+<td>MOD+v</td>
+</tr>
+<tr>
+<td>注入计算机剪贴板文本</td>
+<td>MOD+Shift+v</td>
+</tr>
+<tr>
+<td>启用&#x2F;禁用 FPS 计数器（在标准输出上）</td>
+<td>MOD+i</td>
+</tr>
+<tr>
+<td>双指缩放</td>
+<td>Ctrl+<em>点击并移动</em></td>
+</tr>
+<tr>
+<td>拖放 APK 文件</td>
+<td>从电脑安装APK</td>
+</tr>
+<tr>
+<td>拖放非 APK 文件</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/Genymobile/scrcpy#push-file-to-device">推送文件到设备</a></td>
+</tr>
+</tbody></table>
+<p><em>¹双击黑色边框将其删除。</em><br><em>²如果屏幕已关闭，则右键单击可打开屏幕，否则按 BACK。</em><br><em>³第四个和第五个鼠标按钮，如果你的鼠标有它们。</em><br><em>⁴仅适用于 Android &gt;&#x3D; 7。</em></p>
+<p>带有重复键的快捷方式通过松开并再次按下该键来执行。例如，要执行“扩展设置面板”：</p>
+<ol>
+<li>按住MOD。</li>
+<li>然后双击n。</li>
+<li>最后，释放MOD。</li>
+</ol>
+<p>所有Ctrl+<em>键</em>的快捷方式被转发到该设备，所以它们被激活的应用程序来处理。</p>
+<h2 id="投屏不清晰问题"><a href="#投屏不清晰问题" class="headerlink" title="投屏不清晰问题"></a>投屏不清晰问题</h2><p>找到 <code>scrcpy.exe</code> 右键 &gt; 属性 &gt; 兼容性 &gt; 更改高DPI设置 &gt; 勾选替代高DPI缩放行为 &gt; 确定应用即可</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img-blog.csdnimg.cn/ba3c612ed7a0462bafe0210d8c193534.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5pmC5YWJ5b-D5ZCR6Ziz,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="常见错误"><a href="#常见错误" class="headerlink" title="常见错误"></a>常见错误</h2><ol>
+<li><p><code>error: more than one device/emulator</code></p>
+<p>报错原因：多个设备连接了电脑，导致adb无法识别操作具体哪台设备</p>
+<p>可通过命令 <code>adb devices</code> 查看已连接设备</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">D:\Program Files (x86)\scrcpy<span class="literal">-win64-v1</span>.<span class="number">21</span>&gt;adb devices</span><br><span class="line">List of devices attached</span><br><span class="line">SKPN45IF8DBMRG59        device</span><br><span class="line"><span class="number">192.168</span>.<span class="number">5.126</span>:<span class="number">5555</span>      device</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>若想选择其中一个设备，可以执行以下命令连接其中一个设备</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">scrcpy --serial SKPN45IF8DBMRG59</span><br><span class="line"># 或者</span><br><span class="line">scrcpy -s SKPN45IF8DBMRG59</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>也可以用<code>adb -s SKPN45IF8DBMRG59 shell</code>，进入该设备操作</p>
+</li>
+<li><p>若不想进入shell模式，则执行 <code>adb -s SKPN45IF8DBMRG59  指令</code>（如 adb -s SKPN45IF8DBMRG59 shell input keyevent 3）</p>
+</li>
+<li><p>如果只有一个模拟器和一个手机连着电脑</p>
+<ul>
+<li>可以用<code>adb -e</code> 来指明是操作模拟器（Emulator）</li>
+<li>可以用<code>adb -d </code>来指明是操作设备（Device）</li>
+</ul>
+</li>
+</ul>
+<p>此处我是由于已进行无线连接（可以看到连接设备有 <code>192.168.5.126:5555      device</code>）又连接了US</p>
+<p>只需拔掉USB，执行<code>scrcpy</code> 重新连接即可</p>
+</li>
+<li><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[<span class="type">server</span>] ERROR: Exception on thread Thread[<span class="type">main</span>,<span class="number">5</span>,<span class="type">main</span>]</span><br><span class="line">java.lang.IllegalStateException</span><br><span class="line">        at android.media.MediaCodec.native_dequeueOutputBuffer(Native Method)</span><br><span class="line">        at android.media.MediaCodec.dequeueOutputBuffer(MediaCodec.java:<span class="number">2792</span>)</span><br><span class="line">        at com.genymobile.scrcpy.ScreenEncoder.encode(ScreenEncoder.java:<span class="number">110</span>)</span><br><span class="line">        at com.genymobile.scrcpy.ScreenEncoder.internalStreamScreen(ScreenEncoder.java:<span class="number">91</span>)</span><br><span class="line">        at com.genymobile.scrcpy.ScreenEncoder.streamScreen(ScreenEncoder.java:<span class="number">65</span>)</span><br><span class="line">        at com.genymobile.scrcpy.Server.scrcpy(Server.java:<span class="number">93</span>)</span><br><span class="line">        at com.genymobile.scrcpy.Server.main(Server.java:<span class="number">309</span>)</span><br><span class="line">        at com.android.internal.os.RuntimeInit.nativeFinishInit(Native Method)</span><br><span class="line">        at com.android.internal.os.RuntimeInit.main(RuntimeInit.java:<span class="number">372</span>)</span><br><span class="line">INFO: Renderer: direct3d</span><br><span class="line">INFO: Initial texture: <span class="number">1080</span>x2336</span><br><span class="line">WARN: Device disconnected</span><br></pre></td></tr></table></figure>
+
+<p>报错原因：已连接设备不支持默认分辨率设置</p>
+<p>可使用如下命令打开</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 三者任选其一</span></span><br><span class="line">scrcpy <span class="literal">-m</span> <span class="number">1920</span></span><br><span class="line">scrcpy <span class="literal">-m</span> <span class="number">1024</span></span><br><span class="line">scrcpy <span class="literal">-m</span> <span class="number">800</span></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li><p><code>cannot connect to 192.168.X.X:5555: 由于目标计算机积极拒绝，无法连接。 (10061)</code></p>
+<ol>
+<li>首先检查要连接的手机是否已开启adb调试</li>
+<li>开启手机adb服务端口及adb调试功能</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">D:\Program Files (x86)\scrcpy-win64-v1.21&gt;adb shell # 进入安卓系统shell</span><br><span class="line">PD1831:/ $ setprop service.adb.tcp.port 5555 #设置adb服务端口为5555，打开adb网络调试功能</span><br><span class="line">PD1831:/ $ setprop service.adb.tcp.port -1  # 打开adb的usb调试功能。</span><br><span class="line">PD1831:/ $ exit # 退出shell</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>cmd输入命令  <code>adb tcpip 5555</code>   让设备在 5555 端口监听 TCP&#x2F;IP 连接。</li>
+<li>cmd 输入命令 <code>adb connect ip:端口</code> 即可连接成功</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p><strong>参考</strong></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/was172/article/details/99705855">scrcpy——Android投屏神器(使用教程)</a></p>
+</blockquote>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://blog.shiguangcoding.eu.org">時光</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://blog.shiguangcoding.eu.org/posts/222d2de8.html">https://blog.shiguangcoding.eu.org/posts/222d2de8.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.shiguangcoding.eu.org" target="_blank">時光的博客园子</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Scrcpy/">Scrcpy</a></div><div class="post_share"><div class="social-share" data-image="/img/avatar.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/59241ebb.html" title="IDEA远程Debug调试配置"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">IDEA远程Debug调试配置</div></div></a></div><div class="next-post pull-right"><a href="/posts/34bcc8fe.html" title="私有化部署LobeChat"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">私有化部署LobeChat</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">時光</div><div class="author-info__description">一个乐于分享的小白</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">80</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">74</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/shiguang-coding"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/shiguang-coding" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:an_shiguang@163.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Scrcpy-%E5%9F%BA%E6%9C%AC%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">Scrcpy 基本简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Scrcpy-%E7%89%B9%E5%BE%81"><span class="toc-number">2.</span> <span class="toc-text">Scrcpy 特征</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E8%A6%81%E6%B1%82"><span class="toc-number">3.</span> <span class="toc-text">使用要求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#USB%E8%BF%9E%E6%8E%A5"><span class="toc-number">4.</span> <span class="toc-text">USB连接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A0%E7%BA%BF%E8%BF%9E%E6%8E%A5"><span class="toc-number">5.</span> <span class="toc-text">无线连接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BD%95%E5%88%B6%E5%B1%8F%E5%B9%95"><span class="toc-number">6.</span> <span class="toc-text">录制屏幕</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F"><span class="toc-number">7.</span> <span class="toc-text">快捷方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%95%E5%B1%8F%E4%B8%8D%E6%B8%85%E6%99%B0%E9%97%AE%E9%A2%98"><span class="toc-number">8.</span> <span class="toc-text">投屏不清晰问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF"><span class="toc-number">9.</span> <span class="toc-text">常见错误</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/59241ebb.html" title="IDEA远程Debug调试配置">IDEA远程Debug调试配置</a><time datetime="2023-12-26T14:53:43.093Z" title="发表于 2023-12-26 22:53:43">2023-12-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/222d2de8.html" title="投屏神器Scrcpy基本使用">投屏神器Scrcpy基本使用</a><time datetime="2023-12-26T14:53:43.075Z" title="发表于 2023-12-26 22:53:43">2023-12-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/34bcc8fe.html" title="私有化部署LobeChat">私有化部署LobeChat</a><time datetime="2023-12-26T14:53:43.070Z" title="发表于 2023-12-26 22:53:43">2023-12-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/a327d8e1.html" title="基于Notion搭建个人博客">基于Notion搭建个人博客</a><time datetime="2023-12-26T14:53:43.064Z" title="发表于 2023-12-26 22:53:43">2023-12-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/9a6fc6fc.html" title="缺少MSVCP140.dll导致软件无法打开">缺少MSVCP140.dll导致软件无法打开</a><time datetime="2023-12-26T14:53:43.051Z" title="发表于 2023-12-26 22:53:43">2023-12-26</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By 時光</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"></div><div class="aplayer no-destroy" data-id="8152976493" data-server="netease" data-type="playlist"   data-order="list" data-fixed="true" data-preload="auto" data-autoplay="false" data-mutex="true" ></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="true" data-click="true"></script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="true"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/"});</script></body></html>

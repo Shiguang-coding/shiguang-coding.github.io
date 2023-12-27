@@ -1,0 +1,395 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>時光的博客园子 - 生活百般滋味,人生需要笑对</title><meta name="author" content="時光"><meta name="copyright" content="時光"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="referrer" content="no-referrer"><meta name="description" content="一个乐于分享的小白">
+<meta property="og:type" content="website">
+<meta property="og:title" content="時光的博客园子">
+<meta property="og:url" content="https://blog.shiguangcoding.eu.org/index.html">
+<meta property="og:site_name" content="時光的博客园子">
+<meta property="og:description" content="一个乐于分享的小白">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.shiguangcoding.eu.org/img/avatar.png">
+<meta property="article:author" content="時光">
+<meta property="article:tag" content="博客,時光,時光的博客,時光博客园子,实用博客,开源,共享">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.shiguangcoding.eu.org/img/avatar.png"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://blog.shiguangcoding.eu.org/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '時光的博客园子',
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2023-12-27 14:19:06'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.0.0"><link rel="alternate" href="/atom.xml" title="時光的博客园子" type="application/atom+xml">
+</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">80</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">74</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url('/img/logo.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="時光的博客园子"><span class="site-name">時光的博客园子</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">時光的博客园子</h1><div id="site-subtitle"><span id="subtitle"></span></div><div id="site_social_icons"><a class="social-icon" href="https://github.com/shiguang-coding" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:an_shiguang@163.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/59241ebb.html" title="IDEA远程Debug调试配置">IDEA远程Debug调试配置</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-12-26T14:53:43.093Z" title="发表于 2023-12-26 22:53:43">2023-12-26</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%B0%8F%E6%8A%80%E8%83%BD/">小技能</a></span></div><div class="content">操作步骤查看虚拟机ip
+
+选择 Edit Configurations..
+
+点击 Add new 选择 Remote JVM Debug
+
+配置服务名称，主机地址，端口
+
+以Resin服务为例，须在Resin服务的JVM参数中新增JVM参数配置
+Resin低版本相关配置文件目录为Resin/conf/resin.conf
+1&lt;jvm-arg&gt;-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=9090&lt;/jvm-arg&gt;
+
+
+Resin较高版本相关配置文件为Resin/conf/resin.properties
+123# Arg passed directly to the JVM jvm_args  : -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=9090 -Xmx2789m -Xms2789m -XX:ParallelGCThreads=20 -XX:+UseConcMarkSweepGC -XX:-Omi ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/222d2de8.html" title="投屏神器Scrcpy基本使用">投屏神器Scrcpy基本使用</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-12-26T14:53:43.075Z" title="发表于 2023-12-26 22:53:43">2023-12-26</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%B0%8F%E6%8A%80%E8%83%BD/">小技能</a></span></div><div class="content">
+github: https://github.com/Genymobile/scrcpy
+
+ 选择下载版本
+
+下载操作系统相应的安装包
+
+Scrcpy 基本简介简单地来说，scrcpy就是通过adb调试的方式来将手机屏幕投到电脑上，并可以通过电脑控制您的Android设备。它可以通过USB连接，也可以通过Wifi连接（类似于隔空投屏），而且不需要任何root权限，不需要在手机里安装任何程序。scrcpy同时适用于GNU &#x2F; Linux，Windows和macOS。
+更多详细介绍见 ：README.md
+Scrcpy 特征它专注于：
+
+亮度：原生，仅显示设备屏幕
+性能：30~120fps，取决于设备
+画质：1920×1080或以上
+低延迟：35~70ms
+启动时间短：显示第一张图像约 1 秒
+非侵入性：设备上没有安装任何东西
+用户权益：无账户、无广告、无需网络
+自由：自由和开源软件
+
+其特点包括：
+
+记录
+在设备屏幕关闭的情况下进行镜像
+双向复制粘贴
+可配置的质量
+设备屏幕作为网络摄像头 (V4L2)（仅限 Linux）
+物理键盘模拟 (HID) （仅限 Linux）
+和更多 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/34bcc8fe.html" title="私有化部署LobeChat">私有化部署LobeChat</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-12-26T14:53:43.070Z" title="发表于 2023-12-26 22:53:43">2023-12-26</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/">安装教程</a></span></div><div class="content">一、LobeChat介绍LobeChat 是开源的高性能聊天机器人框架，支持语音合成、多模态、可扩展的（Function Call）插件系统。支持一键免费部署私人 ChatGPT&#x2F;LLM 网页应用程序。
+官方 GitHub 地址：https://github.com/lobehub/lobe-chat官方 Demo：https://chat-preview.lobehub.com官方文档：https://github.com/lobehub/lobe-chat/wiki
+二、安装步骤一、Vercel一键部署点击 一键部署，登录账号
+
+创建仓库
+
+填写 OPEN_API_KEY
+
+点击Deploy进行部署，等待部署完成撒花即可
+
+然后就可以愉快地聊天了
+
+如果你想设置访问密码，可以在设置页面添加环境变量，变量名称为 ACCESS_CODE
+
+然后重新部署下项目使配置生效
+
+设置访问密码后许输入正确的访问密码才能使用
+
+二、Docker Compose部署1234567sudo -imkdir -p /root/docker_data/lobecd /root/docker_da ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/a327d8e1.html" title="基于Notion搭建个人博客">基于Notion搭建个人博客</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-12-26T14:53:43.064Z" title="发表于 2023-12-26 22:53:43">2023-12-26</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%B0%8F%E6%8A%80%E8%83%BD/">小技能</a></span></div><div class="content">一、注册Notion账号官网地址： https://notion.so 
+注册并登录后会进入以下界面
+
+复制Notion模版登录账号之后，打开 Notion模版
+点击  Duplicating 可将模板复制到自己网站了
+
+模版克隆到到个人账户之后，点击右上角的Share-&gt;Publish-&gt;Publish to Web，那么互联网上的用户就能使用这个链接来访问我们的个人页面了。
+
+二、Github拉取NotionNext项目将 NotionNext项目 fork到自己的github
+
+这份代码就是我们搭建个人网站的关键，这个NotionNext调用了Notion的API来展示Notion的页面，同时提供了一些主题和特效，可以定制化我们的网站效果。
+对于这个仓库，我们唯一需要关注的就是blog.config.js文件，我们的所有主题特效修改都只需要改这个配置文件即可。
+
+三、Vercel部署注册或登录 Vercel，建议用github账号进行登录，选择添加新项目
+
+选择 NotionNext 项目点击 import 导入	
+
+需要配置一下环境变量
+
+即 blog.config ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/9a6fc6fc.html" title="缺少MSVCP140.dll导致软件无法打开">缺少MSVCP140.dll导致软件无法打开</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-12-26T14:53:43.051Z" title="发表于 2023-12-26 22:53:43">2023-12-26</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%B0%8F%E6%8A%80%E8%83%BD/">小技能</a></span></div><div class="content">缺少 MSVCP140.dll 导致软件无法打开重装完系统后，打开之前在非系统盘安装的软件应用程序，提示 由于找不到 MSVCP140.dll ,无法继续执行代码，重新安装程序可能会解决此问题  的错误
+
+解决方法 
+安装微软常用运行库即可
+
+链接：https://pan.baidu.com/s/1s7nTrrYkV6uFZCO33Douew?pwd=ptlx提取码：ptlx
+
+</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/162921c5.html" title="免费领取云服务器">免费领取云服务器</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-12-26T14:53:43.048Z" title="发表于 2023-12-26 22:53:43">2023-12-26</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%99%BD%E5%AB%96%E7%A6%8F%E5%88%A9/">白嫖福利</a></span></div><div class="content">一、注册账号云服务器账号注册链接：http://bit.ly/3GlfucW
+
+可以在 邮政名企网查询邮编
+二、申请服务资源注册好后点击 活动链接 ，可以申请相关资源
+
+点击立即申请，自定义配置选择 1核2G
+
+选择操作系统，此处我选择Ubuntu最新系统
+
+宽带类型选择 大陆优化，点击继续
+进入到订单界面，支付方式选择 alipay ，同意条款协议，点击结账 (不会真正付款)
+
+点击结账后会进入账单页面，无需继续操作
+
+回到客户中心，可以看到未付款的账单
+
+点击 查看服务
+
+继续点击 新开工单
+
+主题填写 申请免费云服务器，信息可随意填写
+
+提交完成后如下
+
+可以回到客服中心查看我的工单
+
+此时状态为售后处理中，等待处理完毕即可
+
+客服处理完毕后，状态会变为 等您确认
+
+回到客服中心，点击我的服务，即可看到已有一台可用的服务器
+
+点击拦截可查看服务器详情
+
+三、连接服务器Windows开始菜单搜索 PowerShell 
+
+输入 ssh -p 端口 root@ip，询问是否把该主机加入到Ip列表内，输入yes，然后输入密码即可
+
+如登录失败，许把当前端口添加到安全组
+
+安全组设置：安 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/31741fba.html" title="利用CloudFlare获取无限邮箱">利用CloudFlare获取无限邮箱</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-12-26T14:53:43.045Z" title="发表于 2023-12-26 22:53:43">2023-12-26</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%B7%A5%E5%85%B7%E7%AE%B1/">工具箱</a></span></div><div class="content">1、创建自定义地址点击开始使用
+
+填写自定义地址及目标地址，目标地址即最终你要用来接收邮件的邮箱
+
+2、验证目标地址添加你希望转发到的邮箱地址（可以是QQ邮箱、163.com等国内邮箱）
+
+点击添加记录并启用
+
+启用后如下所示
+
+此时就可以用自定义邮箱地址接收邮件，邮件最终会发送到你配置的目标邮箱上
+3、使用我们模拟给自定义邮箱发送一封邮件
+
+使用配置的目标邮箱查看收到的邮件，此邮件会显示代发详情
+
+4、启用Catch-all地址启用Catch-all地址，点击编辑
+
+操作选择发送到电子邮件，填写目标邮件地址，保存即可
+
+配置好以后，所有xxxx@your_domain的邮件都转发到你配置的目标邮件地址上了
+</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/2ff113dc.html" title="搭建自定义导航网站">搭建自定义导航网站</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-12-26T14:53:43.025Z" title="发表于 2023-12-26 22:53:43">2023-12-26</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/">安装教程</a></span></div><div class="content">免费版地址https://www.iotheme.cn/store/webstack.html
+付费版购买地址https://www.iotheme.cn/store/onenav.html
+Webstack项目地址：https://github.com/HCLonely/hexo-theme-webstack
+其他主题推荐
+TwoNav主题：https://github.com/tznb1/TwoNav
+一、安装宝塔面板宝塔官网：https://www.bt.cn/new/download.html
+Centos安装脚本1yum install -y wget &amp;&amp; wget -O install.sh https://download.bt.cn/install/install_6.0.sh &amp;&amp; sh install.sh ed8484bec
+
+Ubuntu&#x2F;Deepin安装脚本1wget -O install.sh https://download.bt.cn/install/install-ubuntu_6.0.sh &amp;&am ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/d1bb370f.html" title="安装并配置java">安装并配置java</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-12-26T14:53:43.006Z" title="发表于 2023-12-26 22:53:43">2023-12-26</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/">安装教程</a></span></div><div class="content">安装并配置java一、安装java文件首先去官网下载 java1.8
+
+运行下载好的应用程序
+
+可以更改安装目录，且目录中不要包含中文，空格，特殊字符等
+
+接下来安装jre,也可以调整安装目录
+
+安装完成，点击关闭即可
+
+二、配置环境变量此电脑右击 &gt; 属性
+
+高级系统设置
+
+环境变量
+
+在系统变量中新建
+
+变量名 JAVA_HOME ,变量值选择刚才安装的jdk目录
+
+双击打开 Path 系统变量
+
+点击新建 %JAVA_HOME%\bin 
+
+点击上移，放到首位
+
+点击确定保存，注意有三次确认
+查看是否安装 jre
+
+查看Java版本
+
+注意：jdk1.8小版本号较低的查看版本号 用 java --version , 较高的 用 java -version 
+否则会报 Could not create the Java Virtual Machine. 错误
+
+</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/a3d190d8.html" title="Windows实现滑动关机">Windows实现滑动关机</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-12-26T14:53:43.003Z" title="发表于 2023-12-26 22:53:43">2023-12-26</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%B0%8F%E6%8A%80%E8%83%BD/">小技能</a></span></div><div class="content">
+可以先设置一个好看的锁屏壁纸   
+桌面右键 &gt; 个性化 &gt; 锁屏界面   从本地选择一个喜欢的锁屏壁纸
+在桌面右键 &gt; 新建 &gt; 快捷方式
+对象位置输入 SlideToShutDown 下一页
+
+为快捷方式命名
+
+点击完成会在桌面生成一个快捷方式，双击该快捷方式即可进行滑动关机
+
+可以为快捷方式设置一个图标，在快捷方式上右键 &gt; 属性 &gt; 快捷方式 &gt; 更改图标
+
+可以选择系统图标，也可以从本地选择其他图标
+
+点击完成即可
+
+</div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span><a class="page-number" href="/page/2/#content-inner">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/#content-inner">8</a><a class="extend next" rel="next" href="/page/2/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">時光</div><div class="author-info__description">一个乐于分享的小白</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">80</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">74</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/shiguang-coding"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/shiguang-coding" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:an_shiguang@163.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/59241ebb.html" title="IDEA远程Debug调试配置">IDEA远程Debug调试配置</a><time datetime="2023-12-26T14:53:43.093Z" title="发表于 2023-12-26 22:53:43">2023-12-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/222d2de8.html" title="投屏神器Scrcpy基本使用">投屏神器Scrcpy基本使用</a><time datetime="2023-12-26T14:53:43.075Z" title="发表于 2023-12-26 22:53:43">2023-12-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/34bcc8fe.html" title="私有化部署LobeChat">私有化部署LobeChat</a><time datetime="2023-12-26T14:53:43.070Z" title="发表于 2023-12-26 22:53:43">2023-12-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/a327d8e1.html" title="基于Notion搭建个人博客">基于Notion搭建个人博客</a><time datetime="2023-12-26T14:53:43.064Z" title="发表于 2023-12-26 22:53:43">2023-12-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/9a6fc6fc.html" title="缺少MSVCP140.dll导致软件无法打开">缺少MSVCP140.dll导致软件无法打开</a><time datetime="2023-12-26T14:53:43.051Z" title="发表于 2023-12-26 22:53:43">2023-12-26</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            
+            </div>
+            <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%A5%BD%E8%AE%B0%E6%80%A7%E4%B8%8D%E5%A6%82%E7%83%82%E7%AC%94%E5%A4%B4/"><span class="card-category-list-name">好记性不如烂笔头</span><span class="card-category-list-count">12</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><span class="card-category-list-name">学习笔记</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/"><span class="card-category-list-name">安装教程</span><span class="card-category-list-count">19</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%B0%8F%E6%8A%80%E8%83%BD/"><span class="card-category-list-name">小技能</span><span class="card-category-list-count">23</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%B7%A5%E5%85%B7%E7%AE%B1/"><span class="card-category-list-name">工具箱</span><span class="card-category-list-count">9</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E7%99%BD%E5%AB%96%E7%A6%8F%E5%88%A9/"><span class="card-category-list-name">白嫖福利</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E8%B8%A9%E5%9D%91/"><span class="card-category-list-name">踩坑</span><span class="card-category-list-count">10</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0/"><span class="card-category-list-name">项目笔记</span><span class="card-category-list-count">3</span></a></li>
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/Markdown/" style="font-size: 1.1em; color: #999">Markdown</a> <a href="/tags/AI/" style="font-size: 1.34em; color: #99a3b0">AI</a> <a href="/tags/%E9%87%8D%E8%A3%85%E7%B3%BB%E7%BB%9F/" style="font-size: 1.1em; color: #999">重装系统</a> <a href="/tags/Wechat/" style="font-size: 1.1em; color: #999">Wechat</a> <a href="/tags/Vercel/" style="font-size: 1.18em; color: #999ca1">Vercel</a> <a href="/tags/git/" style="font-size: 1.1em; color: #999">git</a> <a href="/tags/%E5%8F%B3%E9%94%AE%E8%8F%9C%E5%8D%95/" style="font-size: 1.1em; color: #999">右键菜单</a> <a href="/tags/Gemini/" style="font-size: 1.1em; color: #999">Gemini</a> <a href="/tags/VMware/" style="font-size: 1.18em; color: #999ca1">VMware</a> <a href="/tags/%E5%86%85%E5%AD%98%E6%9D%A1/" style="font-size: 1.1em; color: #999">内存条</a> <a href="/tags/%E5%AD%A6%E4%B9%A0/" style="font-size: 1.26em; color: #999fa8">学习</a> <a href="/tags/PicGo/" style="font-size: 1.1em; color: #999">PicGo</a> <a href="/tags/%E9%98%B2%E7%9B%97%E9%93%BE/" style="font-size: 1.1em; color: #999">防盗链</a> <a href="/tags/1Panel/" style="font-size: 1.1em; color: #999">1Panel</a> <a href="/tags/Cos/" style="font-size: 1.1em; color: #999">Cos</a> <a href="/tags/DNS/" style="font-size: 1.1em; color: #999">DNS</a> <a href="/tags/CentOs/" style="font-size: 1.1em; color: #999">CentOs</a> <a href="/tags/%E5%86%85%E5%AD%98/" style="font-size: 1.1em; color: #999">内存</a> <a href="/tags/IDEA-Debug/" style="font-size: 1.1em; color: #999">IDEA Debug</a> <a href="/tags/PostgreSQL/" style="font-size: 1.1em; color: #999">PostgreSQL</a> <a href="/tags/java/" style="font-size: 1.1em; color: #999">java</a> <a href="/tags/ChatGPT/" style="font-size: 1.42em; color: #99a6b7">ChatGPT</a> <a href="/tags/CloudFlare/" style="font-size: 1.1em; color: #999">CloudFlare</a> <a href="/tags/%E6%8F%90%E5%8D%87%E6%95%88%E7%8E%87/" style="font-size: 1.1em; color: #999">提升效率</a> <a href="/tags/%E9%A1%B9%E7%9B%AE/" style="font-size: 1.26em; color: #999fa8">项目</a> <a href="/tags/%E5%BB%BA%E7%AB%99/" style="font-size: 1.1em; color: #999">建站</a> <a href="/tags/CSDN/" style="font-size: 1.1em; color: #999">CSDN</a> <a href="/tags/Element/" style="font-size: 1.1em; color: #999">Element</a> <a href="/tags/%E7%BD%91%E7%9B%98%E8%B5%84%E6%BA%90/" style="font-size: 1.1em; color: #999">网盘资源</a> <a href="/tags/Vscode/" style="font-size: 1.1em; color: #999">Vscode</a> <a href="/tags/Docker-Portainer/" style="font-size: 1.1em; color: #999">Docker Portainer</a> <a href="/tags/List/" style="font-size: 1.1em; color: #999">List</a> <a href="/tags/SqlServer/" style="font-size: 1.1em; color: #999">SqlServer</a> <a href="/tags/1panel/" style="font-size: 1.1em; color: #999">1panel</a> <a href="/tags/Docker/" style="font-size: 1.5em; color: #99a9bf">Docker</a> <a href="/tags/hexo/" style="font-size: 1.1em; color: #999">hexo</a> <a href="/tags/Windows%E6%8A%80%E5%B7%A7/" style="font-size: 1.42em; color: #99a6b7">Windows技巧</a> <a href="/tags/SQL/" style="font-size: 1.1em; color: #999">SQL</a> <a href="/tags/Nginx-Proxy-Managerg/" style="font-size: 1.1em; color: #999">Nginx Proxy Managerg</a> <a href="/tags/Sqlserver/" style="font-size: 1.1em; color: #999">Sqlserver</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/12/"><span class="card-archive-list-date">十二月 2023</span><span class="card-archive-list-count">45</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/11/"><span class="card-archive-list-date">十一月 2023</span><span class="card-archive-list-count">6</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/06/"><span class="card-archive-list-date">六月 2023</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/05/"><span class="card-archive-list-date">五月 2023</span><span class="card-archive-list-count">5</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/04/"><span class="card-archive-list-date">四月 2023</span><span class="card-archive-list-count">10</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/03/"><span class="card-archive-list-date">三月 2023</span><span class="card-archive-list-count">13</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">80</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2023-12-27T06:19:05.925Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By 時光</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>window.typedJSFn = {
+  init: (str) => {
+    window.typed = new Typed('#subtitle', Object.assign({
+      strings: str,
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: true,
+      backSpeed: 50,
+    }, null))
+  },
+  run: (subtitleType) => {
+    if (true) {
+      if (typeof Typed === 'function') {
+        subtitleType()
+      } else {
+        getScript('https://cdn.jsdelivr.net/npm/typed.js/dist/typed.umd.min.js').then(subtitleType)
+      }
+    } else {
+      subtitleType()
+    }
+  }
+}
+</script><script>function subtitleType () {
+  if (true) {
+    typedJSFn.init(["生活百般滋味,人生需要笑对"])
+  } else {
+    document.getElementById("subtitle").textContent = "生活百般滋味,人生需要笑对"
+  }
+}
+typedJSFn.run(subtitleType)</script></div><div class="aplayer no-destroy" data-id="8152976493" data-server="netease" data-type="playlist"   data-order="list" data-fixed="true" data-preload="auto" data-autoplay="false" data-mutex="true" ></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="true" data-click="true"></script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="true"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/"});</script></body></html>
