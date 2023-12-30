@@ -3,11 +3,11 @@
   <title>時光</title>
   
   <subtitle>生活百般滋味,人生需要笑对</subtitle>
-  <link href="https://blog.shiguang.cloudns.org/atom.xml" rel="self"/>
+  <link href="https://blog.shiguangcoding.eu.org/atom.xml" rel="self"/>
   
-  <link href="https://blog.shiguang.cloudns.org/"/>
+  <link href="https://blog.shiguangcoding.eu.org/"/>
   <updated>2023-12-28T15:13:31.689Z</updated>
-  <id>https://blog.shiguang.cloudns.org/</id>
+  <id>https://blog.shiguangcoding.eu.org/</id>
   
   <author>
     <name>時光</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>申请CloudDNS免费域名</title>
-    <link href="https://blog.shiguang.cloudns.org/2023/12/28/ceddcdbef5b7/"/>
-    <id>https://blog.shiguang.cloudns.org/2023/12/28/ceddcdbef5b7/</id>
+    <link href="https://blog.shiguangcoding.eu.org/2023/12/28/ceddcdbef5b7/"/>
+    <id>https://blog.shiguangcoding.eu.org/2023/12/28/ceddcdbef5b7/</id>
     <published>2023-12-28T13:47:01.000Z</published>
     <updated>2023-12-28T15:13:31.689Z</updated>
     
@@ -33,21 +33,21 @@
     
     
     
-    <category term="白嫖福利" scheme="https://blog.shiguang.cloudns.org/categories/%E7%99%BD%E5%AB%96%E7%A6%8F%E5%88%A9/"/>
+    <category term="白嫖福利" scheme="https://blog.shiguangcoding.eu.org/categories/%E7%99%BD%E5%AB%96%E7%A6%8F%E5%88%A9/"/>
     
     
-    <category term="域名" scheme="https://blog.shiguang.cloudns.org/tags/%E5%9F%9F%E5%90%8D/"/>
+    <category term="域名" scheme="https://blog.shiguangcoding.eu.org/tags/%E5%9F%9F%E5%90%8D/"/>
     
-    <category term="CloudDNS" scheme="https://blog.shiguang.cloudns.org/tags/CloudDNS/"/>
+    <category term="CloudDNS" scheme="https://blog.shiguangcoding.eu.org/tags/CloudDNS/"/>
     
-    <category term="Cloudflare" scheme="https://blog.shiguang.cloudns.org/tags/Cloudflare/"/>
+    <category term="Cloudflare" scheme="https://blog.shiguangcoding.eu.org/tags/Cloudflare/"/>
     
   </entry>
   
   <entry>
     <title>Docker搭建青龙面板</title>
-    <link href="https://blog.shiguang.cloudns.org/2023/12/26/688cbb4c2348/"/>
-    <id>https://blog.shiguang.cloudns.org/2023/12/26/688cbb4c2348/</id>
+    <link href="https://blog.shiguangcoding.eu.org/2023/12/26/688cbb4c2348/"/>
+    <id>https://blog.shiguangcoding.eu.org/2023/12/26/688cbb4c2348/</id>
     <published>2023-12-26T14:53:42.912Z</published>
     <updated>2023-12-26T15:34:58.170Z</updated>
     
@@ -61,17 +61,17 @@
     
     
     
-    <category term="安装教程" scheme="https://blog.shiguang.cloudns.org/categories/%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/"/>
+    <category term="安装教程" scheme="https://blog.shiguangcoding.eu.org/categories/%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/"/>
     
     
-    <category term="面板" scheme="https://blog.shiguang.cloudns.org/tags/%E9%9D%A2%E6%9D%BF/"/>
+    <category term="面板" scheme="https://blog.shiguangcoding.eu.org/tags/%E9%9D%A2%E6%9D%BF/"/>
     
   </entry>
   
   <entry>
     <title>Docker部署去中心化聊天室</title>
-    <link href="https://blog.shiguang.cloudns.org/2023/12/26/d543e80c1652/"/>
-    <id>https://blog.shiguang.cloudns.org/2023/12/26/d543e80c1652/</id>
+    <link href="https://blog.shiguangcoding.eu.org/2023/12/26/d543e80c1652/"/>
+    <id>https://blog.shiguangcoding.eu.org/2023/12/26/d543e80c1652/</id>
     <published>2023-12-26T14:53:42.904Z</published>
     <updated>2023-12-26T15:34:58.179Z</updated>
     
@@ -85,21 +85,21 @@
     
     
     
-    <category term="安装教程" scheme="https://blog.shiguang.cloudns.org/categories/%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/"/>
+    <category term="安装教程" scheme="https://blog.shiguangcoding.eu.org/categories/%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/"/>
     
     
-    <category term="Docker" scheme="https://blog.shiguang.cloudns.org/tags/Docker/"/>
+    <category term="Docker" scheme="https://blog.shiguangcoding.eu.org/tags/Docker/"/>
     
-    <category term="Maxtri" scheme="https://blog.shiguang.cloudns.org/tags/Maxtri/"/>
+    <category term="Maxtri" scheme="https://blog.shiguangcoding.eu.org/tags/Maxtri/"/>
     
-    <category term="Element" scheme="https://blog.shiguang.cloudns.org/tags/Element/"/>
+    <category term="Element" scheme="https://blog.shiguangcoding.eu.org/tags/Element/"/>
     
   </entry>
   
   <entry>
     <title>Docker部署服务器运维管理面板1Panel</title>
-    <link href="https://blog.shiguang.cloudns.org/2023/12/26/c9ac373f6802/"/>
-    <id>https://blog.shiguang.cloudns.org/2023/12/26/c9ac373f6802/</id>
+    <link href="https://blog.shiguangcoding.eu.org/2023/12/26/c9ac373f6802/"/>
+    <id>https://blog.shiguangcoding.eu.org/2023/12/26/c9ac373f6802/</id>
     <published>2023-12-26T14:53:42.901Z</published>
     <updated>2023-12-26T15:34:58.180Z</updated>
     
@@ -113,25 +113,25 @@
     
     
     
-    <category term="安装教程" scheme="https://blog.shiguang.cloudns.org/categories/%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/"/>
+    <category term="安装教程" scheme="https://blog.shiguangcoding.eu.org/categories/%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/"/>
     
     
-    <category term="Docker" scheme="https://blog.shiguang.cloudns.org/tags/Docker/"/>
+    <category term="Docker" scheme="https://blog.shiguangcoding.eu.org/tags/Docker/"/>
     
-    <category term="面板" scheme="https://blog.shiguang.cloudns.org/tags/%E9%9D%A2%E6%9D%BF/"/>
+    <category term="面板" scheme="https://blog.shiguangcoding.eu.org/tags/%E9%9D%A2%E6%9D%BF/"/>
     
-    <category term="1Panel" scheme="https://blog.shiguang.cloudns.org/tags/1Panel/"/>
+    <category term="1Panel" scheme="https://blog.shiguangcoding.eu.org/tags/1Panel/"/>
     
   </entry>
   
   <entry>
     <title>Docker部署Nginx Proxy Manager</title>
-    <link href="https://blog.shiguang.cloudns.org/2023/12/26/2f6c7d70483c/"/>
-    <id>https://blog.shiguang.cloudns.org/2023/12/26/2f6c7d70483c/</id>
+    <link href="https://blog.shiguangcoding.eu.org/2023/12/26/2f6c7d70483c/"/>
+    <id>https://blog.shiguangcoding.eu.org/2023/12/26/2f6c7d70483c/</id>
     <published>2023-12-26T14:53:42.898Z</published>
     <updated>2023-12-26T15:34:58.175Z</updated>
     
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><blockquote><p>官网地址：<a href="https://nginxproxymanager.com/">https://nginxproxymanager.com/</a></p><p>github: <a href="https://github.com/NginxProxyManager/nginx-proxy-manager">https://github.com/NginxProxyManager/nginx-proxy-manager</a></p></blockquote><p>更新环境</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt update -y &amp;&amp; apt install -y curl socat wget sudo</span><br></pre></td></tr></table></figure><p>安装 Docker 及  docker-compose </p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">curl -fsSL https://get.docker.com | sh</span><br><span class="line"></span><br><span class="line">curl -L &quot;https://github.com/docker/compose/releases/download/v2.18.1/docker-compose-$(uname -s)-$(uname -m)&quot; -o /usr/local/bin/docker-compose </span><br><span class="line"></span><br><span class="line">chmod +x /usr/local/bin/docker-compose</span><br></pre></td></tr></table></figure><p>创建目录并进入目录</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">mkdir -p /root/docker_data/nginx-proxy-manager</span><br><span class="line"></span><br><span class="line">cd /root/docker_data/nginx-proxy-manager</span><br></pre></td></tr></table></figure><p>创建docker-compose.yml的文件</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nano docker-compose.yml</span><br></pre></td></tr></table></figure><p>复制代码进入文件中</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">version: &#x27;3.8&#x27;</span><br><span class="line"></span><br><span class="line">services:</span><br><span class="line"></span><br><span class="line"> app:</span><br><span class="line"></span><br><span class="line">  image: &#x27;jc21/nginx-proxy-manager:latest&#x27;</span><br><span class="line"></span><br><span class="line">  restart: unless-stopped</span><br><span class="line"></span><br><span class="line">  ports:</span><br><span class="line"></span><br><span class="line">   \- &#x27;80:80&#x27;</span><br><span class="line"></span><br><span class="line">   \- &#x27;81:81&#x27;</span><br><span class="line"></span><br><span class="line">   \- &#x27;443:443&#x27;</span><br><span class="line"></span><br><span class="line">  volumes:</span><br><span class="line"></span><br><span class="line">   \- ./data:/data</span><br><span class="line"></span><br><span class="line">   \- ./letsencrypt:/etc/letsencrypt</span><br></pre></td></tr></table></figure><p>中文版本</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">image:</span> <span class="string">&#x27;chishin/nginx-proxy-manager-zh:latest&#x27;</span></span><br></pre></td></tr></table></figure><p>crl＋x 然后y 然后回车退出编辑模式</p><p>注意：80 和 443 端口不能修改，否则会出现 <code>Internal Error</code> 错误</p><p><img src="https://img2023.cnblogs.com/blog/2233039/202312/2233039-20231222224356678-886363766.png" alt="image-20231222224350178"></p><p>启动</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure><p>默认用户名密码</p><p>Email: <a href="mailto:&#x61;&#100;&#109;&#x69;&#x6e;&#64;&#101;&#x78;&#x61;&#x6d;&#112;&#x6c;&#101;&#46;&#99;&#111;&#x6d;">&#x61;&#100;&#109;&#x69;&#x6e;&#64;&#101;&#x78;&#x61;&#x6d;&#112;&#x6c;&#101;&#46;&#99;&#111;&#x6d;</a></p><p>Password: changeme</p><p>首次登录需要设置管理员账户信息</p><p><img src="https://img2023.cnblogs.com/blog/2233039/202312/2233039-20231222222931716-582424306.png" alt="image-20231222222932729"></p><p>重置密码</p><p><img src="https://img2023.cnblogs.com/blog/2233039/202312/2233039-20231222223213968-1680502182.png" alt="image-20231222223215266"></p>]]></content>
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><blockquote><p>官网地址：<a href="https://nginxproxymanager.com/">https://nginxproxymanager.com/</a></p><p>github: <a href="https://github.com/NginxProxyManager/nginx-proxy-manager">https://github.com/NginxProxyManager/nginx-proxy-manager</a></p></blockquote><p>更新环境</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt update -y &amp;&amp; apt install -y curl socat wget sudo</span><br></pre></td></tr></table></figure><p>安装 Docker 及  docker-compose </p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">curl -fsSL https://get.docker.com | sh</span><br><span class="line"></span><br><span class="line">curl -L &quot;https://github.com/docker/compose/releases/download/v2.18.1/docker-compose-$(uname -s)-$(uname -m)&quot; -o /usr/local/bin/docker-compose </span><br><span class="line"></span><br><span class="line">chmod +x /usr/local/bin/docker-compose</span><br></pre></td></tr></table></figure><p>创建目录并进入目录</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">mkdir -p /root/docker_data/nginx-proxy-manager</span><br><span class="line"></span><br><span class="line">cd /root/docker_data/nginx-proxy-manager</span><br></pre></td></tr></table></figure><p>创建docker-compose.yml的文件</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nano docker-compose.yml</span><br></pre></td></tr></table></figure><p>复制代码进入文件中</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">version: &#x27;3.8&#x27;</span><br><span class="line"></span><br><span class="line">services:</span><br><span class="line"></span><br><span class="line"> app:</span><br><span class="line"></span><br><span class="line">  image: &#x27;jc21/nginx-proxy-manager:latest&#x27;</span><br><span class="line"></span><br><span class="line">  restart: unless-stopped</span><br><span class="line"></span><br><span class="line">  ports:</span><br><span class="line"></span><br><span class="line">   \- &#x27;80:80&#x27;</span><br><span class="line"></span><br><span class="line">   \- &#x27;81:81&#x27;</span><br><span class="line"></span><br><span class="line">   \- &#x27;443:443&#x27;</span><br><span class="line"></span><br><span class="line">  volumes:</span><br><span class="line"></span><br><span class="line">   \- ./data:/data</span><br><span class="line"></span><br><span class="line">   \- ./letsencrypt:/etc/letsencrypt</span><br></pre></td></tr></table></figure><p>中文版本</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">image:</span> <span class="string">&#x27;chishin/nginx-proxy-manager-zh:latest&#x27;</span></span><br></pre></td></tr></table></figure><p>crl＋x 然后y 然后回车退出编辑模式</p><p>注意：80 和 443 端口不能修改，否则会出现 <code>Internal Error</code> 错误</p><p><img src="https://img2023.cnblogs.com/blog/2233039/202312/2233039-20231222224356678-886363766.png" alt="image-20231222224350178"></p><p>启动</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure><p>默认用户名密码</p><p>Email: <a href="mailto:&#97;&#100;&#x6d;&#105;&#110;&#64;&#x65;&#120;&#97;&#109;&#x70;&#x6c;&#x65;&#x2e;&#99;&#x6f;&#x6d;">&#97;&#100;&#x6d;&#105;&#110;&#64;&#x65;&#120;&#97;&#109;&#x70;&#x6c;&#x65;&#x2e;&#99;&#x6f;&#x6d;</a></p><p>Password: changeme</p><p>首次登录需要设置管理员账户信息</p><p><img src="https://img2023.cnblogs.com/blog/2233039/202312/2233039-20231222222931716-582424306.png" alt="image-20231222222932729"></p><p>重置密码</p><p><img src="https://img2023.cnblogs.com/blog/2233039/202312/2233039-20231222223213968-1680502182.png" alt="image-20231222223215266"></p>]]></content>
     
     
       
@@ -141,19 +141,19 @@
     
     
     
-    <category term="安装教程" scheme="https://blog.shiguang.cloudns.org/categories/%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/"/>
+    <category term="安装教程" scheme="https://blog.shiguangcoding.eu.org/categories/%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/"/>
     
     
-    <category term="Docker" scheme="https://blog.shiguang.cloudns.org/tags/Docker/"/>
+    <category term="Docker" scheme="https://blog.shiguangcoding.eu.org/tags/Docker/"/>
     
-    <category term="Nginx Proxy Managerg" scheme="https://blog.shiguang.cloudns.org/tags/Nginx-Proxy-Managerg/"/>
+    <category term="Nginx Proxy Managerg" scheme="https://blog.shiguangcoding.eu.org/tags/Nginx-Proxy-Managerg/"/>
     
   </entry>
   
   <entry>
     <title>Docker部署chatgpt-on-wechat</title>
-    <link href="https://blog.shiguang.cloudns.org/2023/12/26/eed43b14f7b1/"/>
-    <id>https://blog.shiguang.cloudns.org/2023/12/26/eed43b14f7b1/</id>
+    <link href="https://blog.shiguangcoding.eu.org/2023/12/26/eed43b14f7b1/"/>
+    <id>https://blog.shiguangcoding.eu.org/2023/12/26/eed43b14f7b1/</id>
     <published>2023-12-26T14:53:42.896Z</published>
     <updated>2023-12-26T15:34:58.176Z</updated>
     
@@ -167,21 +167,21 @@
     
     
     
-    <category term="安装教程" scheme="https://blog.shiguang.cloudns.org/categories/%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/"/>
+    <category term="安装教程" scheme="https://blog.shiguangcoding.eu.org/categories/%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/"/>
     
     
-    <category term="Docker" scheme="https://blog.shiguang.cloudns.org/tags/Docker/"/>
+    <category term="Docker" scheme="https://blog.shiguangcoding.eu.org/tags/Docker/"/>
     
-    <category term="ChatGPT" scheme="https://blog.shiguang.cloudns.org/tags/ChatGPT/"/>
+    <category term="ChatGPT" scheme="https://blog.shiguangcoding.eu.org/tags/ChatGPT/"/>
     
-    <category term="Wechat" scheme="https://blog.shiguang.cloudns.org/tags/Wechat/"/>
+    <category term="Wechat" scheme="https://blog.shiguangcoding.eu.org/tags/Wechat/"/>
     
   </entry>
   
   <entry>
     <title>Docker部署chatgpt-next-web</title>
-    <link href="https://blog.shiguang.cloudns.org/2023/12/26/95753dd3fc79/"/>
-    <id>https://blog.shiguang.cloudns.org/2023/12/26/95753dd3fc79/</id>
+    <link href="https://blog.shiguangcoding.eu.org/2023/12/26/95753dd3fc79/"/>
+    <id>https://blog.shiguangcoding.eu.org/2023/12/26/95753dd3fc79/</id>
     <published>2023-12-26T14:53:42.893Z</published>
     <updated>2023-12-26T15:34:58.173Z</updated>
     
@@ -195,21 +195,21 @@
     
     
     
-    <category term="安装教程" scheme="https://blog.shiguang.cloudns.org/categories/%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/"/>
+    <category term="安装教程" scheme="https://blog.shiguangcoding.eu.org/categories/%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/"/>
     
     
-    <category term="Docker" scheme="https://blog.shiguang.cloudns.org/tags/Docker/"/>
+    <category term="Docker" scheme="https://blog.shiguangcoding.eu.org/tags/Docker/"/>
     
-    <category term="ChatGPT" scheme="https://blog.shiguang.cloudns.org/tags/ChatGPT/"/>
+    <category term="ChatGPT" scheme="https://blog.shiguangcoding.eu.org/tags/ChatGPT/"/>
     
-    <category term="AI" scheme="https://blog.shiguang.cloudns.org/tags/AI/"/>
+    <category term="AI" scheme="https://blog.shiguangcoding.eu.org/tags/AI/"/>
     
   </entry>
   
   <entry>
     <title>1panel搭建LNMP环境</title>
-    <link href="https://blog.shiguang.cloudns.org/2023/12/26/df6af97ea13a/"/>
-    <id>https://blog.shiguang.cloudns.org/2023/12/26/df6af97ea13a/</id>
+    <link href="https://blog.shiguangcoding.eu.org/2023/12/26/df6af97ea13a/"/>
+    <id>https://blog.shiguangcoding.eu.org/2023/12/26/df6af97ea13a/</id>
     <published>2023-12-26T14:53:42.879Z</published>
     <updated>2023-12-26T15:34:58.168Z</updated>
     
@@ -224,18 +224,18 @@
     
     
     
-    <category term="1panel" scheme="https://blog.shiguang.cloudns.org/tags/1panel/"/>
+    <category term="1panel" scheme="https://blog.shiguangcoding.eu.org/tags/1panel/"/>
     
-    <category term="Docker" scheme="https://blog.shiguang.cloudns.org/tags/Docker/"/>
+    <category term="Docker" scheme="https://blog.shiguangcoding.eu.org/tags/Docker/"/>
     
-    <category term="面板" scheme="https://blog.shiguang.cloudns.org/tags/%E9%9D%A2%E6%9D%BF/"/>
+    <category term="面板" scheme="https://blog.shiguangcoding.eu.org/tags/%E9%9D%A2%E6%9D%BF/"/>
     
   </entry>
   
   <entry>
     <title>Hexo基本使用</title>
-    <link href="https://blog.shiguang.cloudns.org/2023/12/25/5c114e5214cc/"/>
-    <id>https://blog.shiguang.cloudns.org/2023/12/25/5c114e5214cc/</id>
+    <link href="https://blog.shiguangcoding.eu.org/2023/12/25/5c114e5214cc/"/>
+    <id>https://blog.shiguangcoding.eu.org/2023/12/25/5c114e5214cc/</id>
     <published>2023-12-25T03:44:43.000Z</published>
     <updated>2023-12-26T15:34:58.187Z</updated>
     
@@ -249,15 +249,15 @@
     
     
     
-    <category term="安装教程" scheme="https://blog.shiguang.cloudns.org/categories/%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/"/>
+    <category term="安装教程" scheme="https://blog.shiguangcoding.eu.org/categories/%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/"/>
     
     
   </entry>
   
   <entry>
     <title>使用PandoraNext注册ChatGPT账号</title>
-    <link href="https://blog.shiguang.cloudns.org/2023/12/24/94bd66c3afdd/"/>
-    <id>https://blog.shiguang.cloudns.org/2023/12/24/94bd66c3afdd/</id>
+    <link href="https://blog.shiguangcoding.eu.org/2023/12/24/94bd66c3afdd/"/>
+    <id>https://blog.shiguangcoding.eu.org/2023/12/24/94bd66c3afdd/</id>
     <published>2023-12-24T12:32:17.000Z</published>
     <updated>2023-12-26T15:34:58.218Z</updated>
     
@@ -271,19 +271,19 @@
     
     
     
-    <category term="小技能" scheme="https://blog.shiguang.cloudns.org/categories/%E5%B0%8F%E6%8A%80%E8%83%BD/"/>
+    <category term="小技能" scheme="https://blog.shiguangcoding.eu.org/categories/%E5%B0%8F%E6%8A%80%E8%83%BD/"/>
     
     
-    <category term="ChatGPT" scheme="https://blog.shiguang.cloudns.org/tags/ChatGPT/"/>
+    <category term="ChatGPT" scheme="https://blog.shiguangcoding.eu.org/tags/ChatGPT/"/>
     
-    <category term="PandoraNext" scheme="https://blog.shiguang.cloudns.org/tags/PandoraNext/"/>
+    <category term="PandoraNext" scheme="https://blog.shiguangcoding.eu.org/tags/PandoraNext/"/>
     
   </entry>
   
   <entry>
     <title>一键部署谷歌Gemini聊天机器人</title>
-    <link href="https://blog.shiguang.cloudns.org/2023/12/19/4c08fe48731a/"/>
-    <id>https://blog.shiguang.cloudns.org/2023/12/19/4c08fe48731a/</id>
+    <link href="https://blog.shiguangcoding.eu.org/2023/12/19/4c08fe48731a/"/>
+    <id>https://blog.shiguangcoding.eu.org/2023/12/19/4c08fe48731a/</id>
     <published>2023-12-19T14:32:12.000Z</published>
     <updated>2023-12-26T15:34:58.214Z</updated>
     
@@ -297,23 +297,23 @@
     
     
     
-    <category term="安装教程" scheme="https://blog.shiguang.cloudns.org/categories/%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/"/>
+    <category term="安装教程" scheme="https://blog.shiguangcoding.eu.org/categories/%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/"/>
     
     
-    <category term="Docker" scheme="https://blog.shiguang.cloudns.org/tags/Docker/"/>
+    <category term="Docker" scheme="https://blog.shiguangcoding.eu.org/tags/Docker/"/>
     
-    <category term="AI" scheme="https://blog.shiguang.cloudns.org/tags/AI/"/>
+    <category term="AI" scheme="https://blog.shiguangcoding.eu.org/tags/AI/"/>
     
-    <category term="Gemini" scheme="https://blog.shiguang.cloudns.org/tags/Gemini/"/>
+    <category term="Gemini" scheme="https://blog.shiguangcoding.eu.org/tags/Gemini/"/>
     
-    <category term="Vercel" scheme="https://blog.shiguang.cloudns.org/tags/Vercel/"/>
+    <category term="Vercel" scheme="https://blog.shiguangcoding.eu.org/tags/Vercel/"/>
     
   </entry>
   
   <entry>
     <title>IPTV电视直播源搜索引擎推荐</title>
-    <link href="https://blog.shiguang.cloudns.org/2023/12/17/e0f05cbc7fd8/"/>
-    <id>https://blog.shiguang.cloudns.org/2023/12/17/e0f05cbc7fd8/</id>
+    <link href="https://blog.shiguangcoding.eu.org/2023/12/17/e0f05cbc7fd8/"/>
+    <id>https://blog.shiguangcoding.eu.org/2023/12/17/e0f05cbc7fd8/</id>
     <published>2023-12-17T04:00:00.000Z</published>
     <updated>2023-12-27T13:09:36.398Z</updated>
     
@@ -327,15 +327,15 @@
     
     
     
-    <category term="工具箱" scheme="https://blog.shiguang.cloudns.org/categories/%E5%B7%A5%E5%85%B7%E7%AE%B1/"/>
+    <category term="工具箱" scheme="https://blog.shiguangcoding.eu.org/categories/%E5%B7%A5%E5%85%B7%E7%AE%B1/"/>
     
     
   </entry>
   
   <entry>
     <title>ufw简单使用</title>
-    <link href="https://blog.shiguang.cloudns.org/2023/12/17/e321a225685e/"/>
-    <id>https://blog.shiguang.cloudns.org/2023/12/17/e321a225685e/</id>
+    <link href="https://blog.shiguangcoding.eu.org/2023/12/17/e321a225685e/"/>
+    <id>https://blog.shiguangcoding.eu.org/2023/12/17/e321a225685e/</id>
     <published>2023-12-17T04:00:00.000Z</published>
     <updated>2023-12-27T10:30:19.063Z</updated>
     
@@ -349,17 +349,17 @@
     
     
     
-    <category term="工具箱" scheme="https://blog.shiguang.cloudns.org/categories/%E5%B7%A5%E5%85%B7%E7%AE%B1/"/>
+    <category term="工具箱" scheme="https://blog.shiguangcoding.eu.org/categories/%E5%B7%A5%E5%85%B7%E7%AE%B1/"/>
     
     
-    <category term="ufw" scheme="https://blog.shiguang.cloudns.org/tags/ufw/"/>
+    <category term="ufw" scheme="https://blog.shiguangcoding.eu.org/tags/ufw/"/>
     
   </entry>
   
   <entry>
     <title>Docker部署在线音乐服务Melody</title>
-    <link href="https://blog.shiguang.cloudns.org/2023/12/17/44217802193b/"/>
-    <id>https://blog.shiguang.cloudns.org/2023/12/17/44217802193b/</id>
+    <link href="https://blog.shiguangcoding.eu.org/2023/12/17/44217802193b/"/>
+    <id>https://blog.shiguangcoding.eu.org/2023/12/17/44217802193b/</id>
     <published>2023-12-17T01:50:02.000Z</published>
     <updated>2023-12-26T15:34:58.178Z</updated>
     
@@ -373,19 +373,19 @@
     
     
     
-    <category term="安装教程" scheme="https://blog.shiguang.cloudns.org/categories/%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/"/>
+    <category term="安装教程" scheme="https://blog.shiguangcoding.eu.org/categories/%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/"/>
     
     
-    <category term="Docker" scheme="https://blog.shiguang.cloudns.org/tags/Docker/"/>
+    <category term="Docker" scheme="https://blog.shiguangcoding.eu.org/tags/Docker/"/>
     
-    <category term="Melody" scheme="https://blog.shiguang.cloudns.org/tags/Melody/"/>
+    <category term="Melody" scheme="https://blog.shiguangcoding.eu.org/tags/Melody/"/>
     
   </entry>
   
   <entry>
     <title>搭建Docker可视化面板Portainer</title>
-    <link href="https://blog.shiguang.cloudns.org/2023/12/16/ccff1fc51c57/"/>
-    <id>https://blog.shiguang.cloudns.org/2023/12/16/ccff1fc51c57/</id>
+    <link href="https://blog.shiguangcoding.eu.org/2023/12/16/ccff1fc51c57/"/>
+    <id>https://blog.shiguangcoding.eu.org/2023/12/16/ccff1fc51c57/</id>
     <published>2023-12-16T07:07:11.000Z</published>
     <updated>2023-12-26T15:34:58.234Z</updated>
     
@@ -399,17 +399,17 @@
     
     
     
-    <category term="安装教程" scheme="https://blog.shiguang.cloudns.org/categories/%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/"/>
+    <category term="安装教程" scheme="https://blog.shiguangcoding.eu.org/categories/%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/"/>
     
     
-    <category term="Docker Portainer" scheme="https://blog.shiguang.cloudns.org/tags/Docker-Portainer/"/>
+    <category term="Docker Portainer" scheme="https://blog.shiguangcoding.eu.org/tags/Docker-Portainer/"/>
     
   </entry>
   
   <entry>
     <title>Docker搭建哪吒面板</title>
-    <link href="https://blog.shiguang.cloudns.org/2023/12/16/7046c60c34ea/"/>
-    <id>https://blog.shiguang.cloudns.org/2023/12/16/7046c60c34ea/</id>
+    <link href="https://blog.shiguangcoding.eu.org/2023/12/16/7046c60c34ea/"/>
+    <id>https://blog.shiguangcoding.eu.org/2023/12/16/7046c60c34ea/</id>
     <published>2023-12-16T05:53:36.000Z</published>
     <updated>2023-12-26T15:34:58.172Z</updated>
     
@@ -423,19 +423,19 @@
     
     
     
-    <category term="安装教程" scheme="https://blog.shiguang.cloudns.org/categories/%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/"/>
+    <category term="安装教程" scheme="https://blog.shiguangcoding.eu.org/categories/%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/"/>
     
     
-    <category term="Docker" scheme="https://blog.shiguang.cloudns.org/tags/Docker/"/>
+    <category term="Docker" scheme="https://blog.shiguangcoding.eu.org/tags/Docker/"/>
     
-    <category term="面板" scheme="https://blog.shiguang.cloudns.org/tags/%E9%9D%A2%E6%9D%BF/"/>
+    <category term="面板" scheme="https://blog.shiguangcoding.eu.org/tags/%E9%9D%A2%E6%9D%BF/"/>
     
   </entry>
   
   <entry>
     <title>Docker部署ChatBotUI</title>
-    <link href="https://blog.shiguang.cloudns.org/2023/12/13/d5ab712c49e2/"/>
-    <id>https://blog.shiguang.cloudns.org/2023/12/13/d5ab712c49e2/</id>
+    <link href="https://blog.shiguangcoding.eu.org/2023/12/13/d5ab712c49e2/"/>
+    <id>https://blog.shiguangcoding.eu.org/2023/12/13/d5ab712c49e2/</id>
     <published>2023-12-13T12:23:33.000Z</published>
     <updated>2023-12-26T15:34:58.174Z</updated>
     
@@ -449,21 +449,21 @@
     
     
     
-    <category term="安装教程" scheme="https://blog.shiguang.cloudns.org/categories/%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/"/>
+    <category term="安装教程" scheme="https://blog.shiguangcoding.eu.org/categories/%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/"/>
     
     
-    <category term="Docker" scheme="https://blog.shiguang.cloudns.org/tags/Docker/"/>
+    <category term="Docker" scheme="https://blog.shiguangcoding.eu.org/tags/Docker/"/>
     
-    <category term="ChatGPT" scheme="https://blog.shiguang.cloudns.org/tags/ChatGPT/"/>
+    <category term="ChatGPT" scheme="https://blog.shiguangcoding.eu.org/tags/ChatGPT/"/>
     
-    <category term="ChatBotUI" scheme="https://blog.shiguang.cloudns.org/tags/ChatBotUI/"/>
+    <category term="ChatBotUI" scheme="https://blog.shiguangcoding.eu.org/tags/ChatBotUI/"/>
     
   </entry>
   
   <entry>
     <title>私有化部署LobeChat</title>
-    <link href="https://blog.shiguang.cloudns.org/2023/12/12/afdaa444a11a/"/>
-    <id>https://blog.shiguang.cloudns.org/2023/12/12/afdaa444a11a/</id>
+    <link href="https://blog.shiguangcoding.eu.org/2023/12/12/afdaa444a11a/"/>
+    <id>https://blog.shiguangcoding.eu.org/2023/12/12/afdaa444a11a/</id>
     <published>2023-12-12T15:21:14.000Z</published>
     <updated>2023-12-27T10:12:13.998Z</updated>
     
@@ -477,25 +477,25 @@
     
     
     
-    <category term="安装教程" scheme="https://blog.shiguang.cloudns.org/categories/%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/"/>
+    <category term="安装教程" scheme="https://blog.shiguangcoding.eu.org/categories/%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/"/>
     
     
-    <category term="Docker" scheme="https://blog.shiguang.cloudns.org/tags/Docker/"/>
+    <category term="Docker" scheme="https://blog.shiguangcoding.eu.org/tags/Docker/"/>
     
-    <category term="ChatGPT" scheme="https://blog.shiguang.cloudns.org/tags/ChatGPT/"/>
+    <category term="ChatGPT" scheme="https://blog.shiguangcoding.eu.org/tags/ChatGPT/"/>
     
-    <category term="AI" scheme="https://blog.shiguang.cloudns.org/tags/AI/"/>
+    <category term="AI" scheme="https://blog.shiguangcoding.eu.org/tags/AI/"/>
     
-    <category term="Vercel" scheme="https://blog.shiguang.cloudns.org/tags/Vercel/"/>
+    <category term="Vercel" scheme="https://blog.shiguangcoding.eu.org/tags/Vercel/"/>
     
-    <category term="LobeChat" scheme="https://blog.shiguang.cloudns.org/tags/LobeChat/"/>
+    <category term="LobeChat" scheme="https://blog.shiguangcoding.eu.org/tags/LobeChat/"/>
     
   </entry>
   
   <entry>
     <title>基于Notion搭建个人博客</title>
-    <link href="https://blog.shiguang.cloudns.org/2023/12/12/23e22634b01f/"/>
-    <id>https://blog.shiguang.cloudns.org/2023/12/12/23e22634b01f/</id>
+    <link href="https://blog.shiguangcoding.eu.org/2023/12/12/23e22634b01f/"/>
+    <id>https://blog.shiguangcoding.eu.org/2023/12/12/23e22634b01f/</id>
     <published>2023-12-12T07:56:35.000Z</published>
     <updated>2023-12-27T10:13:19.823Z</updated>
     
@@ -509,17 +509,17 @@
     
     
     
-    <category term="小技能" scheme="https://blog.shiguang.cloudns.org/categories/%E5%B0%8F%E6%8A%80%E8%83%BD/"/>
+    <category term="小技能" scheme="https://blog.shiguangcoding.eu.org/categories/%E5%B0%8F%E6%8A%80%E8%83%BD/"/>
     
     
-    <category term="Notion" scheme="https://blog.shiguang.cloudns.org/tags/Notion/"/>
+    <category term="Notion" scheme="https://blog.shiguangcoding.eu.org/tags/Notion/"/>
     
   </entry>
   
   <entry>
     <title>宝塔面板调整80和443端口</title>
-    <link href="https://blog.shiguang.cloudns.org/2023/12/12/809f271a3aac/"/>
-    <id>https://blog.shiguang.cloudns.org/2023/12/12/809f271a3aac/</id>
+    <link href="https://blog.shiguangcoding.eu.org/2023/12/12/809f271a3aac/"/>
+    <id>https://blog.shiguangcoding.eu.org/2023/12/12/809f271a3aac/</id>
     <published>2023-12-12T06:52:11.000Z</published>
     <updated>2023-12-26T15:34:58.230Z</updated>
     
@@ -533,10 +533,10 @@
     
     
     
-    <category term="好记性不如烂笔头" scheme="https://blog.shiguang.cloudns.org/categories/%E5%A5%BD%E8%AE%B0%E6%80%A7%E4%B8%8D%E5%A6%82%E7%83%82%E7%AC%94%E5%A4%B4/"/>
+    <category term="好记性不如烂笔头" scheme="https://blog.shiguangcoding.eu.org/categories/%E5%A5%BD%E8%AE%B0%E6%80%A7%E4%B8%8D%E5%A6%82%E7%83%82%E7%AC%94%E5%A4%B4/"/>
     
     
-    <category term="宝塔面板" scheme="https://blog.shiguang.cloudns.org/tags/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF/"/>
+    <category term="宝塔面板" scheme="https://blog.shiguangcoding.eu.org/tags/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF/"/>
     
   </entry>
   
