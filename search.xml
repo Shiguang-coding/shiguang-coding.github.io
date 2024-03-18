@@ -2274,5 +2274,16 @@
     </entry>
     
     
+    
+    <entry>
+      <title></title>
+      <link href="/gitalk/index.html"/>
+      <url>/gitalk/index.html</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>var gitalk = new Gitalk({    clientID: 'c031c48c32dc34b6ddaa', // clientID     clientSecret: '17f38e3a3a0c2d6955c840794f953a2b820db6ae', // clientSecret    repo: 'shiguang-comments', // 评论仓库名    owner: 'Shiguang-coding',    admin: ['Shiguang-coding'], // 管理人    id: location.pathname, // 返回当前 URL 的路径部分作为id    language:'zh-CN', // 语言    distractionFreeMode: false  // 无干扰模式})]]></content>
+      
+    </entry>
+    
+    
   
 </search>
