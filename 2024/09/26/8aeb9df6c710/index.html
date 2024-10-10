@@ -1,0 +1,565 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>【尚硅谷】MySQL-多版本并发控制 | 時光</title><meta name="author" content="時光"><meta name="copyright" content="時光"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="referrer" content="no-referrer"><meta name="description" content="在线视频:MySQL数据库入门到大牛，mysql安装到优化，百科全书级，全网天花板官方资料: 尚硅谷MySQL入门到高级-宋红康版 代码仓库Gitee：https:&#x2F;&#x2F;gitee.com&#x2F;an_shiguang&#x2F;learn-mysql  什么是MVCCMVCC （Multiversion Concurrency Control），多版本并发控制。顾名思义，MVCC 是通过数据行的多个版本管理来实">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【尚硅谷】MySQL-多版本并发控制">
+<meta property="og:url" content="https://blog.shiguang666.eu.org/2024/09/26/8aeb9df6c710/index.html">
+<meta property="og:site_name" content="時光">
+<meta property="og:description" content="在线视频:MySQL数据库入门到大牛，mysql安装到优化，百科全书级，全网天花板官方资料: 尚硅谷MySQL入门到高级-宋红康版 代码仓库Gitee：https:&#x2F;&#x2F;gitee.com&#x2F;an_shiguang&#x2F;learn-mysql  什么是MVCCMVCC （Multiversion Concurrency Control），多版本并发控制。顾名思义，MVCC 是通过数据行的多个版本管理来实">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg">
+<meta property="article:published_time" content="2024-09-26T03:27:08.000Z">
+<meta property="article:modified_time" content="2024-10-10T15:08:52.911Z">
+<meta property="article:author" content="時光">
+<meta property="article:tag" content="SQL">
+<meta property="article:tag" content="尚硅谷">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://blog.shiguang666.eu.org/2024/09/26/8aeb9df6c710/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="baidu-site-verification" content="codeva-DpB1dzOUDd"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: 時光","link":"链接: ","source":"来源: 時光","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '【尚硅谷】MySQL-多版本并发控制',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-10-10 23:08:52'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="時光" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load',() => { preloader.endLoading() })
+
+  if (false) {
+    document.addEventListener('pjax:send', () => { preloader.initLoading() })
+    document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+  }
+})()</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">209</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">179</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">16</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://www.shiguang666.eu.org/"><i class="fa-fw fas fa-id-card"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-book"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/random.html"><i class="fa-fw fas fa-random"></i><span> 随机</span></a></li><li><a class="site-page child" href="/atom.xml"><i class="fa-fw fa fa-rss"></i><span> RSS</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-paper-plane"></i><span> 导航</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/navigate/"><i class="fa-fw fas fa-sign-in"></i><span> 站内</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://nav.shiguang666.eu.org/"><i class="fa-fw fas fa-sign-out"></i><span> 站外</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa-solid fa-flask"></i><span> 实验室</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/news"><i class="fa-fw fa fa-calendar"></i><span> 每日早报</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://qexo.shiguang666.eu.org/"><i class="fa-fw fas fa-q"></i><span> Hexo管理面板</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://games.shiguang666.eu.org"><i class="fa-fw fa-solid fa-dragon"></i><span> 在线小游戏</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://game.shiguang666.eu.org"><i class="fa-fw fa-solid fa-headset"></i><span> 怀旧游戏机</span></a></li><li><a class="site-page child" href="/xjj/"><i class="fa-fw fa fa-rocket"></i><span> 随机小姐姐</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://countdown.shiguang666.eu.org/"><i class="fa-fw fa-solid fa-calendar-check"></i><span> 高考倒计时1</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://countdown1.shiguang666.eu.org/"><i class="fa-fw fa-solid fa-stopwatch-20"></i><span> 高考倒计时2</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://countdown2.shiguang666.eu.org/"><i class="fa-fw fa-solid fa-hourglass-start"></i><span> 高考倒计时3</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa-solid fa-user-group"></i><span> 友链</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/flink/"><i class="fa-fw fa-solid fa-user-tie"></i><span> 本站友链</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://www.travellings.cn/go.html"><i class="fa-fw fa fa-subway"></i><span> 随机开往</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://travel.moe/go.html?travel=on"><i class="fa-fw fa fa-taxi"></i><span> 异次元之旅</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://zhblogs.ohyee.cc/"><i class="fa-fw fa fa-motorcycle"></i><span> 列表导航</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/gallery/"><i class="fa-fw fas fa-solid fa-image"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fas fa-comments"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg')"><nav id="nav"><span id="blog-info"><a href="/" title="時光"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.png"/><span class="site-name">時光</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://www.shiguang666.eu.org/"><i class="fa-fw fas fa-id-card"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-book"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/random.html"><i class="fa-fw fas fa-random"></i><span> 随机</span></a></li><li><a class="site-page child" href="/atom.xml"><i class="fa-fw fa fa-rss"></i><span> RSS</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-paper-plane"></i><span> 导航</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/navigate/"><i class="fa-fw fas fa-sign-in"></i><span> 站内</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://nav.shiguang666.eu.org/"><i class="fa-fw fas fa-sign-out"></i><span> 站外</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa-solid fa-flask"></i><span> 实验室</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/news"><i class="fa-fw fa fa-calendar"></i><span> 每日早报</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://qexo.shiguang666.eu.org/"><i class="fa-fw fas fa-q"></i><span> Hexo管理面板</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://games.shiguang666.eu.org"><i class="fa-fw fa-solid fa-dragon"></i><span> 在线小游戏</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://game.shiguang666.eu.org"><i class="fa-fw fa-solid fa-headset"></i><span> 怀旧游戏机</span></a></li><li><a class="site-page child" href="/xjj/"><i class="fa-fw fa fa-rocket"></i><span> 随机小姐姐</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://countdown.shiguang666.eu.org/"><i class="fa-fw fa-solid fa-calendar-check"></i><span> 高考倒计时1</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://countdown1.shiguang666.eu.org/"><i class="fa-fw fa-solid fa-stopwatch-20"></i><span> 高考倒计时2</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://countdown2.shiguang666.eu.org/"><i class="fa-fw fa-solid fa-hourglass-start"></i><span> 高考倒计时3</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa-solid fa-user-group"></i><span> 友链</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/flink/"><i class="fa-fw fa-solid fa-user-tie"></i><span> 本站友链</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://www.travellings.cn/go.html"><i class="fa-fw fa fa-subway"></i><span> 随机开往</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://travel.moe/go.html?travel=on"><i class="fa-fw fa fa-taxi"></i><span> 异次元之旅</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://zhblogs.ohyee.cc/"><i class="fa-fw fa fa-motorcycle"></i><span> 列表导航</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/gallery/"><i class="fa-fw fas fa-solid fa-image"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fas fa-comments"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">【尚硅谷】MySQL-多版本并发控制</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-09-26T03:27:08.000Z" title="发表于 2024-09-26 11:27:08">2024-09-26</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-10-10T15:08:52.911Z" title="更新于 2024-10-10 23:08:52">2024-10-10</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">6.3k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>20分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="【尚硅谷】MySQL-多版本并发控制"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><blockquote>
+<p>在线视频:<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1iq4y1u7vj?p=183">MySQL数据库入门到大牛，mysql安装到优化，百科全书级，全网天花板</a><br>官方资料: <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1ztbzMVF9qRJ2xCOpySXl3Q?pwd=yyds">尚硅谷MySQL入门到高级-宋红康版</a></p>
+<p>代码仓库<br>Gitee：<a target="_blank" rel="noopener" href="https://gitee.com/an_shiguang/learn-mysql">https://gitee.com/an_shiguang/learn-mysql</a></p>
+</blockquote>
+<h1 id="什么是MVCC"><a href="#什么是MVCC" class="headerlink" title="什么是MVCC"></a>什么是MVCC</h1><p>MVCC （Multiversion Concurrency Control），多版本并发控制。顾名思义，MVCC 是通过数据行的多个版本管理来实现数据库的 <code>并发控制 </code>。这项技术使得在InnoDB的事务隔离级别下执行 <code>一致性读</code> 操作有了保证。换言之，就是为了查询一些正在被另一个事务更新的行，并且可以看到它们被更新之前的值，这样 在做查询的时候就不用等待另一个事务释放锁。</p>
+<p>MVCC没有正式的标准，在不同的DBMS中MVCC的实现方式可能是不同的，也不是普遍使用的（大家可以参考相关的DBMS文档）。这里讲解InnoDB中MVCC的实现机制（MySQL其他的存储引擎并不支持它）。</p>
+<h1 id="快照读与当前读"><a href="#快照读与当前读" class="headerlink" title="快照读与当前读"></a>快照读与当前读</h1><p>MVCC在MySQL InnoDB中的实现主要是为了提高数据库并发性能，用更好的方式去处理 <code>读-写冲突</code> ，做到 即使有读写冲突时，也能做到 <code>不加锁</code> ， <code>非阻塞并发读</code> ，而这个读指的就是 <code>快照读</code> , 而非 <code>当前读</code> 。当前 读实际上是一种加锁的操作，是悲观锁的实现。而MVCC本质是采用乐观锁思想的一种方式。</p>
+<h2 id="快照读"><a href="#快照读" class="headerlink" title="快照读"></a>快照读</h2><p>快照读又叫一致性读，读取的是快照数据。<strong>不加锁的简单的 SELECT 都属于快照读</strong>，即不加锁的非阻塞 读；比如这样：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM player WHERE ...</span><br></pre></td></tr></table></figure>
+
+<p>之所以出现快照读的情况，是基于提高并发性能的考虑，快照读的实现是基于MVCC，它在很多情况下， 避免了加锁操作，降低了开销。</p>
+<p>既然是基于多版本，那么快照读可能读到的并不一定是数据的最新版本，而有可能是之前的历史版本。 </p>
+<p>快照读的前提是隔离级别不是串行级别，串行级别下的快照读会退化成当前读。</p>
+<h2 id="当前读"><a href="#当前读" class="headerlink" title="当前读"></a>当前读</h2><p>当前读读取的是记录的最新版本（最新数据，而不是历史版本的数据），读取时还要保证其他并发事务 不能修改当前记录，会对读取的记录进行加锁。加锁的 SELECT，或者对数据进行增删改都会进行当前 读。比如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM student LOCK IN SHARE MODE; # 共享锁</span><br><span class="line">SELECT * FROM student FOR UPDATE; # 排他锁</span><br><span class="line">INSERT INTO student values ... # 排他锁</span><br><span class="line">DELETE FROM student WHERE ... # 排他锁</span><br><span class="line">UPDATE student SET ... # 排他锁</span><br></pre></td></tr></table></figure>
+
+<h1 id="复习"><a href="#复习" class="headerlink" title="复习"></a>复习</h1><h2 id="再谈隔离级别"><a href="#再谈隔离级别" class="headerlink" title="再谈隔离级别"></a>再谈隔离级别</h2><p>我们知道事务有 4 个隔离级别，可能存在三种并发问题：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/26/66f4dc2f306a3.png" alt="image-20240926115942061"></p>
+<p>在MySQL中，默认的隔离级别是可重复读，可以解决脏读和不可重复读的问题，如果仅从定义的角度来看，它并<br>不能解决幻读问题。如果我们想要解决幻读问题，就需要采用串行化的方式，也就是将隔离级别提升到最高，但<br>这样一来就会大幅降低数据库的事务并发能力。</p>
+<p>MVCC可以不采用锁机制，而是通过乐观锁的方式来解决不可重复读和幻读问题！它可以在大多数情况下替代行<br>级锁，降低系统的开销。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/26/66f4dc85cde4c.png" alt="image-20240926120109439"></p>
+<h2 id="隐藏字段、Undo-Log版本链"><a href="#隐藏字段、Undo-Log版本链" class="headerlink" title="隐藏字段、Undo Log版本链"></a>隐藏字段、Undo Log版本链</h2><p>回顾一下undo日志的版本链，对于使用 InnoDB 存储引擎的表来说，它的聚簇索引记录中都包含两个必要的隐藏列。</p>
+<ul>
+<li><code>trx_id</code> ：每次一个事务对某条聚簇索引记录进行改动时，都会把该事务的 <code>事务id</code> 赋值给 <code>trx_id</code> 隐藏列。 </li>
+<li><code>roll_pointer</code> ：每次对某条聚簇索引记录进行改动时，都会把旧的版本写入到 <code>undo日志</code> 中，然 后这个隐藏列就相当于一个指针，可以通过它来找到该记录修改前的信息。</li>
+</ul>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/26/66f4dc9d3eba6.png" alt="image-20220714140716427" style="float:left;" />
+
+<p>假设插入该记录的<code>事务id</code>为<code>8</code>，那么此刻该条记录的示意图如下所示：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/26/66f4dcc75e118.png" alt="image-20240926120215025"></p>
+<blockquote>
+<p>insert undo只在事务回滚时起作用，当事务提交后，该类型的undo日志就没用了，它占用的Undo Log Segment也会被系统回收（也就是该undo日志占用的Undo页面链表要么被重用，要么被释放）。</p>
+</blockquote>
+<p>假设之后两个事务id分别为 <code>10</code> 、 <code>20</code> 的事务对这条记录进行<code> UPDATE</code> 操作，操作流程如下：</p>
+<table>
+<thead>
+<tr>
+<th>发生时间顺序</th>
+<th>事务10</th>
+<th>事务20</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>BEGIN;</td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td></td>
+<td>BEGIN;</td>
+</tr>
+<tr>
+<td>3</td>
+<td>update student set name &#x3D; “李四” where id &#x3D; 1;</td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td>update student set name &#x3D; “王五” where id &#x3D; 1;</td>
+<td></td>
+</tr>
+<tr>
+<td>5</td>
+<td>COMMIT；</td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td></td>
+<td>update student set name &#x3D; “钱七” where id &#x3D; 1;</td>
+</tr>
+<tr>
+<td>7</td>
+<td></td>
+<td>update student set name &#x3D; “宋八” where id &#x3D; 1;</td>
+</tr>
+<tr>
+<td>8</td>
+<td></td>
+<td>COMMIT;</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>能不能在两个事务中交叉更新同一条记录呢？不能！这不就是一个事务修改了另一个未提交事务修改过的数<br>据，脏写。<br>InnoDB使用锁来保证不会有脏写情况的发生，也就是在第一个事务更新了某条记录后，就会给这条记录加<br>锁，另一个事务再次更新时就需要等待第一个事务提交了，把锁释放之后才可以继续更新。</p>
+</blockquote>
+<p>每次对记录进行改动，都会记录一条undo日志，每条undo日志也都有一个 <code>roll_pointer</code> 属性 （ <code>INSERT</code> 操作对应的undo日志没有该属性，因为该记录并没有更早的版本），可以将这些 <code>undo日志</code> 都连起来，串成一个链表：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/26/66f4dde2f0784.png" alt="image-20220714141012874"></p>
+<p>对该记录每次更新后，都会将旧值放到一条 <code>undo日志</code> 中，就算是该记录的一个旧版本，随着更新次数 的增多，所有的版本都会被 <code>roll_pointer</code> 属性连接成一个链表，我们把这个链表称之为 <code>版本链</code> ，版 本链的头节点就是当前记录最新的值。</p>
+<p>每个版本中还包含生成该版本时对应的<code>事务id</code>。</p>
+<h1 id="MVCC实现原理之ReadView"><a href="#MVCC实现原理之ReadView" class="headerlink" title="MVCC实现原理之ReadView"></a>MVCC实现原理之ReadView</h1><p>MVCC 的实现依赖于：<code>隐藏字段</code>、<code>Undo Log</code>、<code>Read View</code>。</p>
+<h2 id="什么是ReadView"><a href="#什么是ReadView" class="headerlink" title="什么是ReadView"></a>什么是ReadView</h2><p>在MVCC机制中，多个事务对同一个行记录进行更新会产生多个历史快照，这些历史快照保存在Undo Log里。如<br>果一个事务想要查询这个行记录，需要读取哪个版本的行记录呢？这时就需要用到ReadView了，<strong>它帮我们解决</strong><br><strong>了行的可见性问题。</strong></p>
+<p><strong>ReadView就是某一具体事务在使用MVCC机制进行快照读操作时产生的读视图</strong>。当事务启动时，会生成数据库系统当前的一个快照，InnoDB为每个事务构造了一个数组，用来记录并维护系统当前<code>活跃事务</code>的ID(“活跃”指的就是，启动了但还没提交)。</p>
+<h2 id="设计思路"><a href="#设计思路" class="headerlink" title="设计思路"></a>设计思路</h2><p>使用 <code>READ UNCOMMITTED</code> 隔离级别的事务，由于可以读到未提交事务修改过的记录，所以直接读取记录的最新版本就好了。</p>
+<p>使用 <code>SERIALIZABLE</code> 隔离级别的事务，InnoDB规定使用加锁的方式来访问记录。</p>
+<p>使用 <code>READ COMMITTED</code> 和 <code>REPEATABLE READ</code> 隔离级别的事务，都必须保证读到 <code>已经提交了的</code> 事务修改过的记录。假如另一个事务已经修改了记录但是尚未提交，是不能直接读取最新版本的记录的，核心问题就是需要判断一下版本链中的哪个版本是当前事务可见的，这是ReadView要解决的主要问题。</p>
+<p>这个ReadView中主要包含4个比较重要的内容，分别如下：</p>
+<ol>
+<li><p><code>creator_trx_id</code> ，创建这个 Read View 的事务 ID。</p>
+<blockquote>
+<p>说明：只有在对表中的记录做改动时（执行INSERT、DELETE、UPDATE这些语句时）才会为 事务分配事务id，否则在一个只读事务中的事务id值都默认为0。</p>
+</blockquote>
+</li>
+<li><p><code>trx_ids</code> ，表示在生成ReadView时当前系统中活跃的读写事务的 <code>事务id列表</code> 。</p>
+</li>
+<li><p><code>up_limit_id</code> ，活跃的事务中最小的事务 ID。</p>
+</li>
+<li><p><code>low_limit_id</code> ，表示生成ReadView时系统中应该分配给下一个事务的 id 值。low_limit_id 是系 统最大的事务id值，这里要注意是系统中的事务id，需要区别于正在活跃的事务ID。</p>
+</li>
+</ol>
+<blockquote>
+<p>注意：low_limit_id并不是trx_ids中的最大值，事务id是递增分配的。比如，现在有id为1， 2，3这三个事务，之后id为3的事务提交了。那么一个新的读事务在生成ReadView时， trx_ids就包括1和2，up_limit_id的值就是1，low_limit_id的值就是4。</p>
+</blockquote>
+<p>举例：<br>trx_ids为trx2、trx3、trx5和trx8的集合，系统的最大事务ID(low_limit_id)为trx8+1(如果之前没有其他的新<br>增事务)，活跃的最小事务ID(up_limit_id)为trx2。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/26/66f4dfd03eb3f.png" alt="image-20240926121511836"></p>
+<h1 id="ReadView的规则"><a href="#ReadView的规则" class="headerlink" title="ReadView的规则"></a>ReadView的规则</h1><p>有了这个ReadView，这样在访问某条记录时，只需要按照下边的步骤判断记录的某个版本是否可见。</p>
+<ul>
+<li>如果被访问版本的trx_id属性值与ReadView中的 creator_trx_id 值相同，意味着当前事务在访问它自己修改过的记录，所以该版本可以被当前事务访问。 </li>
+<li>如果被访问版本的trx_id属性值小于ReadView中的 up_limit_id 值，表明生成该版本的事务在当前事务生成ReadView前已经提交，所以该版本可以被当前事务访问。 </li>
+<li>如果被访问版本的trx_id属性值大于或等于ReadView中的 low_limit_id 值，表明生成该版本的事务在当前事务生成ReadView后才开启，所以该版本不可以被当前事务访问。 </li>
+<li>如果被访问版本的trx_id属性值在ReadView的 up_limit_id 和 low_limit_id 之间，那就需要判断一下trx_id属性值是不是在 trx_ids 列表中。<ul>
+<li>如果在，说明创建ReadView时生成该版本的事务还是活跃的，该版本不可以被访问。 </li>
+<li>如果不在，说明创建ReadView时生成该版本的事务已经被提交，该版本可以被访问。</li>
+</ul>
+</li>
+</ul>
+<h1 id="MVCC整体操作流程"><a href="#MVCC整体操作流程" class="headerlink" title="MVCC整体操作流程"></a>MVCC整体操作流程</h1><p>了解了这些概念之后，我们来看下当查询一条记录的时候，系统如何通过MVCC找到它：</p>
+<ol>
+<li>首先获取事务自己的版本号，也就是事务 ID； </li>
+<li>获取 ReadView； </li>
+<li>查询得到的数据，然后与 ReadView 中的事务版本号进行比较；</li>
+<li>如果不符合 ReadView 规则，就需要从 Undo Log 中获取历史快照； </li>
+<li>最后返回符合规则的数据。</li>
+</ol>
+<p>如果某个版本的数据对当前事务不可见的话，那就顺着版本链找到下一个版本的数据，继续按照上边的步骤判断<br>可见性，依此类推，直到版本链中的最后一个版本。如果最后一个版本也不可见的话，那么就意味着该条记录对<br>该事务完全不可见，查询结果就不包含该记录。</p>
+<blockquote>
+<p>InnoDB中，MVCC是通过Undo Log+Read View进行数据读取，Undo Log保存了历史快照，而Read View规<br>则帮我们判断当前版本的数据是否可见。</p>
+</blockquote>
+<p>在隔离级别为读已提交（Read Committed）时，一个事务中的每一次 SELECT 查询都会重新获取一次 Read View。</p>
+<p>如表所示：</p>
+<table>
+<thead>
+<tr>
+<th align="center">事务</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">begin;</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">select * from student where id&gt;2;</td>
+<td align="center">获取一次ReadView</td>
+</tr>
+<tr>
+<td align="center">…</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">select * from student where id &gt; 2;</td>
+<td align="center">获取一次ReadView</td>
+</tr>
+<tr>
+<td align="center">commit;</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>注意，此时同样的查询语句都会重新获取一次 Read View，这时如果 Read View 不同，就可能产生不可重复读或者幻读的情况。</p>
+</blockquote>
+<p>当隔离级别为可重复读的时候，就避免了不可重复读，这是因为一个事务只在第一次 SELECT 的时候会获取一次 Read View，而后面所有的 SELECT 都会复用这个 Read View，如下表所示：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/26/66f4e1f2d50ce.png" alt="image-20240926122418461"></p>
+<h1 id="举例说明"><a href="#举例说明" class="headerlink" title="举例说明"></a>举例说明</h1><p>假设现在student表中只有一条由<code>事务id</code>为<code>8</code>的事务插入的一条记录：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/26/66f4e4c945b41.png" alt="image-20240926123624863"></p>
+<p>MVCC只能在<code>READ COMMITTED</code>和<code>REPEATABLE READ</code>两个隔离级别下工作。接下来看一下<code>READ COMMITTED</code>和<br><code>REPEATABLE READ</code>所谓的生成<code>ReadView</code>的时机不同到底不同在哪里。</p>
+<h2 id="READ-COMMITTED隔离级别下"><a href="#READ-COMMITTED隔离级别下" class="headerlink" title="READ COMMITTED隔离级别下"></a>READ COMMITTED隔离级别下</h2><p><strong><font color = 'red'>READ COMMITTED ：每次读取数据前都生成一个ReadView。</font></strong></p>
+<p>现在有两个 <code>事务id</code> 分别为 <code>10</code> 、 <code>20</code> 的事务在执行:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># Transaction 10</span><br><span class="line">BEGIN;</span><br><span class="line">UPDATE student SET name=&quot;李四&quot; WHERE id=1;</span><br><span class="line">UPDATE student SET name=&quot;王五&quot; WHERE id=1;</span><br><span class="line"># Transaction 20</span><br><span class="line">BEGIN;</span><br><span class="line"># 更新了一些别的表的记录</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>说明：事务执行过程中，只有在第一次真正修改记录时（比如使用INSERT、DELETE、UPDATE语句），才会被分配一个单独的事务id，这个事务id是递增的。所以我们才在事务2中更新一些别的表的记录，目的是让它分配事务id。</p>
+</blockquote>
+<p>此刻，表student 中 id 为 1 的记录得到的版本链表如下所示：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/26/66f4e5097fc36.png" alt="image-20220715133640655"></p>
+<p>假设现在有一个使用 <code>READ COMMITTED</code> 隔离级别的事务开始执行：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 使用READ COMMITTED隔离级别的事务</span><br><span class="line"><span class="keyword">BEGIN</span>;</span><br><span class="line"></span><br><span class="line"># SELECT1：Transaction <span class="number">10</span>、<span class="number">20</span>未提交</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> student <span class="keyword">WHERE</span> id <span class="operator">=</span> <span class="number">1</span>; # 得到的列name的值为<span class="string">&#x27;张三&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>这个<code>SELECT1</code>的执行过程如下：<br>步骤1：在执行<code>SELECT</code>语句时会先生成一个<code>ReadView</code>,ReadView的<code>trx_ids</code>列表的内容就是[10,20],<br><code>up_limit_id</code>为<code>10</code>,<code>low_limit_id</code>为<code>21</code>，<code>creator_trx_id</code>为<code>0</code>。</p>
+<p>步骤2：从版本链中挑选可见的记录，从图中看出，最新版本的列<code>name</code>的内容是<code>&#39;王五&#39;</code>，该版本的<code>trx_id</code>值为<br><code>10</code>，在<code>trx_ids</code>列表内，所以不符合可见性要求，根据<code>roll_pointer</code>跳到下一个版本。</p>
+<p>步骤3：下一个版本的列<code>name</code>的内容是<code>&#39;李四&#39;</code>，该版本的<code>trx_id</code>值也为<code>10</code>,也在<code>trx_ids</code>列表内，所以也不<br>符合要求，继续跳到下一个版本。</p>
+<p>步骤4：下一个版本的列<code>name</code>的内容是<code>&#39;张三&#39;</code>，该版本的<code>trx_id</code>值为8，小于<code>ReadView</code>中的<code>up_limit_id</code><br>值<code>10</code>，所以这个版本是符合要求的，最后返回给用户的版本就是这条列<code>name</code>为<code>&#39;张三&#39;</code>的记录。</p>
+<p>之后，我们把 <code>事务id</code> 为 <code>10</code> 的事务提交一下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># Transaction 10</span><br><span class="line">BEGIN;</span><br><span class="line">UPDATE student SET name=&quot;李四&quot; WHERE id=1;</span><br><span class="line">UPDATE student SET name=&quot;王五&quot; WHERE id=1;</span><br><span class="line">COMMIT;</span><br></pre></td></tr></table></figure>
+
+<p>然后再到 <code>事务id</code> 为 <code>20</code> 的事务中更新一下表 <code>student</code> 中 <code>id</code> 为 <code>1</code> 的记录：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Transaction 20</span><br><span class="line">BEGIN;</span><br><span class="line"># 更新了一些别的表的记录</span><br><span class="line">...</span><br><span class="line">UPDATE student SET name=&quot;钱七&quot; WHERE id=1;</span><br><span class="line">UPDATE student SET name=&quot;宋八&quot; WHERE id=1;</span><br></pre></td></tr></table></figure>
+
+<p>此刻，表student中 <code>id</code> 为 <code>1</code> 的记录的版本链就长这样：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/26/66f4e6a0ad034.png" alt="image-20220715134839081"></p>
+<p>然后再到刚才使用 <code>READ COMMITTED</code> 隔离级别的事务中继续查找这个 id 为 1 的记录，如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 使用READ COMMITTED隔离级别的事务</span><br><span class="line"><span class="keyword">BEGIN</span>;</span><br><span class="line"></span><br><span class="line"># SELECT1：Transaction <span class="number">10</span>、<span class="number">20</span>均未提交</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> student <span class="keyword">WHERE</span> id <span class="operator">=</span> <span class="number">1</span>; # 得到的列name的值为<span class="string">&#x27;张三&#x27;</span></span><br><span class="line"></span><br><span class="line"># SELECT2：Transaction <span class="number">10</span>提交，Transaction <span class="number">20</span>未提交</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> student <span class="keyword">WHERE</span> id <span class="operator">=</span> <span class="number">1</span>; # 得到的列name的值为<span class="string">&#x27;王五&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>这个<code>SELECT2</code>的执行过程如下：</p>
+<p>步骤1：在执行<code>SELECT</code>语句时会又会单独生成一个<code>ReadView</code>,该ReadView的<code>trx_ids</code>列表的内容就是<code>[20]</code>,<br><code>up_limit_id</code>为<code>20</code>,<code>low_limit_id</code>为<code>21</code>，<code>creator_trx_id</code>为<code>0</code>。</p>
+<p>步骤2：从版本链中挑选可见的记录，从图中看出，最新版本的列<code>name</code>的内容是<code>&#39;宋八&#39;</code>，该版本的<code>trx_id</code>值为<br><code>20</code>，在<code>trx_ids</code>列表内，所以不符合可见性要求，根据<code>roll_pointer</code>跳到下一个版本。</p>
+<p>步骤3：下一个版本的列<code>name</code>的内容是<code>&#39;钱七&#39;</code>，该版本的<code>trx_1d</code>值为<code>20</code>,也在<code>trx_ids</code>列表内，所以也不符<br>合要求，继续跳到下一个版本。</p>
+<p>步骤4：下一个版本的列<code>name</code>的内容是<code>&#39;王五&#39;</code>，该版本的<code>trx_id</code>值为<code>10</code>，小于<code>ReadView</code>中的<code>up_limit_id</code><br>值<code>20</code>，所以这个版本是符合要求的，最后返回给用户的版本就是这条列<code>name</code>为<code>&#39;王五&#39;</code>的记录。</p>
+<p>以此类推，如果之后<code>事务id</code>为<code>20</code>的记录也提交了，再次在使用<code>READ C0MMITTED</code>隔离级别的事务中查询表<br><code>student</code>中<code>id</code>值为<code>1</code>的记录时，得到的结果就是<code>&#39;宋八&#39;</code>了，具体流程我们就不分析了。</p>
+<blockquote>
+<p>强调：使用READ COMMITTED隔离级别的事务在每次查询开始时都会生成一个独立的ReadView。</p>
+</blockquote>
+<h2 id="REPEATABLE-READ隔离级别下"><a href="#REPEATABLE-READ隔离级别下" class="headerlink" title="REPEATABLE READ隔离级别下"></a>REPEATABLE READ隔离级别下</h2><p>使用 <code>REPEATABLE READ</code> 隔离级别的事务来说，只会在第一次执行查询语句时生成一个 <code>ReadView</code> ，之后的查询就不会重复生成了。</p>
+<p>比如，系统里有两个 <code>事务id</code> 分别为 <code>10</code> 、 <code>20</code> 的事务在执行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># Transaction 10</span><br><span class="line">BEGIN;</span><br><span class="line">UPDATE student SET name=&quot;李四&quot; WHERE id=1;</span><br><span class="line">UPDATE student SET name=&quot;王五&quot; WHERE id=1;</span><br><span class="line"># Transaction 20</span><br><span class="line">BEGIN;</span><br><span class="line"># 更新了一些别的表的记录</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>此刻，表student 中 id 为 1 的记录得到的版本链表如下所示：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/26/66f4e859872a6.png" alt="image-20220715140006061"></p>
+<p>假设现在有一个使用 <code>REPEATABLE READ</code> 隔离级别的事务开始执行：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 使用REPEATABLE READ隔离级别的事务</span><br><span class="line"><span class="keyword">BEGIN</span>;</span><br><span class="line"></span><br><span class="line"># SELECT1：Transaction <span class="number">10</span>、<span class="number">20</span>未提交</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> student <span class="keyword">WHERE</span> id <span class="operator">=</span> <span class="number">1</span>; # 得到的列name的值为<span class="string">&#x27;张三&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>这个<code>SELECT1</code>的执行过程如下：<br>步骤1：在执行<code>SELECT</code>语句时会先生成一个<code>ReadView</code>，ReadView的<code>trx_ids</code>列表的内容就是<code>[10,20]</code>,<br><code>up_limit_id</code>为<code>10</code>，<code>low_limit_id</code>为<code>21</code>，<code>creator_tr×_id</code>为<code>0</code>。</p>
+<p>步骤2：然后从版本链中挑选可见的记录，从图中看出，最新版本的列<code>name</code>的内容是<code>&#39;王五&#39;</code>，该版本的<code>trx_id</code><br>值为<code>10</code>,在<code>trx_ids</code>列表内，所以不符合可见性要求，根据<code>roll_pointer</code>跳到下一个版本。</p>
+<p>步骤3：下一个版本的列<code>name</code>的内容是<code>&#39;李四&#39;</code>，该版本的<code>trx_1d</code>值也为<code>10</code>，也在<code>trx_ids</code>列表内，所以也不<br>符合要求，继续跳到下一个版本。</p>
+<p>步骤4：下一个版本的列<code>name</code>的内容是<code>&#39;张三&#39;</code>，该版本的<code>trx_id</code>值为8，小于<code>ReadView</code>中的<code>up_limit_id</code><br>值<code>10</code>，所以这个版本是符合要求的，最后返回给用户的版本就是这条列<code>name</code>为<code>&#39;张三&#39;</code>的记录。</p>
+<p>之后，我们把<code>事务id</code>为<code>10</code>的事务提交一下，就像这样：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># Transaction <span class="number">10</span></span><br><span class="line"><span class="keyword">BEGIN</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">UPDATE</span> student <span class="keyword">SET</span> name<span class="operator">=</span>&quot;李四&quot; <span class="keyword">WHERE</span> id<span class="operator">=</span><span class="number">1</span>;</span><br><span class="line"><span class="keyword">UPDATE</span> student <span class="keyword">SET</span> name<span class="operator">=</span>&quot;王五&quot; <span class="keyword">WHERE</span> id<span class="operator">=</span><span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">COMMIT</span>;</span><br></pre></td></tr></table></figure>
+
+<p>然后再到 <code>事务id</code> 为 <code>20</code> 的事务中更新一下表 <code>student</code> 中 <code>id</code> 为 <code>1</code> 的记录：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Transaction <span class="number">20</span></span><br><span class="line"><span class="keyword">BEGIN</span>;</span><br><span class="line"># 更新了一些别的表的记录</span><br><span class="line">...</span><br><span class="line"><span class="keyword">UPDATE</span> student <span class="keyword">SET</span> name<span class="operator">=</span>&quot;钱七&quot; <span class="keyword">WHERE</span> id<span class="operator">=</span><span class="number">1</span>;</span><br><span class="line"><span class="keyword">UPDATE</span> student <span class="keyword">SET</span> name<span class="operator">=</span>&quot;宋八&quot; <span class="keyword">WHERE</span> id<span class="operator">=</span><span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+<p>此刻，表student 中 <code>id</code> 为 <code>1</code> 的记录的版本链长这样：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/26/66f4ea08a3474.png" alt="image-20220715140354217"></p>
+<p>然后再到刚才使用 <code>REPEATABLE READ</code> 隔离级别的事务中继续查找这个 <code>id</code> 为 <code>1</code> 的记录，如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 使用REPEATABLE READ隔离级别的事务</span><br><span class="line">BEGIN;</span><br><span class="line"># SELECT1：Transaction 10、20均未提交</span><br><span class="line">SELECT * FROM student WHERE id = 1; # 得到的列name的值为&#x27;张三&#x27;</span><br><span class="line"># SELECT2：Transaction 10提交，Transaction 20未提交</span><br><span class="line">SELECT * FROM student WHERE id = 1; # 得到的列name的值仍为&#x27;张三&#x27;</span><br></pre></td></tr></table></figure>
+
+<p><code>SELECT2</code>的执行过程如下：<br>步骤1：因为当前事务的隔离级别为<code>REPEATABLE READ</code>,而之前在执行<code>SELECT1</code>时已经生成过<code>ReadView</code>了，所<br>以此时直接复用之前的<code>ReadView</code>，之前的<code>ReadView</code>的<code>trx_ids</code>列表的内容就是<code>[10,20]</code>，<code>up_limit_id</code><br>为<code>10</code>，<code>low_limit_id</code>为<code>21</code>，<code>creator_trx_id</code>为<code>0</code>。</p>
+<p>步骤2：然后从版本链中挑选可见的记录，从图中可以看出，最新版本的列<code>name</code>的内容是<code>&#39;宋八&#39;</code>，该版本的<br><code>trx_id</code>值为<code>20</code>，在<code>trx_ids</code>列表内，所以不符合可见性要求，根据<code>roll_pointer</code>跳到下一个版本。</p>
+<p>步骤3：下一个版本的列<code>name</code>的内容是<code>&#39;钱七&#39;</code>，该版本的<code>trx_id</code>值为<code>20</code>,也在<code>trx_ids</code>列表内，所以也不符<br>合要求，继续跳到下一个版本。</p>
+<p>步骤4：下一个版本的列<code>name</code>的内容是<code>&#39;王五&#39;</code>，该版本的<code>trx_id</code>值为<code>10</code>，而<code>trx_ids</code>列表中是包含值为<code>10</code><br>的事务id的，所以该版本也不符合要求，同理下一个列<code>name</code>的内容是<code>&#39;李四&#39;</code>的版本也不符合要求。继续跳到下<br>一个版本。</p>
+<p>步骤5：下一个版本的列<code>name</code>的内容是<code>&#39;张三&#39;</code>，该版本的<code>trx_id</code>值为<code>8</code>,小于<code>ReadView</code>中的<code>up_limit_id</code><br>值<code>10</code>，所以这个版本是符合要求的，最后返回给用户的版本就是这条列<code>name</code>为<code>&#39;张三&#39;</code>的记录。</p>
+<p>这次<code>SELECT</code>查询得到的结果是重复的，记录的列<code>name</code>值都是<code>张三</code>，这就是<code>可重复读</code>的含义。如果我们之后再把<code>事务id</code>为<code>20</code>的记录提交了，然后再到刚才使用<code>REPEATABLE READ</code>隔离级别的事务中继续查找这个<code>id</code>为<code>1</code>的记录，得到的结果还是<code>&#39;张三&#39;</code>，具体执行过程大家可以自己分析一下。</p>
+<h2 id="如何解决幻读"><a href="#如何解决幻读" class="headerlink" title="如何解决幻读"></a>如何解决幻读</h2><p>接下来说明InnoDB 是如何解决幻读的。</p>
+<p>假设现在表 student 中只有一条数据，数据内容中，主键 id&#x3D;1，隐藏的 trx_id&#x3D;10，它的 undo log 如下图所示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/26/66f4ec66e4a8e.png" alt="image-20240926130854546"></p>
+<p>假设现在有事务 A 和事务 B 并发执行，<code>事务 A</code> 的事务 id 为 <code>20</code> ， <code>事务 B</code> 的事务 id 为 <code>30</code> 。</p>
+<p>步骤1：事务 A 开始第一次查询数据，查询的 SQL 语句如下。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from student where id &gt;= 1;</span><br></pre></td></tr></table></figure>
+
+<p>在开始查询之前，MySQL 会为事务 A 产生一个 ReadView，此时 ReadView 的内容如下： <code>trx_ids= [20,30] ， up_limit_id=20 , low_limit_id=31 , creator_trx_id=20</code> 。</p>
+<p>由于此时表 student 中只有一条数据，且符合 where id&gt;&#x3D;1 条件，因此会查询出来。然后根据 ReadView 机制，发现该行数据的trx_id&#x3D;10，小于事务 A 的 ReadView 里 up_limit_id，这表示这条数据是事务 A 开启之前，其他事务就已经提交了的数据，因此事务 A 可以读取到。</p>
+<p>结论：事务 A 的第一次查询，能读取到一条数据，id&#x3D;1。</p>
+<p>步骤2：接着事务 B(trx_id&#x3D;30)，往表 student 中新插入两条数据，并提交事务。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">insert into student(id,name) values(2,&#x27;李四&#x27;);</span><br><span class="line">insert into student(id,name) values(3,&#x27;王五&#x27;);</span><br></pre></td></tr></table></figure>
+
+<p>此时表student 中就有三条数据了，对应的 undo 如下图所示：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/26/66f4ec861fdba.png" alt="image-20220715141208667"></p>
+<p>步骤3：接着事务 A 开启第二次查询，根据可重复读隔离级别的规则，此时事务 A 并不会再重新生成 ReadView。此时表 student 中的 3 条数据都满足 where id&gt;&#x3D;1 的条件，因此会先查出来。然后根据 ReadView 机制，判断每条数据是不是都可以被事务 A 看到。</p>
+<p>1）首先 id&#x3D;1 的这条数据，前面已经说过了，可以被事务 A 看到。 </p>
+<p>2）然后是 id&#x3D;2 的数据，它的 trx_id&#x3D;30，此时事务 A 发现，这个值处于 up_limit_id 和 low_limit_id 之 间，因此还需要再判断 30 是否处于 trx_ids 数组内。由于事务 A 的 trx_ids&#x3D;[20,30]，因此在数组内，这表 示 id&#x3D;2 的这条数据是与事务 A 在同一时刻启动的其他事务提交的，所以这条数据不能让事务 A 看到。</p>
+<p>3）同理，id&#x3D;3 的这条数据，trx_id 也为 30，因此也不能被事务 A 看见。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/26/66f4ec861effa.png" alt="image-20220715141243993"></p>
+<p>结论：最终事务 A 的第二次查询，只能查询出 id&#x3D;1 的这条数据。这和事务 A 的第一次查询的结果是一样 的，因此没有出现幻读现象，所以说在 MySQL 的可重复读隔离级别下，不存在幻读问题。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>这里介绍了 MVCC 在 <code>READ COMMITTD</code> 、 <code>REPEATABLE READ</code> 这两种隔离级别的事务在执行快照读操作时 访问记录的版本链的过程。这样使不同事务的 <code>读-写</code> 、 <code>写-读</code> 操作并发执行，从而提升系统性能。</p>
+<p>核心点在于 ReadView 的原理， <code>READ COMMITTD</code> 、 <code>REPEATABLE READ</code> 这两个隔离级别的一个很大不同 就是生成ReadView的时机不同：</p>
+<ul>
+<li><code>READ COMMITTD</code> 在每一次进行普通SELECT操作前都会生成一个ReadView </li>
+<li><code>REPEATABLE READ</code> 只在第一次进行普通SELECT操作前生成一个ReadView，之后的查询操作都重复 使用这个ReadView就好了。</li>
+</ul>
+<blockquote>
+<p>说明：我们之前说执行DELETE语句或者更新主键的UPDATE语句并不会立即把对应的记录完全从页面中删除<br>而是执行一个所谓的delete mark操作，相当于只是对记录打上了一个删除标志位，这主要就是为MVCC服务<br>的。</p>
+</blockquote>
+<p>通过MVCC我们可以解决：</p>
+<ol>
+<li><code>读写之间阻塞的问题</code>。通过MCC可以让读写互相不阻塞，即读不阻塞写，写不阻塞读，这样就可以提升事<br>务并发处理能力。</li>
+<li><code>降低了死锁的概率</code>。这是因为MVCC采用了乐观锁的方式，读取数据时并不需要加锁，对于写操作，也只锁<br>定必要的行。</li>
+<li><code>解决快照读的问题</code>。当我们查询数据库在某个时间点的快照时，只能看到这个时间点之前事务提交更新的结<br>果，而不能看到这个时间点之后事务提交的更新结果。</li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://blog.shiguang666.eu.org">時光</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://blog.shiguang666.eu.org/2024/09/26/8aeb9df6c710/">https://blog.shiguang666.eu.org/2024/09/26/8aeb9df6c710/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.shiguang666.eu.org" target="_blank">時光</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/SQL/">SQL</a><a class="post-meta__tags" href="/tags/%E5%B0%9A%E7%A1%85%E8%B0%B7/">尚硅谷</a></div><div class="post_share"><div class="social-share" data-image="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>赞助</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/wechat.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/alipay.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/alipay.png" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/09/26/922071561806/" title="【尚硅谷】MySQL-其他数据库日志"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">【尚硅谷】MySQL-其他数据库日志</div></div></a></div><div class="next-post pull-right"><a href="/2024/09/25/ce0ab3c73ed6/" title="【尚硅谷】MySQL-锁"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">【尚硅谷】MySQL-锁</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2024/09/25/076bbddc6716/" title="【尚硅谷】MySQL-MySQL事务日志"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-09-25</div><div class="title">【尚硅谷】MySQL-MySQL事务日志</div></div></a></div><div><a href="/2024/09/26/f7ad294f7377/" title="【尚硅谷】MySQL-主从复制"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-09-26</div><div class="title">【尚硅谷】MySQL-主从复制</div></div></a></div><div><a href="/2024/09/24/5ff69d1c35a3/" title="【尚硅谷】MySQL-事务基础知识"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-09-24</div><div class="title">【尚硅谷】MySQL-事务基础知识</div></div></a></div><div><a href="/2024/09/26/922071561806/" title="【尚硅谷】MySQL-其他数据库日志"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-09-26</div><div class="title">【尚硅谷】MySQL-其他数据库日志</div></div></a></div><div><a href="/2024/09/22/88ec74bb220c/" title="【尚硅谷】MySQL-性能分析工具的使用"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-09-22</div><div class="title">【尚硅谷】MySQL-性能分析工具的使用</div></div></a></div><div><a href="/2024/09/26/e441e650956c/" title="【尚硅谷】MySQL-数据库备份与恢复"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-09-26</div><div class="title">【尚硅谷】MySQL-数据库备份与恢复</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div class="comment-switch"><span class="first-comment">Twikoo</span><span id="switch-btn"></span><span class="second-comment">Valine</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">時光</div><div class="author-info__description">心寄朗朗乾坤，胸怀真修之道。</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">209</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">179</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">16</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/shiguang-coding"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/shiguang-coding" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:an_shiguang@163.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎光临時光的博客园子🎉🎉</br>https://blog.shiguang666.eu.org</br>https://blog.shiguang88.icu</br>https://blog.shiguangdev.cn</br></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFMVCC"><span class="toc-number">1.</span> <span class="toc-text">什么是MVCC</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BF%AB%E7%85%A7%E8%AF%BB%E4%B8%8E%E5%BD%93%E5%89%8D%E8%AF%BB"><span class="toc-number">2.</span> <span class="toc-text">快照读与当前读</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BF%AB%E7%85%A7%E8%AF%BB"><span class="toc-number">2.1.</span> <span class="toc-text">快照读</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BD%93%E5%89%8D%E8%AF%BB"><span class="toc-number">2.2.</span> <span class="toc-text">当前读</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A4%8D%E4%B9%A0"><span class="toc-number">3.</span> <span class="toc-text">复习</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%8D%E8%B0%88%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB"><span class="toc-number">3.1.</span> <span class="toc-text">再谈隔离级别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9A%90%E8%97%8F%E5%AD%97%E6%AE%B5%E3%80%81Undo-Log%E7%89%88%E6%9C%AC%E9%93%BE"><span class="toc-number">3.2.</span> <span class="toc-text">隐藏字段、Undo Log版本链</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MVCC%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86%E4%B9%8BReadView"><span class="toc-number">4.</span> <span class="toc-text">MVCC实现原理之ReadView</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFReadView"><span class="toc-number">4.1.</span> <span class="toc-text">什么是ReadView</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF"><span class="toc-number">4.2.</span> <span class="toc-text">设计思路</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ReadView%E7%9A%84%E8%A7%84%E5%88%99"><span class="toc-number">5.</span> <span class="toc-text">ReadView的规则</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MVCC%E6%95%B4%E4%BD%93%E6%93%8D%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="toc-number">6.</span> <span class="toc-text">MVCC整体操作流程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%BE%E4%BE%8B%E8%AF%B4%E6%98%8E"><span class="toc-number">7.</span> <span class="toc-text">举例说明</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#READ-COMMITTED%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E4%B8%8B"><span class="toc-number">7.1.</span> <span class="toc-text">READ COMMITTED隔离级别下</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#REPEATABLE-READ%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E4%B8%8B"><span class="toc-number">7.2.</span> <span class="toc-text">REPEATABLE READ隔离级别下</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E5%B9%BB%E8%AF%BB"><span class="toc-number">7.3.</span> <span class="toc-text">如何解决幻读</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">8.</span> <span class="toc-text">总结</span></a></li></ol></div></div><div class="card-widget card-post-series"><div class="item-headline"><i class="fa-solid fa-layer-group"></i><span>系列文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/09/26/e441e650956c/" title="【尚硅谷】MySQL-数据库备份与恢复"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【尚硅谷】MySQL-数据库备份与恢复"></a><div class="content"><a class="title" href="/2024/09/26/e441e650956c/" title="【尚硅谷】MySQL-数据库备份与恢复">【尚硅谷】MySQL-数据库备份与恢复</a><time datetime="2024-09-26T08:58:34.000Z" title="发表于 2024-09-26 16:58:34">2024-09-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/09/26/f7ad294f7377/" title="【尚硅谷】MySQL-主从复制"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【尚硅谷】MySQL-主从复制"></a><div class="content"><a class="title" href="/2024/09/26/f7ad294f7377/" title="【尚硅谷】MySQL-主从复制">【尚硅谷】MySQL-主从复制</a><time datetime="2024-09-26T07:52:50.000Z" title="发表于 2024-09-26 15:52:50">2024-09-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/09/26/922071561806/" title="【尚硅谷】MySQL-其他数据库日志"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【尚硅谷】MySQL-其他数据库日志"></a><div class="content"><a class="title" href="/2024/09/26/922071561806/" title="【尚硅谷】MySQL-其他数据库日志">【尚硅谷】MySQL-其他数据库日志</a><time datetime="2024-09-26T05:24:52.000Z" title="发表于 2024-09-26 13:24:52">2024-09-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/09/26/8aeb9df6c710/" title="【尚硅谷】MySQL-多版本并发控制"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【尚硅谷】MySQL-多版本并发控制"></a><div class="content"><a class="title" href="/2024/09/26/8aeb9df6c710/" title="【尚硅谷】MySQL-多版本并发控制">【尚硅谷】MySQL-多版本并发控制</a><time datetime="2024-09-26T03:27:08.000Z" title="发表于 2024-09-26 11:27:08">2024-09-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/09/25/ce0ab3c73ed6/" title="【尚硅谷】MySQL-锁"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【尚硅谷】MySQL-锁"></a><div class="content"><a class="title" href="/2024/09/25/ce0ab3c73ed6/" title="【尚硅谷】MySQL-锁">【尚硅谷】MySQL-锁</a><time datetime="2024-09-25T06:33:05.000Z" title="发表于 2024-09-25 14:33:05">2024-09-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/09/25/076bbddc6716/" title="【尚硅谷】MySQL-MySQL事务日志"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【尚硅谷】MySQL-MySQL事务日志"></a><div class="content"><a class="title" href="/2024/09/25/076bbddc6716/" title="【尚硅谷】MySQL-MySQL事务日志">【尚硅谷】MySQL-MySQL事务日志</a><time datetime="2024-09-25T03:07:48.000Z" title="发表于 2024-09-25 11:07:48">2024-09-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/09/24/5ff69d1c35a3/" title="【尚硅谷】MySQL-事务基础知识"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【尚硅谷】MySQL-事务基础知识"></a><div class="content"><a class="title" href="/2024/09/24/5ff69d1c35a3/" title="【尚硅谷】MySQL-事务基础知识">【尚硅谷】MySQL-事务基础知识</a><time datetime="2024-09-24T14:16:25.000Z" title="发表于 2024-09-24 22:16:25">2024-09-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/09/24/9ddefc9f8faa/" title="【尚硅谷】MySQL-索引优化与查询优化"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【尚硅谷】MySQL-索引优化与查询优化"></a><div class="content"><a class="title" href="/2024/09/24/9ddefc9f8faa/" title="【尚硅谷】MySQL-索引优化与查询优化">【尚硅谷】MySQL-索引优化与查询优化</a><time datetime="2024-09-24T05:36:43.000Z" title="发表于 2024-09-24 13:36:43">2024-09-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/09/22/88ec74bb220c/" title="【尚硅谷】MySQL-性能分析工具的使用"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【尚硅谷】MySQL-性能分析工具的使用"></a><div class="content"><a class="title" href="/2024/09/22/88ec74bb220c/" title="【尚硅谷】MySQL-性能分析工具的使用">【尚硅谷】MySQL-性能分析工具的使用</a><time datetime="2024-09-22T09:22:10.000Z" title="发表于 2024-09-22 17:22:10">2024-09-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/09/21/b933eb15c0a2/" title="【尚硅谷】MySQL-索引的创建与设计原则"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【尚硅谷】MySQL-索引的创建与设计原则"></a><div class="content"><a class="title" href="/2024/09/21/b933eb15c0a2/" title="【尚硅谷】MySQL-索引的创建与设计原则">【尚硅谷】MySQL-索引的创建与设计原则</a><time datetime="2024-09-21T05:32:30.000Z" title="发表于 2024-09-21 13:32:30">2024-09-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/09/20/dbfa846f2f03/" title="【尚硅谷】MySQL-InnoDB数据存储结构"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【尚硅谷】MySQL-InnoDB数据存储结构"></a><div class="content"><a class="title" href="/2024/09/20/dbfa846f2f03/" title="【尚硅谷】MySQL-InnoDB数据存储结构">【尚硅谷】MySQL-InnoDB数据存储结构</a><time datetime="2024-09-20T12:24:42.000Z" title="发表于 2024-09-20 20:24:42">2024-09-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/09/20/d84d1622a220/" title="【尚硅谷】MySQL-索引的数据结构"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【尚硅谷】MySQL-索引的数据结构"></a><div class="content"><a class="title" href="/2024/09/20/d84d1622a220/" title="【尚硅谷】MySQL-索引的数据结构">【尚硅谷】MySQL-索引的数据结构</a><time datetime="2024-09-20T01:51:42.000Z" title="发表于 2024-09-20 09:51:42">2024-09-20</time></div></div></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/10/10/4be03cc7eefc/" title="YUM命令Python3与Python2命令不兼容问题"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240514172642177-438633277.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="YUM命令Python3与Python2命令不兼容问题"/></a><div class="content"><a class="title" href="/2024/10/10/4be03cc7eefc/" title="YUM命令Python3与Python2命令不兼容问题">YUM命令Python3与Python2命令不兼容问题</a><time datetime="2024-10-10T14:52:36.000Z" title="发表于 2024-10-10 22:52:36">2024-10-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/10/10/3149a4506563/" title="【尚硅谷】RabbitMQ"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【尚硅谷】RabbitMQ"/></a><div class="content"><a class="title" href="/2024/10/10/3149a4506563/" title="【尚硅谷】RabbitMQ">【尚硅谷】RabbitMQ</a><time datetime="2024-10-10T12:30:47.000Z" title="发表于 2024-10-10 20:30:47">2024-10-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/09/30/69d054bcefd2/" title="【尚硅谷】Kafka 3.x"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【尚硅谷】Kafka 3.x"/></a><div class="content"><a class="title" href="/2024/09/30/69d054bcefd2/" title="【尚硅谷】Kafka 3.x">【尚硅谷】Kafka 3.x</a><time datetime="2024-09-30T01:59:53.000Z" title="发表于 2024-09-30 09:59:53">2024-09-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/09/26/e441e650956c/" title="【尚硅谷】MySQL-数据库备份与恢复"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【尚硅谷】MySQL-数据库备份与恢复"/></a><div class="content"><a class="title" href="/2024/09/26/e441e650956c/" title="【尚硅谷】MySQL-数据库备份与恢复">【尚硅谷】MySQL-数据库备份与恢复</a><time datetime="2024-09-26T08:58:34.000Z" title="发表于 2024-09-26 16:58:34">2024-09-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/09/26/f7ad294f7377/" title="【尚硅谷】MySQL-主从复制"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【尚硅谷】MySQL-主从复制"/></a><div class="content"><a class="title" href="/2024/09/26/f7ad294f7377/" title="【尚硅谷】MySQL-主从复制">【尚硅谷】MySQL-主从复制</a><time datetime="2024-09-26T07:52:50.000Z" title="发表于 2024-09-26 15:52:50">2024-09-26</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg')"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2024 By 時光</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text"><a href="https://icp.gov.moe/?keyword=20246626" target="_blank"><img class="icp-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202406/2233039-20240628094902584-1588070362.png" ><span>萌ICP备20246626号</span></a>,<a href="https://www.travellings.cn/go.html" target="_blank"><img class="icp-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202406/2233039-20240628100510455-861321739.png" ><span>随机开往</span></a>,<a style="text-decoration:none;" href="https://travel.moe/go.html?travel=on " title="异次元之旅-跃迁-我们一起去萌站成员的星球旅行吧！" target="_blank"><img class="icp-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://travel.moe/images/icon/icon64.png" ><span>异次元之旅</span></a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="chat-btn" type="button" title="聊天"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"><script>(() => {
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo.shiguangdev.eu.org',
+      region: '',
+      onCommentLoaded: () => {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') setTimeout(init,0)
+    else getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(init)
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo.shiguangdev.eu.org',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(res => {
+      countELement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else {
+      loadTwikoo()
+      GLOBAL_CONFIG_SITE.isPost && getCount()
+    }
+  } else {
+    window.loadOtherComment = loadTwikoo
+  }
+})()</script><script>(() => {
+  const initValine = () => {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'dx3B54wOwhi75vxC2IAZagtg-gzGzoHsz',
+      appKey: 'm4k2fhnFa1iPI4vbofHqMY5X',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: false
+    }, null))
+  }
+
+  const loadValine = async () => {
+    if (typeof Valine === 'function') initValine()
+    else {
+      await getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js')
+      initValine()
+    }
+  }
+
+  if ('Twikoo' === 'Valine' || !true) {
+    if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+    else setTimeout(loadValine, 0)
+  } else {
+    window.loadOtherComment = loadValine
+  }
+})()</script></div><div class="aplayer no-destroy" data-id="10051718332" data-server="netease" data-type="playlist"   data-order="list" data-fixed="true" data-preload="auto" data-autoplay="false" data-mutex="true" ></div><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="true"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div><!-- hexo injector body_end start -->
+  <script data-pjax src="/js/hexo_githubcalendar.js"></script>
+  <script data-pjax>
+        function GithubCalendarConfig(){
+            var git_githubapiurl ="https://githubcalendarapi.shiguang666.eu.org/api?user=shiguang-coding";
+            var git_color =['#ebedf0', '#a2f7af', '#6ce480', '#54ad63', '#469252', '#31753c', '#1f5f2a', '#13531f', '#084111', '#032b09', '#000000'];
+            var git_user ="shiguang-coding";
+            var parent_div_git = document.getElementById('recent-posts');
+            var git_div_html = '<div class="recent-post-item" style="width:100%;height:auto;padding:10px;"><div id="github_loading" style="width:10%;height:100%;margin:0 auto;display: block"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animateTransform></path></svg></div><div id="github_container"></div></div>';
+            if(parent_div_git && location.pathname =='/'){
+                console.log("已挂载hexo-github-calendar https://github.com/Barry-Flynn/hexo-github-calendar");
+                // parent_div_git.innerHTML=git_div_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",git_div_html) // 有报错，但不影响使用(支持pjax跳转)
+            };
+            GithubCalendar(git_githubapiurl,git_color,git_user)
+        }
+        if(document.getElementById('recent-posts')){
+            GithubCalendarConfig()
+        }
+    </script>
+    <style>#github_container{min-height:280px}@media screen and (max-width:650px) {#github_container{background-image:;min-height:0px}}</style>
+    <style></style><!-- hexo injector body_end end --></body></html>
