@@ -1,0 +1,354 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Ctrl键被锁解决方法 | 時光</title><meta name="author" content="時光"><meta name="copyright" content="時光"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="一、问题描述使用外置键盘时Ctrl键突然像被锁定了一样，一直处于被按着的状态，拔掉外置键盘使用笔记本自带的小键盘是可以正常使用的，插上外置键盘就失灵。 二、出现问题的一般场景1、一般都是在笔记本上出现的居多 2、在安装了其他驱动或软件后引起的问题 3、升级到专业版Win后也有可能出现问题。 4、外置键盘物理损坏，比如进水 三、解决方案我最开始怀疑是键盘驱动的问题，卸载了键盘驱动，禁用了粘滞键功能，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ctrl键被锁解决方法">
+<meta property="og:url" content="https://blog.shiguang666.eu.org/2024/05/14/e260e8e9a4af/index.html">
+<meta property="og:site_name" content="時光">
+<meta property="og:description" content="一、问题描述使用外置键盘时Ctrl键突然像被锁定了一样，一直处于被按着的状态，拔掉外置键盘使用笔记本自带的小键盘是可以正常使用的，插上外置键盘就失灵。 二、出现问题的一般场景1、一般都是在笔记本上出现的居多 2、在安装了其他驱动或软件后引起的问题 3、升级到专业版Win后也有可能出现问题。 4、外置键盘物理损坏，比如进水 三、解决方案我最开始怀疑是键盘驱动的问题，卸载了键盘驱动，禁用了粘滞键功能，">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img.shiguangdev.cn/i/2024/10/17/6710c471187c4.png">
+<meta property="article:published_time" content="2024-05-14T04:45:58.000Z">
+<meta property="article:modified_time" content="2024-10-18T13:38:03.587Z">
+<meta property="article:author" content="時光">
+<meta property="article:tag" content="KeyBoardTestUtility">
+<meta property="article:tag" content="图吧工具箱">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.shiguangdev.cn/i/2024/10/17/6710c471187c4.png"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://blog.shiguang666.eu.org/2024/05/14/e260e8e9a4af/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""><link rel="preconnect" href="//busuanzi.ibruce.info"><meta name="baidu-site-verification" content="codeva-DpB1dzOUDd"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: 時光","link":"链接: ","source":"来源: 時光","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Ctrl键被锁解决方法',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-10-18 21:38:03'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="時光" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load',() => { preloader.endLoading() })
+
+  if (false) {
+    document.addEventListener('pjax:send', () => { preloader.initLoading() })
+    document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+  }
+})()</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">214</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">179</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">16</div></a></div><hr class="custom-hr"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://www.shiguang666.eu.org/"><i class="fa-fw fas fa-id-card"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-book"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/random.html"><i class="fa-fw fas fa-random"></i><span> 随机</span></a></li><li><a class="site-page child" href="/atom.xml"><i class="fa-fw fa fa-rss"></i><span> RSS</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa-solid fa-flask"></i><span> 实验室</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" target="_blank" rel="noopener" href="https://nav.shiguang666.eu.org/"><i class="fa-fw fas fa-paper-plane"></i><span> 导航</span></a></li><li><a class="site-page child" href="/news"><i class="fa-fw fa fa-calendar"></i><span> 每日早报</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://qexo.shiguang666.eu.org/"><i class="fa-fw fas fa-q"></i><span> Hexo管理面板</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://games.shiguang666.eu.org"><i class="fa-fw fa-solid fa-dragon"></i><span> 在线小游戏</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://game.shiguang666.eu.org"><i class="fa-fw fa-solid fa-headset"></i><span> 怀旧游戏机</span></a></li><li><a class="site-page child" href="/xjj/"><i class="fa-fw fa fa-rocket"></i><span> 随机小姐姐</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa-solid fa-user-group"></i><span> 友链</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/flink/"><i class="fa-fw fa-solid fa-user-tie"></i><span> 本站友链</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://www.travellings.cn/go.html"><i class="fa-fw fa fa-subway"></i><span> 随机开往</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://travel.moe/go.html?travel=on"><i class="fa-fw fa fa-taxi"></i><span> 异次元之旅</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://zhblogs.ohyee.cc/"><i class="fa-fw fa fa-motorcycle"></i><span> 列表导航</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/gallery/"><i class="fa-fw fas fa-solid fa-image"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fas fa-comments"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://img.shiguangdev.cn/i/2024/10/17/6710c471187c4.png')"><nav id="nav"><span id="blog-info"><a href="/" title="時光"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.png"><span class="site-name">時光</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://www.shiguang666.eu.org/"><i class="fa-fw fas fa-id-card"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-book"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/random.html"><i class="fa-fw fas fa-random"></i><span> 随机</span></a></li><li><a class="site-page child" href="/atom.xml"><i class="fa-fw fa fa-rss"></i><span> RSS</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa-solid fa-flask"></i><span> 实验室</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" target="_blank" rel="noopener" href="https://nav.shiguang666.eu.org/"><i class="fa-fw fas fa-paper-plane"></i><span> 导航</span></a></li><li><a class="site-page child" href="/news"><i class="fa-fw fa fa-calendar"></i><span> 每日早报</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://qexo.shiguang666.eu.org/"><i class="fa-fw fas fa-q"></i><span> Hexo管理面板</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://games.shiguang666.eu.org"><i class="fa-fw fa-solid fa-dragon"></i><span> 在线小游戏</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://game.shiguang666.eu.org"><i class="fa-fw fa-solid fa-headset"></i><span> 怀旧游戏机</span></a></li><li><a class="site-page child" href="/xjj/"><i class="fa-fw fa fa-rocket"></i><span> 随机小姐姐</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa-solid fa-user-group"></i><span> 友链</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/flink/"><i class="fa-fw fa-solid fa-user-tie"></i><span> 本站友链</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://www.travellings.cn/go.html"><i class="fa-fw fa fa-subway"></i><span> 随机开往</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://travel.moe/go.html?travel=on"><i class="fa-fw fa fa-taxi"></i><span> 异次元之旅</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://zhblogs.ohyee.cc/"><i class="fa-fw fa fa-motorcycle"></i><span> 列表导航</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/gallery/"><i class="fa-fw fas fa-solid fa-image"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fas fa-comments"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Ctrl键被锁解决方法</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-05-14T04:45:58.000Z" title="发表于 2024-05-14 12:45:58">2024-05-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-10-18T13:38:03.587Z" title="更新于 2024-10-18 21:38:03">2024-10-18</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%B8%A9%E5%9D%91/">踩坑</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>3分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Ctrl键被锁解决方法"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><div id="postchat_postcontent"><h1 id="一、问题描述"><a href="#一、问题描述" class="headerlink" title="一、问题描述"></a>一、问题描述</h1><p>使用外置键盘时Ctrl键突然像被锁定了一样，一直处于被按着的状态，拔掉外置键盘使用笔记本自带的小键盘是可以正常使用的，插上外置键盘就失灵。</p>
+<h1 id="二、出现问题的一般场景"><a href="#二、出现问题的一般场景" class="headerlink" title="二、出现问题的一般场景"></a>二、出现问题的一般场景</h1><p>1、一般都是在笔记本上出现的居多</p>
+<p>2、在安装了其他驱动或软件后引起的问题</p>
+<p>3、升级到专业版Win后也有可能出现问题。</p>
+<p>4、外置键盘物理损坏，比如进水</p>
+<h1 id="三、解决方案"><a href="#三、解决方案" class="headerlink" title="三、解决方案"></a>三、解决方案</h1><p>我最开始怀疑是键盘驱动的问题，卸载了键盘驱动，禁用了粘滞键功能，重启了系统，各种方法都试了，后来发现是键盘进水了，拆开键盘仔细擦拭一番，第二天水分晾干了就好了。</p>
+<p>以下是我从网络上搜集来的各种解决方案，虽然未能帮助到我，但也给了我一些启发，希望对你有所帮助</p>
+<h3 id="方法一："><a href="#方法一：" class="headerlink" title="方法一："></a>方法一：</h3><p>找到出现Ctrl键自动按下问题的时间点，然后卸载在那个时间点内安装的驱动或软件，大概率可以解决问题。</p>
+<h3 id="方法二："><a href="#方法二：" class="headerlink" title="方法二："></a>方法二：</h3><p>首先，在WIN图标上右击，找到“<strong>设备管理器</strong>”进入。</p>
+<p>然后找到“<strong>键盘</strong>”，再把“<strong>键盘</strong>”内的所有驱动都删掉，然后关机重启，重启后系统会自动重新更新键盘驱动，不用担心删除后没有驱动就彻底不能使用外置键盘</p>
+<h3 id="方法三："><a href="#方法三：" class="headerlink" title="方法三："></a>方法三：</h3><p>直接在电脑键盘上连续按五次“shift键”，然后取消粘滞键就可以了。</p>
+<h3 id="方法四："><a href="#方法四：" class="headerlink" title="方法四："></a>方法四：</h3><p>同时按 <strong>Fn + Ctrl +Alt</strong> ，可以多尝试几次。</p>
+<h2 id="方法五"><a href="#方法五" class="headerlink" title="方法五"></a>方法五</h2><p>同时按住键盘两边的Ctrl键，可以多尝试几次。</p>
+<h1 id="四、键盘检测工具"><a href="#四、键盘检测工具" class="headerlink" title="四、键盘检测工具"></a>四、键盘检测工具</h1><h2 id="虚拟屏幕键盘"><a href="#虚拟屏幕键盘" class="headerlink" title="虚拟屏幕键盘"></a>虚拟屏幕键盘</h2><p>Win + R 输入  <code>osk  </code> 可以唤出屏幕键盘</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/10/16/670fb15af246f.png" alt="image-20240514130705040"></p>
+<p>可以模拟外置键盘进行输入或者检测哪些按键失灵，如图所示，我当时就是Ctrl键一直处于锁定状态，不过一闪一闪的，就是隔个几秒闪一下，就不能用</p>
+<p>这个虚拟键盘有个缺点，就是如果有两个相同的键位时无法准确显示按的是哪一个，因为无论按键盘左边还是右边的哪一个键位，两个都会显示，比如 Ctrl、Alt</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/10/16/670fb15b49b12.png" alt="image-20240514130937040"></p>
+<h2 id="KeyBoardTestUtility"><a href="#KeyBoardTestUtility" class="headerlink" title="KeyBoardTestUtility"></a>KeyBoardTestUtility</h2><p>你可以安装更专业的键盘检测工具  <a target="_blank" rel="noopener" href="https://apps.microsoft.com/detail/9nkrgtggqwsd?hl=zh-cn&amp;gl=CN">KeyBoardTestUtility</a>，这款应用可以检测您的键盘是否有问题，每个按键是否可以正常的使用，并且这款工具对于Ctrl，Alt 这种两个键位的也是可以准确区分具体按的是哪个的。</p>
+<p>或者你可以安装 <a target="_blank" rel="noopener" href="https://www.tbtool.cn/">图吧工具箱</a> ，外设工具 =&gt;  KeyBoardTestUtility 进行检测</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/10/16/670fb15bbd3ac.png" alt="image-20240514132437763"></p>
+<p>图吧工具箱是一个强大的硬件检测工具集合，个人强烈推荐，以下是官方的介绍</p>
+<blockquote>
+<p>图吧工具箱，是开源、免费、绿色、纯净的硬件检测工具合集，专为所有计算机硬件极客、DIY爱好者、各路大神及小白制作。集成大量常见硬件检测、评分工具，一键下载、方便使用。</p>
+<p>专业 · 专注于收集各种硬件检测、评分、测试工具，常见工具均有收集。</p>
+<p>纯净 · 无任何捆绑强制安装行为，不写入注册表，没有任何敏感目录及文件操作，无任何诱导、孔吓、欺乍等操作。</p>
+<p>绿色 · 仅提供自解压格式的压缩包(可右键使用任意解压工具打开)，无需安装、注册等复杂操作，解压即可使用。用完可直接删除，无需卸载。</p>
+<p>开放 · 群文件可直接下载源码，并提供硬件检测SDK，主流编程语言无门槛调用，且无需授权、免费使用无任何限制。</p>
+<p>不忘初心，始于2014，持续8年稳定更新，坚持做能方便大家使用的硬件检测工具箱。</p>
+</blockquote>
+<h2 id="键盘按键在线检测"><a href="#键盘按键在线检测" class="headerlink" title="键盘按键在线检测"></a>键盘按键在线检测</h2><p>或者使用在线工具进行测试</p>
+<p><a target="_blank" rel="noopener" href="https://keyboard.bmcx.com/">键盘按键测试在线 - 键盘测试工具 - 键盘连键检测</a></p>
+<p><strong>参考</strong></p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/499592041">Win10/11 笔记本电脑自动锁定按下Ctrl键怎么解决的办法</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/46495416">为什么电脑总是默认按下CTRL键？</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/19890472">Ctrl 键好像被一直按下了，怎么取消？</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/34835461">关于电脑按键混乱，好像被按住了ctrl或者alt一样</a></p>
+</blockquote>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://blog.shiguang666.eu.org">時光</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://blog.shiguang666.eu.org/2024/05/14/e260e8e9a4af/">https://blog.shiguang666.eu.org/2024/05/14/e260e8e9a4af/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.shiguang666.eu.org" target="_blank">時光</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/KeyBoardTestUtility/">KeyBoardTestUtility</a><a class="post-meta__tags" href="/tags/%E5%9B%BE%E5%90%A7%E5%B7%A5%E5%85%B7%E7%AE%B1/">图吧工具箱</a></div><div class="post_share"><div class="social-share" data-image="https://img.shiguangdev.cn/i/2024/10/17/6710c471187c4.png" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer=""></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>赞助</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/wechat.png" alt="微信"></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/alipay.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/alipay.png" alt="支付宝"></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/05/14/5c2d0bc54d20/" title="博客文章封面生成工具推荐"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/10/16/670fd03e3b403.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">博客文章封面生成工具推荐</div></div></a></div><div class="next-post pull-right"><a href="/2024/05/13/cc195aa726f0/" title="新一代浏览器推荐—Arc浏览器"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/10/17/6710c3ad1f933.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">新一代浏览器推荐—Arc浏览器</div></div></a></div></nav><hr class="custom-hr"><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div class="comment-switch"><span class="first-comment">Twikoo</span><span id="switch-btn"></span><span class="second-comment">Valine</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"></div><div class="author-info__name">時光</div><div class="author-info__description">心寄朗朗乾坤，胸怀真修之道。</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">214</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">179</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">16</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/shiguang-coding"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/shiguang-coding" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:an_shiguang@163.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎光临時光的博客园子🎉🎉<br>https://blog.shiguang666.eu.org<br>https://blog.shiguang88.icu<br>https://blog.shiguangdev.cn<br></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">一、问题描述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%87%BA%E7%8E%B0%E9%97%AE%E9%A2%98%E7%9A%84%E4%B8%80%E8%88%AC%E5%9C%BA%E6%99%AF"><span class="toc-number">2.</span> <span class="toc-text">二、出现问题的一般场景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-number">3.</span> <span class="toc-text">三、解决方案</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80%EF%BC%9A"><span class="toc-number">3.0.1.</span> <span class="toc-text">方法一：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C%EF%BC%9A"><span class="toc-number">3.0.2.</span> <span class="toc-text">方法二：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%B8%89%EF%BC%9A"><span class="toc-number">3.0.3.</span> <span class="toc-text">方法三：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E5%9B%9B%EF%BC%9A"><span class="toc-number">3.0.4.</span> <span class="toc-text">方法四：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%BA%94"><span class="toc-number">3.1.</span> <span class="toc-text">方法五</span></a></li></ol><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E9%94%AE%E7%9B%98%E6%A3%80%E6%B5%8B%E5%B7%A5%E5%85%B7"><span class="toc-number">4.</span> <span class="toc-text">四、键盘检测工具</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E5%B1%8F%E5%B9%95%E9%94%AE%E7%9B%98"><span class="toc-number">4.1.</span> <span class="toc-text">虚拟屏幕键盘</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#KeyBoardTestUtility"><span class="toc-number">4.2.</span> <span class="toc-text">KeyBoardTestUtility</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%94%AE%E7%9B%98%E6%8C%89%E9%94%AE%E5%9C%A8%E7%BA%BF%E6%A3%80%E6%B5%8B"><span class="toc-number">4.3.</span> <span class="toc-text">键盘按键在线检测</span></a></li></ol></li></div></div><div class="card-widget card-post-series"><div class="item-headline"><i class="fa-solid fa-layer-group"></i><span>系列文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/05/14/e260e8e9a4af/" title="Ctrl键被锁解决方法"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/10/17/6710c471187c4.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Ctrl键被锁解决方法"></a><div class="content"><a class="title" href="/2024/05/14/e260e8e9a4af/" title="Ctrl键被锁解决方法">Ctrl键被锁解决方法</a><time datetime="2024-05-14T04:45:58.000Z" title="发表于 2024-05-14 12:45:58">2024-05-14</time></div></div></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/10/18/a2cc0b63066f/" title="Hexo博客自动生成AI摘要"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/10/17/6710c62cac4e6.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hexo博客自动生成AI摘要"></a><div class="content"><a class="title" href="/2024/10/18/a2cc0b63066f/" title="Hexo博客自动生成AI摘要">Hexo博客自动生成AI摘要</a><time datetime="2024-10-18T09:41:41.000Z" title="发表于 2024-10-18 17:41:41">2024-10-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/10/18/b1d78a79cbfb/" title="蓝空图床上传失败问题排查"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/10/18/67120e3f9201f.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="蓝空图床上传失败问题排查"></a><div class="content"><a class="title" href="/2024/10/18/b1d78a79cbfb/" title="蓝空图床上传失败问题排查">蓝空图床上传失败问题排查</a><time datetime="2024-10-18T06:50:32.000Z" title="发表于 2024-10-18 14:50:32">2024-10-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/10/15/6b65681b29d7/" title="批量备份迁移Markdown文件中的图片解决方案"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/10/15/670e7bd0e5b0e.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="批量备份迁移Markdown文件中的图片解决方案"></a><div class="content"><a class="title" href="/2024/10/15/6b65681b29d7/" title="批量备份迁移Markdown文件中的图片解决方案">批量备份迁移Markdown文件中的图片解决方案</a><time datetime="2024-10-15T06:34:27.000Z" title="发表于 2024-10-15 14:34:27">2024-10-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/10/15/0410596602c9/" title="error: src refspec main does not match any"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/10/15/670e7c73d294a.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="error: src refspec main does not match any"></a><div class="content"><a class="title" href="/2024/10/15/0410596602c9/" title="error: src refspec main does not match any">error: src refspec main does not match any</a><time datetime="2024-10-15T06:09:56.000Z" title="发表于 2024-10-15 14:09:56">2024-10-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/10/15/bdc2992e0b08/" title="Failed to connect to github.com port 443 after 21042 ms: Couldn't connect to server"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/10/15/670e7cef8dd22.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Failed to connect to github.com port 443 after 21042 ms: Couldn't connect to server"></a><div class="content"><a class="title" href="/2024/10/15/bdc2992e0b08/" title="Failed to connect to github.com port 443 after 21042 ms: Couldn't connect to server">Failed to connect to github.com port 443 after 21042 ms: Couldn't connect to server</a><time datetime="2024-10-15T03:55:30.000Z" title="发表于 2024-10-15 11:55:30">2024-10-15</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://img.shiguangdev.cn/i/2024/10/17/6710c471187c4.png')"><div id="footer-wrap"><div class="copyright">©2023 - 2024 By 時光</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text"><a href="https://icp.gov.moe/?keyword=20246626" target="_blank"><img class="icp-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/10/18/6712525ee948c.png"><span>萌ICP备20246626号</span></a>,<a href="https://www.travellings.cn/go.html" target="_blank"><img class="icp-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/10/18/671252762fd82.png"><span>随机开往</span></a>,<a style="text-decoration:none;" href="https://travel.moe/go.html?travel=on " title="异次元之旅-跃迁-我们一起去萌站成员的星球旅行吧！" target="_blank"><img class="icp-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/10/18/6712528b22dd7.png"><span>异次元之旅</span></a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="chat-btn" type="button" title="聊天"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"><script>(() => {
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo.shiguangdev.eu.org',
+      region: '',
+      onCommentLoaded: () => {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') setTimeout(init,0)
+    else getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(init)
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo.shiguangdev.eu.org',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(res => {
+      countELement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else {
+      loadTwikoo()
+      GLOBAL_CONFIG_SITE.isPost && getCount()
+    }
+  } else {
+    window.loadOtherComment = loadTwikoo
+  }
+})()</script><script>(() => {
+  const initValine = () => {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'dx3B54wOwhi75vxC2IAZagtg-gzGzoHsz',
+      appKey: 'm4k2fhnFa1iPI4vbofHqMY5X',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: false
+    }, null))
+  }
+
+  const loadValine = async () => {
+    if (typeof Valine === 'function') initValine()
+    else {
+      await getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js')
+      initValine()
+    }
+  }
+
+  if ('Twikoo' === 'Valine' || !true) {
+    if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+    else setTimeout(loadValine, 0)
+  } else {
+    window.loadOtherComment = loadValine
+  }
+})()</script></div><div class="aplayer no-destroy" data-id="10051718332" data-server="netease" data-type="playlist" data-order="list" data-fixed="true" data-preload="auto" data-autoplay="false" data-mutex="true"></div><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="true"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script async="" data-pjax="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"></div></div><hr><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div><!-- hexo injector body_end start -->
+  <script data-pjax="" src="/js/hexo_githubcalendar.js"></script>
+  <script data-pjax="">
+        function GithubCalendarConfig(){
+            var git_githubapiurl ="https://githubcalendarapi.shiguang666.eu.org/api?user=shiguang-coding";
+            var git_color =['#ebedf0', '#a2f7af', '#6ce480', '#54ad63', '#469252', '#31753c', '#1f5f2a', '#13531f', '#084111', '#032b09', '#000000'];
+            var git_user ="shiguang-coding";
+            var parent_div_git = document.getElementById('recent-posts');
+            var git_div_html = '<div class="recent-post-item" style="width:100%;height:auto;padding:10px;"><div id="github_loading" style="width:10%;height:100%;margin:0 auto;display: block"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animateTransform></path></svg></div><div id="github_container"></div></div>';
+            if(parent_div_git && location.pathname =='/'){
+                console.log("已挂载hexo-github-calendar https://github.com/Barry-Flynn/hexo-github-calendar");
+                // parent_div_git.innerHTML=git_div_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",git_div_html) // 有报错，但不影响使用(支持pjax跳转)
+            };
+            GithubCalendar(git_githubapiurl,git_color,git_user)
+        }
+        if(document.getElementById('recent-posts')){
+            GithubCalendarConfig()
+        }
+    </script>
+    <style>#github_container{min-height:280px}@media screen and (max-width:650px) {#github_container{background-image:;min-height:0px}}</style>
+    <style></style><!-- hexo injector body_end end -->
+    <link rel="stylesheet" href="https://ai.tianli0.top/static/public/postChatUser_summary.min.css">
+    <script>
+        let tianliGPT_key = 'd5bf7262da0ef66e8635';
+        let tianliGPT_postSelector = '#article-container';
+        let tianliGPT_Title = '文章摘要';
+        let tianliGPT_postURL = '/^https?://[^/]+/[0-9]{4}/[0-9]{2}/[0-9]{2}/';
+        let tianliGPT_blacklist = '';
+        let tianliGPT_wordLimit = '1000';
+        let tianliGPT_typingAnimate = true;
+        var postChatConfig = {
+          backgroundColor: "#3e86f6",
+          bottom: "16px",
+          left: "16px",
+          fill: "#FFFFFF",
+          width: "44px",
+          frameWidth: "375px",
+          frameHeight: "600px",
+          defaultInput: true,
+          upLoadWeb: true,
+          showInviteLink: true,
+          userTitle: "PostChat",
+          userDesc: "如果你对网站的内容有任何疑问，可以来问我哦～",
+          addButton: true,
+          beginningText: "这篇文章介绍了"
+        };
+    </script>
+    <script data-postchat_key="d5bf7262da0ef66e8635" src="https://ai.tianli0.top/static/public/tianli_gpt.min.js"></script>
+  </body></html>

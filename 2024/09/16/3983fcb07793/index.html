@@ -1,0 +1,528 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>【面试题】JAVA面试题之大杂烩篇 | 時光</title><meta name="author" content="時光"><meta name="copyright" content="時光"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="StringBuilder与StringBuffer的区别StringBuilder 和 StringBuffer 都是 Java 中用于处理字符串的可变类，但它们之间有一些关键的区别： 1. 线程安全性StringBuffer: 是线程安全的。它的所有公共方法都是同步的（即使用了 synchronized 关键字），这意味着在多线程环境中，多个线程可以安全地访问同一个 StringBuffer">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【面试题】JAVA面试题之大杂烩篇">
+<meta property="og:url" content="https://blog.shiguang666.eu.org/2024/09/16/3983fcb07793/index.html">
+<meta property="og:site_name" content="時光">
+<meta property="og:description" content="StringBuilder与StringBuffer的区别StringBuilder 和 StringBuffer 都是 Java 中用于处理字符串的可变类，但它们之间有一些关键的区别： 1. 线程安全性StringBuffer: 是线程安全的。它的所有公共方法都是同步的（即使用了 synchronized 关键字），这意味着在多线程环境中，多个线程可以安全地访问同一个 StringBuffer">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img.shiguangdev.cn/i/2024/10/18/671251e13b5a1.png">
+<meta property="article:published_time" content="2024-09-16T06:13:42.000Z">
+<meta property="article:modified_time" content="2024-10-18T13:38:03.603Z">
+<meta property="article:author" content="時光">
+<meta property="article:tag" content="JAVA">
+<meta property="article:tag" content="面试">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.shiguangdev.cn/i/2024/10/18/671251e13b5a1.png"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://blog.shiguang666.eu.org/2024/09/16/3983fcb07793/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""><link rel="preconnect" href="//busuanzi.ibruce.info"><meta name="baidu-site-verification" content="codeva-DpB1dzOUDd"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: 時光","link":"链接: ","source":"来源: 時光","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '【面试题】JAVA面试题之大杂烩篇',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-10-18 21:38:03'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="時光" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load',() => { preloader.endLoading() })
+
+  if (false) {
+    document.addEventListener('pjax:send', () => { preloader.initLoading() })
+    document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+  }
+})()</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">214</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">179</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">16</div></a></div><hr class="custom-hr"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://www.shiguang666.eu.org/"><i class="fa-fw fas fa-id-card"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-book"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/random.html"><i class="fa-fw fas fa-random"></i><span> 随机</span></a></li><li><a class="site-page child" href="/atom.xml"><i class="fa-fw fa fa-rss"></i><span> RSS</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa-solid fa-flask"></i><span> 实验室</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" target="_blank" rel="noopener" href="https://nav.shiguang666.eu.org/"><i class="fa-fw fas fa-paper-plane"></i><span> 导航</span></a></li><li><a class="site-page child" href="/news"><i class="fa-fw fa fa-calendar"></i><span> 每日早报</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://qexo.shiguang666.eu.org/"><i class="fa-fw fas fa-q"></i><span> Hexo管理面板</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://games.shiguang666.eu.org"><i class="fa-fw fa-solid fa-dragon"></i><span> 在线小游戏</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://game.shiguang666.eu.org"><i class="fa-fw fa-solid fa-headset"></i><span> 怀旧游戏机</span></a></li><li><a class="site-page child" href="/xjj/"><i class="fa-fw fa fa-rocket"></i><span> 随机小姐姐</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa-solid fa-user-group"></i><span> 友链</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/flink/"><i class="fa-fw fa-solid fa-user-tie"></i><span> 本站友链</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://www.travellings.cn/go.html"><i class="fa-fw fa fa-subway"></i><span> 随机开往</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://travel.moe/go.html?travel=on"><i class="fa-fw fa fa-taxi"></i><span> 异次元之旅</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://zhblogs.ohyee.cc/"><i class="fa-fw fa fa-motorcycle"></i><span> 列表导航</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/gallery/"><i class="fa-fw fas fa-solid fa-image"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fas fa-comments"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://img.shiguangdev.cn/i/2024/10/18/671251e13b5a1.png')"><nav id="nav"><span id="blog-info"><a href="/" title="時光"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.png"><span class="site-name">時光</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://www.shiguang666.eu.org/"><i class="fa-fw fas fa-id-card"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-book"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/random.html"><i class="fa-fw fas fa-random"></i><span> 随机</span></a></li><li><a class="site-page child" href="/atom.xml"><i class="fa-fw fa fa-rss"></i><span> RSS</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa-solid fa-flask"></i><span> 实验室</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" target="_blank" rel="noopener" href="https://nav.shiguang666.eu.org/"><i class="fa-fw fas fa-paper-plane"></i><span> 导航</span></a></li><li><a class="site-page child" href="/news"><i class="fa-fw fa fa-calendar"></i><span> 每日早报</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://qexo.shiguang666.eu.org/"><i class="fa-fw fas fa-q"></i><span> Hexo管理面板</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://games.shiguang666.eu.org"><i class="fa-fw fa-solid fa-dragon"></i><span> 在线小游戏</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://game.shiguang666.eu.org"><i class="fa-fw fa-solid fa-headset"></i><span> 怀旧游戏机</span></a></li><li><a class="site-page child" href="/xjj/"><i class="fa-fw fa fa-rocket"></i><span> 随机小姐姐</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa-solid fa-user-group"></i><span> 友链</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/flink/"><i class="fa-fw fa-solid fa-user-tie"></i><span> 本站友链</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://www.travellings.cn/go.html"><i class="fa-fw fa fa-subway"></i><span> 随机开往</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://travel.moe/go.html?travel=on"><i class="fa-fw fa fa-taxi"></i><span> 异次元之旅</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://zhblogs.ohyee.cc/"><i class="fa-fw fa fa-motorcycle"></i><span> 列表导航</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/gallery/"><i class="fa-fw fas fa-solid fa-image"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fas fa-comments"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">【面试题】JAVA面试题之大杂烩篇</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-09-16T06:13:42.000Z" title="发表于 2024-09-16 14:13:42">2024-09-16</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-10-18T13:38:03.603Z" title="更新于 2024-10-18 21:38:03">2024-10-18</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">4.5k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>14分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="【面试题】JAVA面试题之大杂烩篇"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><div id="postchat_postcontent"><h2 id="StringBuilder与StringBuffer的区别"><a href="#StringBuilder与StringBuffer的区别" class="headerlink" title="StringBuilder与StringBuffer的区别"></a>StringBuilder与StringBuffer的区别</h2><p><code>StringBuilder</code> 和 <code>StringBuffer</code> 都是 Java 中用于处理字符串的可变类，但它们之间有一些关键的区别：</p>
+<h3 id="1-线程安全性"><a href="#1-线程安全性" class="headerlink" title="1. 线程安全性"></a>1. <strong>线程安全性</strong></h3><p><strong><code>StringBuffer</code></strong>: 是线程安全的。它的所有公共方法都是同步的（即使用了 <code>synchronized</code> 关键字），这意味着在多线程环境中，多个线程可以安全地访问同一个 <code>StringBuffer</code> 实例，而不会导致数据不一致或其他并发问题。</p>
+<p><strong><code>StringBuilder</code></strong>: 不是线程安全的。它的方法没有使用 <code>synchronized</code> 关键字，因此在多线程环境中使用 <code>StringBuilder</code> 可能会导致数据不一致或其他并发问题。</p>
+<h3 id="2-性能"><a href="#2-性能" class="headerlink" title="2. 性能"></a>2. <strong>性能</strong></h3><p><strong><code>StringBuilder</code></strong>: 由于没有同步开销，<code>StringBuilder</code> 在单线程环境中的性能通常比 <code>StringBuffer</code> 更好。如果你确定你的代码只会在单线程环境中运行，使用 <code>StringBuilder</code> 可以获得更好的性能。</p>
+<p><strong><code>StringBuffer</code></strong>: 由于方法的同步，<code>StringBuffer</code> 在多线程环境中的性能可能会稍差一些，但它在多线程环境中提供了线程安全性。</p>
+<h3 id="3-使用场景"><a href="#3-使用场景" class="headerlink" title="3. 使用场景"></a>3. <strong>使用场景</strong></h3><p><strong><code>StringBuilder</code></strong>: 适用于单线程环境或不需要线程安全的场景。例如，在循环中频繁地拼接字符串时，使用 <code>StringBuilder</code> 可以提高性能。</p>
+<p><strong><code>StringBuffer</code></strong>: 适用于多线程环境或需要线程安全的场景。例如，在多个线程同时访问和修改同一个字符串对象时，使用 <code>StringBuffer</code> 可以确保数据的一致性。</p>
+<h3 id="4-API-兼容性"><a href="#4-API-兼容性" class="headerlink" title="4. API 兼容性"></a>4. <strong>API 兼容性</strong></h3><p><code>StringBuilder</code> 和 <code>StringBuffer</code> 的 API 几乎是完全相同的，因此你可以很容易地在它们之间切换，而不需要修改太多的代码。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><strong><code>StringBuilder</code></strong>: 适用于单线程环境，性能更好。</p>
+<p><strong><code>StringBuffer</code></strong>: 适用于多线程环境，提供了线程安全性。</p>
+<p>在实际开发中，如果你不需要考虑线程安全问题，建议使用 <code>StringBuilder</code> 以获得更好的性能。如果你需要在多线程环境中操作字符串，则应该使用 <code>StringBuffer</code>。</p>
+<h2 id="自动拆箱与自动装箱"><a href="#自动拆箱与自动装箱" class="headerlink" title="自动拆箱与自动装箱"></a>自动拆箱与自动装箱</h2><p>在 Java 中，自动装箱（Autoboxing）和自动拆箱（Unboxing）是 Java 5 引入的两个特性，它们使得基本数据类型和其对应的包装类之间的转换变得更加方便。</p>
+<h3 id="自动装箱（Autoboxing）"><a href="#自动装箱（Autoboxing）" class="headerlink" title="自动装箱（Autoboxing）"></a>自动装箱（Autoboxing）</h3><p><strong>自动装箱</strong>是指将基本数据类型（如 <code>int</code>、<code>char</code>、<code>boolean</code> 等）自动转换为其对应的包装类对象（如 <code>Integer</code>、<code>Character</code>、<code>Boolean</code> 等）。</p>
+<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">primitiveInt</span> <span class="operator">=</span> <span class="number">42</span>;</span><br><span class="line"><span class="type">Integer</span> <span class="variable">wrappedInt</span> <span class="operator">=</span> primitiveInt;  <span class="comment">// 自动装箱</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>在这个例子中，<code>int</code> 类型的 <code>primitiveInt</code> 被自动转换为 <code>Integer</code> 类型的 <code>wrappedInt</code>。</p>
+<h3 id="自动拆箱（Unboxing）"><a href="#自动拆箱（Unboxing）" class="headerlink" title="自动拆箱（Unboxing）"></a>自动拆箱（Unboxing）</h3><p><strong>自动拆箱</strong>是指将包装类对象（如 <code>Integer</code>、<code>Character</code>、<code>Boolean</code> 等）自动转换为其对应的基本数据类型（如 <code>int</code>、<code>char</code>、<code>boolean</code> 等）。</p>
+<h4 id="示例-1"><a href="#示例-1" class="headerlink" title="示例"></a>示例</h4><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Integer</span> <span class="variable">wrappedInt</span> <span class="operator">=</span> <span class="number">42</span>;</span><br><span class="line"><span class="type">int</span> <span class="variable">primitiveInt</span> <span class="operator">=</span> wrappedInt;  <span class="comment">// 自动拆箱</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>在这个例子中，<code>Integer</code> 类型的 <code>wrappedInt</code> 被自动转换为 <code>int</code> 类型的 <code>primitiveInt</code>。</p>
+<h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h3><p>自动装箱和自动拆箱在以下场景中非常有用：</p>
+<ol>
+<li><p><strong>集合类</strong>：集合类（如 <code>ArrayList</code>、<code>HashMap</code> 等）只能存储对象，不能存储基本数据类型。自动装箱使得你可以直接将基本数据类型存储在集合中。</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ArrayList&lt;Integer&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">list.add(<span class="number">1</span>);  <span class="comment">// 自动装箱</span></span><br><span class="line"><span class="type">int</span> <span class="variable">value</span> <span class="operator">=</span> list.get(<span class="number">0</span>);  <span class="comment">// 自动拆箱</span></span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p><strong>方法参数和返回值</strong>：方法可以接受和返回包装类对象，自动装箱和自动拆箱使得你可以直接传递和返回基本数据类型。</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Integer <span class="title function_">add</span><span class="params">(Integer a, Integer b)</span> {</span><br><span class="line">    <span class="keyword">return</span> a + b;  <span class="comment">// 自动拆箱和自动装箱</span></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="variable">result</span> <span class="operator">=</span> add(<span class="number">1</span>, <span class="number">2</span>);  <span class="comment">// 自动装箱和自动拆箱</span></span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p><strong>条件表达式</strong>：在条件表达式中，自动装箱和自动拆箱使得你可以直接使用基本数据类型和包装类对象。</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Integer</span> <span class="variable">wrappedInt</span> <span class="operator">=</span> <span class="number">42</span>;</span><br><span class="line"><span class="keyword">if</span> (wrappedInt == <span class="number">42</span>) {  <span class="comment">// 自动拆箱</span></span><br><span class="line">    System.out.println(<span class="string">"Equal"</span>);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></li>
+</ol>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><ol>
+<li><p><strong>性能开销</strong>：虽然自动装箱和自动拆箱使得代码更加简洁，但它们可能会带来一些性能开销，因为涉及到对象的创建和销毁。</p>
+</li>
+<li><p><strong>空指针异常</strong>：在自动拆箱时，如果包装类对象为 <code>null</code>，会抛出 <code>NullPointerException</code>。</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Integer</span> <span class="variable">wrappedInt</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line"><span class="type">int</span> <span class="variable">primitiveInt</span> <span class="operator">=</span> wrappedInt;  <span class="comment">// 抛出 NullPointerException</span></span><br></pre></td></tr></tbody></table></figure></li>
+</ol>
+<h3 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h3><p>自动装箱和自动拆箱是 Java 中非常方便的特性，它们简化了基本数据类型和包装类之间的转换。然而，在使用时需要注意性能开销和可能的空指针异常。</p>
+<h3 id="实战演练"><a href="#实战演练" class="headerlink" title="实战演练"></a>实战演练</h3><p>下面的程序返回的结果分别是什么，为什么？</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> {</span><br><span class="line">    <span class="type">Integer</span> <span class="variable">i1</span> <span class="operator">=</span> <span class="number">100</span>;</span><br><span class="line">    <span class="type">Integer</span> <span class="variable">i2</span> <span class="operator">=</span> <span class="number">100</span>;</span><br><span class="line">    System.out.println(i1 == i2); </span><br><span class="line"></span><br><span class="line">    <span class="type">Integer</span> <span class="variable">i3</span> <span class="operator">=</span> <span class="number">128</span>;</span><br><span class="line">    <span class="type">Integer</span> <span class="variable">i4</span> <span class="operator">=</span> <span class="number">128</span>;</span><br><span class="line">    System.out.println(i3 == i4); </span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="自动装箱和缓存机制"><a href="#自动装箱和缓存机制" class="headerlink" title="自动装箱和缓存机制"></a>自动装箱和缓存机制</h4><p>Java 的 <code>Integer</code> 类有一个缓存机制，它会缓存从 <code>-128</code> 到 <code>127</code> 之间的整数对象。这意味着在这个范围内的整数在自动装箱时会返回同一个缓存对象，而不是创建新的 <code>Integer</code> 对象。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/16/66e7ed7374988.png" alt="image-20240916163356908"></p>
+<p><strong>各包装类型缓存对象范围：</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/16/66e7e81336f4e.png" alt="image-20240916161100903"></p>
+<h4 id="具体分析"><a href="#具体分析" class="headerlink" title="具体分析"></a>具体分析</h4><p><strong><code>Integer i1 = 100;</code> 和 <code>Integer i2 = 100;</code></strong></p>
+<p>由于 <code>100</code> 在 <code>-128</code> 到 <code>127</code> 的范围内，<code>i1</code> 和 <code>i2</code> 都会引用同一个缓存的 <code>Integer</code> 对象。</p>
+<p>因此，<code>i1 == i2</code> 返回 <code>true</code>。</p>
+<p><strong><code>Integer i3 = 128;</code> 和 <code>Integer i4 = 128;</code></strong></p>
+<p>由于 <code>128</code> 超出了 <code>-128</code> 到 <code>127</code> 的范围，<code>i3</code> 和 <code>i4</code> 都会创建新的 <code>Integer</code> 对象。</p>
+<p>因此，<code>i3 == i4</code> 返回 <code>false</code>，因为它们引用的是不同的对象。</p>
+<h4 id="输出结果"><a href="#输出结果" class="headerlink" title="输出结果"></a>输出结果</h4><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">true</span></span><br><span class="line"><span class="literal">false</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="总结-2"><a href="#总结-2" class="headerlink" title="总结"></a>总结</h4><p>对于 <code>-128</code> 到 <code>127</code> 范围内的整数，自动装箱会返回同一个缓存的 <code>Integer</code> 对象，因此 <code>==</code> 比较返回 <code>true</code>。</p>
+<p>对于超出这个范围的整数，自动装箱会创建新的 <code>Integer</code> 对象，因此 <code>==</code> 比较返回 <code>false</code>。</p>
+<h4 id="进一步解释"><a href="#进一步解释" class="headerlink" title="进一步解释"></a>进一步解释</h4><p>如果你想比较两个 <code>Integer</code> 对象的值是否相等，而不是比较它们是否引用同一个对象，应该使用 <code>equals</code> 方法：</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(i1.equals(i2));  <span class="comment">// true</span></span><br><span class="line">System.out.println(i3.equals(i4));  <span class="comment">// true</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><code>equals</code> 方法会比较两个 <code>Integer</code> 对象的值，而不是它们的引用。</p>
+<h2 id="如何定义一个标准javabean"><a href="#如何定义一个标准javabean" class="headerlink" title="如何定义一个标准javabean"></a>如何定义一个标准javabean</h2><p>在 Java 中，一个标准的 JavaBean 是一个遵循特定命名和设计约定的类。JavaBean 通常用于封装数据，并且可以通过反射机制进行访问和操作。以下是定义一个标准 JavaBean 的主要规范：</p>
+<h3 id="私有属性（Private-Fields）"><a href="#私有属性（Private-Fields）" class="headerlink" title="私有属性（Private Fields）"></a>私有属性（Private Fields）</h3><p>JavaBean 的属性通常是私有的（<code>private</code>），这意味着它们不能直接从类的外部访问。</p>
+<h3 id="公共的-getter-和-setter-方法"><a href="#公共的-getter-和-setter-方法" class="headerlink" title="公共的 getter 和 setter 方法"></a>公共的 getter 和 setter 方法</h3><p>为了访问和修改私有属性，JavaBean 提供了公共的 getter 和 setter 方法。这些方法的命名遵循特定的约定：</p>
+<p><strong>Getter 方法</strong>：用于获取属性的值。如果属性名为 <code>propertyName</code>，则 getter 方法通常命名为 <code>getPropertyName()</code>。如果属性是布尔类型，getter 方法可以命名为 <code>isPropertyName()</code>。</p>
+<p><strong>Setter 方法</strong>：用于设置属性的值。如果属性名为 <code>propertyName</code>，则 setter 方法通常命名为 <code>setPropertyName(Type value)</code>。</p>
+<h3 id="无参构造方法"><a href="#无参构造方法" class="headerlink" title="无参构造方法"></a>无参构造方法</h3><p>JavaBean 必须提供一个无参的公共构造方法（默认构造方法），以便可以通过反射机制实例化对象。</p>
+<h3 id="实现-Serializable-接口（可选）"><a href="#实现-Serializable-接口（可选）" class="headerlink" title="实现 Serializable 接口（可选）"></a>实现 <code>Serializable</code> 接口（可选）</h3><p>为了支持序列化和反序列化，JavaBean 可以实现 <code>java.io.Serializable</code> 接口。</p>
+<h3 id="选择合适的数据类型"><a href="#选择合适的数据类型" class="headerlink" title="选择合适的数据类型"></a>选择合适的数据类型</h3><ul>
+<li><strong>基本数据类型</strong>：适用于不需要表示 <code>null</code> 值的场景，性能更好，代码更简洁。</li>
+<li><strong>包装类</strong>：适用于需要表示 <code>null</code> 值的场景，例如数据库操作或集合类。</li>
+</ul>
+<p>在实际开发中，选择使用基本数据类型还是包装类取决于具体的需求和场景。如果不需要表示 <code>null</code> 值，并且性能是一个关键因素，建议使用基本数据类型。如果需要表示 <code>null</code> 值，或者需要将属性存储在集合中，建议使用包装类。</p>
+<h3 id="关键点总结"><a href="#关键点总结" class="headerlink" title="关键点总结"></a>关键点总结</h3><p><strong>私有属性</strong>：属性通常是私有的，以封装数据。</p>
+<p><strong>Getter 和 Setter 方法</strong>：提供公共的 getter 和 setter 方法来访问和修改私有属性。</p>
+<p><strong>无参构造方法</strong>：提供一个无参的公共构造方法，以便可以通过反射机制实例化对象。</p>
+<p><strong>实现 <code>Serializable</code> 接口</strong>（可选）：为了支持序列化和反序列化，可以实现 <code>Serializable</code> 接口。</p>
+<h2 id="死锁及产生死锁的原因，应如何避免"><a href="#死锁及产生死锁的原因，应如何避免" class="headerlink" title="死锁及产生死锁的原因，应如何避免"></a>死锁及产生死锁的原因，应如何避免</h2><h3 id="死锁（Deadlock）"><a href="#死锁（Deadlock）" class="headerlink" title="死锁（Deadlock）"></a>死锁（Deadlock）</h3><p><strong>死锁</strong>是指两个或多个线程在等待彼此释放资源的情况下，永远无法继续执行的状态。死锁是并发编程中常见的问题，通常发生在多个线程需要竞争多个资源时。</p>
+<h3 id="死锁的四个必要条件"><a href="#死锁的四个必要条件" class="headerlink" title="死锁的四个必要条件"></a>死锁的四个必要条件</h3><p>死锁的发生需要满足以下四个必要条件：</p>
+<ol>
+<li><p><strong>互斥条件（Mutual Exclusion）</strong>：</p>
+<p>至少有一个资源必须处于非共享模式，即一次只能被一个线程使用。如果另一个线程请求该资源，请求线程必须等待。</p>
+</li>
+<li><p><strong>占有并等待（Hold and Wait）</strong>：</p>
+<p>一个线程必须占有至少一个资源，并且正在等待获取其他线程占有的资源。</p>
+</li>
+<li><p><strong>不可抢占（No Preemption）</strong>：</p>
+<p>资源不能被强制从占有它的线程中抢占，只能由占有它的线程显式释放。</p>
+</li>
+<li><p><strong>循环等待（Circular Wait）</strong>：</p>
+<p>存在一组等待线程，形成一个循环链，每个线程都在等待链中下一个线程占有的资源。</p>
+</li>
+</ol>
+<h3 id="死锁的原因"><a href="#死锁的原因" class="headerlink" title="死锁的原因"></a>死锁的原因</h3><p>死锁通常由以下原因引起：</p>
+<ol>
+<li><p><strong>资源竞争</strong>：</p>
+<p>多个线程需要竞争多个资源，而这些资源被不同的线程占有。</p>
+</li>
+<li><p><strong>资源请求顺序不当</strong>：</p>
+<p>线程请求资源的顺序不当，导致循环等待。例如，线程 A 占有资源 1 并请求资源 2，而线程 B 占有资源 2 并请求资源 1。</p>
+</li>
+<li><p><strong>资源分配不当</strong>：</p>
+<p>资源分配策略不当，导致某些线程长时间占有资源，而其他线程无法获取所需资源。</p>
+</li>
+</ol>
+<h3 id="如何避免死锁"><a href="#如何避免死锁" class="headerlink" title="如何避免死锁"></a>如何避免死锁</h3><p>避免死锁的方法主要包括以下几种：</p>
+<ol>
+<li><p><strong>破坏互斥条件</strong>：</p>
+<p>尽量避免使用非共享资源。如果资源可以共享，则不会发生死锁。</p>
+</li>
+<li><p><strong>破坏占有并等待条件</strong>：</p>
+<p>一次性请求所有需要的资源。如果线程在开始执行前请求所有需要的资源，并且在所有资源都可用之前不执行，则可以避免占有并等待条件。</p>
+</li>
+<li><p><strong>破坏不可抢占条件</strong>：</p>
+<p>允许资源被抢占。如果资源可以被强制从占有它的线程中抢占，则可以避免死锁。</p>
+</li>
+<li><p><strong>破坏循环等待条件</strong>：<br>对资源进行排序，并强制线程按照相同的顺序请求资源。如果所有线程都按照相同的顺序请求资源，则不会形成循环等待。</p>
+</li>
+</ol>
+<h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例"></a>示例</h3><p>以下是一个简单的死锁示例：</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DeadlockExample</span> {</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Object</span> <span class="variable">resource1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Object</span>();</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Object</span> <span class="variable">resource2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Object</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> {</span><br><span class="line">        <span class="type">Thread</span> <span class="variable">thread1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; {</span><br><span class="line">            <span class="keyword">synchronized</span> (resource1) {</span><br><span class="line">                System.out.println(<span class="string">"Thread 1: Holding resource 1..."</span>);</span><br><span class="line">                <span class="keyword">try</span> { Thread.sleep(<span class="number">100</span>); } <span class="keyword">catch</span> (InterruptedException e) {}</span><br><span class="line">                System.out.println(<span class="string">"Thread 1: Waiting for resource 2..."</span>);</span><br><span class="line">                <span class="keyword">synchronized</span> (resource2) {</span><br><span class="line">                    System.out.println(<span class="string">"Thread 1: Holding resource 1 and 2..."</span>);</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        });</span><br><span class="line"></span><br><span class="line">        <span class="type">Thread</span> <span class="variable">thread2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; {</span><br><span class="line">            <span class="keyword">synchronized</span> (resource2) {</span><br><span class="line">                System.out.println(<span class="string">"Thread 2: Holding resource 2..."</span>);</span><br><span class="line">                <span class="keyword">try</span> { Thread.sleep(<span class="number">100</span>); } <span class="keyword">catch</span> (InterruptedException e) {}</span><br><span class="line">                System.out.println(<span class="string">"Thread 2: Waiting for resource 1..."</span>);</span><br><span class="line">                <span class="keyword">synchronized</span> (resource1) {</span><br><span class="line">                    System.out.println(<span class="string">"Thread 2: Holding resource 1 and 2..."</span>);</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        });</span><br><span class="line"></span><br><span class="line">        thread1.start();</span><br><span class="line">        thread2.start();</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>在这个示例中，<code>thread1</code> 和 <code>thread2</code> 分别占有 <code>resource1</code> 和 <code>resource2</code>，并试图获取对方的资源，从而形成死锁。</p>
+<h3 id="避免死锁的示例"><a href="#避免死锁的示例" class="headerlink" title="避免死锁的示例"></a>避免死锁的示例</h3><p>通过破坏循环等待条件，可以避免死锁：</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DeadlockAvoidanceExample</span> {</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Object</span> <span class="variable">resource1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Object</span>();</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Object</span> <span class="variable">resource2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Object</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> {</span><br><span class="line">        <span class="type">Thread</span> <span class="variable">thread1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; {</span><br><span class="line">            <span class="keyword">synchronized</span> (resource1) {</span><br><span class="line">                System.out.println(<span class="string">"Thread 1: Holding resource 1..."</span>);</span><br><span class="line">                <span class="keyword">try</span> { Thread.sleep(<span class="number">100</span>); } <span class="keyword">catch</span> (InterruptedException e) {}</span><br><span class="line">                System.out.println(<span class="string">"Thread 1: Waiting for resource 2..."</span>);</span><br><span class="line">                <span class="keyword">synchronized</span> (resource2) {</span><br><span class="line">                    System.out.println(<span class="string">"Thread 1: Holding resource 1 and 2..."</span>);</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        });</span><br><span class="line"></span><br><span class="line">        <span class="type">Thread</span> <span class="variable">thread2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; {</span><br><span class="line">            <span class="keyword">synchronized</span> (resource1) {  <span class="comment">// 先请求 resource1</span></span><br><span class="line">                System.out.println(<span class="string">"Thread 2: Holding resource 1..."</span>);</span><br><span class="line">                <span class="keyword">try</span> { Thread.sleep(<span class="number">100</span>); } <span class="keyword">catch</span> (InterruptedException e) {}</span><br><span class="line">                System.out.println(<span class="string">"Thread 2: Waiting for resource 2..."</span>);</span><br><span class="line">                <span class="keyword">synchronized</span> (resource2) {</span><br><span class="line">                    System.out.println(<span class="string">"Thread 2: Holding resource 1 and 2..."</span>);</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        });</span><br><span class="line"></span><br><span class="line">        thread1.start();</span><br><span class="line">        thread2.start();</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>在这个示例中，<code>thread2</code> 先请求 <code>resource1</code>，再请求 <code>resource2</code>，从而避免了循环等待。</p>
+<h3 id="总结-3"><a href="#总结-3" class="headerlink" title="总结"></a>总结</h3><p>死锁是并发编程中常见的问题，通常由资源竞争、资源请求顺序不当和资源分配不当引起。避免死锁的方法包括破坏互斥条件、占有并等待条件、不可抢占条件和循环等待条件。通过合理设计资源请求顺序和资源分配策略，可以有效避免死锁的发生。</p>
+<h2 id="TCP协议中的三次握手和四次挥手"><a href="#TCP协议中的三次握手和四次挥手" class="headerlink" title="TCP协议中的三次握手和四次挥手"></a>TCP协议中的三次握手和四次挥手</h2><p>三次握手:</p>
+<ul>
+<li>第一次握手，客户端向服务器端发出连接请求，等待服务器确认。</li>
+<li>第二次握手，服务器端向客户端回送一个响应，通知客户端收到了连接请求。</li>
+<li>第三次握手，客户端再次向服务器端发送确认信息，确认连接。</li>
+</ul>
+<p>四次挥手:</p>
+<ul>
+<li>第一次挥手：客户端向</li>
+<li>服务器端提出结束连接，让服务器做最后的准备工作。此时，客户端处于半关闭状态，即表示不再向服务器发送数据了，但是还可以接受数据。</li>
+<li>第二次挥手：服务器接收到客户端释放连接的请求后，会将最后的数据发给客户端。并告知上层的应用进程不再接收数据。</li>
+<li>第三次挥手：服务器发送完数据后，会给客户端发送一个释放连接的报文。那么客户端接收后就知道可以正式释放连接了。</li>
+<li>第四次挥手：客户端接收到服务器最后的释放连接报文后，要回复一个彻底断开的报文。这样服务器收到后才会彻底释放连接。这里客户端，发送完最后的报文后，会等待2MSL，因为有可能服务器没有收到最后的报文，那么服务器迟迟没收到，就会再次给客户端发送释放连接的报文，此时客户端在等待时间范围内接收到，会重新发送最后的报文，并重新计时。如果等待2MSL后，没有收到，那么彻底断开。</li>
+</ul>
+<h2 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><p>时间复杂度（Time Complexity）是算法分析中的一个重要概念，用于衡量算法在输入规模增大时所需执行时间的增长趋势。时间复杂度通常用大 O 表示法（Big O Notation）来表示，它描述了算法在最坏情况下的执行时间与输入规模之间的关系。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/20/66ed6760beca4.png" alt="image-20240920201450963"></p>
+<h3 id="常见的时间复杂度"><a href="#常见的时间复杂度" class="headerlink" title="常见的时间复杂度"></a>常见的时间复杂度</h3><p>以下是一些常见的时间复杂度及其对应的算法性能：</p>
+<ol>
+<li><p><strong>O(1) - 常数时间复杂度</strong>：</p>
+<ul>
+<li>算法的执行时间与输入规模无关，无论输入规模如何增大，执行时间都是固定的。</li>
+<li>例如：访问数组中的某个元素、插入/删除链表中的某个节点。</li>
+</ul>
+</li>
+<li><p><strong>O(log n) - 对数时间复杂度</strong>：</p>
+<ul>
+<li>算法的执行时间随输入规模的增大而增长，但增长速度较慢，通常是对数级别的增长。</li>
+<li>例如：二分查找（Binary Search）。</li>
+</ul>
+</li>
+<li><p><strong>O(n) - 线性时间复杂度</strong>：</p>
+<ul>
+<li>算法的执行时间与输入规模成正比，输入规模增大一倍，执行时间也增大一倍。</li>
+<li>例如：遍历数组、线性查找（Linear Search）。</li>
+</ul>
+</li>
+<li><p><strong>O(n log n) - 线性对数时间复杂度</strong>：</p>
+<ul>
+<li>算法的执行时间介于线性和平方之间，通常是一些高效排序算法的时间复杂度。</li>
+<li>例如：快速排序（Quick Sort）、归并排序（Merge Sort）。</li>
+</ul>
+</li>
+<li><p><strong>O(n^2) - 平方时间复杂度</strong>：</p>
+<ul>
+<li>算法的执行时间与输入规模的平方成正比，输入规模增大一倍，执行时间增大四倍。</li>
+<li>例如：冒泡排序（Bubble Sort）、选择排序（Selection Sort）。</li>
+</ul>
+</li>
+<li><p><strong>O(n^3) - 立方时间复杂度</strong>：</p>
+<ul>
+<li>算法的执行时间与输入规模的立方成正比，输入规模增大一倍，执行时间增大八倍。</li>
+<li>例如：矩阵乘法。</li>
+</ul>
+</li>
+<li><p><strong>O(2^n) - 指数时间复杂度</strong>：</p>
+<ul>
+<li>算法的执行时间随输入规模的增大呈指数级增长，通常是一些暴力搜索算法的时间复杂度。</li>
+<li>例如：求解旅行商问题（TSP）的暴力解法。</li>
+</ul>
+</li>
+<li><p><strong>O(n!) - 阶乘时间复杂度</strong>：</p>
+<ul>
+<li>算法的执行时间随输入规模的增大呈阶乘级增长，通常是一些组合问题的暴力解法。</li>
+<li>例如：求解全排列问题的暴力解法。</li>
+</ul>
+</li>
+</ol>
+<h3 id="如何计算时间复杂度"><a href="#如何计算时间复杂度" class="headerlink" title="如何计算时间复杂度"></a>如何计算时间复杂度</h3><p>计算时间复杂度通常需要分析算法中的基本操作次数，并找出其与输入规模之间的关系。以下是一些常见的计算方法：</p>
+<ol>
+<li><p><strong>循环结构</strong>：</p>
+<ul>
+<li>单层循环的时间复杂度通常为 O(n)。</li>
+<li>嵌套循环的时间复杂度通常为 O(n^k)，其中 k 是循环的层数。</li>
+</ul>
+</li>
+<li><p><strong>递归结构</strong>：</p>
+<ul>
+<li>递归算法的时间复杂度通常需要通过递归关系式来求解，例如使用主定理（Master Theorem）。</li>
+</ul>
+</li>
+<li><p><strong>分治法</strong>：</p>
+<ul>
+<li>分治法的时间复杂度通常可以通过递归关系式来求解，例如归并排序的时间复杂度为 O(n log n)。</li>
+</ul>
+</li>
+</ol>
+<h3 id="总结-4"><a href="#总结-4" class="headerlink" title="总结"></a>总结</h3><p>时间复杂度是衡量算法性能的重要指标，它描述了算法在最坏情况下的执行时间与输入规模之间的关系。了解常见的时间复杂度及其对应的算法性能，有助于选择合适的算法来解决问题，并优化算法的执行效率。</p>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://blog.shiguang666.eu.org">時光</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://blog.shiguang666.eu.org/2024/09/16/3983fcb07793/">https://blog.shiguang666.eu.org/2024/09/16/3983fcb07793/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.shiguang666.eu.org" target="_blank">時光</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/JAVA/">JAVA</a><a class="post-meta__tags" href="/tags/%E9%9D%A2%E8%AF%95/">面试</a></div><div class="post_share"><div class="social-share" data-image="https://img.shiguangdev.cn/i/2024/10/18/671251e13b5a1.png" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer=""></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>赞助</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/wechat.png" alt="微信"></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/alipay.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/alipay.png" alt="支付宝"></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/09/16/277ab91cb5a0/" title="【尚硅谷】JAVA基础-多线程"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">【尚硅谷】JAVA基础-多线程</div></div></a></div><div class="next-post pull-right"><a href="/2024/09/16/a32606420cb2/" title="【尚硅谷】JAVA基础-API"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">【尚硅谷】JAVA基础-API</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2023/03/28/357620dd47a4/" title="java替换第N次出现的字符串"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/10/18/67125168b4f6a.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-28</div><div class="title">java替换第N次出现的字符串</div></div></a></div><div><a href="/2024/09/16/a32606420cb2/" title="【尚硅谷】JAVA基础-API"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-09-16</div><div class="title">【尚硅谷】JAVA基础-API</div></div></a></div><div><a href="/2024/09/17/56a6db38519d/" title="【尚硅谷】JAVA基础-IO流"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-09-17</div><div class="title">【尚硅谷】JAVA基础-IO流</div></div></a></div><div><a href="/2024/09/17/ef5bcf52c331/" title="【尚硅谷】JAVA基础-JDK新特性"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-09-17</div><div class="title">【尚硅谷】JAVA基础-JDK新特性</div></div></a></div><div><a href="/2024/09/16/277ab91cb5a0/" title="【尚硅谷】JAVA基础-多线程"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-09-16</div><div class="title">【尚硅谷】JAVA基础-多线程</div></div></a></div><div><a href="/2024/09/16/fadbedc8dc87/" title="【尚硅谷】JAVA基础-异常&amp;Object"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-09-16</div><div class="title">【尚硅谷】JAVA基础-异常&amp;Object</div></div></a></div></div></div><hr class="custom-hr"><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div class="comment-switch"><span class="first-comment">Twikoo</span><span id="switch-btn"></span><span class="second-comment">Valine</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"></div><div class="author-info__name">時光</div><div class="author-info__description">心寄朗朗乾坤，胸怀真修之道。</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">214</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">179</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">16</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/shiguang-coding"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/shiguang-coding" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:an_shiguang@163.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎光临時光的博客园子🎉🎉<br>https://blog.shiguang666.eu.org<br>https://blog.shiguang88.icu<br>https://blog.shiguangdev.cn<br></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#StringBuilder%E4%B8%8EStringBuffer%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.</span> <span class="toc-text">StringBuilder与StringBuffer的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E6%80%A7"><span class="toc-number">1.1.</span> <span class="toc-text">1. 线程安全性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%80%A7%E8%83%BD"><span class="toc-number">1.2.</span> <span class="toc-text">2. 性能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">1.3.</span> <span class="toc-text">3. 使用场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-API-%E5%85%BC%E5%AE%B9%E6%80%A7"><span class="toc-number">1.4.</span> <span class="toc-text">4. API 兼容性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">1.5.</span> <span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E6%8B%86%E7%AE%B1%E4%B8%8E%E8%87%AA%E5%8A%A8%E8%A3%85%E7%AE%B1"><span class="toc-number">2.</span> <span class="toc-text">自动拆箱与自动装箱</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E8%A3%85%E7%AE%B1%EF%BC%88Autoboxing%EF%BC%89"><span class="toc-number">2.1.</span> <span class="toc-text">自动装箱（Autoboxing）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B"><span class="toc-number">2.1.1.</span> <span class="toc-text">示例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E6%8B%86%E7%AE%B1%EF%BC%88Unboxing%EF%BC%89"><span class="toc-number">2.2.</span> <span class="toc-text">自动拆箱（Unboxing）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B-1"><span class="toc-number">2.2.1.</span> <span class="toc-text">示例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">2.3.</span> <span class="toc-text">使用场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-number">2.4.</span> <span class="toc-text">注意事项</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93-1"><span class="toc-number">2.5.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E6%88%98%E6%BC%94%E7%BB%83"><span class="toc-number">2.6.</span> <span class="toc-text">实战演练</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E8%A3%85%E7%AE%B1%E5%92%8C%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6"><span class="toc-number">2.6.1.</span> <span class="toc-text">自动装箱和缓存机制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E5%88%86%E6%9E%90"><span class="toc-number">2.6.2.</span> <span class="toc-text">具体分析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E7%BB%93%E6%9E%9C"><span class="toc-number">2.6.3.</span> <span class="toc-text">输出结果</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%BB%E7%BB%93-2"><span class="toc-number">2.6.4.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9B%E4%B8%80%E6%AD%A5%E8%A7%A3%E9%87%8A"><span class="toc-number">2.6.5.</span> <span class="toc-text">进一步解释</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%AE%9A%E4%B9%89%E4%B8%80%E4%B8%AA%E6%A0%87%E5%87%86javabean"><span class="toc-number">3.</span> <span class="toc-text">如何定义一个标准javabean</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A7%81%E6%9C%89%E5%B1%9E%E6%80%A7%EF%BC%88Private-Fields%EF%BC%89"><span class="toc-number">3.1.</span> <span class="toc-text">私有属性（Private Fields）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AC%E5%85%B1%E7%9A%84-getter-%E5%92%8C-setter-%E6%96%B9%E6%B3%95"><span class="toc-number">3.2.</span> <span class="toc-text">公共的 getter 和 setter 方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A0%E5%8F%82%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95"><span class="toc-number">3.3.</span> <span class="toc-text">无参构造方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0-Serializable-%E6%8E%A5%E5%8F%A3%EF%BC%88%E5%8F%AF%E9%80%89%EF%BC%89"><span class="toc-number">3.4.</span> <span class="toc-text">实现 Serializable 接口（可选）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E5%90%88%E9%80%82%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">3.5.</span> <span class="toc-text">选择合适的数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E7%82%B9%E6%80%BB%E7%BB%93"><span class="toc-number">3.6.</span> <span class="toc-text">关键点总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%BB%E9%94%81%E5%8F%8A%E4%BA%A7%E7%94%9F%E6%AD%BB%E9%94%81%E7%9A%84%E5%8E%9F%E5%9B%A0%EF%BC%8C%E5%BA%94%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D"><span class="toc-number">4.</span> <span class="toc-text">死锁及产生死锁的原因，应如何避免</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%BB%E9%94%81%EF%BC%88Deadlock%EF%BC%89"><span class="toc-number">4.1.</span> <span class="toc-text">死锁（Deadlock）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%BB%E9%94%81%E7%9A%84%E5%9B%9B%E4%B8%AA%E5%BF%85%E8%A6%81%E6%9D%A1%E4%BB%B6"><span class="toc-number">4.2.</span> <span class="toc-text">死锁的四个必要条件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%BB%E9%94%81%E7%9A%84%E5%8E%9F%E5%9B%A0"><span class="toc-number">4.3.</span> <span class="toc-text">死锁的原因</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E6%AD%BB%E9%94%81"><span class="toc-number">4.4.</span> <span class="toc-text">如何避免死锁</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B-2"><span class="toc-number">4.5.</span> <span class="toc-text">示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%81%BF%E5%85%8D%E6%AD%BB%E9%94%81%E7%9A%84%E7%A4%BA%E4%BE%8B"><span class="toc-number">4.6.</span> <span class="toc-text">避免死锁的示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93-3"><span class="toc-number">4.7.</span> <span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP%E5%8D%8F%E8%AE%AE%E4%B8%AD%E7%9A%84%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E5%92%8C%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B"><span class="toc-number">5.</span> <span class="toc-text">TCP协议中的三次握手和四次挥手</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="toc-number">6.</span> <span class="toc-text">时间复杂度</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="toc-number">6.1.</span> <span class="toc-text">常见的时间复杂度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E8%AE%A1%E7%AE%97%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="toc-number">6.2.</span> <span class="toc-text">如何计算时间复杂度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93-4"><span class="toc-number">6.3.</span> <span class="toc-text">总结</span></a></li></ol></li></ol></div></div><div class="card-widget card-post-series"><div class="item-headline"><i class="fa-solid fa-layer-group"></i><span>系列文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/09/16/3983fcb07793/" title="【面试题】JAVA面试题之大杂烩篇"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/10/18/671251e13b5a1.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【面试题】JAVA面试题之大杂烩篇"></a><div class="content"><a class="title" href="/2024/09/16/3983fcb07793/" title="【面试题】JAVA面试题之大杂烩篇">【面试题】JAVA面试题之大杂烩篇</a><time datetime="2024-09-16T06:13:42.000Z" title="发表于 2024-09-16 14:13:42">2024-09-16</time></div></div></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/10/18/a2cc0b63066f/" title="Hexo博客自动生成AI摘要"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/10/17/6710c62cac4e6.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hexo博客自动生成AI摘要"></a><div class="content"><a class="title" href="/2024/10/18/a2cc0b63066f/" title="Hexo博客自动生成AI摘要">Hexo博客自动生成AI摘要</a><time datetime="2024-10-18T09:41:41.000Z" title="发表于 2024-10-18 17:41:41">2024-10-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/10/18/b1d78a79cbfb/" title="蓝空图床上传失败问题排查"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/10/18/67120e3f9201f.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="蓝空图床上传失败问题排查"></a><div class="content"><a class="title" href="/2024/10/18/b1d78a79cbfb/" title="蓝空图床上传失败问题排查">蓝空图床上传失败问题排查</a><time datetime="2024-10-18T06:50:32.000Z" title="发表于 2024-10-18 14:50:32">2024-10-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/10/15/6b65681b29d7/" title="批量备份迁移Markdown文件中的图片解决方案"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/10/15/670e7bd0e5b0e.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="批量备份迁移Markdown文件中的图片解决方案"></a><div class="content"><a class="title" href="/2024/10/15/6b65681b29d7/" title="批量备份迁移Markdown文件中的图片解决方案">批量备份迁移Markdown文件中的图片解决方案</a><time datetime="2024-10-15T06:34:27.000Z" title="发表于 2024-10-15 14:34:27">2024-10-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/10/15/0410596602c9/" title="error: src refspec main does not match any"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/10/15/670e7c73d294a.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="error: src refspec main does not match any"></a><div class="content"><a class="title" href="/2024/10/15/0410596602c9/" title="error: src refspec main does not match any">error: src refspec main does not match any</a><time datetime="2024-10-15T06:09:56.000Z" title="发表于 2024-10-15 14:09:56">2024-10-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/10/15/bdc2992e0b08/" title="Failed to connect to github.com port 443 after 21042 ms: Couldn't connect to server"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/10/15/670e7cef8dd22.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Failed to connect to github.com port 443 after 21042 ms: Couldn't connect to server"></a><div class="content"><a class="title" href="/2024/10/15/bdc2992e0b08/" title="Failed to connect to github.com port 443 after 21042 ms: Couldn't connect to server">Failed to connect to github.com port 443 after 21042 ms: Couldn't connect to server</a><time datetime="2024-10-15T03:55:30.000Z" title="发表于 2024-10-15 11:55:30">2024-10-15</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://img.shiguangdev.cn/i/2024/10/18/671251e13b5a1.png')"><div id="footer-wrap"><div class="copyright">©2023 - 2024 By 時光</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text"><a href="https://icp.gov.moe/?keyword=20246626" target="_blank"><img class="icp-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/10/18/6712525ee948c.png"><span>萌ICP备20246626号</span></a>,<a href="https://www.travellings.cn/go.html" target="_blank"><img class="icp-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/10/18/671252762fd82.png"><span>随机开往</span></a>,<a style="text-decoration:none;" href="https://travel.moe/go.html?travel=on " title="异次元之旅-跃迁-我们一起去萌站成员的星球旅行吧！" target="_blank"><img class="icp-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/10/18/6712528b22dd7.png"><span>异次元之旅</span></a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="chat-btn" type="button" title="聊天"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"><script>(() => {
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo.shiguangdev.eu.org',
+      region: '',
+      onCommentLoaded: () => {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') setTimeout(init,0)
+    else getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(init)
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo.shiguangdev.eu.org',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(res => {
+      countELement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else {
+      loadTwikoo()
+      GLOBAL_CONFIG_SITE.isPost && getCount()
+    }
+  } else {
+    window.loadOtherComment = loadTwikoo
+  }
+})()</script><script>(() => {
+  const initValine = () => {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'dx3B54wOwhi75vxC2IAZagtg-gzGzoHsz',
+      appKey: 'm4k2fhnFa1iPI4vbofHqMY5X',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: false
+    }, null))
+  }
+
+  const loadValine = async () => {
+    if (typeof Valine === 'function') initValine()
+    else {
+      await getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js')
+      initValine()
+    }
+  }
+
+  if ('Twikoo' === 'Valine' || !true) {
+    if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+    else setTimeout(loadValine, 0)
+  } else {
+    window.loadOtherComment = loadValine
+  }
+})()</script></div><div class="aplayer no-destroy" data-id="10051718332" data-server="netease" data-type="playlist" data-order="list" data-fixed="true" data-preload="auto" data-autoplay="false" data-mutex="true"></div><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="true"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script async="" data-pjax="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"></div></div><hr><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div><!-- hexo injector body_end start -->
+  <script data-pjax="" src="/js/hexo_githubcalendar.js"></script>
+  <script data-pjax="">
+        function GithubCalendarConfig(){
+            var git_githubapiurl ="https://githubcalendarapi.shiguang666.eu.org/api?user=shiguang-coding";
+            var git_color =['#ebedf0', '#a2f7af', '#6ce480', '#54ad63', '#469252', '#31753c', '#1f5f2a', '#13531f', '#084111', '#032b09', '#000000'];
+            var git_user ="shiguang-coding";
+            var parent_div_git = document.getElementById('recent-posts');
+            var git_div_html = '<div class="recent-post-item" style="width:100%;height:auto;padding:10px;"><div id="github_loading" style="width:10%;height:100%;margin:0 auto;display: block"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animateTransform></path></svg></div><div id="github_container"></div></div>';
+            if(parent_div_git && location.pathname =='/'){
+                console.log("已挂载hexo-github-calendar https://github.com/Barry-Flynn/hexo-github-calendar");
+                // parent_div_git.innerHTML=git_div_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",git_div_html) // 有报错，但不影响使用(支持pjax跳转)
+            };
+            GithubCalendar(git_githubapiurl,git_color,git_user)
+        }
+        if(document.getElementById('recent-posts')){
+            GithubCalendarConfig()
+        }
+    </script>
+    <style>#github_container{min-height:280px}@media screen and (max-width:650px) {#github_container{background-image:;min-height:0px}}</style>
+    <style></style><!-- hexo injector body_end end -->
+    <link rel="stylesheet" href="https://ai.tianli0.top/static/public/postChatUser_summary.min.css">
+    <script>
+        let tianliGPT_key = 'd5bf7262da0ef66e8635';
+        let tianliGPT_postSelector = '#article-container';
+        let tianliGPT_Title = '文章摘要';
+        let tianliGPT_postURL = '/^https?://[^/]+/[0-9]{4}/[0-9]{2}/[0-9]{2}/';
+        let tianliGPT_blacklist = '';
+        let tianliGPT_wordLimit = '1000';
+        let tianliGPT_typingAnimate = true;
+        var postChatConfig = {
+          backgroundColor: "#3e86f6",
+          bottom: "16px",
+          left: "16px",
+          fill: "#FFFFFF",
+          width: "44px",
+          frameWidth: "375px",
+          frameHeight: "600px",
+          defaultInput: true,
+          upLoadWeb: true,
+          showInviteLink: true,
+          userTitle: "PostChat",
+          userDesc: "如果你对网站的内容有任何疑问，可以来问我哦～",
+          addButton: true,
+          beginningText: "这篇文章介绍了"
+        };
+    </script>
+    <script data-postchat_key="d5bf7262da0ef66e8635" src="https://ai.tianli0.top/static/public/tianli_gpt.min.js"></script>
+  </body></html>

@@ -1,0 +1,1567 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>時光导航站 | 時光</title><meta name="author" content="時光"><meta name="copyright" content="時光"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="开发社区                                                                                       CSDN                中国最大的IT社区和服务平台，提供技术文章、论坛、博客等服务。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="時光导航站">
+<meta property="og:url" content="https://blog.shiguang666.eu.org/navigate/index.html">
+<meta property="og:site_name" content="時光">
+<meta property="og:description" content="开发社区                                                                                       CSDN                中国最大的IT社区和服务平台，提供技术文章、论坛、博客等服务。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img.shiguangdev.cn/i/2024/10/18/67125168b4f6a.png">
+<meta property="article:published_time" content="2024-05-08T05:33:40.000Z">
+<meta property="article:modified_time" content="2024-10-18T13:38:03.615Z">
+<meta property="article:author" content="時光">
+<meta property="article:tag" content="博客,時光,時光的博客,時光博客园子,实用博客,开源,共享">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.shiguangdev.cn/i/2024/10/18/67125168b4f6a.png"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://blog.shiguang666.eu.org/navigate/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""><link rel="preconnect" href="//busuanzi.ibruce.info"><meta name="baidu-site-verification" content="codeva-DpB1dzOUDd"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: 時光","link":"链接: ","source":"来源: 時光","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '時光导航站',
+  isPost: false,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2024-10-18 21:38:03'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="時光" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load',() => { preloader.endLoading() })
+
+  if (false) {
+    document.addEventListener('pjax:send', () => { preloader.initLoading() })
+    document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+  }
+})()</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">214</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">179</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">16</div></a></div><hr class="custom-hr"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://www.shiguang666.eu.org/"><i class="fa-fw fas fa-id-card"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-book"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/random.html"><i class="fa-fw fas fa-random"></i><span> 随机</span></a></li><li><a class="site-page child" href="/atom.xml"><i class="fa-fw fa fa-rss"></i><span> RSS</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa-solid fa-flask"></i><span> 实验室</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" target="_blank" rel="noopener" href="https://nav.shiguang666.eu.org/"><i class="fa-fw fas fa-paper-plane"></i><span> 导航</span></a></li><li><a class="site-page child" href="/news"><i class="fa-fw fa fa-calendar"></i><span> 每日早报</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://qexo.shiguang666.eu.org/"><i class="fa-fw fas fa-q"></i><span> Hexo管理面板</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://games.shiguang666.eu.org"><i class="fa-fw fa-solid fa-dragon"></i><span> 在线小游戏</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://game.shiguang666.eu.org"><i class="fa-fw fa-solid fa-headset"></i><span> 怀旧游戏机</span></a></li><li><a class="site-page child" href="/xjj/"><i class="fa-fw fa fa-rocket"></i><span> 随机小姐姐</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa-solid fa-user-group"></i><span> 友链</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/flink/"><i class="fa-fw fa-solid fa-user-tie"></i><span> 本站友链</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://www.travellings.cn/go.html"><i class="fa-fw fa fa-subway"></i><span> 随机开往</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://travel.moe/go.html?travel=on"><i class="fa-fw fa fa-taxi"></i><span> 异次元之旅</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://zhblogs.ohyee.cc/"><i class="fa-fw fa fa-motorcycle"></i><span> 列表导航</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/gallery/"><i class="fa-fw fas fa-solid fa-image"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fas fa-comments"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="not-home-page" id="page-header" style="background-image: url('/img/top_1.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="時光"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.png"><span class="site-name">時光</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://www.shiguang666.eu.org/"><i class="fa-fw fas fa-id-card"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-book"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/random.html"><i class="fa-fw fas fa-random"></i><span> 随机</span></a></li><li><a class="site-page child" href="/atom.xml"><i class="fa-fw fa fa-rss"></i><span> RSS</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa-solid fa-flask"></i><span> 实验室</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" target="_blank" rel="noopener" href="https://nav.shiguang666.eu.org/"><i class="fa-fw fas fa-paper-plane"></i><span> 导航</span></a></li><li><a class="site-page child" href="/news"><i class="fa-fw fa fa-calendar"></i><span> 每日早报</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://qexo.shiguang666.eu.org/"><i class="fa-fw fas fa-q"></i><span> Hexo管理面板</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://games.shiguang666.eu.org"><i class="fa-fw fa-solid fa-dragon"></i><span> 在线小游戏</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://game.shiguang666.eu.org"><i class="fa-fw fa-solid fa-headset"></i><span> 怀旧游戏机</span></a></li><li><a class="site-page child" href="/xjj/"><i class="fa-fw fa fa-rocket"></i><span> 随机小姐姐</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa-solid fa-user-group"></i><span> 友链</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/flink/"><i class="fa-fw fa-solid fa-user-tie"></i><span> 本站友链</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://www.travellings.cn/go.html"><i class="fa-fw fa fa-subway"></i><span> 随机开往</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://travel.moe/go.html?travel=on"><i class="fa-fw fa fa-taxi"></i><span> 异次元之旅</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://zhblogs.ohyee.cc/"><i class="fa-fw fa fa-motorcycle"></i><span> 列表导航</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/gallery/"><i class="fa-fw fas fa-solid fa-image"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fas fa-comments"></i><span> 留言</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="page-site-info"><h1 id="site-title">時光导航站</h1></div></header><main class="layout" id="content-inner"><div id="page"><div id="article-container"><div class="flink"><div class="flink-name">开发社区</div> <div class="flink-list">
+          <div class="flink-list-item">
+            <a href="https://www.csdn.net/" title="CSDN" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/07/11/668fa391f3c0e.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="CSDN">
+              </div>
+              <div class="flink-item-name">CSDN</div> 
+              <div class="flink-item-desc" title="中国最大的IT社区和服务平台，提供技术文章、论坛、博客等服务。">中国最大的IT社区和服务平台，提供技术文章、论坛、博客等服务。</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://www.cnblogs.com/" title="博客园" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/07/11/668fa3971d6fd.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="博客园">
+              </div>
+              <div class="flink-item-name">博客园</div> 
+              <div class="flink-item-desc" title="一个面向开发者的博客平台，提供技术文章和博客服务。">一个面向开发者的博客平台，提供技术文章和博客服务。</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://www.zhihu.com/" title="知乎" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/07/11/668fa3adf3e03.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="知乎">
+              </div>
+              <div class="flink-item-name">知乎</div> 
+              <div class="flink-item-desc" title="中文互联网高质量的问答社区和创作者聚集的原创内容平台。">中文互联网高质量的问答社区和创作者聚集的原创内容平台。</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://juejin.cn/" title="掘金" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/07/11/668fa3e75060f.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="掘金">
+              </div>
+              <div class="flink-item-name">掘金</div> 
+              <div class="flink-item-desc" title="面向开发者的技术社区，提供技术文章、问答、活动等。">面向开发者的技术社区，提供技术文章、问答、活动等。</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://www.oschina.net/" title="开源中国" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/07/11/668fa3d73b5d3.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="开源中国">
+              </div>
+              <div class="flink-item-name">开源中国</div> 
+              <div class="flink-item-desc" title="一个专注于为中国开发者提供最新开源资讯、软件更新资讯、技术分享和交流的技术平台。">一个专注于为中国开发者提供最新开源资讯、软件更新资讯、技术分享和交流的技术平台。</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://segmentfault.com/" title="思否" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/07/11/668fa3ff0937a.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="思否">
+              </div>
+              <div class="flink-item-name">思否</div> 
+              <div class="flink-item-desc" title="面向开发者的技术问答社区，提供文章、问答、活动等。">面向开发者的技术问答社区，提供文章、问答、活动等。</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://www.v2ex.com" title="V2EX" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/07/11/668fa40e680ff.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="V2EX">
+              </div>
+              <div class="flink-item-name">V2EX</div> 
+              <div class="flink-item-desc" title="一个关于分享和探索的地方，有许多与编程和开发相关的讨论。">一个关于分享和探索的地方，有许多与编程和开发相关的讨论。</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://stackoverflow.co/" title="Stack Overflow" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/07/11/668fa3c2f1552.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="Stack Overflow">
+              </div>
+              <div class="flink-item-name">Stack Overflow</div> 
+              <div class="flink-item-desc" title="面向程序员的问答社区，提供编程问题的解答。">面向程序员的问答社区，提供编程问题的解答。</div>
+            </a>
+          </div></div><div class="flink-name">AI对话</div> <div class="flink-list">
+          <div class="flink-list-item">
+            <a href="https://chat.openai.com/" title="ChatGPT" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240508173801240-1295072689.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="ChatGPT">
+              </div>
+              <div class="flink-item-name">ChatGPT</div> 
+              <div class="flink-item-desc" title="ChatGPT是一款由OpenAI团队开发的聊天机器人程序，其对话能力近似于真人，甚至还可以完成画图、做视频、撰写邮件、翻译、写代码，写论文等各种任务，目前主要有GPT3.5和GPT4.0这两个版本">ChatGPT是一款由OpenAI团队开发的聊天机器人程序，其对话能力近似于真人，甚至还可以完成画图、做视频、撰写邮件、翻译、写代码，写论文等各种任务，目前主要有GPT3.5和GPT4.0这两个版本</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://tongyi.aliyun.com/" title="阿里通义千问" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240508165636321-57882754.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="阿里通义千问">
+              </div>
+              <div class="flink-item-name">阿里通义千问</div> 
+              <div class="flink-item-desc" title="通义千问，是阿里云推出的一个超大规模的语言模型，功能包括多轮对话、文案创作、逻辑推理、多模态理解、多语言支持。能够跟人类进行多轮的交互，也融入了多模态的知识理解，且有文案创作能力，能够续写小说，编写邮件等。">通义千问，是阿里云推出的一个超大规模的语言模型，功能包括多轮对话、文案创作、逻辑推理、多模态理解、多语言支持。能够跟人类进行多轮的交互，也融入了多模态的知识理解，且有文案创作能力，能够续写小说，编写邮件等。</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://www.coze.com/" title="字节Coze" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240508165814199-1614819019.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="字节Coze">
+              </div>
+              <div class="flink-item-name">字节Coze</div> 
+              <div class="flink-item-desc" title="Coze是由字节跳动在海外推出的一个AI聊天机器人和应用开发平台，专为开发下一代 AI 聊天机器人而设计。可以通过这个平台快速创建各种类型的聊天机器人，并将其发布到各类社交平台和通讯软件上。">Coze是由字节跳动在海外推出的一个AI聊天机器人和应用开发平台，专为开发下一代 AI 聊天机器人而设计。可以通过这个平台快速创建各种类型的聊天机器人，并将其发布到各类社交平台和通讯软件上。</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://chat.deepseek.com/" title="deepseek" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202406/2233039-20240606125749893-102590650.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="deepseek">
+              </div>
+              <div class="flink-item-name">deepseek</div> 
+              <div class="flink-item-desc" title="各大AI模型API购买，一个账号通用所有模型">各大AI模型API购买，一个账号通用所有模型</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://xinghuo.xfyun.cn/" title="讯飞星火" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240508165956012-1802377415.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="讯飞星火">
+              </div>
+              <div class="flink-item-name">讯飞星火</div> 
+              <div class="flink-item-desc" title="讯飞星火认知大模型，是由科大讯飞推出的新一代认知智能大模型，拥有跨领域的知识和语言理解能力，能够基于自然对话方式理解与执行任务，提供语言理解、知识问答、逻辑推理、数学题解答、代码理解与编写等多种能力。">讯飞星火认知大模型，是由科大讯飞推出的新一代认知智能大模型，拥有跨领域的知识和语言理解能力，能够基于自然对话方式理解与执行任务，提供语言理解、知识问答、逻辑推理、数学题解答、代码理解与编写等多种能力。</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://chat.baidu.com/" title="百度AI伙伴" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240508170207619-184305568.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="百度AI伙伴">
+              </div>
+              <div class="flink-item-name">百度AI伙伴</div> 
+              <div class="flink-item-desc" title="百度上线的搜索AI伙伴，用户可免费进行对话、A绘画和其他内容创作，百度搜索A伙伴是百度最新上线的基于文心大模型的AI搜索对话工具，目前处于免费测试中。申请了文心一言测试的用户可在桌面端百度网站或移动端的百度APP点击右上角的A图标，即可进入A聊天界面，或直接访问chat.baidu.com，使用前需要登录百度账号，且账号需要与申请了文心一言测试的账号一致。">百度上线的搜索AI伙伴，用户可免费进行对话、A绘画和其他内容创作，百度搜索A伙伴是百度最新上线的基于文心大模型的AI搜索对话工具，目前处于免费测试中。申请了文心一言测试的用户可在桌面端百度网站或移动端的百度APP点击右上角的A图标，即可进入A聊天界面，或直接访问chat.baidu.com，使用前需要登录百度账号，且账号需要与申请了文心一言测试的账号一致。</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://yiyan.baidu.com/" title="文心一言" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240508170325124-884981737.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="文心一言">
+              </div>
+              <div class="flink-item-name">文心一言</div> 
+              <div class="flink-item-desc" title="百度全新一代知识增强大语言模型，文心大模型家族的新成员，能够与人对话互动，回答问题，协助创作，高效便捷地帮助人们获取信息、知识和灵感。">百度全新一代知识增强大语言模型，文心大模型家族的新成员，能够与人对话互动，回答问题，协助创作，高效便捷地帮助人们获取信息、知识和灵感。</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://www.doubao.com/" title="豆包AI" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240508170441016-1312369879.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="豆包AI">
+              </div>
+              <div class="flink-item-name">豆包AI</div> 
+              <div class="flink-item-desc" title="豆包是基于抖音云雀模型开发，提供聊天机器人、写作助手以及英语学习助手等功能。">豆包是基于抖音云雀模型开发，提供聊天机器人、写作助手以及英语学习助手等功能。</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://chatglm.cn/" title="智谱清言" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240508170534739-1219832029.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="智谱清言">
+              </div>
+              <div class="flink-item-name">智谱清言</div> 
+              <div class="flink-item-desc" title="清华技术成果转化的公司智谱AI研发的支持中英双语的对话机器人。千亿参数对话模型，基于ChatGLM2模型开发，支持多轮对话，具备内容创作、信息归纳总结等能力。">清华技术成果转化的公司智谱AI研发的支持中英双语的对话机器人。千亿参数对话模型，基于ChatGLM2模型开发，支持多轮对话，具备内容创作、信息归纳总结等能力。</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://www.chatlaw.cloud/" title="ChatLaw法律大模型" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240508170923952-1328721393.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="ChatLaw法律大模型">
+              </div>
+              <div class="flink-item-name">ChatLaw法律大模型</div> 
+              <div class="flink-item-desc" title="由北大团队开发发布的中文法律大模型。">由北大团队开发发布的中文法律大模型。</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="http://zs.aidashi.cn/" title="AI大师助手" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240519234133636-1721011128.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="AI大师助手">
+              </div>
+              <div class="flink-item-name">AI大师助手</div> 
+              <div class="flink-item-desc" title="AI大师助手是一款免费AI对话、写作工具，主要是免费的，可以回答你的各种提问，帮你写文章、写剧本、写会议记录、写小红书风格文案等，还可以帮你写作论文。">AI大师助手是一款免费AI对话、写作工具，主要是免费的，可以回答你的各种提问，帮你写文章、写剧本、写会议记录、写小红书风格文案等，还可以帮你写作论文。</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://playground.ai.cloudflare.com/" title="Workers AI LLM Playground" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240519231321884-1099400969.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="Workers AI LLM Playground">
+              </div>
+              <div class="flink-item-name">Workers AI LLM Playground</div> 
+              <div class="flink-item-desc" title="一个AI聚合应用平台。">一个AI聚合应用平台。</div>
+            </a>
+          </div></div><div class="flink-name">AI搜索</div> <div class="flink-list">
+          <div class="flink-list-item">
+            <a href="https://www.perplexity.ai/" title="perplexity AI" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240515204830299-902634829.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="perplexity AI">
+              </div>
+              <div class="flink-item-name">perplexity AI</div> 
+              <div class="flink-item-desc" title="一款基于人工智能的搜索引擎平台，旨在帮助用户快速高效地获取所需信息。">一款基于人工智能的搜索引擎平台，旨在帮助用户快速高效地获取所需信息。</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://ying.baichuan-ai.com/" title="百小应" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202406/2233039-20240608214250251-566365135.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="百小应">
+              </div>
+              <div class="flink-item-name">百小应</div> 
+              <div class="flink-item-desc" title="由百川智能的工程师们创造的大语言模型。">由百川智能的工程师们创造的大语言模型。</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://so.chat.360.cn/" title="360AI搜索" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202406/2233039-20240608215013079-1822816283.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="360AI搜索">
+              </div>
+              <div class="flink-item-name">360AI搜索</div> 
+              <div class="flink-item-desc" title="360AI搜索是一款由360集团推出的创新性答案引擎。">360AI搜索是一款由360集团推出的创新性答案引擎。</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://tian-gong.net/" title="天工AI" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202406/2233039-20240608215147941-2037099129.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="天工AI">
+              </div>
+              <div class="flink-item-name">天工AI</div> 
+              <div class="flink-item-desc" title="一个由昆仑万维公司精心打造的人工智能助手。">一个由昆仑万维公司精心打造的人工智能助手。</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://yuanbao.tencent.com/" title="腾讯元宝" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202406/2233039-20240608215610692-10511757.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="腾讯元宝">
+              </div>
+              <div class="flink-item-name">腾讯元宝</div> 
+              <div class="flink-item-desc" title="一个由腾讯基于混元大模型研发的人工智能助手。">一个由腾讯基于混元大模型研发的人工智能助手。</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://hailuoai.com/" title="海螺AI" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202406/2233039-20240608220004262-834681911.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="海螺AI">
+              </div>
+              <div class="flink-item-name">海螺AI</div> 
+              <div class="flink-item-desc" title="上海稀宇科技有限公司（MiniMax）旗下的AI助理。">上海稀宇科技有限公司（MiniMax）旗下的AI助理。</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://thinkany.ai/" title="ThinkAny" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202406/2233039-20240608220407989-1388187542.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="ThinkAny">
+              </div>
+              <div class="flink-item-name">ThinkAny</div> 
+              <div class="flink-item-desc" title="ThinkAny AI公司开发的大型语言模型助手。">ThinkAny AI公司开发的大型语言模型助手。</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://kimi.moonshot.cn/" title="Kimi" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202406/2233039-20240608220738271-120964524.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="Kimi">
+              </div>
+              <div class="flink-item-name">Kimi</div> 
+              <div class="flink-item-desc" title="由月之暗面科技有限公司开发的人工智能助手。">由月之暗面科技有限公司开发的人工智能助手。</div>
+            </a>
+          </div></div><div class="flink-name">AI应用</div> <div class="flink-list">
+          <div class="flink-list-item">
+            <a href="https://bardpdf.dev/" title="bardpdf" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240519225227371-214648380.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="bardpdf">
+              </div>
+              <div class="flink-item-name">bardpdf</div> 
+              <div class="flink-item-desc" title="一款可以通过Gemini与PDF文件进行交流的工具。可以在Gemini中使用Google Workspace扩展，基于Google Docs或Google Drive中的文件进行对话。可以使用ChatPDF与任何PDF文件进行交流，具有更好的交互性、图形界面，并且可以根据指定文件进行对话，并查看相应的PDF文件源内容。">一款可以通过Gemini与PDF文件进行交流的工具。可以在Gemini中使用Google Workspace扩展，基于Google Docs或Google Drive中的文件进行对话。可以使用ChatPDF与任何PDF文件进行交流，具有更好的交互性、图形界面，并且可以根据指定文件进行对话，并查看相应的PDF文件源内容。</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://aium.cc/" title="AIUM" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202406/2233039-20240606125229870-1759050130.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="AIUM">
+              </div>
+              <div class="flink-item-name">AIUM</div> 
+              <div class="flink-item-desc" title="各大AI模型API购买，一个账号通用所有模型">各大AI模型API购买，一个账号通用所有模型</div>
+            </a>
+          </div></div><div class="flink-name">AI导航</div> <div class="flink-list">
+          <div class="flink-list-item">
+            <a href="https://www.aidashi.cn/" title="AI大师" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240508201143538-1549999869.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="AI大师">
+              </div>
+              <div class="flink-item-name">AI大师</div> 
+              <div class="flink-item-desc" title="一站式AI工具、AI资讯、AI教程分享网站！">一站式AI工具、AI资讯、AI教程分享网站！</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://www.aiyjs.com/" title="AI研究所" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240519234403024-263340249.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="AI研究所">
+              </div>
+              <div class="flink-item-name">AI研究所</div> 
+              <div class="flink-item-desc" title="收录 AI 相关工具">收录 AI 相关工具</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://www.amz123.com/ai" title="amz123" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202406/2233039-20240606122723920-1874538642.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="amz123">
+              </div>
+              <div class="flink-item-name">amz123</div> 
+              <div class="flink-item-desc" title="AI工具箱导航网站，收录了国内外数百个AI工具，提供聊天、绘画、设计、音频、视频等各类精选AI工具，帮助卖家轻松找到合适的工具进行绘画创作，智能对话。">AI工具箱导航网站，收录了国内外数百个AI工具，提供聊天、绘画、设计、音频、视频等各类精选AI工具，帮助卖家轻松找到合适的工具进行绘画创作，智能对话。</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://ai-bot.cn/" title="ai-bot" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202406/2233039-20240606122945347-761937001.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="ai-bot">
+              </div>
+              <div class="flink-item-name">ai-bot</div> 
+              <div class="flink-item-desc" title="收录了国内外数百个不同类型的A工具，每日更新和添加最新AI工具">收录了国内外数百个不同类型的A工具，每日更新和添加最新AI工具</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://www.naviai.cn/" title="naviai" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202406/2233039-20240606123535846-1609187839.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="naviai">
+              </div>
+              <div class="flink-item-name">naviai</div> 
+              <div class="flink-item-desc" title="收录了国内外2000+优质AI工具，人工智能工具和模型，整理了AI对话聊天、AI绘画设计、AI视频制作、AI写作办公、AI编程开发等各类工具，还包括最新的AI资讯、AI绘画教程、AI工具技巧等实用内容。">收录了国内外2000+优质AI工具，人工智能工具和模型，整理了AI对话聊天、AI绘画设计、AI视频制作、AI写作办公、AI编程开发等各类工具，还包括最新的AI资讯、AI绘画教程、AI工具技巧等实用内容。</div>
+            </a>
+          </div></div><div class="flink-name">软件应用</div> <div class="flink-list">
+          <div class="flink-list-item">
+            <a href="https://www.ghxi.com/" title="果核剥壳" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240508221725165-1499274965.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="果核剥壳">
+              </div>
+              <div class="flink-item-name">果核剥壳</div> 
+              <div class="flink-item-desc" title="果核剥壳是一家综合科技站点，看新闻，分享破解软件、绿色软件，Windows系统。">果核剥壳是一家综合科技站点，看新闻，分享破解软件、绿色软件，Windows系统。</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://www.iplaysoft.com/" title="异次元软件世界" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240508220058631-595457132.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="异次元软件世界">
+              </div>
+              <div class="flink-item-name">异次元软件世界</div> 
+              <div class="flink-item-desc" title="极具人气和特色的软件网站！">极具人气和特色的软件网站！</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="http://www.wodown.com/" title="沃下载" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240509222518076-1135262999.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="沃下载">
+              </div>
+              <div class="flink-item-name">沃下载</div> 
+              <div class="flink-item-desc" title="实用的免费下载站">实用的免费下载站</div>
+            </a>
+          </div></div><div class="flink-name">社区论坛</div> <div class="flink-list">
+          <div class="flink-list-item">
+            <a href="https://bbs.leyuxyz.com/" title="乐愚社区" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240515113448156-1234090299.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="乐愚社区">
+              </div>
+              <div class="flink-item-name">乐愚社区</div> 
+              <div class="flink-item-desc" title="乐愚社区，做一个有价值的社区 。">乐愚社区，做一个有价值的社区 。</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://linux.do/" title="Linux Do" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240508204945532-1241094956.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="Linux Do">
+              </div>
+              <div class="flink-item-name">Linux Do</div> 
+              <div class="flink-item-desc" title="一个包含快问快答、人工智能、软件分享、软件开发等模块的知识分享社区">一个包含快问快答、人工智能、软件分享、软件开发等模块的知识分享社区</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240523141747490-385189967.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="吾爱破解">
+              </div>
+              <div class="flink-item-name">吾爱破解</div> 
+              <div class="flink-item-desc" title="吾爱破解论坛致力于软件安全与病毒分析的前沿，丰富的技术版块交相辉映，由无数热衷于软件加密解密及反病毒爱好者共同维护">吾爱破解论坛致力于软件安全与病毒分析的前沿，丰富的技术版块交相辉映，由无数热衷于软件加密解密及反病毒爱好者共同维护</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://www.chongbuluo.com/" title="虫部落" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240508220617347-1419564038.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="虫部落">
+              </div>
+              <div class="flink-item-name">虫部落</div> 
+              <div class="flink-item-desc" title="虫部落是一个纯粹的搜索知识、技术和经验分享平台，虫部落快搜、虫部落学术搜索等搜索聚合工具均为虫部落原创出品，搜索世界的乐趣，就在虫部落！">虫部落是一个纯粹的搜索知识、技术和经验分享平台，虫部落快搜、虫部落学术搜索等搜索聚合工具均为虫部落原创出品，搜索世界的乐趣，就在虫部落！</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="http://www.java1234.com/" title="JAVA知识分享网" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240509213958033-1253210274.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="JAVA知识分享网">
+              </div>
+              <div class="flink-item-name">JAVA知识分享网</div> 
+              <div class="flink-item-desc" title="Java知识分享网,Java资源网,专业的Java资源下载网站">Java知识分享网,Java资源网,专业的Java资源下载网站</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://hellogithub.com/" title="HelloGitHub" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240519222151383-1910904973.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="HelloGitHub">
+              </div>
+              <div class="flink-item-name">HelloGitHub</div> 
+              <div class="flink-item-desc" title="Github上的项目非常多，想找一些有趣的自己感兴趣的并不好找。这个网站收集Github上有趣、入门级的开源项目。可以找到各种语言的开源项目、让生活变得更美好的工具、书籍、学习笔记、教程等。通过这些项目你将学习到更多编程知识、提高自己的编程技巧、发现编程的乐趣。">Github上的项目非常多，想找一些有趣的自己感兴趣的并不好找。这个网站收集Github上有趣、入门级的开源项目。可以找到各种语言的开源项目、让生活变得更美好的工具、书籍、学习笔记、教程等。通过这些项目你将学习到更多编程知识、提高自己的编程技巧、发现编程的乐趣。</div>
+            </a>
+          </div></div><div class="flink-name">在线观影</div> <div class="flink-list">
+          <div class="flink-list-item">
+            <a href="https://cupfox.love/" title="茶杯狐" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240508222341168-10420674.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="茶杯狐">
+              </div>
+              <div class="flink-item-name">茶杯狐</div> 
+              <div class="flink-item-desc" title="茶杯不狐是中国最大的影视资源聚合搜索引擎，实时聚合全网优质影视资源，同时支持在线下载和字幕。电影、电视剧、动漫、综艺应有尽有。">茶杯不狐是中国最大的影视资源聚合搜索引擎，实时聚合全网优质影视资源，同时支持在线下载和字幕。电影、电视剧、动漫、综艺应有尽有。</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://www.shipinla.com/" title="视频啦" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240515110700206-739690669.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="视频啦">
+              </div>
+              <div class="flink-item-name">视频啦</div> 
+              <div class="flink-item-desc" title="视频啦 -最新影视剧情介绍和影视">视频啦 -最新影视剧情介绍和影视</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://www.keke1.app/" title="可可影视" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240515104515274-1727326894.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="可可影视">
+              </div>
+              <div class="flink-item-name">可可影视</div> 
+              <div class="flink-item-desc" title="搜片.com聚合全网影片，你想看的全都钱得到！每天搜集最新电影、电视剧、在线观看网址、蓝光高清正版免费看！">搜片.com聚合全网影片，你想看的全都钱得到！每天搜集最新电影、电视剧、在线观看网址、蓝光高清正版免费看！</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://netfly.tv/" title="奈飞中文网" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240515110155358-699109999.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="奈飞中文网">
+              </div>
+              <div class="flink-item-name">奈飞中文网</div> 
+              <div class="flink-item-desc" title="热门 Netflix 新剧、电影、动漫、综艺，高清免费片源，每日更新！">热门 Netflix 新剧、电影、动漫、综艺，高清免费片源，每日更新！</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://soupian.pro/" title="搜片" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240508222643634-1951889178.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="搜片">
+              </div>
+              <div class="flink-item-name">搜片</div> 
+              <div class="flink-item-desc" title="搜片.com聚合全网影片，你想看的全都钱得到！每天搜集最新电影、电视剧、在线观看网址、蓝光高清正版免费看！">搜片.com聚合全网影片，你想看的全都钱得到！每天搜集最新电影、电视剧、在线观看网址、蓝光高清正版免费看！</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://feikuai.tv/" title="飞快TV" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240515112115054-379603336.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="飞快TV">
+              </div>
+              <div class="flink-item-name">飞快TV</div> 
+              <div class="flink-item-desc" title="飞快TV">飞快TV</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://www.hdmoli.pro/" title="HDmoli" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240515091447218-383083534.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="HDmoli">
+              </div>
+              <div class="flink-item-name">HDmoli</div> 
+              <div class="flink-item-desc" title="高品质在线影视资源">高品质在线影视资源</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://zhuiyingmao2.com/" title="追影猫" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240515102139813-1959234866.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="追影猫">
+              </div>
+              <div class="flink-item-name">追影猫</div> 
+              <div class="flink-item-desc" title="高品质在线影视资源">高品质在线影视资源</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://www.liuliyy.com/" title="琉璃影院" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240515102802361-780217982.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="琉璃影院">
+              </div>
+              <div class="flink-item-name">琉璃影院</div> 
+              <div class="flink-item-desc" title="为广大电影爱好者提供了各类最新好看的电影">为广大电影爱好者提供了各类最新好看的电影</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="http://www.yingyoushe.com/" title="影友社" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240523141859315-1955450090.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="影友社">
+              </div>
+              <div class="flink-item-name">影友社</div> 
+              <div class="flink-item-desc" title="手机看电影电视剧大片在线观看的免费网站">手机看电影电视剧大片在线观看的免费网站</div>
+            </a>
+          </div></div><div class="flink-name">视频学习</div> <div class="flink-list">
+          <div class="flink-list-item">
+            <a href="https://www.bilibili.com/" title="哔哩哔哩" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240508211912434-1894152992.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="哔哩哔哩">
+              </div>
+              <div class="flink-item-name">哔哩哔哩</div> 
+              <div class="flink-item-desc" title="哔哩哔哩是中国年轻世代高度聚集的综合性视频社区，被用户亲切地称为“B站”。">哔哩哔哩是中国年轻世代高度聚集的综合性视频社区，被用户亲切地称为“B站”。</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://www.icourse163.org/" title="中国大学MOOC" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240509210029576-726663347.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="中国大学MOOC">
+              </div>
+              <div class="flink-item-name">中国大学MOOC</div> 
+              <div class="flink-item-desc" title="中国大学MOOC(慕课)_国家精品课程在线学习平台">中国大学MOOC(慕课)_国家精品课程在线学习平台</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://www.imooc.com/" title="慕课网" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240509210229688-903378681.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="慕课网">
+              </div>
+              <div class="flink-item-name">慕课网</div> 
+              <div class="flink-item-desc" title="慕课网是垂直的互联网IT技能学习网站，自2013年上线始终专注于IT在线教育领域，以培养互联网企业实用型人才为己任，邀请一线大厂技术达人打造前沿的IT技术 精品课程 ，帮助每一位有志向的开发者实现职业梦想。">慕课网是垂直的互联网IT技能学习网站，自2013年上线始终专注于IT在线教育领域，以培养互联网企业实用型人才为己任，邀请一线大厂技术达人打造前沿的IT技术 精品课程 ，帮助每一位有志向的开发者实现职业梦想。</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://ke.qq.com/" title="腾讯课堂" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240509210527610-236358401.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="腾讯课堂">
+              </div>
+              <div class="flink-item-name">腾讯课堂</div> 
+              <div class="flink-item-desc" title="腾讯推出的专业在线教育平台，聚合了大量优质教育机构和名师，下设职业培训、公务员考试、托福雅思、考证考级、英语口语、中小学教育等众多在线学习精品课程。">腾讯推出的专业在线教育平台，聚合了大量优质教育机构和名师，下设职业培训、公务员考试、托福雅思、考证考级、英语口语、中小学教育等众多在线学习精品课程。</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://open.163.com/" title="网易公开课" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240509210704074-550574843.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="网易公开课">
+              </div>
+              <div class="flink-item-name">网易公开课</div> 
+              <div class="flink-item-desc" title="网易公开课汇集清华、北大、哈佛、耶鲁等世界名校共上千门课程，覆盖科学、经济、人文、哲学等22个领域，在这里你可以开拓视野看世界，获取有深度的好知识。">网易公开课汇集清华、北大、哈佛、耶鲁等世界名校共上千门课程，覆盖科学、经济、人文、哲学等22个领域，在这里你可以开拓视野看世界，获取有深度的好知识。</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://study.163.com/" title="网易云课堂" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240509210923578-884948564.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="网易云课堂">
+              </div>
+              <div class="flink-item-name">网易云课堂</div> 
+              <div class="flink-item-desc" title="网易云课堂，一个专注于成人终身学习的在线教育平台。立足于实用性的要求, 与优质的教育内容创作者一起，为您提供全面、有效的在线学习内容。">网易云课堂，一个专注于成人终身学习的在线教育平台。立足于实用性的要求, 与优质的教育内容创作者一起，为您提供全面、有效的在线学习内容。</div>
+            </a>
+          </div></div><div class="flink-name">文档学习</div> <div class="flink-list">
+          <div class="flink-list-item">
+            <a href="https://www.runoob.com/" title="菜鸟教程" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api.iowen.cn/favicon/www.runoob.com.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="菜鸟教程">
+              </div>
+              <div class="flink-item-name">菜鸟教程</div> 
+              <div class="flink-item-desc" title="菜鸟教程提供了编程的基础技术教程, 介绍了HTML、CSS、Javascript、Python，Java，Ruby，C，PHP , MySQL等各种编程语言的基础知识。 同时本站中也提供了大量的在线实例，通过实例，您可以更好的学习编程。">菜鸟教程提供了编程的基础技术教程, 介绍了HTML、CSS、Javascript、Python，Java，Ruby，C，PHP , MySQL等各种编程语言的基础知识。 同时本站中也提供了大量的在线实例，通过实例，您可以更好的学习编程。</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://www.w3school.com.cn/" title="w3school" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240508221218777-1599066182.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="w3school">
+              </div>
+              <div class="flink-item-name">w3school</div> 
+              <div class="flink-item-desc" title="全球最大的中文 Web 技术教程。">全球最大的中文 Web 技术教程。</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://www.liaoxuefeng.com/" title="廖雪峰的官方网站" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240509211150195-839195126.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="廖雪峰的官方网站">
+              </div>
+              <div class="flink-item-name">廖雪峰的官方网站</div> 
+              <div class="flink-item-desc" title="廖雪峰是一位知名的编程教育者，他的网站提供了Java、Python、JavaScript、区块链等多种编程语言的零基础教程，以及Git、SQL、CSS等工具的使用教程。">廖雪峰是一位知名的编程教育者，他的网站提供了Java、Python、JavaScript、区块链等多种编程语言的零基础教程，以及Git、SQL、CSS等工具的使用教程。</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://www.pdai.tech/" title="Java全栈知识体系" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240509214756433-1492836745.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="Java全栈知识体系">
+              </div>
+              <div class="flink-item-name">Java全栈知识体系</div> 
+              <div class="flink-item-desc" title="包含Java 基础, Java 部分源码, JVM, Spring, Spring Boot, Spring Cloud, 数据库原理,MySQL,ElasticSearch, MongoDB, Docker, k8s, CI&amp;CD, Linux, DevOps, 分布式, 中间件, 开发工具, Git, IDE, 源码阅读，读书笔记, 开源项目等">包含Java 基础, Java 部分源码, JVM, Spring, Spring Boot, Spring Cloud, 数据库原理,MySQL,ElasticSearch, MongoDB, Docker, k8s, CI&amp;CD, Linux, DevOps, 分布式, 中间件, 开发工具, Git, IDE, 源码阅读，读书笔记, 开源项目等</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://openstax.org/" title="OpenStax" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240519140316461-782456974.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="OpenStax">
+              </div>
+              <div class="flink-item-name">OpenStax</div> 
+              <div class="flink-item-desc" title="OpenStax 是莱斯大学的一项非盈利教育项目。是世界上最大的免费开放教育资源 (OER) 出版商。 OpenStax 受到 70% 的美国学院和大学的信赖，自 2012 年以来为学生节省了 29 亿美元的教育成本。所有这些重要工作都有助于我们致力于建设一个未来，让每个学生都能获得实现教育梦想所需的工具。">OpenStax 是莱斯大学的一项非盈利教育项目。是世界上最大的免费开放教育资源 (OER) 出版商。 OpenStax 受到 70% 的美国学院和大学的信赖，自 2012 年以来为学生节省了 29 亿美元的教育成本。所有这些重要工作都有助于我们致力于建设一个未来，让每个学生都能获得实现教育梦想所需的工具。</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://www.nationalgeographic.com/" title="美国国家地理杂志" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240519141413068-1872152593.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="美国国家地理杂志">
+              </div>
+              <div class="flink-item-name">美国国家地理杂志</div> 
+              <div class="flink-item-desc" title="美国国家地理杂志，包含远古探秘，奇闻异事，宇宙奥秘，案件解说等有趣栏目">美国国家地理杂志，包含远古探秘，奇闻异事，宇宙奥秘，案件解说等有趣栏目</div>
+            </a>
+          </div></div><div class="flink-name">优质博客</div> <div class="flink-list">
+          <div class="flink-list-item">
+            <a href="https://kejilion.blogspot.com/" title="科技Lion" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240509201624909-621646810.jpg" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="科技Lion">
+              </div>
+              <div class="flink-item-name">科技Lion</div> 
+              <div class="flink-item-desc" title="科技分享 极致白嫖">科技分享 极致白嫖</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://www.freedidi.com/" title="零度博客" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240509202307695-747272287.jpg" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="零度博客">
+              </div>
+              <div class="flink-item-name">零度博客</div> 
+              <div class="flink-item-desc" title="零度解说博客">零度解说博客</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://www.runningcheese.com/" title="奔跑中的奶酪" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240509202556824-580178718.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="奔跑中的奶酪">
+              </div>
+              <div class="flink-item-name">奔跑中的奶酪</div> 
+              <div class="flink-item-desc" title="有智，有趣，有爱是世界上最美好的三件事。崇尚科技和高效，网站致力于个人提升和价值分享。">有智，有趣，有爱是世界上最美好的三件事。崇尚科技和高效，网站致力于个人提升和价值分享。</div>
+            </a>
+          </div></div><div class="flink-name">托管平台</div> <div class="flink-list">
+          <div class="flink-list-item">
+            <a href="https://github.com/" title="GitHub" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240509202947248-588850187.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="GitHub">
+              </div>
+              <div class="flink-item-name">GitHub</div> 
+              <div class="flink-item-desc" title="GitHub是一个面向开源]及私有软件项目的托管平台，因为只支持Git作为唯一的版本库格式进行托管，故名GitHub。由于程序员群体里缺少女性，拥有高纯度男性用户的 GitHub，也被戏称为全球最大的同性交友网站。">GitHub是一个面向开源]及私有软件项目的托管平台，因为只支持Git作为唯一的版本库格式进行托管，故名GitHub。由于程序员群体里缺少女性，拥有高纯度男性用户的 GitHub，也被戏称为全球最大的同性交友网站。</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://gitee.com/" title="码云Gitee" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240509203401841-408595516.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="码云Gitee">
+              </div>
+              <div class="flink-item-name">码云Gitee</div> 
+              <div class="flink-item-desc" title="基于 Git 的代码托管和研发协作平台">基于 Git 的代码托管和研发协作平台</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://vercel.com/" title="Vercel" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240509203815737-448600344.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="Vercel">
+              </div>
+              <div class="flink-item-name">Vercel</div> 
+              <div class="flink-item-desc" title="Vercel 是一个云计算和部署平台，旨在帮助开发者更轻松地构建、部署和管理他们的应用程序。它支持多种编程语言和框架，提供了快速、可扩展且易于管理的部署体验2。Vercel 还提供了全球 CDN 加速和自动部署功能。它是一个为前端开发者设计的一体化平台，非常适合开发者在不同平台和环境中进行开发和部署。">Vercel 是一个云计算和部署平台，旨在帮助开发者更轻松地构建、部署和管理他们的应用程序。它支持多种编程语言和框架，提供了快速、可扩展且易于管理的部署体验2。Vercel 还提供了全球 CDN 加速和自动部署功能。它是一个为前端开发者设计的一体化平台，非常适合开发者在不同平台和环境中进行开发和部署。</div>
+            </a>
+          </div></div><div class="flink-name">建站工具</div> <div class="flink-list">
+          <div class="flink-list-item">
+            <a href="https://dash.cloudflare.com/" title="Cloudflare" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240509204758547-486227477.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="Cloudflare">
+              </div>
+              <div class="flink-item-name">Cloudflare</div> 
+              <div class="flink-item-desc" title="Cloudflare, Inc. 是一家美国网络基础设施和网站安全公司，提供内容交付网络和 DDoS 缓解服务。 它的服务发生在网站访问者和 Cloudflare 客户的托管服务提供商之间，充当网站的反向代理。">Cloudflare, Inc. 是一家美国网络基础设施和网站安全公司，提供内容交付网络和 DDoS 缓解服务。 它的服务发生在网站访问者和 Cloudflare 客户的托管服务提供商之间，充当网站的反向代理。</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://beian.miit.gov.cn/#/Integrated/index" title="信息备案管理系统" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240519225833523-264801474.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="信息备案管理系统">
+              </div>
+              <div class="flink-item-name">信息备案管理系统</div> 
+              <div class="flink-item-desc" title="官方的备案信息查询系统。可以查询网站、APP、小程序、快应用的备案信息。">官方的备案信息查询系统。可以查询网站、APP、小程序、快应用的备案信息。</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://tinypng.com/" title="TinyPNG" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240515204032163-1581078589.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="TinyPNG">
+              </div>
+              <div class="flink-item-name">TinyPNG</div> 
+              <div class="flink-item-desc" title="智能 WebP、PNG 和 JPEG 压缩可提高网站速度">智能 WebP、PNG 和 JPEG 压缩可提高网站速度</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://tool.chinaz.com/" title="站长之家" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240509212857069-1015913518.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="站长之家">
+              </div>
+              <div class="flink-item-name">站长之家</div> 
+              <div class="flink-item-desc" title="站长之家是一个专注于中文网站的综合平台，提供最新的网站资讯、技术、工具、案例、商业等内容，帮助站长提升网站运营效率和收益。">站长之家是一个专注于中文网站的综合平台，提供最新的网站资讯、技术、工具、案例、商业等内容，帮助站长提升网站运营效率和收益。</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://fast.com/" title="Fast" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240523142015095-1463642665.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="Fast">
+              </div>
+              <div class="flink-item-name">Fast</div> 
+              <div class="flink-item-desc" title="FAST.com 为您提供当前互联网速度的估算值。. 您通过领先的互联网服务通常可以获得该速度，该类服务使用分布全球的服务器。">FAST.com 为您提供当前互联网速度的估算值。. 您通过领先的互联网服务通常可以获得该速度，该类服务使用分布全球的服务器。</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://whoer.net/" title="Whoer" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240509212348537-1288205835.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="Whoer">
+              </div>
+              <div class="flink-item-name">Whoer</div> 
+              <div class="flink-item-desc" title="Whoer.net可以显示您的IP地址、DNS地址、浏览器、操作系统、位置等信息，并提供一些检测和防检测的工具。">Whoer.net可以显示您的IP地址、DNS地址、浏览器、操作系统、位置等信息，并提供一些检测和防检测的工具。</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://www.meiguodizhi.com/" title="美国地址生成器" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240509223346658-1978986254.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="美国地址生成器">
+              </div>
+              <div class="flink-item-name">美国地址生成器</div> 
+              <div class="flink-item-desc" title="随机生成美国地址, 身份信息，信用卡信息，手机号码和其他基本信息。还会随机生成工作信息，财务信息，兴趣爱好等信息。">随机生成美国地址, 身份信息，信用卡信息，手机号码和其他基本信息。还会随机生成工作信息，财务信息，兴趣爱好等信息。</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://coverview.vercel.app/editor" title="Coverview" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240515205354817-513140677.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="Coverview">
+              </div>
+              <div class="flink-item-name">Coverview</div> 
+              <div class="flink-item-desc" title="为您的博客创建封面图片">为您的博客创建封面图片</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://besticon-demo.herokuapp.com/" title="网站图标查找器" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240515210038106-969515507.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="网站图标查找器">
+              </div>
+              <div class="flink-item-name">网站图标查找器</div> 
+              <div class="flink-item-desc" title="在网站上查找图标的服务">在网站上查找图标的服务</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://favicon.inbrowser.app/tools/favicon-generator" title="favicon-generator" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240519220901101-171091593.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="favicon-generator">
+              </div>
+              <div class="flink-item-name">favicon-generator</div> 
+              <div class="flink-item-desc" title="Favicon InBrowser.App是一个生成favicon的工具。完全在您的浏览器中运行。没有服务器端代码。">Favicon InBrowser.App是一个生成favicon的工具。完全在您的浏览器中运行。没有服务器端代码。</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://yesicon.app/" title="yesicon" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240519221218064-805130914.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="yesicon">
+              </div>
+              <div class="flink-item-name">yesicon</div> 
+              <div class="flink-item-desc" title="高品质矢量图标免费分享网站">高品质矢量图标免费分享网站</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://www.logo.wine/" title="LOGO wine" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240519221703608-848954823.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="LOGO wine">
+              </div>
+              <div class="flink-item-name">LOGO wine</div> 
+              <div class="flink-item-desc" title="品牌徽标免费下载SVG矢量和PNG文件格式">品牌徽标免费下载SVG矢量和PNG文件格式</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://www.picprose.net/zh" title="PicProse" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240519233221586-1381947385.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="PicProse">
+              </div>
+              <div class="flink-item-name">PicProse</div> 
+              <div class="flink-item-desc" title="一款更好的封面图片生成工具，适用于 Medium、YouTube、BiliBili、Blog 等。提供图片模板，支持自定义比例、遮罩颜色、透明度、字体、图标、标题、作者等，可下载 JPG/PNG/SVG 格式。">一款更好的封面图片生成工具，适用于 Medium、YouTube、BiliBili、Blog 等。提供图片模板，支持自定义比例、遮罩颜色、透明度、字体、图标、标题、作者等，可下载 JPG/PNG/SVG 格式。</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://www.duelpeak.com/pages/poster" title="Photo Relay" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240519233854423-1060742263.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="Photo Relay">
+              </div>
+              <div class="flink-item-name">Photo Relay</div> 
+              <div class="flink-item-desc" title="一个清爽、简单、无需登录的在线封面制作网站，轻松制作高品质封面图片。提供内设模板，支持自定义图标、背景、图层、尺寸、文字等，并可以一键保存下载。">一个清爽、简单、无需登录的在线封面制作网站，轻松制作高品质封面图片。提供内设模板，支持自定义图标、背景、图层、尺寸、文字等，并可以一键保存下载。</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://fontawesome.com/" title="Font Awesome" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202406/2233039-20240606124027278-162083144.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="Font Awesome">
+              </div>
+              <div class="flink-item-name">Font Awesome</div> 
+              <div class="flink-item-desc" title="图标库和工具包">图标库和工具包</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://fontawesome.p2hp.com/" title="Font Awesome中文网" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202406/2233039-20240606124536278-477738923.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="Font Awesome中文网">
+              </div>
+              <div class="flink-item-name">Font Awesome中文网</div> 
+              <div class="flink-item-desc" title="Font Awesome中文网">Font Awesome中文网</div>
+            </a>
+          </div></div><div class="flink-name">接码平台</div> <div class="flink-list">
+          <div class="flink-list-item">
+            <a href="https://sms-activate.org" title="SMS-Activate" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240509211916784-893512534.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="SMS-Activate">
+              </div>
+              <div class="flink-item-name">SMS-Activate</div> 
+              <div class="flink-item-desc" title="SMS-activate 是一个接码平台，提供多种国家和地区的手机号码供您选择，可用于许多应用程序和网站，让您在注册和验证应用程序时更加放心和轻松。SMS-activate 提供两种方式的号码验证方式：激活和租用，支持全球 200 多个国家的手机号、700 多种服务，提供号码 20 分钟的使用时间。该工具非常适合不仅创建任何应用的账户，但也完成 SEO、流量套利、发布广告与其他网络领域的任务。">SMS-activate 是一个接码平台，提供多种国家和地区的手机号码供您选择，可用于许多应用程序和网站，让您在注册和验证应用程序时更加放心和轻松。SMS-activate 提供两种方式的号码验证方式：激活和租用，支持全球 200 多个国家的手机号、700 多种服务，提供号码 20 分钟的使用时间。该工具非常适合不仅创建任何应用的账户，但也完成 SEO、流量套利、发布广告与其他网络领域的任务。</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://mianfeijiema.com/" title="免费接码" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240509223616381-504950216.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="免费接码">
+              </div>
+              <div class="flink-item-name">免费接码</div> 
+              <div class="flink-item-desc" title="免费接码(MianFeiJieMa.com)提供中国、美国、英国等各国免费手机号码短信接收服务，你可以使用我们的免费手机号码注册APP或账号。免费在线接收短信就来MianFeiJieMa.com。免费接码(MianFeiJieMa.com)用于在线接收手机短信验证码。不需要注册。只需从下面的列表中选择您的电话号码即可。您可以使用它来接收来自FACEBOOK，TELEGRAM，WECHAT，VK，PAYPAL，ALIPAY等发来的手机短信验证码。">免费接码(MianFeiJieMa.com)提供中国、美国、英国等各国免费手机号码短信接收服务，你可以使用我们的免费手机号码注册APP或账号。免费在线接收短信就来MianFeiJieMa.com。免费接码(MianFeiJieMa.com)用于在线接收手机短信验证码。不需要注册。只需从下面的列表中选择您的电话号码即可。您可以使用它来接收来自FACEBOOK，TELEGRAM，WECHAT，VK，PAYPAL，ALIPAY等发来的手机短信验证码。</div>
+            </a>
+          </div></div><div class="flink-name">实用工具</div> <div class="flink-list">
+          <div class="flink-list-item">
+            <a href="https://z-lib.io/" title="Z-Library" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240508211754103-1116284746.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="Z-Library">
+              </div>
+              <div class="flink-item-name">Z-Library</div> 
+              <div class="flink-item-desc" title="Zlibrary被称为全球最大的数字图书馆，里面包含 9,826,996 本电子书，84,837,646 篇期刊文章。 从各种知名文学著作，理工学科，人文艺术、到学术论文等应有尽有！支持PDF、epub、mobi等多种格式图书资源下载绝对是你找书的不二选择。">Zlibrary被称为全球最大的数字图书馆，里面包含 9,826,996 本电子书，84,837,646 篇期刊文章。 从各种知名文学著作，理工学科，人文艺术、到学术论文等应有尽有！支持PDF、epub、mobi等多种格式图书资源下载绝对是你找书的不二选择。</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://rxresu.me/" title="rxresu.me" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240523142301649-1413185051.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="rxresu.me">
+              </div>
+              <div class="flink-item-name">rxresu.me</div> 
+              <div class="flink-item-desc" title="一款完全安全、可定制、可移植、开源及永久免费的简历创建工具。可简化创建、更新和共享简历的过程，支持自托管；可通过邮件、Google、GitHub 直接登录使用。提供多种语言版本，并具有实时编辑、数十个模板、拖放自定义以及与 OpenAI 集成等功能，可增强您的写作能力。">一款完全安全、可定制、可移植、开源及永久免费的简历创建工具。可简化创建、更新和共享简历的过程，支持自托管；可通过邮件、Google、GitHub 直接登录使用。提供多种语言版本，并具有实时编辑、数十个模板、拖放自定义以及与 OpenAI 集成等功能，可增强您的写作能力。</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://qwerty.kaiyi.cool/" title="Qwerty Learner" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240508204407370-808478266.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="Qwerty Learner">
+              </div>
+              <div class="flink-item-name">Qwerty Learner</div> 
+              <div class="flink-item-desc" title="为键盘工作者设计的单词与肌肉记忆锻炼软件">为键盘工作者设计的单词与肌肉记忆锻炼软件</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://unbug.github.io/codelf/" title="CODEIF" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240509221338524-1092215045.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="CODEIF">
+              </div>
+              <div class="flink-item-name">CODEIF</div> 
+              <div class="flink-item-desc" title="CODEIF是一个搜索在线开源平台的变量取名工具，可以根据关键字找出合适的英文变量名。支持中文搜索，适合嵌入式系统开发者参考大量的库，节约思考时间。">CODEIF是一个搜索在线开源平台的变量取名工具，可以根据关键字找出合适的英文变量名。支持中文搜索，适合嵌入式系统开发者参考大量的库，节约思考时间。</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://cp.ciding.cc/" title="青蛙快传" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240509221721585-502130426.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="青蛙快传">
+              </div>
+              <div class="flink-item-name">青蛙快传</div> 
+              <div class="flink-item-desc" title="在线文件分享工具">在线文件分享工具</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://www.youbianku.com/" title="邮编库" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240518222036540-1775602008.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="邮编库">
+              </div>
+              <div class="flink-item-name">邮编库</div> 
+              <div class="flink-item-desc" title="主要提供国内任意地址的邮编查询、国际邮编查询、邮编反向查询、任意地址所属街道办事处和社区居委会查询等功能。">主要提供国内任意地址的邮编查询、国际邮编查询、邮编反向查询、任意地址所属街道办事处和社区居委会查询等功能。</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://www.paperpass.com/" title="paperpass" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240519140624265-1177024817.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="paperpass">
+              </div>
+              <div class="flink-item-name">paperpass</div> 
+              <div class="flink-item-desc" title="学术论文查重网站">学术论文查重网站</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://yunge.in/" title="云鸽" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240519230439932-445643189.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="云鸽">
+              </div>
+              <div class="flink-item-name">云鸽</div> 
+              <div class="flink-item-desc" title="一款跨平台的文件传输助手，可以在不同设备之间快速、方便、安全地共享文件。无需下载或登录，可以直接在浏览器中打开 [yunge.in](https://yunge.in/) 来进行操作。采用点对点技术，文件传输实时进行，无需等待。支持传输任何大小的文件，包括照片、文档、音频和视频文件。">一款跨平台的文件传输助手，可以在不同设备之间快速、方便、安全地共享文件。无需下载或登录，可以直接在浏览器中打开 [yunge.in](https://yunge.in/) 来进行操作。采用点对点技术，文件传输实时进行，无需等待。支持传输任何大小的文件，包括照片、文档、音频和视频文件。</div>
+            </a>
+          </div></div><div class="flink-name">在线聚合</div> <div class="flink-list">
+          <div class="flink-list-item">
+            <a href="https://it-tools.tech/" title="IT-Tools" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240518222436435-2125875016.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="IT-Tools">
+              </div>
+              <div class="flink-item-name">IT-Tools</div> 
+              <div class="flink-item-desc" title="IT-Tools 是为开发人员提供的方便的在线工具集合，具有出色的用户体验。">IT-Tools 是为开发人员提供的方便的在线工具集合，具有出色的用户体验。</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://www.jyshare.com/" title="菜鸟工具" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240509223123397-1388284012.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="菜鸟工具">
+              </div>
+              <div class="flink-item-name">菜鸟工具</div> 
+              <div class="flink-item-desc" title="菜鸟工具，为开发设计人员提供在线工具，网址导航，提供在线PHP、Python、 CSS、JS 调试，中文简繁体转换，进制转换等工具。致力于打造国内专业WEB开发工具，集成开发环境，WEB开发教程。">菜鸟工具，为开发设计人员提供在线工具，网址导航，提供在线PHP、Python、 CSS、JS 调试，中文简繁体转换，进制转换等工具。致力于打造国内专业WEB开发工具，集成开发环境，WEB开发教程。</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://c.p2hp.com/" title="高手工具" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240509225332935-612718656.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="高手工具">
+              </div>
+              <div class="flink-item-name">高手工具</div> 
+              <div class="flink-item-desc" title="高手工具，为开发设计人员提供在线工具，提供在线PHP、Python、 CSS、JS 调试，中文简繁体转换，进制转换等工具。致力于打造国内专业WEB开发工具，集成开发环境，WEB开发教程">高手工具，为开发设计人员提供在线工具，提供在线PHP、Python、 CSS、JS 调试，中文简繁体转换，进制转换等工具。致力于打造国内专业WEB开发工具，集成开发环境，WEB开发教程</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://tool.p2hp.com/" title="程序员工具" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240509225701144-552090279.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="程序员工具">
+              </div>
+              <div class="flink-item-name">程序员工具</div> 
+              <div class="flink-item-desc" title="程序员工具免费在线工具网站包含:在线开发工具,Linux在线命令,在线脑图,JSON代码格式化,PHP混淆/加密/解密工具,在线并发,在线JS/CSS/HTML格式化/压缩。程序猿的在线工具箱">程序员工具免费在线工具网站包含:在线开发工具,Linux在线命令,在线脑图,JSON代码格式化,PHP混淆/加密/解密工具,在线并发,在线JS/CSS/HTML格式化/压缩。程序猿的在线工具箱</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://www.zxgj.cn/" title="在线工具" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240509224454632-1238511474.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="在线工具">
+              </div>
+              <div class="flink-item-name">在线工具</div> 
+              <div class="flink-item-desc" title="提供基于Web网页的在线工具软件，如：智商测试、情商测试、逻辑思维训练、mbti职业性格测试、九型人格测试、大五人格测试、人才测评、图表制作、图片处理、疾病自测、抑郁症测试题、生活查询、健康管理、娱乐工具、及各类在线计算器等等。">提供基于Web网页的在线工具软件，如：智商测试、情商测试、逻辑思维训练、mbti职业性格测试、九型人格测试、大五人格测试、人才测评、图表制作、图片处理、疾病自测、抑郁症测试题、生活查询、健康管理、娱乐工具、及各类在线计算器等等。</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://www.toolnb.com/" title="爱资料工具" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240509230009743-1641860926.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="爱资料工具">
+              </div>
+              <div class="flink-item-name">爱资料工具</div> 
+              <div class="flink-item-desc" title="为开发运维提供全面的在线工具箱,已开发工具400款,包含开发工具,运维工具,常用工具,SEO站长工具等,是好用,方便的在线工具网站">为开发运维提供全面的在线工具箱,已开发工具400款,包含开发工具,运维工具,常用工具,SEO站长工具等,是好用,方便的在线工具网站</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://www.dute.org/" title="独特工具箱" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240509224956257-1488136418.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="独特工具箱">
+              </div>
+              <div class="flink-item-name">独特工具箱</div> 
+              <div class="flink-item-desc" title="独特工具箱，提供免费在线工具">独特工具箱，提供免费在线工具</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://toolwa.com/" title="工具哇" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240509230312130-9066745.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="工具哇">
+              </div>
+              <div class="flink-item-name">工具哇</div> 
+              <div class="flink-item-desc" title="工具哇，提供各种新奇实用又好玩的免费在线小工具，无需下载，打开即可使用！">工具哇，提供各种新奇实用又好玩的免费在线小工具，无需下载，打开即可使用！</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="http://tool.mkblog.cn/" title="孟坤工具箱" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240509230535050-1404384349.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="孟坤工具箱">
+              </div>
+              <div class="flink-item-name">孟坤工具箱</div> 
+              <div class="flink-item-desc" title="孟坤工具箱 网页版">孟坤工具箱 网页版</div>
+            </a>
+          </div></div><div class="flink-name">在线处理</div> <div class="flink-list">
+          <div class="flink-list-item">
+            <a href="https://imagestool.com/" title="imagesTool" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240509215820401-675178035.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="imagesTool">
+              </div>
+              <div class="flink-item-name">imagesTool</div> 
+              <div class="flink-item-desc" title="ImagesTool 所有的在线工具都使用浏览器技术进行图片处理，导入的文件始终在您的设备上，不会上传，最大程度保护您的隐私。">ImagesTool 所有的在线工具都使用浏览器技术进行图片处理，导入的文件始终在您的设备上，不会上传，最大程度保护您的隐私。</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://www.json.cn/" title="Json.cn" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240509220032516-572031319.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="Json.cn">
+              </div>
+              <div class="flink-item-name">Json.cn</div> 
+              <div class="flink-item-desc" title="JSON在线解析及格式化验证">JSON在线解析及格式化验证</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://www.ilovepdf.com/" title="iLovePDF" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240509220152817-277274224.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="iLovePDF">
+              </div>
+              <div class="flink-item-name">iLovePDF</div> 
+              <div class="flink-item-desc" title="为PDF爱好者提供的PDF文件在线处理工具">为PDF爱好者提供的PDF文件在线处理工具</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://bigjpg.com/" title="Bigjpg" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240509222108520-602598986.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="Bigjpg">
+              </div>
+              <div class="flink-item-name">Bigjpg</div> 
+              <div class="flink-item-desc" title="使用人工智能深度卷积神经网络（CNN）智能无损免费放大图片">使用人工智能深度卷积神经网络（CNN）智能无损免费放大图片</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://www.remove.bg/zh" title="remove bg" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240519133427396-2137895640.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="remove bg">
+              </div>
+              <div class="flink-item-name">remove bg</div> 
+              <div class="flink-item-desc" title="AI智能抠图">AI智能抠图</div>
+            </a>
+          </div></div><div class="flink-name">开源应用</div> <div class="flink-list">
+          <div class="flink-list-item">
+            <a href="https://github.com/containrrr/watchtower" title="Watchtower" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240518221415690-2063018496.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="Watchtower">
+              </div>
+              <div class="flink-item-name">Watchtower</div> 
+              <div class="flink-item-desc" title="Watchtower 是一个用于自动更新 Docker 容器的开源工具。它能够检测您运行的 Docker 容器是否有新版本可用，并自动更新这些容器，从而帮助您保持容器应用程序的安全性和稳定性。">Watchtower 是一个用于自动更新 Docker 容器的开源工具。它能够检测您运行的 Docker 容器是否有新版本可用，并自动更新这些容器，从而帮助您保持容器应用程序的安全性和稳定性。</div>
+            </a>
+          </div></div><div class="flink-name">导航网站</div> <div class="flink-list">
+          <div class="flink-list-item">
+            <a href="https://tuostudy.upnb.top/" title="图欧学习导航" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240515210613344-261726834.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="图欧学习导航">
+              </div>
+              <div class="flink-item-name">图欧学习导航</div> 
+              <div class="flink-item-desc" title="终身学习者的云盘资源与工具导航站">终身学习者的云盘资源与工具导航站</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://codernav.com/" title="开发者导航" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240508180553311-330039387.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="开发者导航">
+              </div>
+              <div class="flink-item-name">开发者导航</div> 
+              <div class="flink-item-desc" title="开发者导航网收录了大量免费优质的AI人工智能、资源干货、在线工具等众多分类的网站，千余良心网站供您随时享用，是一个能够提高生活质量、工作效率和学习成绩的综合类导航网站。">开发者导航网收录了大量免费优质的AI人工智能、资源干货、在线工具等众多分类的网站，千余良心网站供您随时享用，是一个能够提高生活质量、工作效率和学习成绩的综合类导航网站。</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://www.tboxn.com/" title="Tbox导航" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240523142531865-1461696850.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="Tbox导航">
+              </div>
+              <div class="flink-item-name">Tbox导航</div> 
+              <div class="flink-item-desc" title="Tbox导航是一个集合大量优质在线工具的导航网站，包括实用工具、影音工具、图片工具、编程工具、网络资源等几十种分类，覆盖全网在线工具，只收录最优质的的精品网站，做一个真正有用好用的工具导航网站。">Tbox导航是一个集合大量优质在线工具的导航网站，包括实用工具、影音工具、图片工具、编程工具、网络资源等几十种分类，覆盖全网在线工具，只收录最优质的的精品网站，做一个真正有用好用的工具导航网站。</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://www.ahhhhfs.com/" title="A姐分享" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240508204023245-1623883904.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="A姐分享">
+              </div>
+              <div class="flink-item-name">A姐分享</div> 
+              <div class="flink-item-desc" title="A姐分享，分享各种网络云盘资源、视频课程、BT种子、磁力链接、高清电影电视剧和羊毛福利，收集各种有趣实用的软件和APP的下载、安装、使用方法，发现一些稀奇古怪的的网站，折腾一些有趣实用的教程，关注谷歌苹果等互联网最新的资讯动态，探索新领域，发现新美好，分享小快乐。">A姐分享，分享各种网络云盘资源、视频课程、BT种子、磁力链接、高清电影电视剧和羊毛福利，收集各种有趣实用的软件和APP的下载、安装、使用方法，发现一些稀奇古怪的的网站，折腾一些有趣实用的教程，关注谷歌苹果等互联网最新的资讯动态，探索新领域，发现新美好，分享小快乐。</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://www.lovejay.top/" title="Jay的资源库" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240508211003216-745725857.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="Jay的资源库">
+              </div>
+              <div class="flink-item-name">Jay的资源库</div> 
+              <div class="flink-item-desc" title="互联网净土，白嫖党天堂，聚合全网优质资源，致力于做到一个网站解决所有问题">互联网净土，白嫖党天堂，聚合全网优质资源，致力于做到一个网站解决所有问题</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://www.bookstack.cn/" title="书栈网" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240523142632369-1148327469.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="书栈网">
+              </div>
+              <div class="flink-item-name">书栈网</div> 
+              <div class="flink-item-desc" title="开发资源导航网站">开发资源导航网站</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://morething.top/" title="有点东西" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240508214343336-208744922.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="有点东西">
+              </div>
+              <div class="flink-item-name">有点东西</div> 
+              <div class="flink-item-desc" title="涵盖娱乐休闲、新闻咨询、资源搜索、编程设计等栏目的综合导航站点">涵盖娱乐休闲、新闻咨询、资源搜索、编程设计等栏目的综合导航站点</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://www.zjnav.com/" title="终极导航" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240508221939189-2065479996.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="终极导航">
+              </div>
+              <div class="flink-item-name">终极导航</div> 
+              <div class="flink-item-desc" title="终极导航是一个互联网垂直分类的优质网站网址导航。网址类型包括：综合网址，办公网址，运营网址，设计网址，新闻网址，程序员网址，站长网址，生活网站，云盘网址，音乐网站，邮箱网址等。目的是满足用户日常的网址导航需求,帮助用户发现更多有趣的网站！">终极导航是一个互联网垂直分类的优质网站网址导航。网址类型包括：综合网址，办公网址，运营网址，设计网址，新闻网址，程序员网址，站长网址，生活网站，云盘网址，音乐网站，邮箱网址等。目的是满足用户日常的网址导航需求,帮助用户发现更多有趣的网站！</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="http://www.3646.net/" title="小鲸鱼搜书" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240509214415303-942102174.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="小鲸鱼搜书">
+              </div>
+              <div class="flink-item-name">小鲸鱼搜书</div> 
+              <div class="flink-item-desc" title="电子书下载导航网站">电子书下载导航网站</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://www.zmt.wiki/" title="自媒体维基" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240509215416870-1130981955.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="自媒体维基">
+              </div>
+              <div class="flink-item-name">自媒体维基</div> 
+              <div class="flink-item-desc" title="一个为设计、产品、新媒体、开发、人工智能AI、旅游服务、教师等行业定制的导航网站">一个为设计、产品、新媒体、开发、人工智能AI、旅游服务、教师等行业定制的导航网站</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://www.cxy666.com/" title="胖虎的工具箱" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240509220703998-1163398723.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="胖虎的工具箱">
+              </div>
+              <div class="flink-item-name">胖虎的工具箱</div> 
+              <div class="flink-item-desc" title="聚合了程序员常用站点工具，分享Java相关技术文章，Java面试题，Java技术栈的优秀文章。">聚合了程序员常用站点工具，分享Java相关技术文章，Java面试题，Java技术栈的优秀文章。</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://www.pncao.com/" title="叛逆草" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240519150805805-470776077.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="叛逆草">
+              </div>
+              <div class="flink-item-name">叛逆草</div> 
+              <div class="flink-item-desc" title="一个专注于收集和分享免费优质资源的导航网站。它提供了各种类型的资源，包括在线工具、影音资源、网盘资源、软件工具、办公学习资源和娱乐休闲资源。">一个专注于收集和分享免费优质资源的导航网站。它提供了各种类型的资源，包括在线工具、影音资源、网盘资源、软件工具、办公学习资源和娱乐休闲资源。</div>
+            </a>
+          </div></div><div class="flink-name">酷站分享</div> <div class="flink-list">
+          <div class="flink-list-item">
+            <a href="https://theuselessweb.com/" title="The Useless Web" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240519234824303-1277135459.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="The Useless Web">
+              </div>
+              <div class="flink-item-name">The Useless Web</div> 
+              <div class="flink-item-desc" title="随机跳转到其他奇怪而无用的网站">随机跳转到其他奇怪而无用的网站</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://fuun.fun/" title="FUUN.FUN" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240519231626837-1055290832.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="FUUN.FUN">
+              </div>
+              <div class="flink-item-name">FUUN.FUN</div> 
+              <div class="flink-item-desc" title="一个收集有趣、沙雕、奇奇怪怪等很多有意思的趣站导航。目前共收集网站 949 个，提供分类、搜索、排行等功能，提供简要的网站介绍">一个收集有趣、沙雕、奇奇怪怪等很多有意思的趣站导航。目前共收集网站 949 个，提供分类、搜索、排行等功能，提供简要的网站介绍</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://c.tianhezulin.com/" title="装逼生成器" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240519151055039-1093187707.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="装逼生成器">
+              </div>
+              <div class="flink-item-name">装逼生成器</div> 
+              <div class="flink-item-desc" title="免费在线各种生成器小工具集合，包括豪车合同生成器，微信转账、微信红包、装逼助手，装逼整蛊生成器">免费在线各种生成器小工具集合，包括豪车合同生成器，微信转账、微信红包、装逼助手，装逼整蛊生成器</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://geektyper.com/" title="geektyper" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240519134619495-80999362.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="geektyper">
+              </div>
+              <div class="flink-item-name">geektyper</div> 
+              <div class="flink-item-desc" title="伪装黑客炫酷桌面效果">伪装黑客炫酷桌面效果</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="http://weavesilk.com/" title="weavesilk" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240519135621527-1143608826.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="weavesilk">
+              </div>
+              <div class="flink-item-name">weavesilk</div> 
+              <div class="flink-item-desc" title="艺术背景图制作">艺术背景图制作</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="http://www.staggeringbeauty.com/" title="staggeringbeauty" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240519141931633-1086764790.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="staggeringbeauty">
+              </div>
+              <div class="flink-item-name">staggeringbeauty</div> 
+              <div class="flink-item-desc" title="当你移动鼠标时，一个巨大的虫子会随着你的动作摆动。">当你移动鼠标时，一个巨大的虫子会随着你的动作摆动。</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://www.geoguessr.com/" title="geoguessr探索世界" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240519142710125-1822269873.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="geoguessr探索世界">
+              </div>
+              <div class="flink-item-name">geoguessr探索世界</div> 
+              <div class="flink-item-desc" title="随机街景">随机街景</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://humanbenchmark.com/" title="humanbenchmark" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240519143206718-531736099.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="humanbenchmark">
+              </div>
+              <div class="flink-item-name">humanbenchmark</div> 
+              <div class="flink-item-desc" title="测试手速">测试手速</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://www.airpano.com/" title="airpano" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240519144313470-1505730718.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="airpano">
+              </div>
+              <div class="flink-item-name">airpano</div> 
+              <div class="flink-item-desc" title="360度全景视频">360度全景视频</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://shipxy.com/" title="船讯网" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240516091904364-2006170355.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="船讯网">
+              </div>
+              <div class="flink-item-name">船讯网</div> 
+              <div class="flink-item-desc" title="船讯网 是一个实时查询船舶动态的公众服务网站。能够为船东、货主、船舶代理、货运代理、船员及其家属，提供船舶实时动态，能给船舶安全航行管理、港口调度计划、物流、船代、货代带来极大的方便。">船讯网 是一个实时查询船舶动态的公众服务网站。能够为船东、货主、船舶代理、货运代理、船员及其家属，提供船舶实时动态，能给船舶安全航行管理、港口调度计划、物流、船代、货代带来极大的方便。</div>
+            </a>
+          </div>
+          <div class="flink-list-item">
+            <a href="https://www.aichpoem.net/" title="诗三百" target="_blank">
+              <div class="flink-item-icon">
+                <img class="no-lightbox" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img2023.cnblogs.com/blog/2233039/202405/2233039-20240519150429961-432340710.png" onerror="this.onerror=null;this.src=&quot;/img/friend_404.gif&quot;" alt="诗三百">
+              </div>
+              <div class="flink-item-name">诗三百</div> 
+              <div class="flink-item-desc" title="诗三百·人工智能在线诗歌写作平台包含AI作诗,自动写诗,藏头诗生成器,歌词生成器，AI填词,自动电脑对联等功能，是用深度学习模型学习海量诗词语料训练的人工智能诗词创作平台">诗三百·人工智能在线诗歌写作平台包含AI作诗,自动写诗,藏头诗生成器,歌词生成器，AI填词,自动电脑对联等功能，是用深度学习模型学习海量诗词语料训练的人工智能诗词创作平台</div>
+            </a>
+          </div></div></div>
+</div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"></div><div class="author-info__name">時光</div><div class="author-info__description">心寄朗朗乾坤，胸怀真修之道。</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">214</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">179</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">16</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/shiguang-coding"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/shiguang-coding" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:an_shiguang@163.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎光临時光的博客园子🎉🎉<br>https://blog.shiguang666.eu.org<br>https://blog.shiguang88.icu<br>https://blog.shiguangdev.cn<br></div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/10/18/a2cc0b63066f/" title="Hexo博客自动生成AI摘要"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/10/17/6710c62cac4e6.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hexo博客自动生成AI摘要"></a><div class="content"><a class="title" href="/2024/10/18/a2cc0b63066f/" title="Hexo博客自动生成AI摘要">Hexo博客自动生成AI摘要</a><time datetime="2024-10-18T09:41:41.000Z" title="发表于 2024-10-18 17:41:41">2024-10-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/10/18/b1d78a79cbfb/" title="蓝空图床上传失败问题排查"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/10/18/67120e3f9201f.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="蓝空图床上传失败问题排查"></a><div class="content"><a class="title" href="/2024/10/18/b1d78a79cbfb/" title="蓝空图床上传失败问题排查">蓝空图床上传失败问题排查</a><time datetime="2024-10-18T06:50:32.000Z" title="发表于 2024-10-18 14:50:32">2024-10-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/10/15/6b65681b29d7/" title="批量备份迁移Markdown文件中的图片解决方案"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/10/15/670e7bd0e5b0e.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="批量备份迁移Markdown文件中的图片解决方案"></a><div class="content"><a class="title" href="/2024/10/15/6b65681b29d7/" title="批量备份迁移Markdown文件中的图片解决方案">批量备份迁移Markdown文件中的图片解决方案</a><time datetime="2024-10-15T06:34:27.000Z" title="发表于 2024-10-15 14:34:27">2024-10-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/10/15/0410596602c9/" title="error: src refspec main does not match any"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/10/15/670e7c73d294a.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="error: src refspec main does not match any"></a><div class="content"><a class="title" href="/2024/10/15/0410596602c9/" title="error: src refspec main does not match any">error: src refspec main does not match any</a><time datetime="2024-10-15T06:09:56.000Z" title="发表于 2024-10-15 14:09:56">2024-10-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/10/15/bdc2992e0b08/" title="Failed to connect to github.com port 443 after 21042 ms: Couldn't connect to server"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/10/15/670e7cef8dd22.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Failed to connect to github.com port 443 after 21042 ms: Couldn't connect to server"></a><div class="content"><a class="title" href="/2024/10/15/bdc2992e0b08/" title="Failed to connect to github.com port 443 after 21042 ms: Couldn't connect to server">Failed to connect to github.com port 443 after 21042 ms: Couldn't connect to server</a><time datetime="2024-10-15T03:55:30.000Z" title="发表于 2024-10-15 11:55:30">2024-10-15</time></div></div></div></div><div class="card-widget" id="card-newest-comments"><div class="item-headline"><i class="fas fa-comment-dots"></i><span>最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            <a class="card-more-btn" href="/categories/" title="查看更多">
+    <i class="fas fa-angle-right"></i></a>
+            </div>
+            <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/AI/"><span class="card-category-list-name">AI</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%A5%BD%E8%AE%B0%E6%80%A7%E4%B8%8D%E5%A6%82%E7%83%82%E7%AC%94%E5%A4%B4/"><span class="card-category-list-name">好记性不如烂笔头</span><span class="card-category-list-count">28</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%A5%BD%E8%BD%AF%E6%8E%A8%E8%8D%90/"><span class="card-category-list-name">好软推荐</span><span class="card-category-list-count">6</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><span class="card-category-list-name">学习笔记</span><span class="card-category-list-count">43</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/"><span class="card-category-list-name">安装教程</span><span class="card-category-list-count">25</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7/"><span class="card-category-list-name">实用工具</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%B0%8F%E6%8A%80%E8%83%BD/"><span class="card-category-list-name">小技能</span><span class="card-category-list-count">39</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%B7%A5%E5%85%B7%E7%AE%B1/"><span class="card-category-list-name">工具箱</span><span class="card-category-list-count">14</span></a></li>
+            </ul></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="fas fa-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/10/"><span class="card-archive-list-date">十月 2024</span><span class="card-archive-list-count">8</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/09/"><span class="card-archive-list-date">九月 2024</span><span class="card-archive-list-count">38</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/08/"><span class="card-archive-list-date">八月 2024</span><span class="card-archive-list-count">9</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/07/"><span class="card-archive-list-date">七月 2024</span><span class="card-archive-list-count">18</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/06/"><span class="card-archive-list-date">六月 2024</span><span class="card-archive-list-count">30</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/05/"><span class="card-archive-list-date">五月 2024</span><span class="card-archive-list-count">20</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/04/"><span class="card-archive-list-date">四月 2024</span><span class="card-archive-list-count">7</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/03/"><span class="card-archive-list-date">三月 2024</span><span class="card-archive-list-count">2</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">214</div></div><div class="webinfo-item"><div class="item-name">已运行时间 :</div><div class="item-count" id="runtimeshow" data-publishdate="2023-12-30T00:00:00.000Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总字数 :</div><div class="item-count">582.2k</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastpushdate="2024-10-18T13:38:32.279Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/img/top_1.jpg')"><div id="footer-wrap"><div class="copyright">©2023 - 2024 By 時光</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text"><a href="https://icp.gov.moe/?keyword=20246626" target="_blank"><img class="icp-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/10/18/6712525ee948c.png"><span>萌ICP备20246626号</span></a>,<a href="https://www.travellings.cn/go.html" target="_blank"><img class="icp-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/10/18/671252762fd82.png"><span>随机开往</span></a>,<a style="text-decoration:none;" href="https://travel.moe/go.html?travel=on " title="异次元之旅-跃迁-我们一起去萌站成员的星球旅行吧！" target="_blank"><img class="icp-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shiguangdev.cn/i/2024/10/18/6712528b22dd7.png"><span>异次元之旅</span></a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="chat-btn" type="button" title="聊天"><i class="fas fa-sms"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"></div><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getComment = () => {
+    const runTwikoo = () => {
+      twikoo.getRecentComments({
+        envId: 'https://twikoo.shiguangdev.eu.org',
+        region: '',
+        pageSize: 6,
+        includeReply: true
+      }).then(function (res) {
+        const twikooArray = res.map(e => {
+          return {
+            'content': changeContent(e.comment),
+            'avatar': e.avatar,
+            'nick': e.nick,
+            'url': e.url + '#' + e.id,
+            'date': new Date(e.created).toISOString()
+          }
+        })
+
+        saveToLocal.set('twikoo-newest-comments', JSON.stringify(twikooArray), 10/(60*24))
+        generateHtml(twikooArray)
+      }).catch(function (err) {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.textContent= "无法获取评论，请确认相关配置是否正确"
+      })
+    }
+
+    if (typeof twikoo === 'object') {
+      runTwikoo()
+    } else {
+      getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runTwikoo)
+    }
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'></a>`
+        }
+        
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <div class='name'><span>${array[i].nick} / </span><time datetime="${array[i].date}">${btf.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom && ($dom.innerHTML= result)
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('twikoo-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><div class="aplayer no-destroy" data-id="10051718332" data-server="netease" data-type="playlist" data-order="list" data-fixed="true" data-preload="auto" data-autoplay="false" data-mutex="true"></div><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="true"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script async="" data-pjax="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"></div></div><hr><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div><!-- hexo injector body_end start -->
+  <script data-pjax="" src="/js/hexo_githubcalendar.js"></script>
+  <script data-pjax="">
+        function GithubCalendarConfig(){
+            var git_githubapiurl ="https://githubcalendarapi.shiguang666.eu.org/api?user=shiguang-coding";
+            var git_color =['#ebedf0', '#a2f7af', '#6ce480', '#54ad63', '#469252', '#31753c', '#1f5f2a', '#13531f', '#084111', '#032b09', '#000000'];
+            var git_user ="shiguang-coding";
+            var parent_div_git = document.getElementById('recent-posts');
+            var git_div_html = '<div class="recent-post-item" style="width:100%;height:auto;padding:10px;"><div id="github_loading" style="width:10%;height:100%;margin:0 auto;display: block"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animateTransform></path></svg></div><div id="github_container"></div></div>';
+            if(parent_div_git && location.pathname =='/'){
+                console.log("已挂载hexo-github-calendar https://github.com/Barry-Flynn/hexo-github-calendar");
+                // parent_div_git.innerHTML=git_div_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",git_div_html) // 有报错，但不影响使用(支持pjax跳转)
+            };
+            GithubCalendar(git_githubapiurl,git_color,git_user)
+        }
+        if(document.getElementById('recent-posts')){
+            GithubCalendarConfig()
+        }
+    </script>
+    <style>#github_container{min-height:280px}@media screen and (max-width:650px) {#github_container{background-image:;min-height:0px}}</style>
+    <style></style><!-- hexo injector body_end end -->
+    <link rel="stylesheet" href="https://ai.tianli0.top/static/public/postChatUser_summary.min.css">
+    <script>
+        let tianliGPT_key = 'd5bf7262da0ef66e8635';
+        let tianliGPT_postSelector = '#article-container';
+        let tianliGPT_Title = '文章摘要';
+        let tianliGPT_postURL = '/^https?://[^/]+/[0-9]{4}/[0-9]{2}/[0-9]{2}/';
+        let tianliGPT_blacklist = '';
+        let tianliGPT_wordLimit = '1000';
+        let tianliGPT_typingAnimate = true;
+        var postChatConfig = {
+          backgroundColor: "#3e86f6",
+          bottom: "16px",
+          left: "16px",
+          fill: "#FFFFFF",
+          width: "44px",
+          frameWidth: "375px",
+          frameHeight: "600px",
+          defaultInput: true,
+          upLoadWeb: true,
+          showInviteLink: true,
+          userTitle: "PostChat",
+          userDesc: "如果你对网站的内容有任何疑问，可以来问我哦～",
+          addButton: true,
+          beginningText: "这篇文章介绍了"
+        };
+    </script>
+    <script data-postchat_key="d5bf7262da0ef66e8635" src="https://ai.tianli0.top/static/public/tianli_gpt.min.js"></script>
+  </body></html>
