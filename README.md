@@ -10,7 +10,7 @@
 
 https://blog.shiguangdev.cn/
 
-https://blog.shiguang666.eu.org/
+https://blog.shiguangdev.cn/
 
 https://blog.shiguang88.icu/
 
