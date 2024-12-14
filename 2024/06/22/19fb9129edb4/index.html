@@ -1,0 +1,754 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>【Hexo】Hexo插件开发步骤 | 時光</title><meta name="keywords" content="Hexo,plugins"><meta name="author" content="時光"><meta name="copyright" content="時光"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="【Hexo】Hexo插件开发步骤"><meta name="application-name" content="【Hexo】Hexo插件开发步骤"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="【Hexo】Hexo插件开发步骤"><meta property="og:url" content="https://blog.shiguang666.eu.org/2024/06/22/19fb9129edb4/index.html"><meta property="og:site_name" content="時光"><meta property="og:description" content="Hexo的插件嵌入有两种方式，一种是通过脚本（Scripts）的方式引入，一种是通过插件（Packages）的方式将自定义的插件内容发布到npm上。本文主要介绍第二种，如果您的代码很简单，建议您编写脚本，您只需要把 JavaScript 文件放到主题目录的 scripts 文件夹，在启动时就会自动"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://img.shiguangdev.cn/i/2024/10/17/6710c62cac4e6.png"><meta property="article:author" content="時光"><meta property="article:tag" content="博客,時光,時光的博客,時光博客园子,实用博客,开源,共享"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://img.shiguangdev.cn/i/2024/10/17/6710c62cac4e6.png"><meta name="description" content="Hexo的插件嵌入有两种方式，一种是通过脚本（Scripts）的方式引入，一种是通过插件（Packages）的方式将自定义的插件内容发布到npm上。本文主要介绍第二种，如果您的代码很简单，建议您编写脚本，您只需要把 JavaScript 文件放到主题目录的 scripts 文件夹，在启动时就会自动"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://blog.shiguang666.eu.org/2024/06/22/19fb9129edb4/"><link rel="preconnect" href="//cdn.cbd.int"><meta name="google-site-verification" content="xxx"><meta name="baidu-site-verification" content="code-xxx"><meta name="msvalidate.01" content="xxx"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: {"enable":true,"title":"与各类博主无限进步","addFriendPlaceholder":"昵称（请勿包含博客等字样）：\n网站地址（要求博客地址，请勿提交个人主页）：\n头像图片url（请提供尽可能清晰的图片，我会上传到我自己的图床）：\n描述：\n站点截图（可选）：\n"},
+  peoplecanvas: undefined,
+  postHeadAiDescription: undefined,
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: {"enable":true,"default":"晚上好👋","list":[{"greeting":"晚安😴","startTime":0,"endTime":5},{"greeting":"早上好鸭👋, 祝你一天好心情！","startTime":6,"endTime":9},{"greeting":"上午好👋, 状态很好，鼓励一下～","startTime":10,"endTime":10},{"greeting":"11点多啦, 在坚持一下就吃饭啦～","startTime":11,"endTime":11},{"greeting":"午安👋, 宝贝","startTime":12,"endTime":14},{"greeting":"🌈充实的一天辛苦啦！","startTime":14,"endTime":18},{"greeting":"19点喽, 奖励一顿丰盛的大餐吧🍔。","startTime":19,"endTime":19},{"greeting":"晚上好👋, 在属于自己的时间好好放松😌~","startTime":20,"endTime":24}]},
+  twikooEnvId: 'https://twikoo.shiguangdev.eu.org',
+  commentBarrageConfig:{"enable":true,"maxBarrage":1,"barrageTime":4000,"accessToken":"","mailMd5":""},
+  music_page_default: "nav_music",
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: true,
+  mainTone: undefined,
+  authorStatus: {"skills":["🌟 技术分享领航人","📚 终身学习倡导者","💡 创新思维启发源","📈 成长路径引路人","🚀 科技趋势探索者","🤖️ AI技术探索先锋","🌈 技术创新推动手","💬 社区互动活跃家","🛠️ 代码经验传授师","📢 知识传播倡导员"]},
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":true,"limitCount":300,"languages":{"author":"作者: 時光","link":"链接: ","source":"来源: 時光","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: true,
+  shortcutKey: {"enable":true,"delay":100,"shiftDelay":200},
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: '時光',
+  title: '【Hexo】Hexo插件开发步骤',
+  postAI: '',
+  pageFillDescription: '一、创建插件项目, 二、编写插件代码, 2.1、介绍, 工具, 2.2、开发示例, 2.3、本地测试, 2.3.1、初始化Hexo项目, 2.3.2、安装插件依赖, 1、通过 npm install 安装, 2、通过 npm link 安装, 3、手动引入依赖, 2.3.3、修改配置文件, 2.3.4、重新运行并测试插件, 三、发布到 NPM, 四、安装并使用插件, 4.1、安装插件, 4.2、修改配置文件, 4.3、重新运行并测试插件, 五、文档和宣传, 六、提交插件到 的插件嵌入有两种方式一种是通过脚本的方式引入一种是通过插件的方式将自定义的插件内容发布到上本文主要介绍第二种如果您的代码很简单建议您编写脚本您只需要把文件放到主题目录的文件夹在启动时就会自动加载具体操作可参考博客每天自动生成每日早报文章中相关介绍下面是引用官方的一段话开发插件至少要包含个文件一个是主程序另一个是描述插件的用途和所依赖的插件中至少要包含属性链接直达如果您的代码较复杂或是您想要发布到上建议您编写插件首先在文件夹中建立文件夹文件夹名称开头必须为如此一来才会在启动时加载否则将会忽略它文件夹内至少要包含个文件一个是主程序另一个是描述插件的用途和所依赖的插件中至少要包含属性例如一创建插件项目创建一个新的目录来存放你的插件项目文件夹名称开头必须为例如可在任意目录创建为方便测试也可直接在项目的目录下创建进入该目录初始化一个新的项目使用初始化有操作向导会引导你一步步输入文件的不同参数也可使用初始化一个仅包含默认参数的文件然后自行修改例如在发布包时仓库信息是一个可选字段但建议填写仓库信息可以帮助其他开发者更容易地找到和贡献代码如果你不想填写仓库信息可以省略这个字段二编写插件代码介绍可参考官方文档进行开发插件文档中文版插件文档英文版工具您可以使用提供的官方工具插件来加速开发文件工具程式本地化生成分页数据除了辅助函数的插件还可划分为不同类型控制台部署器过滤器生成器迁移器处理器渲染引擎标签初始化的时候会相应加载插件列表代码详见插件加载依托于其主要函数有调用读取从而进一步加载插件列表自带第三方插件加载脚本类插件自带主题下的脚本部分插件如果存在编译错误则会无法正常启动且输出错误日志根据日志检查错误相应调整即可开发示例在你的插件目录中创建一个文件并编写你的插件代码例如想要了解更多过滤器及执行顺序可参考过滤器列表事件你的插件逻辑假设我们需要做一个给文章添加版权声明的插件创建文件如下添加调试信息打印当前时间戳和消息插件尚未启用构建版权声明字符串将版权声明添加到文章内容的末尾再次添加调试信息确认版权声明已被添加返回修改后的内容这段代码通过获取配置文件中的特定参数配置项位于下的用于配置版权所有人以下是如何获取这个配置参数的示例获取下的配置在这段代码中我们首先从实例中获取配置对象然后我们通过点符号访问嵌套的配置项注意我们使用了可选链来避免在配置项不存在时抛出错误如果或在配置文件中不存在将保持未定义状态而不会引发错误本地测试初始化项目我们重新初始化一个项目初始化好后可以先执行三连命令运行看下效果安装插件依赖通过安装在你的项目目录中使用以下命令将本地插件链接到你的项目例如我项目目录为插件存放目录为执行安装命令由于安装较慢我使用的进行安装可以看到控制台提示成功添加一个依赖插件名称版本号我们到项目检查一下再检查下项目根目录下引入的依赖或者通过命令查看引入的依赖通过安装或者你也可以使用命令来创建一个全局链接然后在项目中使用这个链接以管理员权限执行命令否则会出现错误更多关于命令的内容详见基本使用执行查看是否创建成功检查项目根目录文件如果没有部分可以手动创建一个然后添加你链接的包的名称和版本例如如果你链接的包名为你可以这样添加例如此处我需要修改为手动引入依赖直接复制插件目录到项目文件夹内修改项目根目录文件在部分添加插件依赖修改配置文件在主配置文件中添加插件的配置注意不是主题的也有说需要添加下面这条配置的我不添加也是可以的这段代码是配置文件中的一部分用于指定博客项目所使用的插件具体来说这段代码的含义和作用如下含义这是一个配置项用于列出当前项目所使用的所有插件这是插件列表中的一个条目表示当前项目使用了名为的插件作用插件管理通过在文件中列出插件在启动时会自动加载这些插件并执行插件中定义的各种功能功能扩展是一个自定义插件通过在中声明它会在生成博客内容时调用该插件从而实现特定的功能扩展例如在你的例子中可能用于在每篇文章的末尾添加版权声明总结来说这段代码的作用是告诉在生成博客内容时要加载并使用插件以便实现该插件所提供的功能重新运行并测试插件注意此处每次运行一定要执行插件才会执行生效能看到文章底部出现版权声明就说明插件运行成功了控制台也会有相应日志输出三发布到确保你的插件目录中包含文件这是插件的入口文件添加文件提供插件的详细说明安装方法和使用示例添加文件声明你的插件使用的开源许可证如果你还没有账号需要先注册一个如果你已经有账号直接登录提示回车打开浏览器访问页面无论注册或登录都需要获取一次性密码即邮箱验证码发布你的插件控制台提示如下信息即代表发布成功发布成功后可直接在官网查询如果要更新插件的话改下版本号重新发布即可四安装并使用插件安装插件安装前先将根目录下目录以及刚才引入的依赖移除重新执行项目确保原配置已失效或者重新初始化个项目在你的项目目录中使用以下命令安装你的插件或者如下修改配置文件在你的项目配置文件中添加插件的配置重新运行并测试插件注意此处每次运行一定要执行插件才会执行生效五文档和宣传在上创建一个仓库并将你的插件代码推送到这个仓库在文件中提供详细的安装和使用说明在社区或其他相关论坛宣传你的插件六提交插件到插件列表打开官方插件列表的仓库点击右上角的按钮将仓库到你自己的账户克隆你的仓库到本地进入目录并创建文件添加你的插件信息例如提交并推送你的更改在你的仓库页面中点击按钮提交你的更改给官方插件列表提交后团队会审核你的插件一旦审核通过你的插件就会被添加到官方插件列表中参考贡献标签插件开发开发插件解决图片路径不一致',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-12-13 13:01:31',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><script async="" defer="" src="https://umami.shiguangdev.cn/script.js" data-website-id="ac8d5698-b224-4ea4-aa79-eefb80c47eef"></script><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="時光" type="application/atom+xml">
+</head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="/img/avatar.png"><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><div class="back-home-button"><i class="anzhiyufont anzhiyu-icon-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://www.shiguang666.eu.org" title="時光主页"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="時光主页"><span class="back-menu-item-text">時光主页</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://nav.shiguang666.eu.org" title="時光导航站"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="時光导航站"><span class="back-menu-item-text">時光导航站</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://game.shiguang666.eu.org" title="怀旧游戏机"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="怀旧游戏机"><span class="back-menu-item-text">怀旧游戏机</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://games.shiguang666.eu.org" title="在线小游戏"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="在线小游戏"><span class="back-menu-item-text">在线小游戏</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">后台管理</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://img.shiguangdev.cn/" title="時光图床"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/favicon.ico" alt="時光图床"><span class="back-menu-item-text">時光图床</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://qexo.shiguang666.eu.org/" title="Hexo管理面板"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://qexo.shiguang666.eu.org/favicon.ico" alt="Hexo管理面板"><span class="back-menu-item-text">Hexo管理面板</span></a></div></div></div></div><a id="site-name" href="/" accesskey="h"><div class="title">時光</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 归档</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随机</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/news/"><i class="fa fa-calendar faa-tada"></i><span> 早报亭</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/music/?id=10051718332&amp;server=netease"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/gallery/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/xjj/"><i class="fa fa-rocket faa-tada"></i><span> 养生堂</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/flink/"><i class="anzhiyufont anzhiyu-icon-artstation faa-tada" style="font-size: 0.9em;"></i><span> 朋友圈</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comment/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于我</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button only-home" id="travellings_button" title="随机前往一个开往项目网站"><a class="site-page" onclick="anzhiyu.totraveling()" title="随机前往一个开往项目网站" href="javascript:void(0);" rel="external nofollow" data-pjax-state="external"><i class="anzhiyufont anzhiyu-icon-train"></i></a></div><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍" accesskey="s"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="/img/wechat.png" target="_blank"><img class="post-qr-code-img" alt="微信" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/wechat.png"></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/alipay.png" target="_blank"><img class="post-qr-code-img" alt="支付宝" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/alipay.png"></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/12/"><span class="card-archive-list-date">十二月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">9</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/11/"><span class="card-archive-list-date">十一月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">8</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/10/"><span class="card-archive-list-date">十月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">31</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/09/"><span class="card-archive-list-date">九月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">38</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/08/"><span class="card-archive-list-date">八月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">9</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/07/"><span class="card-archive-list-date">七月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">18</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/06/"><span class="card-archive-list-date">六月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">30</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/05/"><span class="card-archive-list-date">五月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">20</span><span>篇</span></div></a></li></ul></div><hr></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item on" id="consoleCommentBarrage" onclick="anzhiyu.switchCommentBarrage()" title="热评开关"><a class="commentBarrage"><i class="anzhiyufont anzhiyu-icon-message"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="anzhiyu.musicToggle()" title="音乐开关"><a class="music-switch"><i class="anzhiyufont anzhiyu-icon-music"></i></a></div><div class="console-btn-item" id="consoleKeyboard" onclick="anzhiyu.keyboardToggle()" title="快捷键开关"><a class="keyboard-switch"><i class="anzhiyufont anzhiyu-icon-keyboard"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%A5%BD%E8%AE%B0%E6%80%A7%E4%B8%8D%E5%A6%82%E7%83%82%E7%AC%94%E5%A4%B4/" itemprop="url">好记性不如烂笔头</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/Hexo/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Hexo</span></a><a class="article-meta__tags" href="/tags/plugins/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>plugins</span></a></span></div></div><h1 class="post-title" itemprop="name headline">【Hexo】Hexo插件开发步骤</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2024-06-22T00:03:22.000Z" title="发表于 2024-06-22 08:03:22">2024-06-22</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2024-12-13T05:01:31.743Z" title="更新于 2024-12-13 13:01:31">2024-12-13</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="anzhiyufont anzhiyu-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">3.4k</span><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>13分钟</span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为上海"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>上海</span><span class="post-meta-separator"></span><span class="post-meta-commentcount"><i class="anzhiyufont anzhiyu-icon-comments post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2024/06/22/19fb9129edb4/#post-comment" tabindex="-1"><span id="twikoo-count"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></a></span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://img.shiguangdev.cn/i/2024/10/17/6710c62cac4e6.png"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope="" itemtype="https://blog.shiguang666.eu.org/2024/06/22/19fb9129edb4/"><header><a class="post-meta-categories" href="/categories/%E5%A5%BD%E8%AE%B0%E6%80%A7%E4%B8%8D%E5%A6%82%E7%83%82%E7%AC%94%E5%A4%B4/" itemprop="url">好记性不如烂笔头</a><a href="/tags/Hexo/" tabindex="-1" itemprop="url">Hexo</a><a href="/tags/plugins/" tabindex="-1" itemprop="url">plugins</a><h1 id="CrawlerTitle" itemprop="name headline">【Hexo】Hexo插件开发步骤</h1><span itemprop="author" itemscope="" itemtype="http://schema.org/Person">時光</span><time itemprop="dateCreated datePublished" datetime="2024-06-22T00:03:22.000Z" title="发表于 2024-06-22 08:03:22">2024-06-22</time><time itemprop="dateCreated datePublished" datetime="2024-12-13T05:01:31.743Z" title="更新于 2024-12-13 13:01:31">2024-12-13</time></header><div id="postchat_postcontent"><p> Hexo的插件嵌入有两种方式，一种是通过脚本（Scripts）的方式引入，一种是通过插件（Packages）的方式将自定义的插件内容发布到npm上。本文主要介绍第二种，如果您的代码很简单，建议您编写脚本，您只需要把 JavaScript 文件放到主题目录的 <code>scripts</code> 文件夹，在启动时就会自动加载。具体操作可参考 <a href="https://blog.shiguang666.eu.org/2024/06/20/b4d1ca345b31/">Hexo 博客每天自动生成每日早报文章</a> 中2.2相关介绍。</p>
+<p>下面是引用官方的一段话，开发<code>Hexo</code>插件至少要包含 2 个文件：一个是主程序<code>index.js</code>，另一个是 <code>package.json</code>，描述插件的用途和所依赖的插件。<code>package.json</code> 中至少要包含 <code>name</code>, <code>version</code>, <code>main</code> 属性。</p>
+<blockquote>
+<p><strong>链接直达</strong>：<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/plugins">https://hexo.io/zh-cn/docs/plugins</a></p>
+<p>如果您的代码较复杂，或是您想要发布到 NPM 上，建议您编写插件。首先，在 <code>node_modules</code> 文件夹中建立文件夹，文件夹名称开头必须为 <code>hexo-</code>，如此一来 Hexo 才会在启动时加载；否则 Hexo 将会忽略它。</p>
+<p>文件夹内至少要包含 2 个文件：一个是主程序，另一个是 <code>package.json</code>，描述插件的用途和所依赖的插件。</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── index.js</span><br><span class="line">└── package.json</span><br></pre></td></tr></tbody></table></figure>
+
+<p><code>package.json</code> 中至少要包含 <code>name</code>, <code>version</code>, <code>main</code> 属性，例如：</p>
+<figure class="highlight json"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">package.json<span class="punctuation">{</span></span><br><span class="line"><span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"hexo-my-plugin"</span><span class="punctuation">,</span></span><br><span class="line"><span class="attr">"version"</span><span class="punctuation">:</span> <span class="string">"0.0.1"</span><span class="punctuation">,</span></span><br><span class="line"><span class="attr">"main"</span><span class="punctuation">:</span> <span class="string">"index"</span></span><br><span class="line"><span class="punctuation">}</span></span><br></pre></td></tr></tbody></table></figure>
+</blockquote>
+<h2 id="一、创建插件项目"><a href="#一、创建插件项目" class="headerlink" title="一、创建插件项目"></a>一、创建插件项目</h2><p>创建一个新的目录来存放你的插件项目，文件夹名称开头必须为 <code>hexo-</code>，例如 <code>hexo-footer-plugin</code></p>
+<p>可在任意目录创建,为方便测试也可直接在<code>Hexo</code>项目的<code>node_modules</code>目录下创建</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> hexo-footer-plugin</span><br></pre></td></tr></tbody></table></figure>
+
+<p>进入该目录</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> hexo-footer-plugin</span><br></pre></td></tr></tbody></table></figure>
+
+<p>初始化一个新的 npm 项目</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm init</span><br></pre></td></tr></tbody></table></figure>
+
+<p>使用<code>npm init</code>初始化有操作向导，会引导你一步步输入<code>package.json</code>文件的不同参数。</p>
+<p>也可使用<code>npm init -y</code> 初始化一个仅包含默认参数的<code>package.json</code>文件</p>
+<figure class="highlight json"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">{</span></span><br><span class="line">  <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"hexo-footer-plugin"</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">"version"</span><span class="punctuation">:</span> <span class="string">"1.0.0"</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">"description"</span><span class="punctuation">:</span> <span class="string">""</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">"main"</span><span class="punctuation">:</span> <span class="string">"index.js"</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">"scripts"</span><span class="punctuation">:</span> <span class="punctuation">{</span></span><br><span class="line">    <span class="attr">"test"</span><span class="punctuation">:</span> <span class="string">"echo \"Error: no test specified\" &amp;&amp; exit 1"</span></span><br><span class="line">  <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">"keywords"</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">"author"</span><span class="punctuation">:</span> <span class="string">""</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">"license"</span><span class="punctuation">:</span> <span class="string">"ISC"</span></span><br><span class="line"><span class="punctuation">}</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>然后自行修改，例如</p>
+<figure class="highlight json"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">{</span></span><br><span class="line">  <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"hexo-footer-plugin"</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">"version"</span><span class="punctuation">:</span> <span class="string">"1.0.0"</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">"description"</span><span class="punctuation">:</span> <span class="string">"A Hexo plugin to add a custom footer with copyright information to posts."</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">"main"</span><span class="punctuation">:</span> <span class="string">"index.js"</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">"scripts"</span><span class="punctuation">:</span> <span class="punctuation">{</span></span><br><span class="line">    <span class="attr">"test"</span><span class="punctuation">:</span> <span class="string">"echo \"Error: no test specified\" &amp;&amp; exit 1"</span></span><br><span class="line">  <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">"keywords"</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="string">"hexo"</span><span class="punctuation">,</span></span><br><span class="line">    <span class="string">"plugin"</span><span class="punctuation">,</span></span><br><span class="line">    <span class="string">"footer"</span><span class="punctuation">,</span></span><br><span class="line">    <span class="string">"copyright"</span></span><br><span class="line">  <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">"author"</span><span class="punctuation">:</span> <span class="punctuation">{</span></span><br><span class="line">    <span class="attr">"name"</span><span class="punctuation">:</span> <span class="string">"Shiguang-coding"</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">"email"</span><span class="punctuation">:</span> <span class="string">"an_shiguang@163.com"</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">"url"</span><span class="punctuation">:</span> <span class="string">"https://blog.shiguang666.eu.org"</span></span><br><span class="line">  <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">"license"</span><span class="punctuation">:</span> <span class="string">"MIT"</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">"dependencies"</span><span class="punctuation">:</span> <span class="punctuation">{</span></span><br><span class="line">    <span class="attr">"hexo"</span><span class="punctuation">:</span> <span class="string">"^5.0.0"</span></span><br><span class="line">  <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">"repository"</span><span class="punctuation">:</span> <span class="punctuation">{</span></span><br><span class="line">    <span class="attr">"type"</span><span class="punctuation">:</span> <span class="string">"git"</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">"url"</span><span class="punctuation">:</span> <span class="string">"https://github.com/Shiguang-coding/hexo-footer-plugin.git"</span></span><br><span class="line">  <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">"bugs"</span><span class="punctuation">:</span> <span class="punctuation">{</span></span><br><span class="line">    <span class="attr">"url"</span><span class="punctuation">:</span> <span class="string">"https://github.com/Shiguang-coding/hexo-footer-plugin/issues"</span></span><br><span class="line">  <span class="punctuation">}</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">"homepage"</span><span class="punctuation">:</span> <span class="string">"https://github.com/Shiguang-coding/hexo-footer-plugin#readme"</span></span><br><span class="line"><span class="punctuation">}</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>在发布npm包时，仓库信息（repository）是一个可选字段，但建议填写。仓库信息可以帮助其他开发者更容易地找到和贡献代码。如果你不想填写仓库信息，可以省略这个字段。</p>
+<h2 id="二、编写插件代码"><a href="#二、编写插件代码" class="headerlink" title="二、编写插件代码"></a>二、编写插件代码</h2><h3 id="2-1、介绍"><a href="#2-1、介绍" class="headerlink" title="2.1、介绍"></a>2.1、介绍</h3><blockquote>
+<p>可参考官方文档进行开发</p>
+<p><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/api/">Hexo API</a></p>
+<p><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/plugins">Hexo插件文档中文版</a></p>
+<p><a target="_blank" rel="noopener" href="https://hexo.io/docs/plugins">Hexo插件文档英文版</a></p>
+<h3 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h3><p>您可以使用 Hexo 提供的官方工具插件来加速开发：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo-fs">hexo-fs</a>：文件 IO</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo-util">hexo-util</a>：工具程式</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo-i18n">hexo-i18n</a>：本地化（i18n）</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo-pagination">hexo-pagination</a>：生成分页数据</li>
+</ul>
+</blockquote>
+<p> 除了<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/api/helper">辅助函数（Helper）</a>，Hexo的插件还可划分为不同类型：<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/api/console">控制台 (Console)</a>、<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/api/deployer">部署器 (Deployer)</a>、<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/api/filter">过滤器 (Filter)</a>、<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/api/generator">生成器 (Generator)</a>、<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/api/migrator">迁移器 (Migrator)</a>、<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/api/processor">处理器 (Processor)</a>、<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/api/renderer">渲染引擎 (Renderer)</a>、<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/api/tag">标签 (Tag)</a>。</p>
+<p>Hexo初始化的时候会相应加载插件列表，代码详见 <code>node_modules\hexo\lib\hexo\index.js</code></p>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Load internal plugins</span></span><br><span class="line"><span class="built_in">require</span>(<span class="string">'../plugins/console'</span>)(<span class="variable language_">this</span>);</span><br><span class="line"><span class="built_in">require</span>(<span class="string">'../plugins/filter'</span>)(<span class="variable language_">this</span>);</span><br><span class="line"><span class="built_in">require</span>(<span class="string">'../plugins/generator'</span>)(<span class="variable language_">this</span>);</span><br><span class="line"><span class="built_in">require</span>(<span class="string">'../plugins/helper'</span>)(<span class="variable language_">this</span>);</span><br><span class="line"><span class="built_in">require</span>(<span class="string">'../plugins/injector'</span>)(<span class="variable language_">this</span>);</span><br><span class="line"><span class="built_in">require</span>(<span class="string">'../plugins/processor'</span>)(<span class="variable language_">this</span>);</span><br><span class="line"><span class="built_in">require</span>(<span class="string">'../plugins/renderer'</span>)(<span class="variable language_">this</span>);</span><br><span class="line"><span class="built_in">require</span>(<span class="string">'../plugins/tag'</span>)(<span class="variable language_">this</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Load config</span></span><br><span class="line"><span class="keyword">return</span> <span class="title class_">Promise</span>.<span class="title function_">each</span>([</span><br><span class="line">    <span class="string">'update_package'</span>, <span class="comment">// Update package.json</span></span><br><span class="line">    <span class="string">'load_config'</span>, <span class="comment">// Load config</span></span><br><span class="line">    <span class="string">'load_theme_config'</span>, <span class="comment">// Load alternate theme config</span></span><br><span class="line">    <span class="string">'load_plugins'</span> <span class="comment">// Load external plugins &amp; scripts</span></span><br><span class="line">], <span class="function"><span class="params">name</span> =&gt;</span> <span class="built_in">require</span>(<span class="string">`./<span class="subst">${name}</span>`</span>)(<span class="variable language_">this</span>)).<span class="title function_">then</span>(<span class="function">() =&gt;</span> <span class="variable language_">this</span>.<span class="title function_">execFilter</span>(<span class="string">'after_init'</span>, <span class="literal">null</span>, { <span class="attr">context</span>: <span class="variable language_">this</span> })).<span class="title function_">then</span>(<span class="function">() =&gt;</span> {</span><br><span class="line">    <span class="comment">// Ready to go!</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="title function_">emit</span>(<span class="string">'ready'</span>);</span><br><span class="line">});</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>插件加载依托于<code>load_plugins.js</code>，其主要函数有<code>loadModules</code>、<code>loadScripts</code></p>
+<p> <strong>loadModules</strong> :  调用<code>loadModuleList</code>读取<code>package.json</code>，从而进一步加载插件列表(自带&amp;第三方插件)<br><strong>loadScripts</strong> : 加载脚本类插件(自带&amp;主题scripts下的脚本)</p>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = <span class="function"><span class="params">ctx</span> =&gt;</span> {</span><br><span class="line">  <span class="keyword">if</span> (!ctx.<span class="property">env</span>.<span class="property">init</span> || ctx.<span class="property">env</span>.<span class="property">safe</span>) <span class="keyword">return</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="title function_">loadModules</span>(ctx).<span class="title function_">then</span>(<span class="function">() =&gt;</span> <span class="title function_">loadScripts</span>(ctx));</span><br><span class="line">};</span><br></pre></td></tr></tbody></table></figure>
+
+<p> 部分插件如果存在编译错误则Hexo会无法正常启动且输出错误日志，根据日志检查错误相应调整即可。</p>
+<h3 id="2-2、开发示例"><a href="#2-2、开发示例" class="headerlink" title="2.2、开发示例"></a>2.2、开发示例</h3><p>在你的插件目录中创建一个 <code>index.js</code> 文件，并编写你的插件代码。例如：</p>
+<blockquote>
+<p>想要了解更多过滤器及执行顺序可参考 <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/api/filter#%E8%BF%87%E6%BB%A4%E5%99%A8%E5%88%97%E8%A1%A8">过滤器列表</a>，<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/api/events">事件</a></p>
+</blockquote>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo.<span class="property">extend</span>.<span class="property">filter</span>.<span class="title function_">register</span>(<span class="string">'after_post_render'</span>, <span class="keyword">function</span>(<span class="params">data</span>){</span><br><span class="line">  <span class="comment">// 你的插件逻辑</span></span><br><span class="line">});</span><br></pre></td></tr></tbody></table></figure>
+
+<p>假设我们需要做一个给文章添加版权声明的插件，<code>hexo-footer-plugin</code>，创建 <code>index.js</code>文件如下</p>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">hexo.<span class="property">extend</span>.<span class="property">filter</span>.<span class="title function_">register</span>(<span class="string">'after_post_render'</span>, <span class="keyword">function</span>(<span class="params">data</span>){</span><br><span class="line">    <span class="comment">// 添加调试信息，打印当前时间戳和消息</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">"Debug: hexo-footer-plugin is running at"</span>, <span class="keyword">new</span> <span class="title class_">Date</span>().<span class="title function_">toISOString</span>());</span><br><span class="line">  </span><br><span class="line">    <span class="keyword">const</span> { config } = hexo;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> isEnabled = config[<span class="string">'hexo-footer-plugin'</span>]?.<span class="property">enable</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(!isEnabled){</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">warn</span>(<span class="string">"hexo-footer-plugin 插件尚未启用!!"</span>);</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">const</span> copyrightOwner = config[<span class="string">'hexo-footer-plugin'</span>]?.<span class="property">copyright_owner</span>;</span><br><span class="line">  </span><br><span class="line">    <span class="keyword">if</span> (!copyrightOwner) {</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">warn</span>(<span class="string">"Warning: copyright_owner is not set in the configuration."</span>);</span><br><span class="line">      <span class="keyword">return</span> data;</span><br><span class="line">    }</span><br><span class="line">  </span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">"copyrightOwner:"</span>, copyrightOwner);</span><br><span class="line">  </span><br><span class="line">    <span class="comment">// 构建版权声明字符串</span></span><br><span class="line">    <span class="keyword">var</span> footer = <span class="string">"\n&lt;div id='custom-footer'&gt;© "</span> + <span class="keyword">new</span> <span class="title class_">Date</span>().<span class="title function_">getFullYear</span>() + <span class="string">" "</span> + copyrightOwner + <span class="string">"&lt;/div&gt;"</span>;</span><br><span class="line">  </span><br><span class="line">    <span class="comment">// 将版权声明添加到文章内容的末尾</span></span><br><span class="line">    data.<span class="property">content</span> += footer;</span><br><span class="line">  </span><br><span class="line">    <span class="comment">// 再次添加调试信息，确认版权声明已被添加</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">"Debug: footer added to post content"</span>);</span><br><span class="line">  </span><br><span class="line">    <span class="comment">// 返回修改后的内容</span></span><br><span class="line">    <span class="keyword">return</span> data;</span><br><span class="line">  });</span><br></pre></td></tr></tbody></table></figure>
+
+<p>这段代码 通过<code>hexo.config</code> 获取配置文件中的特定参数，配置项位于 <code>hexo-footer-plugin</code> 下的<code>copyright_owner</code>，用于配置版权所有人，以下是如何获取这个配置参数的示例：</p>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> { config } = hexo;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取 hexo-footer-plugin 下的 copyright_owner 配置</span></span><br><span class="line"><span class="keyword">const</span> copyrightOwner = config[<span class="string">'hexo-footer-plugin'</span>]?.<span class="property">copyright_owner</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(copyrightOwner);</span><br></pre></td></tr></tbody></table></figure>
+
+<p>在这段代码中，我们首先从 <code>hexo</code> 实例中获取配置对象 <code>config</code>。然后，我们通过点符号访问嵌套的配置项。注意，我们使用了可选链 <code>?.</code> 来避免在配置项不存在时抛出错误。</p>
+<p>如果 <code>hexo-footer-plugin</code> 或 <code>copyright_owner</code> 在配置文件中不存在，<code>copyrightOwner</code> 将保持未定义状态，而不会引发错误。</p>
+<h3 id="2-3、本地测试"><a href="#2-3、本地测试" class="headerlink" title="2.3、本地测试"></a>2.3、本地测试</h3><h4 id="2-3-1、初始化Hexo项目"><a href="#2-3-1、初始化Hexo项目" class="headerlink" title="2.3.1、初始化Hexo项目"></a>2.3.1、初始化Hexo项目</h4><p>我们重新初始化一个Hexo项目</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo init blog</span><br><span class="line"><span class="built_in">cd</span> blog</span><br></pre></td></tr></tbody></table></figure>
+
+<p>初始化好后可以先执行三连命令运行看下效果</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clean &amp;&amp; hexo g &amp;&amp; hexo s</span><br></pre></td></tr></tbody></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/10/16/670fbf6820176.png" alt="image-20240622113429888"></p>
+<h4 id="2-3-2、安装插件依赖"><a href="#2-3-2、安装插件依赖" class="headerlink" title="2.3.2、安装插件依赖"></a>2.3.2、安装插件依赖</h4><h5 id="1、通过-npm-install-安装"><a href="#1、通过-npm-install-安装" class="headerlink" title="1、通过 npm install 安装"></a>1、通过 <code>npm install</code> 安装</h5><p>在你的 Hexo 项目目录中，使用以下命令将本地插件链接到你的 Hexo 项目：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install /path/to/your/hexo-footer-plugin</span><br></pre></td></tr></tbody></table></figure>
+
+<p>例如我Hexo项目目录为 <code>D:\hexo\test\blog</code>，插件存放目录为 <code>D:\hexo\plugins\hexo-footer-plugin</code></p>
+<p>执行安装命令，由于npm安装较慢，我使用的cnpm进行安装</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm install ../../plugins/hexo-footer-plugin</span><br></pre></td></tr></tbody></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/10/16/670fbf68886ef.png" alt="image-20240622102520309"></p>
+<p>可以看到控制台提示成功添加一个依赖，插件名称 <code>hexo-footer-plugin</code>	版本号  <code>^1.0.0</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/10/16/670fbf68c3f74.png" alt="image-20240622102831825"></p>
+<p>我们到Hexo项目<code>node_modules</code>检查一下</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/10/16/670fbf691c38a.png" alt="image-20240622103404276"></p>
+<p>再检查下Hexo项目根目录下<code>package.json</code>引入的依赖 <code>dependencies</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/10/16/670fbf6974dee.png" alt="image-20240622103454733"></p>
+<p>或者通过命令 <code>npm ls</code> 查看引入的依赖</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/10/16/670fbf69b3cd6.png" alt="image-20240622103609849"></p>
+<h5 id="2、通过-npm-link-安装"><a href="#2、通过-npm-link-安装" class="headerlink" title="2、通过 npm link 安装"></a>2、通过 <code>npm link</code> 安装</h5><p>或者，你也可以使用 <code>npm link</code> 命令来创建一个全局链接，然后在 Hexo 项目中使用这个链接：</p>
+<p>以管理员权限执行命令，否则会出现 <a href="">npm ERR! errno -4048</a> 错误</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /path/to/your/hexo-footer-plugin</span><br><span class="line">npm <span class="built_in">link</span></span><br><span class="line"><span class="built_in">cd</span> /path/to/your/hexo-project</span><br><span class="line">npm <span class="built_in">link</span> hexo-footer-plugin</span><br></pre></td></tr></tbody></table></figure>
+
+<p>更多关于 <code>npm link</code>命令的内容详见 <a href="">npm link 基本使用</a></p>
+<p>执行<code>npm ls</code> 查看link是否创建成功</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/10/16/670fbf69f29be.png" alt="image-20240622111938844"></p>
+<p>检查Hexo项目根目录 <code>package.json</code>文件，如果没有 <code>dependencies</code> 部分，可以手动创建一个。然后，添加你链接的包的名称和版本。例如，如果你链接的包名为 <code>my-package</code>，你可以这样添加：</p>
+<figure class="highlight json"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">{</span></span><br><span class="line">  <span class="attr">"dependencies"</span><span class="punctuation">:</span> <span class="punctuation">{</span></span><br><span class="line">    <span class="attr">"my-package"</span><span class="punctuation">:</span> <span class="string">"file:../path/to/my-package"</span></span><br><span class="line">  <span class="punctuation">}</span></span><br><span class="line"><span class="punctuation">}</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>例如此处我需要修改为</p>
+<figure class="highlight json"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">{</span></span><br><span class="line">  <span class="attr">"dependencies"</span><span class="punctuation">:</span> <span class="punctuation">{</span></span><br><span class="line">    <span class="attr">"hexo-footer-plugin"</span><span class="punctuation">:</span> <span class="string">"file:./../../plugins/hexo-footer-plugin"</span></span><br><span class="line">  <span class="punctuation">}</span></span><br><span class="line"><span class="punctuation">}</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h5 id="3、手动引入依赖"><a href="#3、手动引入依赖" class="headerlink" title="3、手动引入依赖"></a>3、手动引入依赖</h5><p>直接复制插件目录 <code>hexo-footer-plugin</code> 到Hexo项目 <code>node_modules</code>文件夹内</p>
+<p>修改Hexo项目根目录 <code>package.json</code>文件，在<code>dependencies</code> 部分添加插件依赖</p>
+<figure class="highlight json"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">{</span></span><br><span class="line">  <span class="attr">"dependencies"</span><span class="punctuation">:</span> <span class="punctuation">{</span></span><br><span class="line">    <span class="attr">"hexo-footer-plugin"</span><span class="punctuation">:</span> <span class="string">"^1.0.0"</span></span><br><span class="line">  <span class="punctuation">}</span></span><br><span class="line"><span class="punctuation">}</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="2-3-3、修改配置文件"><a href="#2-3-3、修改配置文件" class="headerlink" title="2.3.3、修改配置文件"></a>2.3.3、修改配置文件</h4><p>在Hexo主配置文件 <code>_config.yml</code> 中添加插件的配置，注意不是主题的<code>_config.yml</code></p>
+<figure class="highlight yaml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">hexo-footer-plugin:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">copyright_owner:</span> <span class="string">Your</span> <span class="string">Name</span></span><br></pre></td></tr></tbody></table></figure>
+
+<blockquote>
+<p>也有说需要添加下面这条配置的，我不添加也是可以的</p>
+<figure class="highlight yaml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">plugins:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">hexo-footer-plugin</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>这段代码是 Hexo 配置文件<code>_config.yml</code> 中的一部分，用于指定 Hexo 博客项目所使用的插件。具体来说，这段代码的含义和作用如下：</p>
+<ol>
+<li><strong>含义</strong>：<ul>
+<li><code>plugins</code>：这是一个配置项，用于列出当前 Hexo 项目所使用的所有插件。</li>
+<li><code>- hexo-footer-plugin</code>：这是插件列表中的一个条目，表示当前项目使用了名为 <code>hexo-footer-plugin</code> 的插件。</li>
+</ul>
+</li>
+<li><strong>作用</strong>：<ul>
+<li><strong>插件管理</strong>：通过在 <code>_config.yml</code> 文件中列出插件，Hexo 在启动时会自动加载这些插件，并执行插件中定义的各种功能。</li>
+<li><strong>功能扩展</strong>：<code>hexo-footer-plugin</code> 是一个自定义插件，通过在 <code>_config.yml</code> 中声明它，Hexo 会在生成博客内容时调用该插件，从而实现特定的功能扩展。例如，在你的例子中，<code>hexo-footer-plugin</code> 可能用于在每篇文章的末尾添加版权声明。</li>
+</ul>
+</li>
+</ol>
+<p>总结来说，这段代码的作用是告诉 Hexo 在生成博客内容时要加载并使用 <code>hexo-footer-plugin</code> 插件，以便实现该插件所提供的功能。</p>
+</blockquote>
+<h4 id="2-3-4、重新运行并测试插件"><a href="#2-3-4、重新运行并测试插件" class="headerlink" title="2.3.4、重新运行并测试插件"></a>2.3.4、重新运行并测试插件</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clean &amp;&amp; hexo g &amp;&amp; hexo s</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>注意</strong>： 此处每次运行一定要执行 <code>hexo clean</code> 插件才会执行生效</p>
+<p>能看到文章底部出现版权声明就说明插件运行成功了</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/10/16/670fbf6a624f8.png" alt="image-20240622114630268"></p>
+<p>控制台也会有相应日志输出</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/10/16/670fc0d7cd798.png" alt="image-20240622114806936"></p>
+<h2 id="三、发布到-NPM"><a href="#三、发布到-NPM" class="headerlink" title="三、发布到 NPM"></a>三、<strong>发布到 NPM</strong></h2><p>确保你的插件目录中包含 <code>index.js</code> 文件，这是插件的入口文件。</p>
+<p>添加 <code>README.md</code> 文件，提供插件的详细说明、安装方法和使用示例。</p>
+<p>添加 <code>LICENSE</code> 文件，声明你的插件使用的开源许可证。</p>
+<p>如果你还没有 npm 账号，需要先注册一个：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm adduser</span><br></pre></td></tr></tbody></table></figure>
+
+<p>如果你已经有账号，直接登录：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm login</span><br></pre></td></tr></tbody></table></figure>
+
+<p>提示回车打开浏览器访问页面，无论注册或登录都需要获取一次性密码(One-time Password)，即邮箱验证码</p>
+<p>发布你的插件：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm publish</span><br></pre></td></tr></tbody></table></figure>
+
+<p>控制台提示如下信息即代表发布成功</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/10/16/670fc0d81baf3.png" alt="image-20240622124723244"></p>
+<p>发布成功后可直接在<a target="_blank" rel="noopener" href="https://www.npmjs.com/package/hexo-footer-plugin">NPM官网</a>查询</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/10/16/670fc0d877f4d.png" alt="image-20240622124934704"></p>
+<p>如果要更新插件的话，改下版本号重新发布即可。</p>
+<h2 id="四、安装并使用插件"><a href="#四、安装并使用插件" class="headerlink" title="四、安装并使用插件"></a>四、<strong>安装并使用插件</strong></h2><h3 id="4-1、安装插件"><a href="#4-1、安装插件" class="headerlink" title="4.1、安装插件"></a>4.1、安装插件</h3><p>安装前先将Hexo根目录下<code>node_modules</code>目录以及<code>package.json</code>刚才引入的依赖移除重新执行项目确保原配置已失效，或者重新初始化个Hexo项目。</p>
+<p>在你的 Hexo 项目目录中，使用以下命令安装你的插件：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-footer-plugin --save</span><br></pre></td></tr></tbody></table></figure>
+
+<p>或者</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm install hexo-footer-plugin --save</span><br></pre></td></tr></tbody></table></figure>
+
+<p>如下</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/10/16/670fc0d8b70e8.png" alt="image-20240622125310889"></p>
+<h3 id="4-2、修改配置文件"><a href="#4-2、修改配置文件" class="headerlink" title="4.2、修改配置文件"></a>4.2、修改配置文件</h3><p>在你的 Hexo 项目配置文件 <code>_config.yml</code> 中添加插件的配置：</p>
+<figure class="highlight yaml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">hexo-footer-plugin:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">copyright_owner:</span> <span class="string">Your</span> <span class="string">Name</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="4-3、重新运行并测试插件"><a href="#4-3、重新运行并测试插件" class="headerlink" title="4.3、重新运行并测试插件"></a>4.3、重新运行并测试插件</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clean &amp;&amp; hexo g &amp;&amp; hexo s</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>注意</strong>： 此处每次运行一定要执行 <code>hexo clean</code> 插件才会执行生效</p>
+<h2 id="五、文档和宣传"><a href="#五、文档和宣传" class="headerlink" title="五、文档和宣传"></a>五、文档和宣传</h2><p>在 GitHub 上创建一个仓库，并将你的插件代码推送到这个仓库。</p>
+<p>在 README 文件中提供详细的安装和使用说明。</p>
+<p>在 Hexo 社区或其他相关论坛宣传你的插件。</p>
+<h2 id="六、提交插件到-Hexo-插件列表"><a href="#六、提交插件到-Hexo-插件列表" class="headerlink" title="六、提交插件到 Hexo 插件列表"></a>六、提交插件到 <a target="_blank" rel="noopener" href="https://hexo.io/plugins/">Hexo 插件列表</a></h2><p>打开 Hexo 官方插件列表的 GitHub 仓库：<a target="_blank" rel="noopener" href="https://github.com/hexojs/site">hexojs/site</a>。</p>
+<p>点击右上角的 “Fork” 按钮，将仓库 fork 到你自己的 GitHub 账户。</p>
+<p>克隆你 fork 的仓库到本地：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/YOUR_GITHUB_USERNAME/site.git</span><br></pre></td></tr></tbody></table></figure>
+
+<p>进入  <code>source/_data/plugins</code> 目录并创建<code>your-plugin-name.yml</code>文件，添加你的插件信息。例如：</p>
+<figure class="highlight yaml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">description:</span> <span class="string">A</span> <span class="string">Hexo</span> <span class="string">plugin</span> <span class="string">to</span> <span class="string">add</span> <span class="string">a</span> <span class="string">custom</span> <span class="string">footer</span> <span class="string">with</span> <span class="string">copyright</span> <span class="string">information</span> <span class="string">to</span> <span class="string">posts.</span></span><br><span class="line"><span class="attr">link:</span> <span class="string">https://github.com/Shiguang-coding/hexo-footer-plugin</span></span><br><span class="line"><span class="attr">tags:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">plugin</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">footer</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">copyright</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>提交并推送你的更改：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add <span class="built_in">source</span>/_data/plugins/your-plugin-name.yml</span><br><span class="line">git commit -m <span class="string">"Add my Hexo plugin"</span></span><br><span class="line">git push origin master</span><br></pre></td></tr></tbody></table></figure>
+
+<p>在 <strong>你的</strong> GitHub 仓库页面中，点击 “New pull request” 按钮，提交你的更改给 Hexo 官方插件列表。</p>
+<p>提交 pull request 后，Hexo 团队会审核你的插件。一旦审核通过，你的插件就会被添加到 Hexo 官方插件列表中。</p>
+<p><strong>参考</strong></p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/api/">Hexo API</a></p>
+<p><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/contributing.html">Hexo 贡献</a></p>
+<p><a target="_blank" rel="noopener" href="https://hexo.io/docs/plugins#Publishing">Hexo Plugins</a></p>
+<p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/2086829">hexo-butterfly-npm标签插件开发</a></p>
+<p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1970544">Hexo + Typora + 开发Hexo插件 解决图片路径不一致</a></p>
+</blockquote>
+</div></article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/avatar.png" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/avatar.png" title="头像" alt="头像"></a><div class="post-copyright__author_name">時光</div><div class="post-copyright__author_desc">心寄朗朗乾坤，胸怀真修之道。</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://blog.shiguang666.eu.org/2024/06/22/19fb9129edb4/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://blog.shiguang666.eu.org/2024/06/22/19fb9129edb4/')">【Hexo】Hexo插件开发步骤</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="anzhiyu.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="anzhiyufont anzhiyu-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="/img/wechat.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/wechat.png" alt="微信"></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/alipay.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/alipay.png" alt="支付宝"></a><div class="post-qr-code-desc">支付宝</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="anzhiyu.removeRewardMask()" style="display: none"></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://blog.shiguang666.eu.org/2024/06/22/19fb9129edb4/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=【Hexo】Hexo插件开发步骤&amp;url=https://blog.shiguang666.eu.org/2024/06/22/19fb9129edb4/&amp;pic=https://img.shiguangdev.cn/i/2024/10/17/6710c62cac4e6.png" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.shiguang666.eu.org" target="_blank">時光</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/Hexo/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>Hexo<span class="tagsPageCount">24</span></a><a class="post-meta__box__tags" href="/tags/plugins/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>plugins<span class="tagsPageCount">1</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://img.shiguangdev.cn/i/2024/12/13/675c5996649aa.webp" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/06/22/42663c7b0211/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://file.alapi.cn/60s/202406221718989092_head.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">【每日早报】-2024-06-22 - 星期六</div></div></a></div><div class="next-post pull-right"><a href="/2024/06/22/45f9b42e4573/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/10/18/671251f4ea790.png?_r_=128aa2f6-fdd4-921b-e6ac-694f7d4c94f3" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">npm ERR! errno -4048</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/2024/06/24/2b00e59a5161/" title="Hexo执行报错 unknown block tag: xxxx"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/10/17/6710c62cac4e6.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-06-24</div><div class="title">Hexo执行报错 unknown block tag: xxxx</div></div></a></div><div><a href="/2024/05/26/83a64f13788a/" title="【Hexo】Butterfly主题添加备案号"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/10/17/6710c62cac4e6.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-05-26</div><div class="title">【Hexo】Butterfly主题添加备案号</div></div></a></div><div><a href="/2024/06/19/0e3b651095f9/" title="【Hexo】Butterfly主题在主页添加GitHub贡献日历"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/11/17/6738c2c53119d.webp" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-06-19</div><div class="title">【Hexo】Butterfly主题在主页添加GitHub贡献日历</div></div></a></div><div><a href="/2024/06/24/5d42540fdef5/" title="【Hexo】Butterfly主题配置及美化"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/07/11/668fa5f2c60c9.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-06-24</div><div class="title">【Hexo】Butterfly主题配置及美化</div></div></a></div><div><a href="/2023/12/25/a58d0008256b/" title="【Hexo】Hexo基本使用"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/10/17/6710c62cac4e6.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2023-12-25</div><div class="title">【Hexo】Hexo基本使用</div></div></a></div><div><a href="/2024/06/23/005158032900/" title="【Hexo】Hexo目录结构"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/10/17/6710c62cac4e6.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-06-23</div><div class="title">【Hexo】Hexo目录结构</div></div></a></div></div></div><hr><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="anzhiyufont anzhiyu-icon-comments"></i><span> 评论</span></div><div class="comment-randomInfo"><a onclick="anzhiyu.addRandomCommentInfo()" href="javascript:void(0)" style="display: none">匿名评论</a><a href="/privacy" style="margin-left: 4px">隐私政策</a></div><div class="comment-tips" id="comment-tips"><span>✅ 你无需删除空行，直接评论以获取最佳展示效果</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div><div class="comment-barrage"></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"><div class="author-status"><img class="g-status" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://emotion.acs.pw/emotion/Heo/送福.png" alt="status"></div></div><div class="author-info__description">代码成就万事基积沙镇海,<br>梦想永在凌云意意气风发。</div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/"><h1 class="author-info__name">時光</h1><div class="author-info__desc">心寄朗朗乾坤，胸怀真修之道。</div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/shiguang-coding" target="_blank" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a></div></div></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bullhorn anzhiyu-shake"></i><span>公告</span></div><div class="announcement_content"><span>🌟欢迎光临時光的博客园子🌟</span><br> <span><a href="https://blog.shiguang666.eu.org"><b>blog.shiguang666.eu.org</b></a></span><br> <span><a target="_blank" rel="noopener" href="https://blog.shiguangdev.cn"><b>blog.shiguangdev.cn</b></a></span><br> <span><a target="_blank" rel="noopener" href="https://blog.shiguang88.icu"><b>blog.shiguang88.icu</b></a></span><br> <span>🤔 如有问题欢迎评论区交流！</span><br> <span>📧 如需联系我：<a href="mailto:an_shiguang@163.com"><b>发送邮件🚀</b></a></span> <div id="welcome-info"></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%88%9B%E5%BB%BA%E6%8F%92%E4%BB%B6%E9%A1%B9%E7%9B%AE"><span class="toc-number">1.</span> <span class="toc-text">一、创建插件项目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E7%BC%96%E5%86%99%E6%8F%92%E4%BB%B6%E4%BB%A3%E7%A0%81"><span class="toc-number">2.</span> <span class="toc-text">二、编写插件代码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1%E3%80%81%E4%BB%8B%E7%BB%8D"><span class="toc-number">2.1.</span> <span class="toc-text">2.1、介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A5%E5%85%B7"><span class="toc-number">2.2.</span> <span class="toc-text">工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2%E3%80%81%E5%BC%80%E5%8F%91%E7%A4%BA%E4%BE%8B"><span class="toc-number">2.3.</span> <span class="toc-text">2.2、开发示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3%E3%80%81%E6%9C%AC%E5%9C%B0%E6%B5%8B%E8%AF%95"><span class="toc-number">2.4.</span> <span class="toc-text">2.3、本地测试</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-1%E3%80%81%E5%88%9D%E5%A7%8B%E5%8C%96Hexo%E9%A1%B9%E7%9B%AE"><span class="toc-number">2.4.1.</span> <span class="toc-text">2.3.1、初始化Hexo项目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-2%E3%80%81%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6%E4%BE%9D%E8%B5%96"><span class="toc-number">2.4.2.</span> <span class="toc-text">2.3.2、安装插件依赖</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1%E3%80%81%E9%80%9A%E8%BF%87-npm-install-%E5%AE%89%E8%A3%85"><span class="toc-number">2.4.2.1.</span> <span class="toc-text">1、通过 npm install 安装</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2%E3%80%81%E9%80%9A%E8%BF%87-npm-link-%E5%AE%89%E8%A3%85"><span class="toc-number">2.4.2.2.</span> <span class="toc-text">2、通过 npm link 安装</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3%E3%80%81%E6%89%8B%E5%8A%A8%E5%BC%95%E5%85%A5%E4%BE%9D%E8%B5%96"><span class="toc-number">2.4.2.3.</span> <span class="toc-text">3、手动引入依赖</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-3%E3%80%81%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-number">2.4.3.</span> <span class="toc-text">2.3.3、修改配置文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-4%E3%80%81%E9%87%8D%E6%96%B0%E8%BF%90%E8%A1%8C%E5%B9%B6%E6%B5%8B%E8%AF%95%E6%8F%92%E4%BB%B6"><span class="toc-number">2.4.4.</span> <span class="toc-text">2.3.4、重新运行并测试插件</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%8F%91%E5%B8%83%E5%88%B0-NPM"><span class="toc-number">3.</span> <span class="toc-text">三、发布到 NPM</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E5%AE%89%E8%A3%85%E5%B9%B6%E4%BD%BF%E7%94%A8%E6%8F%92%E4%BB%B6"><span class="toc-number">4.</span> <span class="toc-text">四、安装并使用插件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1%E3%80%81%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6"><span class="toc-number">4.1.</span> <span class="toc-text">4.1、安装插件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2%E3%80%81%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-number">4.2.</span> <span class="toc-text">4.2、修改配置文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3%E3%80%81%E9%87%8D%E6%96%B0%E8%BF%90%E8%A1%8C%E5%B9%B6%E6%B5%8B%E8%AF%95%E6%8F%92%E4%BB%B6"><span class="toc-number">4.3.</span> <span class="toc-text">4.3、重新运行并测试插件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E6%96%87%E6%A1%A3%E5%92%8C%E5%AE%A3%E4%BC%A0"><span class="toc-number">5.</span> <span class="toc-text">五、文档和宣传</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E6%8F%90%E4%BA%A4%E6%8F%92%E4%BB%B6%E5%88%B0-Hexo-%E6%8F%92%E4%BB%B6%E5%88%97%E8%A1%A8"><span class="toc-number">6.</span> <span class="toc-text">六、提交插件到 Hexo 插件列表</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/12/13/2ec3ab3954b3/" title="通过SSH密钥连接Linux"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/12/13/675c5996649aa.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="通过SSH密钥连接Linux"></a><div class="content"><a class="title" href="/2024/12/13/2ec3ab3954b3/" title="通过SSH密钥连接Linux">通过SSH密钥连接Linux</a><time datetime="2024-12-13T15:37:00.000Z" title="发表于 2024-12-13 23:37:00">2024-12-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/12/13/0616411766f4/" title="【Hexo】一键部署至远程服务器"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/12/13/675c59eff34f4.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【Hexo】一键部署至远程服务器"></a><div class="content"><a class="title" href="/2024/12/13/0616411766f4/" title="【Hexo】一键部署至远程服务器">【Hexo】一键部署至远程服务器</a><time datetime="2024-12-13T13:35:49.000Z" title="发表于 2024-12-13 21:35:49">2024-12-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/12/12/60bae9f9d9cc/" title="【尚硅谷】JVM-类的加载篇"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【尚硅谷】JVM-类的加载篇"></a><div class="content"><a class="title" href="/2024/12/12/60bae9f9d9cc/" title="【尚硅谷】JVM-类的加载篇">【尚硅谷】JVM-类的加载篇</a><time datetime="2024-12-12T04:02:59.000Z" title="发表于 2024-12-12 12:02:59">2024-12-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/12/11/0a6035f3745c/" title="【尚硅谷】JVM-字节码篇"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【尚硅谷】JVM-字节码篇"></a><div class="content"><a class="title" href="/2024/12/11/0a6035f3745c/" title="【尚硅谷】JVM-字节码篇">【尚硅谷】JVM-字节码篇</a><time datetime="2024-12-11T00:33:29.000Z" title="发表于 2024-12-11 08:33:29">2024-12-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/12/09/68b16c939c95/" title="【智能协同云图库】2-项目初始化"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/12/09/6756ee980378a.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【智能协同云图库】2-项目初始化"></a><div class="content"><a class="title" href="/2024/12/09/68b16c939c95/" title="【智能协同云图库】2-项目初始化">【智能协同云图库】2-项目初始化</a><time datetime="2024-12-09T14:12:44.000Z" title="发表于 2024-12-09 22:12:44">2024-12-09</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div id="footer_deal"><a class="deal_link" target="_blank" rel="noopener" href="https://github.com/shiguang-coding" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a><a class="deal_link" href="mailto:an_shiguang@163.com" title="email"><i class="anzhiyufont anzhiyu-icon-envelope"></i></a><img class="footer_mini_logo" title="返回顶部" alt="返回顶部" onclick="anzhiyu.scrollToDest(0, 500)" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/avatar.png" size="50px"><a class="deal_link" href="/atom.xml" title="RSS"><i class="anzhiyufont anzhiyu-icon-rss"></i></a><a class="deal_link" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC"><i class="anzhiyufont anzhiyu-icon-copyright-line"></i></a></div><div id="anzhiyu-footer"><div class="footer-group"><div class="footer-title">服务</div><div class="footer-links"><a class="footer-item" title="开往" target="_blank" rel="noopener" href="https://www.travellings.cn/go.html">开往</a><a class="footer-item" title="异次元之旅" target="_blank" rel="noopener" href="https://travel.moe/go.html?travel=on">异次元之旅</a><a class="footer-item" title="列表导航" target="_blank" rel="noopener" href="https://zhblogs.ohyee.cc/">列表导航</a><a class="footer-item" title="十年之约" target="_blank" rel="noopener" href="https://www.foreverblog.cn/">十年之约</a></div></div><div class="footer-group"><div class="footer-title">文章</div><div class="footer-links"><a class="footer-item" title="归档" href="/archives/">归档</a><a class="footer-item" title="分类" href="/categories/">分类</a><a class="footer-item" title="标签" href="/tags/">标签</a><a class="footer-item" title="RSS" href="/tom.xml">RSS</a></div></div><div class="footer-group"><div class="footer-title">导航</div><div class="footer-links"><a class="footer-item" title="即刻短文" href="/essay/">即刻短文</a><a class="footer-item" title="留言板" href="/comment/">留言板</a><a class="footer-item" title="关于我" href="/about/">关于我</a></div></div><div class="footer-group"><div class="footer-title-group"><div class="footer-title">友链</div><a class="random-friends-btn" id="footer-random-friends-btn" href="javascript:addFriendLinksInFooter();" title="换一批友情链接"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right"></i></a></div><div class="footer-links" id="friend-links-in-footer"></div></div></div><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo_v5.4.0" title="博客框架为Hexo_v5.4.0"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Frame-Hexo.svg" alt="博客框架为Hexo_v5.4.0"></a><a class="github-badge" target="_blank" href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu" style="margin-inline:5px" data-title="本站使用AnZhiYu主题" title="本站使用AnZhiYu主题"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.9/img/Theme-AnZhiYu-2E67D3.svg" alt="本站使用AnZhiYu主题"></a><a class="github-badge" target="_blank" href="https://icp.gov.moe/?keyword=blog.shiguangdev.cn" style="margin-inline:5px" data-title="萌ICP备20246006号" title="萌ICP备20246006号"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shields.io/badge/%E8%90%8Cicp%E5%A4%87-20246006%E5%8F%B7-FF1485" alt="萌ICP备20246006号"></a><a class="github-badge" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" style="margin-inline:5px" data-title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可" title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.2.0/img/badge/Copyright-BY-NC-SA.svg" alt="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"></a></p></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">©2023 - 2024 By <a class="footer-bar-link" href="/" title="時光" target="_blank">時光</a></div></div><div id="footer-type-tips"></div><div class="js-pjax"><script>function subtitleType () {
+  fetch('https://v1.hitokoto.cn')
+    .then(response => response.json())
+    .then(data => {
+      if (true) {
+        const from = '出自 ' + data.from
+        const sub = []
+        sub.unshift(data.hitokoto, from)
+        window.typed = new Typed('#footer-type-tips', {
+          strings: sub,
+          startDelay: 300,
+          typeSpeed: 150,
+          loop: true,
+          backSpeed: 50,
+        })
+      } else {
+        document.getElementById('footer-type-tips').innerHTML = data.hitokoto
+      }
+    })
+}
+
+if (true) {
+  if (typeof Typed === 'function') {
+    subtitleType()
+  } else {
+    getScript('https://cdn.cbd.int/typed.js@2.1.0/dist/typed.umd.js').then(subtitleType)
+  }
+} else {
+  subtitleType()
+}
+</script></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu" title="主题">主题</a><a class="footer-bar-link" target="_blank" rel="noopener" href="https://img.shiguangdev.cn/" title="图床">图床</a><a class="footer-bar-link" target="_blank" rel="noopener" href="https://beian.miit.gov.cn/" title="豫ICP备2024070732号">豫ICP备2024070732号</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">254</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">191</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">16</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://www.shiguang666.eu.org" title="時光主页"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="時光主页"><span class="back-menu-item-text">時光主页</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://nav.shiguang666.eu.org" title="時光导航站"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="時光导航站"><span class="back-menu-item-text">時光导航站</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://game.shiguang666.eu.org" title="怀旧游戏机"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="怀旧游戏机"><span class="back-menu-item-text">怀旧游戏机</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://games.shiguang666.eu.org" title="在线小游戏"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="在线小游戏"><span class="back-menu-item-text">在线小游戏</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">后台管理</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://img.shiguangdev.cn/" title="時光图床"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/favicon.ico" alt="時光图床"><span class="back-menu-item-text">時光图床</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://qexo.shiguang666.eu.org/" title="Hexo管理面板"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://qexo.shiguang666.eu.org/favicon.ico" alt="Hexo管理面板"><span class="back-menu-item-text">Hexo管理面板</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 归档</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随机</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/news/"><i class="fa fa-calendar faa-tada"></i><span> 早报亭</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/music/?id=10051718332&amp;server=netease"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/gallery/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/xjj/"><i class="fa fa-rocket faa-tada"></i><span> 养生堂</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/flink/"><i class="anzhiyufont anzhiyu-icon-artstation faa-tada" style="font-size: 0.9em;"></i><span> 朋友圈</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comment/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于我</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/AI/" style="font-size: 0.88rem;">AI<sup>9</sup></a><a href="/tags/Alist/" style="font-size: 0.88rem;">Alist<sup>3</sup></a><a href="/tags/CentOs/" style="font-size: 0.88rem;">CentOs<sup>1</sup></a><a href="/tags/ChatGPT/" style="font-size: 0.88rem;">ChatGPT<sup>13</sup></a><a href="/tags/ChatGPt/" style="font-size: 0.88rem;">ChatGPt<sup>1</sup></a><a href="/tags/Chrome/" style="font-size: 0.88rem;">Chrome<sup>1</sup></a><a href="/tags/CloudFlare/" style="font-size: 0.88rem;">CloudFlare<sup>3</sup></a><a href="/tags/DNS/" style="font-size: 0.88rem;">DNS<sup>1</sup></a><a href="/tags/Ecology/" style="font-size: 0.88rem;">Ecology<sup>1</sup></a><a href="/tags/GPT-4o/" style="font-size: 0.88rem;">GPT-4o<sup>2</sup></a><a href="/tags/Gemini/" style="font-size: 0.88rem;">Gemini<sup>2</sup></a><a href="/tags/Git/" style="font-size: 0.88rem;">Git<sup>8</sup></a><a href="/tags/GitHub/" style="font-size: 0.88rem;">GitHub<sup>6</sup></a><a href="/tags/Hexo/" style="font-size: 0.88rem;">Hexo<sup>24</sup></a><a href="/tags/IDEA/" style="font-size: 0.88rem;">IDEA<sup>3</sup></a><a href="/tags/KeyBoardTestUtility/" style="font-size: 0.88rem;">KeyBoardTestUtility<sup>1</sup></a><a href="/tags/Linux/" style="font-size: 0.88rem;">Linux<sup>4</sup></a><a href="/tags/Lombok/" style="font-size: 0.88rem;">Lombok<sup>1</sup></a><a href="/tags/Markdown/" style="font-size: 0.88rem;">Markdown<sup>2</sup></a><a href="/tags/MindManager/" style="font-size: 0.88rem;">MindManager<sup>1</sup></a><a href="/tags/Mysql/" style="font-size: 0.88rem;">Mysql<sup>2</sup></a><a href="/tags/Navicat/" style="font-size: 0.88rem;">Navicat<sup>1</sup></a><a href="/tags/Perplexity-AI/" style="font-size: 0.88rem;">Perplexity AI<sup>1</sup></a><a href="/tags/PicGo/" style="font-size: 0.88rem;">PicGo<sup>1</sup></a><a href="/tags/QQ/" style="font-size: 0.88rem;">QQ<sup>1</sup></a><a href="/tags/SSL/" style="font-size: 0.88rem;">SSL<sup>3</sup></a><a href="/tags/Sqlserver/" style="font-size: 0.88rem;">Sqlserver<sup>1</sup></a><a href="/tags/Typora/" style="font-size: 0.88rem;">Typora<sup>5</sup></a><a href="/tags/drawio/" style="font-size: 0.88rem;">drawio<sup>1</sup></a><a href="/tags/git/" style="font-size: 0.88rem;">git<sup>1</sup></a><a href="/tags/mysql/" style="font-size: 0.88rem;">mysql<sup>1</sup></a><a href="/tags/svn/" style="font-size: 0.88rem;">svn<sup>2</sup></a><a href="/tags/%E5%9B%BE%E5%90%A7%E5%B7%A5%E5%85%B7%E7%AE%B1/" style="font-size: 0.88rem;">图吧工具箱<sup>1</sup></a><a href="/tags/%E5%9B%BE%E5%BA%8A/" style="font-size: 0.88rem;">图床<sup>7</sup></a><a href="/tags/%E5%BC%80%E6%BA%90%E5%88%86%E4%BA%AB/" style="font-size: 0.88rem;">开源分享<sup>6</sup></a><a href="/tags/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/" style="font-size: 0.88rem;">搜索引擎<sup>2</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D/" style="font-size: 0.88rem;">数据恢复<sup>1</sup></a><a href="/tags/%E6%A8%A1%E6%9D%BF/" style="font-size: 0.88rem;">模板<sup>4</sup></a><a href="/tags/%E8%B8%A9%E5%9D%91/" style="font-size: 0.88rem;">踩坑<sup>6</sup></a><a href="/tags/%E9%B1%BC%E7%9A%AE/" style="font-size: 0.88rem;">鱼皮<sup>10</sup></a></div></div><hr></div></div><div id="keyboard-tips"><div class="keyboardTitle">博客快捷键</div><div class="keybordList"><div class="keybordItem"><div class="keyGroup"><div class="key">shift K</div></div><div class="keyContent"><div class="content">关闭快捷键功能</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift A</div></div><div class="keyContent"><div class="content">打开/关闭中控台</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift M</div></div><div class="keyContent"><div class="content">播放/暂停音乐</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift D</div></div><div class="keyContent"><div class="content">深色/浅色显示模式</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift S</div></div><div class="keyContent"><div class="content">站内搜索</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift R</div></div><div class="keyContent"><div class="content">随机访问</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift H</div></div><div class="keyContent"><div class="content">返回首页</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift F</div></div><div class="keyContent"><div class="content">友链鱼塘</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift L</div></div><div class="keyContent"><div class="content">友链页面</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift P</div></div><div class="keyContent"><div class="content">关于本站</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift I</div></div><div class="keyContent"><div class="content">原版/本站右键菜单</div></div></div></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="anzhiyufont anzhiyu-icon-comments"></i></a><a id="switch-commentBarrage" href="javascript:anzhiyu.switchCommentBarrage();" title="开关弹幕"><i class="anzhiyufont anzhiyu-icon-danmu"></i></a><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="nav-music"><a id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()" accesskey="m">播放音乐</a><div id="console-music-bg"></div><meting-js id="10051718332" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random" volume="0.7"></meting-js></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="anzhiyufont anzhiyu-icon-xmark"></i></button></nav><div class="is-center" id="loading-database"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-pulse-icon"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"></div></div><hr><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://music.163.com/#/my/m/music/playlist?id=10051718332&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><canvas id="universe"></canvas><script async="" src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("05/01/2023 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2023 By 安知鱼 V1.6.14",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 時光 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async="" src="/anzhiyu/random.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>(() => {
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo.shiguangdev.eu.org',
+      region: '',
+      onCommentLoaded: () => {
+        anzhiyu.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') setTimeout(runFn,0)
+    else getScript('https://cdn.cbd.int/twikoo@1.6.39/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo.shiguangdev.eu.org',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(res => {
+      countELement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  const runFn = () => {
+    init();
+    GLOBAL_CONFIG_SITE.isPost && getCount()
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) anzhiyu.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else {
+      loadTwikoo()
+    }
+  } else {
+    window.loadOtherComment = loadTwikoo
+  }
+})()</script><input type="hidden" name="page-type" id="page-type" value="post"><script async="" src="/js/anzhiyu/comment_barrage.js"></script></div><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getComment = () => {
+    const runTwikoo = () => {
+      twikoo.getRecentComments({
+        envId: 'https://twikoo.shiguangdev.eu.org',
+        region: '',
+        pageSize: 6,
+        includeReply: true
+      }).then(function (res) {
+        const twikooArray = res.map(e => {
+          return {
+            'content': changeContent(e.comment),
+            'avatar': e.avatar,
+            'nick': e.nick,
+            'url': e.url + '#' + e.id,
+            'date': new Date(e.created).toISOString()
+          }
+        })
+
+        saveToLocal.set('twikoo-newest-comments', JSON.stringify(twikooArray), 10/(60*24))
+        generateHtml(twikooArray)
+      }).catch(function (err) {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.textContent= "无法获取评论，请确认相关配置是否正确"
+      })
+    }
+
+    if (typeof twikoo === 'object') {
+      runTwikoo()
+    } else {
+      getScript('https://cdn.cbd.int/twikoo@1.6.39/dist/twikoo.all.min.js').then(runTwikoo)
+    }
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'><div class='name'><span>${array[i].nick} </span></div></a>`
+        }
+        
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <time datetime="${array[i].date}">${anzhiyu.diffDate(array[i].date, true)}</time></div>
+        </div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom && ($dom.innerHTML= result)
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('twikoo-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script async="" data-pjax="" src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><script src="/js/anzhiyu/right_click_menu.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><script src="/js/custom/footer-animal.js" defer=""></script><script src="/api/card-welcome.js"></script><script id="click-heart" src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/dist/click-heart.min.js" async="async" mobile="false"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","meta[property=\"og:type\"]","meta[property=\"og:site_name\"]","meta[property=\"og:description\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div><!-- hexo injector body_end start -->
+  <script data-pjax="" src="/js/hexo_githubcalendar.js"></script>
+  <script data-pjax="">
+        function GithubCalendarConfig(){
+            var git_githubapiurl ="https://githubcalendarapi.shiguang666.eu.org/api?user=shiguang-coding";
+            var git_color =['#ebedf0', '#a2f7af', '#6ce480', '#54ad63', '#469252', '#31753c', '#1f5f2a', '#13531f', '#084111', '#032b09', '#000000'];
+            var git_user ="shiguang-coding";
+            var parent_div_git = document.getElementById('recent-posts');
+            var git_div_html = '<div class="recent-post-item" style="width:100%;height:auto;padding:10px;"><div id="github_loading" style="width:10%;height:100%;margin:0 auto;display: block"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animateTransform></path></svg></div><div id="github_container"></div></div>';
+            if(parent_div_git && location.pathname =='/'){
+                console.log("已挂载hexo-github-calendar https://github.com/Barry-Flynn/hexo-github-calendar");
+                // parent_div_git.innerHTML=git_div_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",git_div_html) // 有报错，但不影响使用(支持pjax跳转)
+            };
+            GithubCalendar(git_githubapiurl,git_color,git_user)
+        }
+        if(document.getElementById('recent-posts')){
+            GithubCalendarConfig()
+        }
+    </script>
+    <style>#github_container{min-height:280px}@media screen and (max-width:650px) {#github_container{background-image:;min-height:0px}}</style>
+    <style></style><!-- hexo injector body_end end -->
+    <link rel="stylesheet" href="https://ai.tianli0.top/static/public/postChatUser_summary.min.css">
+    <script>
+        let tianliGPT_key = '75439fb77e5551eacf54f0df75565616dcf2ad';
+        let tianliGPT_postSelector = '#article-container';
+        let tianliGPT_Title = '文章摘要';
+        let tianliGPT_postURL = '/^https?://[^/]+/[0-9]{4}/[0-9]{2}/[0-9]{2}/';
+        let tianliGPT_blacklist = '';
+        let tianliGPT_wordLimit = '1000';
+        let tianliGPT_typingAnimate = true;
+        var postChatConfig = {
+          backgroundColor: "#3e86f6",
+          bottom: "16px",
+          left: "16px",
+          fill: "#FFFFFF",
+          width: "44px",
+          frameWidth: "375px",
+          frameHeight: "600px",
+          defaultInput: true,
+          upLoadWeb: true,
+          showInviteLink: true,
+          userTitle: "PostChat",
+          userDesc: "如果你对网站的内容有任何疑问，可以来问我哦～",
+          addButton: true,
+          beginningText: "这篇文章介绍了"
+        };
+    </script>
+    <script data-postchat_key="75439fb77e5551eacf54f0df75565616dcf2ad" src="https://ai.tianli0.top/static/public/postChatUser_summary.min.js"></script>
+  </body></html>

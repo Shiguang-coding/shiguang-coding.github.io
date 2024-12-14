@@ -1,0 +1,842 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>【尚硅谷】MySQL-主从复制 | 時光</title><meta name="keywords" content="SQL,尚硅谷"><meta name="author" content="時光"><meta name="copyright" content="時光"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="【尚硅谷】MySQL-主从复制"><meta name="application-name" content="【尚硅谷】MySQL-主从复制"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="【尚硅谷】MySQL-主从复制"><meta property="og:url" content="https://blog.shiguang666.eu.org/2024/09/26/f7ad294f7377/index.html"><meta property="og:site_name" content="時光"><meta property="og:description" content="在线视频:MySQL数据库入门到大牛，mysql安装到优化，百科全书级，全网天花板官方资料: 尚硅谷MySQL入门到高级-宋红康版 代码仓库Gitee：https:&amp;#x2F;&amp;#x2F;gitee.com&amp;#x2F;an_shiguang&amp;#x2F;learn-mysql  主从复制概述如何提升数据库并发能力在实际工作中，我们常常将R"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg"><meta property="article:author" content="時光"><meta property="article:tag" content="博客,時光,時光的博客,時光博客园子,实用博客,开源,共享"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg"><meta name="description" content="在线视频:MySQL数据库入门到大牛，mysql安装到优化，百科全书级，全网天花板官方资料: 尚硅谷MySQL入门到高级-宋红康版 代码仓库Gitee：https:&amp;#x2F;&amp;#x2F;gitee.com&amp;#x2F;an_shiguang&amp;#x2F;learn-mysql  主从复制概述如何提升数据库并发能力在实际工作中，我们常常将R"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://blog.shiguang666.eu.org/2024/09/26/f7ad294f7377/"><link rel="preconnect" href="//cdn.cbd.int"><meta name="google-site-verification" content="xxx"><meta name="baidu-site-verification" content="code-xxx"><meta name="msvalidate.01" content="xxx"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: {"enable":true,"title":"与各类博主无限进步","addFriendPlaceholder":"昵称（请勿包含博客等字样）：\n网站地址（要求博客地址，请勿提交个人主页）：\n头像图片url（请提供尽可能清晰的图片，我会上传到我自己的图床）：\n描述：\n站点截图（可选）：\n"},
+  peoplecanvas: undefined,
+  postHeadAiDescription: undefined,
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: {"enable":true,"default":"晚上好👋","list":[{"greeting":"晚安😴","startTime":0,"endTime":5},{"greeting":"早上好鸭👋, 祝你一天好心情！","startTime":6,"endTime":9},{"greeting":"上午好👋, 状态很好，鼓励一下～","startTime":10,"endTime":10},{"greeting":"11点多啦, 在坚持一下就吃饭啦～","startTime":11,"endTime":11},{"greeting":"午安👋, 宝贝","startTime":12,"endTime":14},{"greeting":"🌈充实的一天辛苦啦！","startTime":14,"endTime":18},{"greeting":"19点喽, 奖励一顿丰盛的大餐吧🍔。","startTime":19,"endTime":19},{"greeting":"晚上好👋, 在属于自己的时间好好放松😌~","startTime":20,"endTime":24}]},
+  twikooEnvId: 'https://twikoo.shiguangdev.eu.org',
+  commentBarrageConfig:{"enable":true,"maxBarrage":1,"barrageTime":4000,"accessToken":"","mailMd5":""},
+  music_page_default: "nav_music",
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: true,
+  mainTone: undefined,
+  authorStatus: {"skills":["🌟 技术分享领航人","📚 终身学习倡导者","💡 创新思维启发源","📈 成长路径引路人","🚀 科技趋势探索者","🤖️ AI技术探索先锋","🌈 技术创新推动手","💬 社区互动活跃家","🛠️ 代码经验传授师","📢 知识传播倡导员"]},
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":true,"limitCount":300,"languages":{"author":"作者: 時光","link":"链接: ","source":"来源: 時光","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: true,
+  shortcutKey: {"enable":true,"delay":100,"shiftDelay":200},
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: '時光',
+  title: '【尚硅谷】MySQL-主从复制',
+  postAI: '',
+  pageFillDescription: '主从复制概述, 如何提升数据库并发能力, 主从复制的作用, 主从复制的原理, 原理剖析, 复制的基本原则, 一主一从架构搭建, 准备工作, 主机配置文件, 从机配置文件, 主机：建立账户并授权, 从机：配置需要复制的主机, 测试, 停止主从同步, 后续, 同步数据一致性问题, 理解主从延迟问题, 主从延迟问题原因, 如何减少主从延迟, 如何解决一致性问题, 方法 1：异步复制, 方法 2：半同步复制, 方法 3：组复制, 知识延伸在线视频数据库入门到大牛安装到优化百科全书级全网天花板官方资料尚硅谷入门到高级宋红康版代码仓库主从复制概述如何提升数据库并发能力在实际工作中我们常常将作为缓存与配合来使用当有请求的时候首先会从缓存中进行查找如果存在就直接取出如果不存在再访问数据库这样就提升了读取的效率也减少了对后端数据库的访问压力的缓存架构是高并发架构中非常重要的一环此外一般应用对数据库而言都是读多写少也就说对数据库读取数据的压力比较大有一个思路就是采用数据库集群的方案做主从架构进行读写分离这样同样可以提升数据库的并发处理能力但并不是所有的应用都需要对数据库进行主从架构的设置毕竟设置架构本身是有成本的如果我们的目的在于提升数据库高并发访问的效率那么首先考虑的是如何优化和索引这种方式简单有效其次才是采用缓存的策略比如使用将热点数据保存在内存数据库中提升读取的效率最后才是对数据库采用主从架构进行读写分离按照上面的方式进行优化使用和维护的成本是由低到高的主从复制的作用主从同步设计不仅可以提高数据库的吞吐量还有以下个方面的作用第个作用读写分离我们可以通过主从复制的方式来同步数据然后通过读写分离提高数据库并发处理能力其中一个是主库负责写入数据我们称之为写库其他都是从库负责读取数据我们称之为读库当主库进行更新的时候会自动将数据复制到从库中而我们在客户端读取数据的时候会从从库进行读取面对读多写少的需求采用读写分离的方式可以实现更高的并发访问同时我们还能对从服务器进行负载均衡让不同的读请求按照策略均匀地分发到不同的从服务器上让读取更加顺畅读取顺畅的另一个原因就是减少了锁表的影响比如我们让主库负责写当主库出现写锁的时候不会影响到从库进行的读取第个作用就是数据备份我们通过主从复制将主库上的数据复制到从库上相当于一种热备份机制也就是在主库正常运行的情况下进行的备份不会影响到服务第个作用是具有高可用性数据备份实际上是一种冗余的机制通过这种冗余的方式可以换取数据库的高可用性也就是当服务器出现故障或宕机的情况下可以切换到从服务器上保证服务的正常运行关于高可用性的程度我们可以用一个指标衡量即正常可用时间全年时间比如要达到全年的时间都可用就意味着系统在一年中的不可用时间不得超过分钟含系统崩溃的时间日常维护操作导致的停机时间等其他时间都需要保持可用的状态实际上更高的高可用性意味着需要付出更高的成本代价在现实中我们需要结合业务需求和成本来进行选择主从复制的原理会从读取来进行数据同步原理剖析三个线程实际上主从同步的原理就是基于进行数据同步的在主从复制过程中会基于个线程来操作一个主库线程两个从库线程二进制日志转储线程是一个主库线程当从库线程连接的时候主库可以将二进制日志发送给从库当主库读取事件的时候会在上加锁读取完成之后再将锁释放掉从库线程会连接到主库向主库发送请求更新这时从库的线程就可以读取到主库的二进制日志转储线程发送的更新部分并且拷贝到本地的中继日志从库线程会读取从库中的中继日志并且执行日志中的事件将从库中的数据与主库保持同步注意不是所有版本的都默认开启服务器的二进制日志在进行主从同步的时候我们需要先检查服务器是否已经开启了二进制日志除非特殊指定默认情况下从服务器会执行所有主服务器中保存的事件也可以通过配置使从服务器执行特定的事件复制三步骤步骤将写操作记录到二进制日志步骤将的拷贝到它的中继日志步骤重做中继日志中的事件将改变应用到自己的数据库中复制是异步的且串行化的而且重启后从接入点开始复制复制的问题复制的最大问题延时复制的基本原则每个只有一个每个只能有一个唯一的服务器每个可以有多个一主一从架构搭建一台主机用于处理所有写请求一台从机负责所有读请求架构图如下准备工作准备台虚拟机具体设置内容在每台虚拟机上需要安装好可以是说明前面我们讲过如何克隆一台大家可以在一台上安装好进而通过克隆的方式复制出台包含的虚拟机注意克隆的方式需要修改新克隆出来主机的地址地址此外克隆的方式生成的虚拟机包含则克隆的虚拟机的相同必须修改否则在有些场景会报错比如报如下的错误修改的方式主机配置文件建议版本一致且后台以服务运行主从所有配置项都配置在节点下且都是小写字母具体参数配置如下必选必须主服务器唯一必须启用二进制日志指名路径比如自己本地的路径可选可选默认表示读写主机表示只读从机设置日志文件保留的时长单位是秒控制单个二进制日志大小此参数的最大和默认值是可选设置不要复制的数据库可选设置需要复制的数据库默认全部记录比如需要复制的主数据库名字可选设置格式重启后台服务使配置生效注意先搭建完主从复制再创建数据库主从复制起始时从机不继承主机数据格式设置格式模式基于语句的复制每一条会修改数据的语句会记录到中这是默认的格式的优点历史悠久技术成熟不需要记录每一行的变化减少了日志量文件较小中包含了所有数据库更改信息可以据此来审核数据库的安全等情况可以用于实时的还原而不仅仅用于复制主从版本可以不一样从服务器版本可以比主服务器版本高的缺点不是所有的语句都能被复制尤其是包含不确定操作的时候使用以下函数的语句也无法被复制除非启动时启用了选项会产生比更多的行级锁复制需要进行全表扫描语句中没有使用到索引的时需要比请求更多的行级锁对于有字段的表而言语句会阻塞其他语句对于一些复杂的语句在从服务器上的耗资源情况会更严重而模式下只会对那个发生变化的记录产生影响执行复杂语句如果出错的话会消耗更多资源数据表必须几乎和主服务器保持一致才行否则可能会导致复制出错模式基于行的复制版本的才开始支持不记录每条语句的上下文信息仅记录哪条数据被修改了修改成什么样了的优点任何情况都可以被复制这对复制来说是最安全可靠的比如不会出现某些特定情况下的存储过程的调用和触发无法被正确复制的问题多数情况下从服务器上的表如果有主键的话复制就会快了很多复制以下几种语句时的行锁更少包含字段的没有附带条件或者并没有修改很多记录的或语句执行语句时锁更少从服务器上采用多线程来执行复制成为可能的缺点大了很多复杂的回滚时中会包含大量的数据主服务器上执行语句时所有发生变化的记录都会写到中而只会写一次这会导致频繁发生的并发写问题无法从中看到都复制了些什么语句模式混合模式复制从版本开始提供了格式实际上就是与的结合在模式下一般的语句修改使用格式保存如一些函数无法完成主从复制的操作则采用格式保存会根据执行的每一条具体的语句来区分对待记录的日志形式也就是在和之间选择一种从机配置文件要求主从所有配置项都配置在的栏位下且都是小写字母必选必须从服务器唯一可选可选启用中继日志重启后台服务使配置生效注意主从机都关闭防火墙主机建立账户并授权在主机里执行授权主从复制的命令从机器数据库注意如果使用的是需要如下的方式建立账户并授权此语句必须执行否则见下面注意在从机执行时报错查询的状态并记录下和的值记录下和的值注意执行完此步骤后不要再操作主服务器防止主服务器状态值变化从机配置需要复制的主机步骤从机上复制主机的命令主机的地址主机用户名主机用户名的密码具体数字具体值举例步骤启动同步如果报错可以执行如下操作删除之前的信息然后重新执行语句即可删除数据库的日志文件并重新启用新的文件接着查看同步状态上面两个参数都是则说明主从配置成功显式如下的情况就是不正确的可能错误的原因有网络不通账户密码错误防火墙配置文件问题连接服务器时语法主服务器权限测试主机新建库新建表记录从机复制停止主从同步停止主从同步命令如何重新配置主从如果停止从服务器复制功能再使用需要重新配置主从否则会报错如下重新配置主从需要在从机上执行删除中所有的文件并将日志索引文件清空重新开始所有新的日志文件慎用后续搭建主从复制双主双从一个主机用于处理所有写请求它的从机和另一台主机还有它的从机负责所有读请求当主机宕机后主机负责写请求互为备机结构图如下同步数据一致性问题主从同步的要求读库和写库的数据一致最终一致写数据必须写到写库读数据必须到读库不一定理解主从延迟问题进行主从同步的内容是二进制日志它是一个文件在进行网络传输的过程中就一定会存在主从延迟比如这样就可能造成用户在从库上读取的数据不是最新的数据也就是主从同步中的数据不一致性问题举例导致主从延迟的时间点主要包括以下三个主库执行完成一个事务写入我们把这个时刻记为之后传给从库我们把从库接收完这个的时刻记为从库执行完成这个事务我们把这个时刻记为主从延迟问题原因在网络正常的时候日志从主库传给从库所需的时间是很短的即的值是非常小的即网络正常情况下主备延迟的主要来源是备库接收完和执行完这个事务之间的时间差主备延迟最直接的表现是从库消费中继日志的速度比主库生产的速度要慢造成原因从库的机器性能比主库要差从库的压力大大事务的执行举例一次性用语句删除太多数据结论后续再删除数据的时候要控制每个事务删除的数据量分成多次删除举例一次性用插入太多数据举例大表比如在主库对一张的表添加一个字段耗费了分钟那么从节点上也会耗费分钟如何减少主从延迟若想要减少主从延迟的时间可以采取下面的办法降低多线程大事务并发的概率优化业务逻辑优化避免慢减少批量操作建议写脚本以这样的形式完成提高从库机器的配置减少主库写和从库读的效率差尽量采用短的链路也就是主库和从库服务器的距离尽量要短提升端口带宽减少传输的网络延时实时性要求的业务读强制走主库从库只做灾备备份如何解决一致性问题如果操作的数据存储在同一个数据库中那么对数据进行更新的时候可以对记录加写锁这样在读取的时候就不会发生数据不一致的情况但这时从库的作用就是备份并没有起到读写分离分担主库读压力的作用读写分离情况下解决主从同步中数据不一致的问题就是解决主从之间数据复制方式的问题如果按照数据一致性从弱到强来进行划分有以下种复制方式方法异步复制异步模式就是客户端提交之后不需要等从库返回任何结果而是直接将结果返回给客户端这样做的好处是不会影响主库写的效率但可能会存在主库宕机而还没有同步到从库的情况也就是此时的主库和从库数据不一致这时候从从库中选择一个作为新主那么新主则可能缺少原来主服务器中已提交的事务所以这种复制模式下的数据一致性是最弱的方法半同步复制版本之后开始支持半同步复制的方式原理是在客户端提交之后不直接将结果返回给客户端而是等待至少有一个从库接收到了并且写入到中继日志中再返回给客户端这样做的好处就是提高了数据的一致性当然相比于异步复制来说至少多增加了一个网络连接的诞延迟降低了主库写的效率在版本中还增加了一个参数可以对应答的从库数量进行设置默认为也就是说只要有个从库进行了响应就可以返回给客户端如果将这个参数调大可以提升数据一致性的强度但也会增加主库等待从库响应的时间方法组复制异步复制和半同步复制都无法最终保证数据的一致性问题半同步复制是通过判断从库响应的个数来决定是否返回给客户端虽然数据一致性相比于异步复制有提升但仍然无法满足对数据一致性要求高的场景比如金融领域很好地弥补了这两种复制模式的不足组复制技术简称是在版本中推出的一种新的数据复制技术这种复制技术是基于协议的状态机复制是如何工作的首先我们将多个节点共同组成一个复制组在执行读写事务的时候需要通过一致性协议层层的同意也就是读写事务想要进行提交必须要经过组里大多数人对应节点的同意大多数指的是同意的节点数量需要大于这样才可以进行提交而不是原发起方一个说了算而针对只读事务则不需要经过组内同意直接即可在一个复制组内有多个节点组成它们各自维护了自己的数据副本并且在一致性协议层实现了原子消息和全局有序消息从而保证组内数据的一致性将带入了数据强一致性的时代是一个划时代的创新其中一个重要的原因就是是基于协议的算法是由年的图灵奖获得者于年提出的有关这个算法的决策机制可以搜一下事实上算法提出来之后就作为分布式一致性算法被广泛应用比如的也是基于实现的知识延伸在主从架构的配置中如果想要采取读写分离的策略我们可以自己编写程序也可以通过第三方的中间件来实现自己编写程序的好处就在于比较自主我们可以自己判断哪些查询在从库上来执行针对实时性要求高的需求我们还可以考虑哪些查询可以在主库上执行同时程序直接连接数据库减少了中间件层相当于减少了性能损耗采用中间件的方法有很明显的优势功能强大使用简单但因为在客户端和数据库之间增加了中间件层会有一些性能损耗同时商业中间件也是有使用成本的我们也可以考虑采取一些优秀的开源工具属于阿里事业群始于年在阿里服役年多接管个数据库的集群日处理在线请求亿次以上由于发起人的离职停止维护是开源社区在阿里基础上进行二次开发解决了存在的问题并且加入了许多新的功能在其中青出于蓝而胜于蓝基于官方的思想利用语言进行开发的是一款商业收费的中间件舍弃了一些功能专注在性能和稳定性上由小团队用语言开发还需要发展需要不断完善是生产在使用架构很复杂不支持原生协议使用需要大量改造成本是团队基于改写功能还需完善高并发下不稳定是原作者维护的一个版本研发的中间件是官方公司发布的中间件主备切换主动切换被动切换如何判断主库出问题了如何解决过程中的数据不一致性问题',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-09-26 16:54:01',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><script async="" defer="" src="https://umami.shiguangdev.cn/script.js" data-website-id="ac8d5698-b224-4ea4-aa79-eefb80c47eef"></script><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="時光" type="application/atom+xml">
+</head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="/img/avatar.png"><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><div class="back-home-button"><i class="anzhiyufont anzhiyu-icon-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://www.shiguang666.eu.org" title="時光主页"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="時光主页"><span class="back-menu-item-text">時光主页</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://nav.shiguang666.eu.org" title="時光导航站"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="時光导航站"><span class="back-menu-item-text">時光导航站</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://game.shiguang666.eu.org" title="怀旧游戏机"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="怀旧游戏机"><span class="back-menu-item-text">怀旧游戏机</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://games.shiguang666.eu.org" title="在线小游戏"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="在线小游戏"><span class="back-menu-item-text">在线小游戏</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">后台管理</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://img.shiguangdev.cn/" title="時光图床"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/favicon.ico" alt="時光图床"><span class="back-menu-item-text">時光图床</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://qexo.shiguang666.eu.org/" title="Hexo管理面板"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://qexo.shiguang666.eu.org/favicon.ico" alt="Hexo管理面板"><span class="back-menu-item-text">Hexo管理面板</span></a></div></div></div></div><a id="site-name" href="/" accesskey="h"><div class="title">時光</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 归档</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随机</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/news/"><i class="fa fa-calendar faa-tada"></i><span> 早报亭</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/music/?id=10051718332&amp;server=netease"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/gallery/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/xjj/"><i class="fa fa-rocket faa-tada"></i><span> 养生堂</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/flink/"><i class="anzhiyufont anzhiyu-icon-artstation faa-tada" style="font-size: 0.9em;"></i><span> 朋友圈</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comment/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于我</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button only-home" id="travellings_button" title="随机前往一个开往项目网站"><a class="site-page" onclick="anzhiyu.totraveling()" title="随机前往一个开往项目网站" href="javascript:void(0);" rel="external nofollow" data-pjax-state="external"><i class="anzhiyufont anzhiyu-icon-train"></i></a></div><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍" accesskey="s"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="/img/wechat.png" target="_blank"><img class="post-qr-code-img" alt="微信" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/wechat.png"></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/alipay.png" target="_blank"><img class="post-qr-code-img" alt="支付宝" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/alipay.png"></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/12/"><span class="card-archive-list-date">十二月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">9</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/11/"><span class="card-archive-list-date">十一月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">8</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/10/"><span class="card-archive-list-date">十月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">31</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/09/"><span class="card-archive-list-date">九月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">38</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/08/"><span class="card-archive-list-date">八月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">9</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/07/"><span class="card-archive-list-date">七月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">18</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/06/"><span class="card-archive-list-date">六月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">30</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/05/"><span class="card-archive-list-date">五月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">20</span><span>篇</span></div></a></li></ul></div><hr></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item on" id="consoleCommentBarrage" onclick="anzhiyu.switchCommentBarrage()" title="热评开关"><a class="commentBarrage"><i class="anzhiyufont anzhiyu-icon-message"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="anzhiyu.musicToggle()" title="音乐开关"><a class="music-switch"><i class="anzhiyufont anzhiyu-icon-music"></i></a></div><div class="console-btn-item" id="consoleKeyboard" onclick="anzhiyu.keyboardToggle()" title="快捷键开关"><a class="keyboard-switch"><i class="anzhiyufont anzhiyu-icon-keyboard"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url">学习笔记</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/SQL/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>SQL</span></a><a class="article-meta__tags" href="/tags/%E5%B0%9A%E7%A1%85%E8%B0%B7/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>尚硅谷</span></a></span></div></div><h1 class="post-title" itemprop="name headline">【尚硅谷】MySQL-主从复制</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2024-09-26T07:52:50.000Z" title="发表于 2024-09-26 15:52:50">2024-09-26</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2024-09-26T08:54:01.554Z" title="更新于 2024-09-26 16:54:01">2024-09-26</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="anzhiyufont anzhiyu-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">5.9k</span><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>18分钟</span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为上海"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>上海</span><span class="post-meta-separator"></span><span class="post-meta-commentcount"><i class="anzhiyufont anzhiyu-icon-comments post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2024/09/26/f7ad294f7377/#post-comment" tabindex="-1"><span id="twikoo-count"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></a></span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope="" itemtype="https://blog.shiguang666.eu.org/2024/09/26/f7ad294f7377/"><header><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url">学习笔记</a><a href="/tags/SQL/" tabindex="-1" itemprop="url">SQL</a><a href="/tags/%E5%B0%9A%E7%A1%85%E8%B0%B7/" tabindex="-1" itemprop="url">尚硅谷</a><h1 id="CrawlerTitle" itemprop="name headline">【尚硅谷】MySQL-主从复制</h1><span itemprop="author" itemscope="" itemtype="http://schema.org/Person">時光</span><time itemprop="dateCreated datePublished" datetime="2024-09-26T07:52:50.000Z" title="发表于 2024-09-26 15:52:50">2024-09-26</time><time itemprop="dateCreated datePublished" datetime="2024-09-26T08:54:01.554Z" title="更新于 2024-09-26 16:54:01">2024-09-26</time></header><div id="postchat_postcontent"><blockquote>
+<p>在线视频:<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1iq4y1u7vj?p=191">MySQL数据库入门到大牛，mysql安装到优化，百科全书级，全网天花板</a><br>官方资料: <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1ztbzMVF9qRJ2xCOpySXl3Q?pwd=yyds">尚硅谷MySQL入门到高级-宋红康版</a></p>
+<p>代码仓库<br>Gitee：<a target="_blank" rel="noopener" href="https://gitee.com/an_shiguang/learn-mysql">https://gitee.com/an_shiguang/learn-mysql</a></p>
+</blockquote>
+<h1 id="主从复制概述"><a href="#主从复制概述" class="headerlink" title="主从复制概述"></a>主从复制概述</h1><h2 id="如何提升数据库并发能力"><a href="#如何提升数据库并发能力" class="headerlink" title="如何提升数据库并发能力"></a>如何提升数据库并发能力</h2><p>在实际工作中，我们常常将<code>Redis</code>作为缓存与<code>MySQL</code>配合来使用，当有请求的时候，首先会从缓存中进行查找，如果存在就直接取出。如果不存在再访问数据库，这样就<code>提升了读取的效率</code>，也减少了对后端数据库的<code>访问压力</code>。Redis的缓存架构是<code>高并发架构</code>中非常重要的一环。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/26/66f51571be34e.png" alt="image-20220715202237535"></p>
+<p>此外，一般应用对数据库而言都是“ <code>读多写少</code> ”，也就说对数据库读取数据的压力比较大，有一个思路就是采用数据库集群的方案，做 <code>主从架构</code> 、进行 <code>读写分离</code> ，这样同样可以提升数据库的并发处理能力。但并不是所有的应用都需要对数据库进行主从架构的设置，毕竟设置架构本身是有成本的。</p>
+<p>如果我们的目的在于提升数据库高并发访问的效率，那么首先考虑的是如何 <code>优化SQL和索引</code> ，这种方式 简单有效；其次才是采用 <code>缓存的策略</code> ，比如使用 Redis将热点数据保存在内存数据库中，提升读取的效率；最后才是对数据库采用 <code>主从架构</code> ，进行读写分离。</p>
+<p>按照上面的方式进行优化，使用和维护的成本是由低到高的。</p>
+<h2 id="主从复制的作用"><a href="#主从复制的作用" class="headerlink" title="主从复制的作用"></a>主从复制的作用</h2><p>主从同步设计不仅可以提高数据库的吞吐量，还有以下 3 个方面的作用。</p>
+<p><strong>第1个作用：读写分离。</strong>我们可以通过主从复制的方式来<code>同步数据</code>，然后通过读写分离提高数据库并发处理能力。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/26/66f51571c3157.png" alt="image-20220715212521601"></p>
+<p>其中一个是Master主库，负责写入数据，我们称之为：写库。</p>
+<p>其他都是Slave从库，负责读取数据，我们称之为：读库。</p>
+<p>当主库进行更新的时候，会自动将数据复制到从库中，而我们在客户端读取数据的时候，会从从库进行读取。</p>
+<p>面对“读多写少”的需求，采用读写分离的方式，可以实现<code>更高的并发访问</code>。同时，我们还能对从服务器进行<code>负载均衡</code>，让不同的读请求按照策略均匀地分发到不同的从服务器上，让<code>读取更加顺畅</code>。读取顺畅的另一个原因，就是<code>减少了锁表</code>的影响，比如我们让主库负责写，当主库出现写锁的时候，不会影响到从库进行SELECT的读取。</p>
+<p><strong>第2个作用就是数据备份。</strong>我们通过主从复制将主库上的数据复制到从库上，相当于一种<code>热备份机制</code>，也就是在主库正常运行的情况下进行的备份，不会影响到服务。</p>
+<p><strong>第3个作用是具有高可用性。</strong>数据备份实际上是一种冗余的机制，通过这种冗余的方式可以换取数据库的高可用性，也就是当服务器出现故障或宕机的情况下，可以切换到从服务器上，保证服务的正常运行。</p>
+<p>关于高可用性的程度，我们可以用一个指标衡量，即正常可用时间/全年时间。比如要达到全年99.999%的时间<br>都可用，就意味着系统在一年中的不可用时间不得超过<code>365*24*60*(1-99.999%)=5.256</code>分钟（含系统崩溃的<br>时间、日常维护操作导致的停机时间等)，其他时间都需要保持可用的状态。</p>
+<p>实际上，更高的高可用性，意味着需要付出更高的成本代价。在现实中我们需要结合业务需求和成本来进行选<br>择。</p>
+<h1 id="主从复制的原理"><a href="#主从复制的原理" class="headerlink" title="主从复制的原理"></a>主从复制的原理</h1><p><code>Slave</code> 会从 <code>Master</code> 读取 <code>binlog</code> 来进行数据同步。</p>
+<h2 id="原理剖析"><a href="#原理剖析" class="headerlink" title="原理剖析"></a>原理剖析</h2><p><strong>三个线程</strong></p>
+<p>实际上主从同步的原理就是基于 binlog 进行数据同步的。在主从复制过程中，会基于 <code>3 个线程</code> 来操 作，一个主库线程，两个从库线程。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/26/66f515fca19b9.png" alt="image-20220715215944767"></p>
+<p><code>二进制日志转储线程</code> （Binlog dump thread）是一个主库线程。当从库线程连接的时候， 主库可以将二进 制日志发送给从库，当主库读取事件（Event）的时候，会在 Binlog 上 <code>加锁</code> ，读取完成之后，再将锁释放掉。</p>
+<p><code>从库 I/O 线程</code> 会连接到主库，向主库发送请求更新 Binlog。这时从库的 I/O 线程就可以读取到主库的二进制日志转储线程发送的 Binlog 更新部分，并且拷贝到本地的中继日志 （Relay log）。</p>
+<p><code>从库 SQL 线程</code> 会读取从库中的中继日志，并且执行日志中的事件，将从库中的数据与主库保持同步。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/26/66f515fca8eb7.png" alt="image-20220715220037213"></p>
+<blockquote>
+<p>注意：</p>
+<p>不是所有版本的MySQL都默认开启服务器的二进制日志。在进行主从同步的时候，我们需要先检查服务器是否已经开启了二进制日志。</p>
+<p>除非特殊指定，默认情况下从服务器会执行所有主服务器中保存的事件。也可以通过配置，使从服务器执行特定的事件。</p>
+</blockquote>
+<p><strong>复制三步骤</strong></p>
+<p>步骤1： <code>Master</code> 将写操作记录到二进制日志（ <code>binlog</code> ）。</p>
+<p>步骤2： <code>Slave</code> 将 <code>Master</code> 的binary log events拷贝到它的中继日志（ <code>relay log</code> ）；</p>
+<p>步骤3： <code>Slave</code> 重做中继日志中的事件，将改变应用到自己的数据库中。 MySQL复制是异步的且串行化的，而且重启后从 <code>接入点</code> 开始复制。</p>
+<p><strong>复制的问题</strong></p>
+<p>复制的最大问题： <code>延时</code></p>
+<h2 id="复制的基本原则"><a href="#复制的基本原则" class="headerlink" title="复制的基本原则"></a>复制的基本原则</h2><ul>
+<li>每个 <code>Slave</code> 只有一个 <code>Master</code></li>
+<li>每个 <code>Slave</code> 只能有一个唯一的服务器ID</li>
+<li>每个 <code>Master</code> 可以有多个 <code>Slave</code></li>
+</ul>
+<h1 id="一主一从架构搭建"><a href="#一主一从架构搭建" class="headerlink" title="一主一从架构搭建"></a>一主一从架构搭建</h1><p>一台 <code>主机</code> 用于处理所有 <code>写请求</code> ，一台 <code>从机</code> 负责所有 <code>读请求</code> ，架构图如下:</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/26/66f519ed38084.png" alt="image-20220715220852836"></p>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>1、准备 2台 CentOS 虚拟机 （具体设置内容在P192）</p>
+<p>2、每台虚拟机上需要安装好MySQL (可以是MySQL8.0 )</p>
+<p>说明：前面我们讲过如何克隆一台CentOS。大家可以在一台CentOS上安装好MySQL，进而通过克隆的方式复制出1台包含MySQL的虚拟机。</p>
+<p>注意：克隆的方式需要修改新克隆出来主机的：① <code>MAC地址</code> ② <code>hostname</code> ③<code> IP 地址</code> ④ <code>UUID</code> 。</p>
+<p>此外，克隆的方式生成的虚拟机（包含MySQL Server），则克隆的虚拟机MySQL Server的UUID相同，必须修改，否则在有些场景会报错。比如： <code>show slave status\G</code> ，报如下的错误：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Last_IO_Error: Fatal error: The slave I/O thread stops because master and slave have</span><br><span class="line">equal MySQL server UUIDs; these UUIDs must be different for replication to work.</span><br></pre></td></tr></tbody></table></figure>
+
+<p>修改MySQL Server 的UUID方式：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vim /var/lib/mysql/auto.cnf</span><br><span class="line"></span><br><span class="line">systemctl restart mysqld</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="主机配置文件"><a href="#主机配置文件" class="headerlink" title="主机配置文件"></a>主机配置文件</h2><p>建议mysql版本一致且后台以服务运行，主从所有配置项都配置在 <code>[mysqld]</code> 节点下，且都是小写字母。</p>
+<p>具体参数配置如下：</p>
+<ul>
+<li>必选</li>
+</ul>
+<figure class="highlight properties"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#[必须]主服务器唯一ID</span></span><br><span class="line"><span class="attr">server-id</span>=<span class="string">1</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">#[必须]启用二进制日志,指名路径。比如：自己本地的路径/log/mysqlbin</span></span><br><span class="line"><span class="attr">log-bin</span>=<span class="string">atguigu-bin</span></span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>可选</li>
+</ul>
+<figure class="highlight properties"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#[可选] 0（默认）表示读写（主机），1表示只读（从机）</span></span><br><span class="line"><span class="attr">read-only</span>=<span class="string">0</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">#设置日志文件保留的时长，单位是秒</span></span><br><span class="line"><span class="attr">binlog_expire_logs_seconds</span>=<span class="string">6000</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">#控制单个二进制日志大小。此参数的最大和默认值是1GB</span></span><br><span class="line"><span class="attr">max_binlog_size</span>=<span class="string">200M</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">#[可选]设置不要复制的数据库</span></span><br><span class="line"><span class="attr">binlog-ignore-db</span>=<span class="string">test</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">#[可选]设置需要复制的数据库,默认全部记录。比如：binlog-do-db=atguigu_master_slave</span></span><br><span class="line"><span class="attr">binlog-do-db</span>=<span class="string">需要复制的主数据库名字</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">#[可选]设置binlog格式</span></span><br><span class="line"><span class="attr">binlog_format</span>=<span class="string">STATEMENT</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>重启后台mysql服务，使配置生效。</p>
+<blockquote>
+<p>注意：</p>
+<p>先搭建完主从复制，再创建数据库。</p>
+<p>MySQL主从复制起始时，从机不继承主机数据。</p>
+</blockquote>
+<p><strong>① binlog格式设置：</strong></p>
+<p>格式1： <code>STATEMENT模式</code> （基于SQL语句的复制(statement-based replication, SBR)）</p>
+<figure class="highlight properties"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">binlog_format</span>=<span class="string">STATEMENT</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>每一条会修改数据的sql语句会记录到binlog中。这是默认的binlog格式。</p>
+<ul>
+<li>SBR 的优点：<ul>
+<li>历史悠久，技术成熟 </li>
+<li>不需要记录每一行的变化，减少了binlog日志量，文件较小 </li>
+<li>binlog中包含了所有数据库更改信息，可以据此来审核数据库的安全等情况 </li>
+<li>binlog可以用于实时的还原，而不仅仅用于复制 </li>
+<li>主从版本可以不一样，从服务器版本可以比主服务器版本高</li>
+</ul>
+</li>
+<li>SBR 的缺点：<ul>
+<li>不是所有的UPDATE语句都能被复制，尤其是包含不确定操作的时候</li>
+</ul>
+</li>
+<li>使用以下函数的语句也无法被复制：LOAD_FILE()、UUID()、USER()、FOUND_ROWS()、SYSDATE() (除非启动时启用了 –sysdate-is-now 选项)<ul>
+<li>INSERT … SELECT 会产生比 RBR 更多的行级锁 </li>
+<li>复制需要进行全表扫描(WHERE 语句中没有使用到索引)的 UPDATE 时，需要比 RBR 请求更多的行级锁 </li>
+<li>对于有 AUTO_INCREMENT 字段的 InnoDB表而言，INSERT 语句会阻塞其他 INSERT 语句 </li>
+<li>对于一些复杂的语句，在从服务器上的耗资源情况会更严重，而 RBR 模式下，只会对那个发 生变化的记录产生影响 </li>
+<li>执行复杂语句如果出错的话，会消耗更多资源</li>
+<li>数据表必须几乎和主服务器保持一致才行，否则可能会导致复制出错</li>
+</ul>
+</li>
+</ul>
+<p><strong>② ROW模式（基于行的复制(row-based replication, RBR)）</strong></p>
+<figure class="highlight properties"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">binlog_format</span>=<span class="string">ROW</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>5.1.5版本的MySQL才开始支持，不记录每条sql语句的上下文信息，仅记录哪条数据被修改了，修改成什么样了。</p>
+<ul>
+<li>RBR 的优点：<ul>
+<li>任何情况都可以被复制，这对复制来说是最 <code>安全可靠</code> 的。（比如：不会出现某些特定情况下 的存储过程、function、trigger的调用和触发无法被正确复制的问题） </li>
+<li>多数情况下，从服务器上的表如果有主键的话，复制就会快了很多 </li>
+<li>复制以下几种语句时的行锁更少：INSERT … SELECT、包含 AUTO_INCREMENT 字段的 INSERT、 没有附带条件或者并没有修改很多记录的 UPDATE 或 DELETE 语句 </li>
+<li>执行 INSERT，UPDATE，DELETE 语句时锁更少 </li>
+<li>从服务器上采用 多线程 来执行复制成为可能</li>
+</ul>
+</li>
+<li>RBR 的缺点：<ul>
+<li>binlog 大了很多 </li>
+<li>复杂的回滚时 binlog 中会包含大量的数据 </li>
+<li>主服务器上执行 UPDATE 语句时，所有发生变化的记录都会写到 binlog 中，而 SBR 只会写一次，这会导致频繁发生 binlog 的并发写问题 </li>
+<li>无法从 binlog 中看到都复制了些什么语句</li>
+</ul>
+</li>
+</ul>
+<p><strong>③ MIXED模式（混合模式复制(mixed-based replication, MBR)）</strong></p>
+<figure class="highlight properties"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">binlog_format</span>=<span class="string">MIXED</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>从5.1.8版本开始，MySQL提供了Mixed格式，实际上就是Statement与Row的结合。</p>
+<p>在Mixed模式下，一般的语句修改使用statment格式保存binlog。如一些函数，statement无法完成主从复制的操作，则采用row格式保存binlog。</p>
+<p>MySQL会根据执行的每一条具体的sql语句来区分对待记录的日志形式，也就是在Statement和Row之间选择一种。</p>
+<h2 id="从机配置文件"><a href="#从机配置文件" class="headerlink" title="从机配置文件"></a>从机配置文件</h2><p>要求主从所有配置项都配置在 <code>my.cnf</code> 的 <code>[mysqld]</code> 栏位下，且都是小写字母。</p>
+<ul>
+<li><p>必选</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#[必须]从服务器唯一ID</span><br><span class="line">server-id=2</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>可选</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#[可选]启用中继日志</span><br><span class="line">relay-log=mysql-relay</span><br></pre></td></tr></tbody></table></figure></li>
+</ul>
+<p>重启后台mysql服务，使配置生效。</p>
+<blockquote>
+<p>注意：主从机都关闭防火墙<br>service iptables stop #CentOS 6<br>systemctl stop firewalld.service #CentOS 7</p>
+</blockquote>
+<h2 id="主机：建立账户并授权"><a href="#主机：建立账户并授权" class="headerlink" title="主机：建立账户并授权"></a>主机：建立账户并授权</h2><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#在主机MySQL里执行授权主从复制的命令</span><br><span class="line">GRANT REPLICATION SLAVE ON *.* TO 'slave1'@'从机器数据库IP' IDENTIFIED BY 'abc123'; #5.5,5.7</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>注意：如果使用的是MySQL8，需要如下的方式建立账户，并授权slave:</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">CREATE USER 'slave1'@'%' IDENTIFIED BY '123456';</span><br><span class="line"></span><br><span class="line">GRANT REPLICATION SLAVE ON *.* TO 'slave1'@'%';</span><br><span class="line"></span><br><span class="line">#此语句必须执行。否则见下面。</span><br><span class="line">ALTER USER 'slave1'@'%' IDENTIFIED WITH mysql_native_password BY '123456';</span><br><span class="line"></span><br><span class="line">flush privileges;</span><br></pre></td></tr></tbody></table></figure>
+
+<blockquote>
+<p>注意：在从机执行show slave status\G时报错： </p>
+<p>Last_IO_Error: error connecting to master ‘<a href="mailto:slave1@192.168.1.150">slave1@192.168.1.150</a>:3306’ - retry-time: 60 retries: 1 message: </p>
+<p>Authentication plugin ‘caching_sha2_password’ reported error: Authentication requires secure connection.</p>
+</blockquote>
+<p>查询Master的状态，并记录下File和Position的值。</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> master status;</span><br></pre></td></tr></tbody></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/26/66f51a8ff327f.png" alt="image-20240926162551652"></p>
+<ul>
+<li>记录下File和Position的值</li>
+</ul>
+<blockquote>
+<p>注意：执行完此步骤后<strong>不要再操作主服务器MySQL</strong>，防止主服务器状态值变化。</p>
+</blockquote>
+<h2 id="从机：配置需要复制的主机"><a href="#从机：配置需要复制的主机" class="headerlink" title="从机：配置需要复制的主机"></a>从机：配置需要复制的主机</h2><p><strong>步骤1：</strong>从机上复制主机的命令</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">CHANGE MASTER TO</span><br><span class="line">MASTER_HOST='主机的IP地址',</span><br><span class="line">MASTER_USER='主机用户名',</span><br><span class="line">MASTER_PASSWORD='主机用户名的密码',</span><br><span class="line">MASTER_LOG_FILE='mysql-bin.具体数字',</span><br><span class="line">MASTER_LOG_POS=具体值;</span><br></pre></td></tr></tbody></table></figure>
+
+<p>举例：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">CHANGE MASTER TO</span><br><span class="line">MASTER_HOST='192.168.1.150',MASTER_USER='slave1',MASTER_PASSWORD='123456',MASTER_LOG_F</span><br><span class="line">ILE='atguigu-bin.000007',MASTER_LOG_POS=154;</span><br></pre></td></tr></tbody></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/26/66f51ab71ff79.png" alt="image-20220718140946747"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/26/66f51c8f2df44.png" alt="image-20240926163422788"></p>
+<p><strong>步骤2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#启动slave同步</span><br><span class="line">START SLAVE;</span><br></pre></td></tr></tbody></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/26/66f51ab70c551.png" alt="image-20220718141825228"></p>
+<p>如果报错：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/26/66f51ab72e404.png" alt="image-20220718141841862"></p>
+<p>可以执行如下操作，删除之前的relay_log信息。然后重新执行 CHANGE MASTER TO …语句即可。</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; reset slave; #删除SLAVE数据库的relaylog日志文件，并重新启用新的relaylog文件</span><br></pre></td></tr></tbody></table></figure>
+
+<p>接着，查看同步状态：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SHOW SLAVE STATUS\G;</span><br></pre></td></tr></tbody></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/26/66f51ad0ede12.png" alt="image-20240926162656635"></p>
+<blockquote>
+<p>上面两个参数都是Yes，则说明主从配置成功！</p>
+</blockquote>
+<p>显式如下的情况，就是不正确的。可能错误的原因有：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1. 网络不通</span><br><span class="line">2. 账户密码错误</span><br><span class="line">3. 防火墙</span><br><span class="line">4. mysql配置文件问题</span><br><span class="line">5. 连接服务器时语法</span><br><span class="line">6. 主服务器mysql权限</span><br></pre></td></tr></tbody></table></figure>
+
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/26/66f51ab75bb34.png" alt="image-20220718142045114" style="zoom:80%;">
+
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>主机新建库、新建表、insert记录，从机复制：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CREATE DATABASE atguigu_master_slave;</span><br><span class="line"></span><br><span class="line">CREATE TABLE mytbl(id INT,NAME VARCHAR(16));</span><br><span class="line"></span><br><span class="line">INSERT INTO mytbl VALUES(1, 'zhang3');</span><br><span class="line"></span><br><span class="line">INSERT INTO mytbl VALUES(2,@@hostname);</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="停止主从同步"><a href="#停止主从同步" class="headerlink" title="停止主从同步"></a>停止主从同步</h2><ul>
+<li><p>停止主从同步命令：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stop slave;</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>如何重新配置主从</p>
+<p>如果停止从服务器复制功能，再使用需要重新配置主从。否则会报错如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/26/66f51ab72dfea.png" alt="image-20220718142549168"></p>
+</li>
+</ul>
+<p>重新配置主从，需要在从机上执行：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">stop slave;</span><br><span class="line"></span><br><span class="line">reset master; #删除Master中所有的binglog文件，并将日志索引文件清空，重新开始所有新的日志文件(慎用)</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h2><p><strong>搭建主从复制：双主双从</strong></p>
+<p>一个主机m1用于处理所有写请求，它的从机s1和另一台主机m2还有它的从机s2负责所有读请求。当m1主机宕机后，m2主机负责写请求，m1、m2互为备机。结构图如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/26/66f51af804f00.png" alt="image-20220718143705843"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/26/66f51af8226df.png" alt="image-20220718143716620"></p>
+<h1 id="同步数据一致性问题"><a href="#同步数据一致性问题" class="headerlink" title="同步数据一致性问题"></a>同步数据一致性问题</h1><p><strong>主从同步的要求：</strong></p>
+<ul>
+<li>读库和写库的数据一致(最终一致)； </li>
+<li>写数据必须写到写库； </li>
+<li>读数据必须到读库(不一定)；</li>
+</ul>
+<h2 id="理解主从延迟问题"><a href="#理解主从延迟问题" class="headerlink" title="理解主从延迟问题"></a>理解主从延迟问题</h2><p>进行主从同步的内容是二进制日志，它是一个文件，在进行 <code>网络传输</code> 的过程中就一定会 <code>存在主从延迟</code> （比如 500ms），这样就可能造成用户在从库上读取的数据不是最新的数据，也就是主从同步中的 <code>数据不一致性</code> 问题。</p>
+<p>举例：导致主从延迟的时间点主要包括以下三个：</p>
+<ol>
+<li>主库A执行完成一个事务，写入binlog,我们把这个时刻记为T1;</li>
+<li>之后传给从库B,我们把从库B接收完这个binlog的时刻记为T2;</li>
+<li>从库B执行完成这个事务，我们把这个时刻记为T3。</li>
+</ol>
+<h2 id="主从延迟问题原因"><a href="#主从延迟问题原因" class="headerlink" title="主从延迟问题原因"></a>主从延迟问题原因</h2><p>在网络正常的时候，日志从主库传给从库所需的时间是很短的，即T2-T1的值是非常小的。即，网络正常情况下，主备延迟的主要来源是备库接收完binlog和执行完这个事务之间的时间差。</p>
+<p><strong>主备延迟最直接的表现是，从库消费中继日志（relay log）的速度，比主库生产binlog的速度要慢。</strong>造成原因：</p>
+<p>1、从库的机器性能比主库要差 </p>
+<p>2、从库的压力大 </p>
+<p>3、大事务的执行</p>
+<p><strong>举例1：</strong>一次性用delete语句删除太多数据 </p>
+<p>结论：后续再删除数据的时候，要控制每个事务删除的数据量，分成多次删除。 </p>
+<p><strong>举例2：</strong>一次性用insert…select插入太多数据 </p>
+<p><strong>举例3：</strong>大表DDL </p>
+<p>比如在主库对一张500W的表添加一个字段耗费了10分钟，那么从节点上也会耗费10分钟。</p>
+<h2 id="如何减少主从延迟"><a href="#如何减少主从延迟" class="headerlink" title="如何减少主从延迟"></a>如何减少主从延迟</h2><p>若想要减少主从延迟的时间，可以采取下面的办法：</p>
+<ol>
+<li>降低多线程大事务并发的概率，优化业务逻辑 </li>
+<li>优化SQL，避免慢SQL， <code>减少批量操作</code> ，建议写脚本以update-sleep这样的形式完成。 </li>
+<li><code>提高从库机器的配置</code> ，减少主库写binlog和从库读binlog的效率差。 </li>
+<li>尽量采用 <code>短的链路</code> ，也就是主库和从库服务器的距离尽量要短，提升端口带宽，减少binlog传输的网络延时。 </li>
+<li>实时性要求的业务读强制走主库，从库只做灾备，备份。</li>
+</ol>
+<h2 id="如何解决一致性问题"><a href="#如何解决一致性问题" class="headerlink" title="如何解决一致性问题"></a>如何解决一致性问题</h2><p>如果操作的数据存储在同一个数据库中，那么对数据进行更新的时候，可以对记录加写锁，这样在读取的时候就不会发生数据不一致的情况。但这时从库的作用就是 <code>备份</code> ，并没有起到 <code>读写分离</code> ，分担主库 <code>读压力</code> 的作用。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/26/66f51b3b34a54.png" alt="image-20220718144341584"></p>
+<p>读写分离情况下，解决主从同步中数据不一致的问题， 就是解决主从之间 <code>数据复制方式</code> 的问题，如果按照数据一致性 <code>从弱到强</code> 来进行划分，有以下 3 种复制方式。</p>
+<h3 id="方法-1：异步复制"><a href="#方法-1：异步复制" class="headerlink" title="方法 1：异步复制"></a>方法 1：异步复制</h3><p>异步模式就是客户端提交 COMMIT 之后不需要等从库返回任何结果，而是直接将结果返回给客户端，这样做的好处是不会影响主库写的效率，但可能会存在主库宕机，而Binlog还没有同步到从库的情况，也就是此时的主库和从库数据不一致。这时候从从库中选择一个作为新主，那么新主则可能缺少原来主服务器中已提交的事务。所以，这种复制模式下的数据一致性是最弱的。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/26/66f51b5802bdc.png" alt="image-20240926162911683"></p>
+<h3 id="方法-2：半同步复制"><a href="#方法-2：半同步复制" class="headerlink" title="方法 2：半同步复制"></a>方法 2：半同步复制</h3><p>MySQL5.5版本之后开始支持半同步复制的方式。原理是在客户端提交C0MMT之后不直接将结果返回给客户端<br>而是等待至少有一个从库接收到了Binlog,并且写入到中继日志中，再返回给客户端。</p>
+<p>这样做的好处就是提高了数据的一致性，当然相比于异步复制来说，至少多增加了一个网络连接的诞延迟，降低了<br>主库写的效率。</p>
+<p>在MySQL5.7版本中还增加了一个<code>rpl_semi_sync_master_wait_for_slave_count</code>参数，可以对应答的从库<br>数量进行设置，默认为<code>1</code>，也就是说只要有1个从库进行了响应，就可以返回给客户端。如果将这个参数调大，<br>可以提升数据一致性的强度，但也会增加主库等待从库响应的时间。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/26/66f520582cd19.png" alt="image-20240926165031780"></p>
+<h3 id="方法-3：组复制"><a href="#方法-3：组复制" class="headerlink" title="方法 3：组复制"></a>方法 3：组复制</h3><p>异步复制和半同步复制都无法最终保证数据的一致性问题，半同步复制是通过判断从库响应的个数来决定是否返回给客户端，虽然数据一致性相比于异步复制有提升，但仍然无法满足对数据一致性要求高的场景，比如金融领域。MGR 很好地弥补了这两种复制模式的不足。</p>
+<p>组复制技术，简称 MGR（MySQL Group Replication）。是 MySQL 在 5.7.17 版本中推出的一种新的数据复制技术，这种复制技术是基于 Paxos 协议的状态机复制。</p>
+<p><strong>MGR 是如何工作的</strong></p>
+<p>首先我们将多个节点共同组成一个复制组，在 <code>执行读写（RW）事务</code> 的时候，需要通过一致性协议层 （Consensus 层）的同意，也就是读写事务想要进行提交，必须要经过组里“大多数人”（对应 Node 节 点）的同意，大多数指的是同意的节点数量需要大于 （N/2+1），这样才可以进行提交，而不是原发起方一个说了算。而针对 <code>只读（RO）事务</code> 则不需要经过组内同意，直接 COMMIT 即可。</p>
+<p>在一个复制组内有多个节点组成，它们各自维护了自己的数据副本，并且在一致性协议层实现了原子消 息和全局有序消息，从而保证组内数据的一致性。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/26/66f5206f080ad.png" alt="image-20220718145235499"></p>
+<p>MGR 将 MySQL 带入了数据强一致性的时代，是一个划时代的创新，其中一个重要的原因就是MGR 是基 于 Paxos 协议的。Paxos 算法是由 2013 年的图灵奖获得者 Leslie Lamport 于 1990 年提出的，有关这个算法的决策机制可以搜一下。事实上，Paxos 算法提出来之后就作为 <code>分布式一致性算法</code> 被广泛应用，比如 Apache 的 ZooKeeper 也是基于 Paxos 实现的。</p>
+<h1 id="知识延伸"><a href="#知识延伸" class="headerlink" title="知识延伸"></a>知识延伸</h1><p>在主从架构的配置中，如果想要采取读写分离的策略，我们可以<code> 自己编写程序</code> ，也可以通过 <code>第三方的中间件</code> 来实现。</p>
+<ul>
+<li>自己编写程序的好处就在于比较自主，我们可以自己判断哪些查询在从库上来执行，针对实时性要 求高的需求，我们还可以考虑哪些查询可以在主库上执行。同时，程序直接连接数据库，减少了中间件层，相当于减少了性能损耗。</li>
+<li>采用中间件的方法有很明显的优势，<code> 功能强大</code> ， <code>使用简单</code> 。但因为在客户端和数据库之间增加了 中间件层会有一些 <code>性能损耗</code> ，同时商业中间件也是有使用成本的。我们也可以考虑采取一些优秀的开源工具。</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/26/66f520fdb19d4.png" alt="image-20220718145428456"></p>
+<p>① <code>Cobar</code> 属于阿里B2B事业群，始于2008年，在阿里服役3年多，接管3000+个MySQL数据库的 schema,集群日处理在线SQL请求50亿次以上。由于Cobar发起人的离职，Cobar停止维护。 </p>
+<p>② <code>Mycat</code> 是开源社区在阿里cobar基础上进行二次开发，解决了cobar存在的问题，并且加入了许 多新的功能在其中。青出于蓝而胜于蓝。</p>
+<p>③ <code>OneProxy</code> 基于MySQL官方的proxy思想利用c语言进行开发的，OneProxy是一款商业 收费 的中 间件。舍弃了一些功能，专注在 性能和稳定性上 。 </p>
+<p>④ <code>kingshard</code> 由小团队用go语言开发，还需要发展，需要不断完善。 </p>
+<p>⑤ <code>Vitess</code> 是Youtube生产在使用，架构很复杂。不支持MySQL原生协议，使用 需要大量改造成 本 。 </p>
+<p>⑥ <code>Atlas</code> 是360团队基于mysql proxy改写，功能还需完善，高并发下不稳定。 </p>
+<p>⑦ <code>MaxScale</code> 是mariadb（MySQL原作者维护的一个版本） 研发的中间件 </p>
+<p>⑧ <code>MySQLRoute</code> 是MySQL官方Oracle公司发布的中间件</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/26/66f520fdafb11.png" alt="image-20220718145523643"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/26/66f520fdad119.png" alt="image-20220718145534856"></p>
+<p>主备切换：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/26/66f520fda0eaf.png" alt="image-20220718145548526"></p>
+<ul>
+<li>主动切换 </li>
+<li>被动切换</li>
+<li>如何判断主库出问题了？如何解决过程中的数据不一致性问题 ?</li>
+</ul>
+</div></article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/avatar.png" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/avatar.png" title="头像" alt="头像"></a><div class="post-copyright__author_name">時光</div><div class="post-copyright__author_desc">心寄朗朗乾坤，胸怀真修之道。</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://blog.shiguang666.eu.org/2024/09/26/f7ad294f7377/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://blog.shiguang666.eu.org/2024/09/26/f7ad294f7377/')">【尚硅谷】MySQL-主从复制</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="anzhiyu.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="anzhiyufont anzhiyu-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="/img/wechat.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/wechat.png" alt="微信"></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/alipay.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/alipay.png" alt="支付宝"></a><div class="post-qr-code-desc">支付宝</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="anzhiyu.removeRewardMask()" style="display: none"></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://blog.shiguang666.eu.org/2024/09/26/f7ad294f7377/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=【尚硅谷】MySQL-主从复制&amp;url=https://blog.shiguang666.eu.org/2024/09/26/f7ad294f7377/&amp;pic=https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.shiguang666.eu.org" target="_blank">時光</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/SQL/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>SQL<span class="tagsPageCount">12</span></a><a class="post-meta__box__tags" href="/tags/%E5%B0%9A%E7%A1%85%E8%B0%B7/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>尚硅谷<span class="tagsPageCount">42</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://img.shiguangdev.cn/i/2024/12/13/675c5996649aa.webp" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/09/26/922071561806/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">【尚硅谷】MySQL-其他数据库日志</div></div></a></div><div class="next-post pull-right"><a href="/2024/09/26/e441e650956c/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">【尚硅谷】MySQL-数据库备份与恢复</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/2024/09/25/076bbddc6716/" title="【尚硅谷】MySQL-MySQL事务日志"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-09-25</div><div class="title">【尚硅谷】MySQL-MySQL事务日志</div></div></a></div><div><a href="/2024/09/24/5ff69d1c35a3/" title="【尚硅谷】MySQL-事务基础知识"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-09-24</div><div class="title">【尚硅谷】MySQL-事务基础知识</div></div></a></div><div><a href="/2024/09/26/8aeb9df6c710/" title="【尚硅谷】MySQL-多版本并发控制"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-09-26</div><div class="title">【尚硅谷】MySQL-多版本并发控制</div></div></a></div><div><a href="/2024/09/26/922071561806/" title="【尚硅谷】MySQL-其他数据库日志"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-09-26</div><div class="title">【尚硅谷】MySQL-其他数据库日志</div></div></a></div><div><a href="/2024/09/26/e441e650956c/" title="【尚硅谷】MySQL-数据库备份与恢复"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-09-26</div><div class="title">【尚硅谷】MySQL-数据库备份与恢复</div></div></a></div><div><a href="/2024/09/22/88ec74bb220c/" title="【尚硅谷】MySQL-性能分析工具的使用"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-09-22</div><div class="title">【尚硅谷】MySQL-性能分析工具的使用</div></div></a></div></div></div><hr><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="anzhiyufont anzhiyu-icon-comments"></i><span> 评论</span></div><div class="comment-randomInfo"><a onclick="anzhiyu.addRandomCommentInfo()" href="javascript:void(0)" style="display: none">匿名评论</a><a href="/privacy" style="margin-left: 4px">隐私政策</a></div><div class="comment-tips" id="comment-tips"><span>✅ 你无需删除空行，直接评论以获取最佳展示效果</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div><div class="comment-barrage"></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"><div class="author-status"><img class="g-status" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://emotion.acs.pw/emotion/Heo/送福.png" alt="status"></div></div><div class="author-info__description">代码成就万事基积沙镇海,<br>梦想永在凌云意意气风发。</div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/"><h1 class="author-info__name">時光</h1><div class="author-info__desc">心寄朗朗乾坤，胸怀真修之道。</div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/shiguang-coding" target="_blank" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a></div></div></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bullhorn anzhiyu-shake"></i><span>公告</span></div><div class="announcement_content"><span>🌟欢迎光临時光的博客园子🌟</span><br> <span><a href="https://blog.shiguang666.eu.org"><b>blog.shiguang666.eu.org</b></a></span><br> <span><a target="_blank" rel="noopener" href="https://blog.shiguangdev.cn"><b>blog.shiguangdev.cn</b></a></span><br> <span><a target="_blank" rel="noopener" href="https://blog.shiguang88.icu"><b>blog.shiguang88.icu</b></a></span><br> <span>🤔 如有问题欢迎评论区交流！</span><br> <span>📧 如需联系我：<a href="mailto:an_shiguang@163.com"><b>发送邮件🚀</b></a></span> <div id="welcome-info"></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">主从复制概述</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E6%8F%90%E5%8D%87%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B9%B6%E5%8F%91%E8%83%BD%E5%8A%9B"><span class="toc-number">1.1.</span> <span class="toc-text">如何提升数据库并发能力</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-number">1.2.</span> <span class="toc-text">主从复制的作用</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E7%9A%84%E5%8E%9F%E7%90%86"><span class="toc-number">2.</span> <span class="toc-text">主从复制的原理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90"><span class="toc-number">2.1.</span> <span class="toc-text">原理剖析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%8D%E5%88%B6%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%8E%9F%E5%88%99"><span class="toc-number">2.2.</span> <span class="toc-text">复制的基本原则</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E4%B8%BB%E4%B8%80%E4%BB%8E%E6%9E%B6%E6%9E%84%E6%90%AD%E5%BB%BA"><span class="toc-number">3.</span> <span class="toc-text">一主一从架构搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-number">3.1.</span> <span class="toc-text">准备工作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BB%E6%9C%BA%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-number">3.2.</span> <span class="toc-text">主机配置文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8E%E6%9C%BA%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-number">3.3.</span> <span class="toc-text">从机配置文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BB%E6%9C%BA%EF%BC%9A%E5%BB%BA%E7%AB%8B%E8%B4%A6%E6%88%B7%E5%B9%B6%E6%8E%88%E6%9D%83"><span class="toc-number">3.4.</span> <span class="toc-text">主机：建立账户并授权</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8E%E6%9C%BA%EF%BC%9A%E9%85%8D%E7%BD%AE%E9%9C%80%E8%A6%81%E5%A4%8D%E5%88%B6%E7%9A%84%E4%B8%BB%E6%9C%BA"><span class="toc-number">3.5.</span> <span class="toc-text">从机：配置需要复制的主机</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95"><span class="toc-number">3.6.</span> <span class="toc-text">测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%81%9C%E6%AD%A2%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5"><span class="toc-number">3.7.</span> <span class="toc-text">停止主从同步</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8E%E7%BB%AD"><span class="toc-number">3.8.</span> <span class="toc-text">后续</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%90%8C%E6%AD%A5%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7%E9%97%AE%E9%A2%98"><span class="toc-number">4.</span> <span class="toc-text">同步数据一致性问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%90%86%E8%A7%A3%E4%B8%BB%E4%BB%8E%E5%BB%B6%E8%BF%9F%E9%97%AE%E9%A2%98"><span class="toc-number">4.1.</span> <span class="toc-text">理解主从延迟问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BB%E4%BB%8E%E5%BB%B6%E8%BF%9F%E9%97%AE%E9%A2%98%E5%8E%9F%E5%9B%A0"><span class="toc-number">4.2.</span> <span class="toc-text">主从延迟问题原因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%87%8F%E5%B0%91%E4%B8%BB%E4%BB%8E%E5%BB%B6%E8%BF%9F"><span class="toc-number">4.3.</span> <span class="toc-text">如何减少主从延迟</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E4%B8%80%E8%87%B4%E6%80%A7%E9%97%AE%E9%A2%98"><span class="toc-number">4.4.</span> <span class="toc-text">如何解决一致性问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%95-1%EF%BC%9A%E5%BC%82%E6%AD%A5%E5%A4%8D%E5%88%B6"><span class="toc-number">4.4.1.</span> <span class="toc-text">方法 1：异步复制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%95-2%EF%BC%9A%E5%8D%8A%E5%90%8C%E6%AD%A5%E5%A4%8D%E5%88%B6"><span class="toc-number">4.4.2.</span> <span class="toc-text">方法 2：半同步复制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%95-3%EF%BC%9A%E7%BB%84%E5%A4%8D%E5%88%B6"><span class="toc-number">4.4.3.</span> <span class="toc-text">方法 3：组复制</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E5%BB%B6%E4%BC%B8"><span class="toc-number">5.</span> <span class="toc-text">知识延伸</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/12/13/2ec3ab3954b3/" title="通过SSH密钥连接Linux"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/12/13/675c5996649aa.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="通过SSH密钥连接Linux"></a><div class="content"><a class="title" href="/2024/12/13/2ec3ab3954b3/" title="通过SSH密钥连接Linux">通过SSH密钥连接Linux</a><time datetime="2024-12-13T15:37:00.000Z" title="发表于 2024-12-13 23:37:00">2024-12-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/12/13/0616411766f4/" title="【Hexo】一键部署至远程服务器"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/12/13/675c59eff34f4.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【Hexo】一键部署至远程服务器"></a><div class="content"><a class="title" href="/2024/12/13/0616411766f4/" title="【Hexo】一键部署至远程服务器">【Hexo】一键部署至远程服务器</a><time datetime="2024-12-13T13:35:49.000Z" title="发表于 2024-12-13 21:35:49">2024-12-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/12/12/60bae9f9d9cc/" title="【尚硅谷】JVM-类的加载篇"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【尚硅谷】JVM-类的加载篇"></a><div class="content"><a class="title" href="/2024/12/12/60bae9f9d9cc/" title="【尚硅谷】JVM-类的加载篇">【尚硅谷】JVM-类的加载篇</a><time datetime="2024-12-12T04:02:59.000Z" title="发表于 2024-12-12 12:02:59">2024-12-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/12/11/0a6035f3745c/" title="【尚硅谷】JVM-字节码篇"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【尚硅谷】JVM-字节码篇"></a><div class="content"><a class="title" href="/2024/12/11/0a6035f3745c/" title="【尚硅谷】JVM-字节码篇">【尚硅谷】JVM-字节码篇</a><time datetime="2024-12-11T00:33:29.000Z" title="发表于 2024-12-11 08:33:29">2024-12-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/12/09/68b16c939c95/" title="【智能协同云图库】2-项目初始化"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/12/09/6756ee980378a.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【智能协同云图库】2-项目初始化"></a><div class="content"><a class="title" href="/2024/12/09/68b16c939c95/" title="【智能协同云图库】2-项目初始化">【智能协同云图库】2-项目初始化</a><time datetime="2024-12-09T14:12:44.000Z" title="发表于 2024-12-09 22:12:44">2024-12-09</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div id="footer_deal"><a class="deal_link" target="_blank" rel="noopener" href="https://github.com/shiguang-coding" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a><a class="deal_link" href="mailto:an_shiguang@163.com" title="email"><i class="anzhiyufont anzhiyu-icon-envelope"></i></a><img class="footer_mini_logo" title="返回顶部" alt="返回顶部" onclick="anzhiyu.scrollToDest(0, 500)" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/avatar.png" size="50px"><a class="deal_link" href="/atom.xml" title="RSS"><i class="anzhiyufont anzhiyu-icon-rss"></i></a><a class="deal_link" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC"><i class="anzhiyufont anzhiyu-icon-copyright-line"></i></a></div><div id="anzhiyu-footer"><div class="footer-group"><div class="footer-title">服务</div><div class="footer-links"><a class="footer-item" title="开往" target="_blank" rel="noopener" href="https://www.travellings.cn/go.html">开往</a><a class="footer-item" title="异次元之旅" target="_blank" rel="noopener" href="https://travel.moe/go.html?travel=on">异次元之旅</a><a class="footer-item" title="列表导航" target="_blank" rel="noopener" href="https://zhblogs.ohyee.cc/">列表导航</a><a class="footer-item" title="十年之约" target="_blank" rel="noopener" href="https://www.foreverblog.cn/">十年之约</a></div></div><div class="footer-group"><div class="footer-title">文章</div><div class="footer-links"><a class="footer-item" title="归档" href="/archives/">归档</a><a class="footer-item" title="分类" href="/categories/">分类</a><a class="footer-item" title="标签" href="/tags/">标签</a><a class="footer-item" title="RSS" href="/tom.xml">RSS</a></div></div><div class="footer-group"><div class="footer-title">导航</div><div class="footer-links"><a class="footer-item" title="即刻短文" href="/essay/">即刻短文</a><a class="footer-item" title="留言板" href="/comment/">留言板</a><a class="footer-item" title="关于我" href="/about/">关于我</a></div></div><div class="footer-group"><div class="footer-title-group"><div class="footer-title">友链</div><a class="random-friends-btn" id="footer-random-friends-btn" href="javascript:addFriendLinksInFooter();" title="换一批友情链接"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right"></i></a></div><div class="footer-links" id="friend-links-in-footer"></div></div></div><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo_v5.4.0" title="博客框架为Hexo_v5.4.0"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Frame-Hexo.svg" alt="博客框架为Hexo_v5.4.0"></a><a class="github-badge" target="_blank" href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu" style="margin-inline:5px" data-title="本站使用AnZhiYu主题" title="本站使用AnZhiYu主题"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.9/img/Theme-AnZhiYu-2E67D3.svg" alt="本站使用AnZhiYu主题"></a><a class="github-badge" target="_blank" href="https://icp.gov.moe/?keyword=blog.shiguangdev.cn" style="margin-inline:5px" data-title="萌ICP备20246006号" title="萌ICP备20246006号"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shields.io/badge/%E8%90%8Cicp%E5%A4%87-20246006%E5%8F%B7-FF1485" alt="萌ICP备20246006号"></a><a class="github-badge" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" style="margin-inline:5px" data-title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可" title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.2.0/img/badge/Copyright-BY-NC-SA.svg" alt="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"></a></p></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">©2023 - 2024 By <a class="footer-bar-link" href="/" title="時光" target="_blank">時光</a></div></div><div id="footer-type-tips"></div><div class="js-pjax"><script>function subtitleType () {
+  fetch('https://v1.hitokoto.cn')
+    .then(response => response.json())
+    .then(data => {
+      if (true) {
+        const from = '出自 ' + data.from
+        const sub = []
+        sub.unshift(data.hitokoto, from)
+        window.typed = new Typed('#footer-type-tips', {
+          strings: sub,
+          startDelay: 300,
+          typeSpeed: 150,
+          loop: true,
+          backSpeed: 50,
+        })
+      } else {
+        document.getElementById('footer-type-tips').innerHTML = data.hitokoto
+      }
+    })
+}
+
+if (true) {
+  if (typeof Typed === 'function') {
+    subtitleType()
+  } else {
+    getScript('https://cdn.cbd.int/typed.js@2.1.0/dist/typed.umd.js').then(subtitleType)
+  }
+} else {
+  subtitleType()
+}
+</script></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu" title="主题">主题</a><a class="footer-bar-link" target="_blank" rel="noopener" href="https://img.shiguangdev.cn/" title="图床">图床</a><a class="footer-bar-link" target="_blank" rel="noopener" href="https://beian.miit.gov.cn/" title="豫ICP备2024070732号">豫ICP备2024070732号</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">254</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">191</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">16</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://www.shiguang666.eu.org" title="時光主页"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="時光主页"><span class="back-menu-item-text">時光主页</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://nav.shiguang666.eu.org" title="時光导航站"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="時光导航站"><span class="back-menu-item-text">時光导航站</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://game.shiguang666.eu.org" title="怀旧游戏机"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="怀旧游戏机"><span class="back-menu-item-text">怀旧游戏机</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://games.shiguang666.eu.org" title="在线小游戏"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="在线小游戏"><span class="back-menu-item-text">在线小游戏</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">后台管理</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://img.shiguangdev.cn/" title="時光图床"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/favicon.ico" alt="時光图床"><span class="back-menu-item-text">時光图床</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://qexo.shiguang666.eu.org/" title="Hexo管理面板"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://qexo.shiguang666.eu.org/favicon.ico" alt="Hexo管理面板"><span class="back-menu-item-text">Hexo管理面板</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 归档</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随机</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/news/"><i class="fa fa-calendar faa-tada"></i><span> 早报亭</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/music/?id=10051718332&amp;server=netease"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/gallery/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/xjj/"><i class="fa fa-rocket faa-tada"></i><span> 养生堂</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/flink/"><i class="anzhiyufont anzhiyu-icon-artstation faa-tada" style="font-size: 0.9em;"></i><span> 朋友圈</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comment/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于我</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/AI/" style="font-size: 0.88rem;">AI<sup>9</sup></a><a href="/tags/Alist/" style="font-size: 0.88rem;">Alist<sup>3</sup></a><a href="/tags/CentOs/" style="font-size: 0.88rem;">CentOs<sup>1</sup></a><a href="/tags/ChatGPT/" style="font-size: 0.88rem;">ChatGPT<sup>13</sup></a><a href="/tags/ChatGPt/" style="font-size: 0.88rem;">ChatGPt<sup>1</sup></a><a href="/tags/Chrome/" style="font-size: 0.88rem;">Chrome<sup>1</sup></a><a href="/tags/CloudFlare/" style="font-size: 0.88rem;">CloudFlare<sup>3</sup></a><a href="/tags/DNS/" style="font-size: 0.88rem;">DNS<sup>1</sup></a><a href="/tags/Ecology/" style="font-size: 0.88rem;">Ecology<sup>1</sup></a><a href="/tags/GPT-4o/" style="font-size: 0.88rem;">GPT-4o<sup>2</sup></a><a href="/tags/Gemini/" style="font-size: 0.88rem;">Gemini<sup>2</sup></a><a href="/tags/Git/" style="font-size: 0.88rem;">Git<sup>8</sup></a><a href="/tags/GitHub/" style="font-size: 0.88rem;">GitHub<sup>6</sup></a><a href="/tags/Hexo/" style="font-size: 0.88rem;">Hexo<sup>24</sup></a><a href="/tags/IDEA/" style="font-size: 0.88rem;">IDEA<sup>3</sup></a><a href="/tags/KeyBoardTestUtility/" style="font-size: 0.88rem;">KeyBoardTestUtility<sup>1</sup></a><a href="/tags/Linux/" style="font-size: 0.88rem;">Linux<sup>4</sup></a><a href="/tags/Lombok/" style="font-size: 0.88rem;">Lombok<sup>1</sup></a><a href="/tags/Markdown/" style="font-size: 0.88rem;">Markdown<sup>2</sup></a><a href="/tags/MindManager/" style="font-size: 0.88rem;">MindManager<sup>1</sup></a><a href="/tags/Mysql/" style="font-size: 0.88rem;">Mysql<sup>2</sup></a><a href="/tags/Navicat/" style="font-size: 0.88rem;">Navicat<sup>1</sup></a><a href="/tags/Perplexity-AI/" style="font-size: 0.88rem;">Perplexity AI<sup>1</sup></a><a href="/tags/PicGo/" style="font-size: 0.88rem;">PicGo<sup>1</sup></a><a href="/tags/QQ/" style="font-size: 0.88rem;">QQ<sup>1</sup></a><a href="/tags/SSL/" style="font-size: 0.88rem;">SSL<sup>3</sup></a><a href="/tags/Sqlserver/" style="font-size: 0.88rem;">Sqlserver<sup>1</sup></a><a href="/tags/Typora/" style="font-size: 0.88rem;">Typora<sup>5</sup></a><a href="/tags/drawio/" style="font-size: 0.88rem;">drawio<sup>1</sup></a><a href="/tags/git/" style="font-size: 0.88rem;">git<sup>1</sup></a><a href="/tags/mysql/" style="font-size: 0.88rem;">mysql<sup>1</sup></a><a href="/tags/svn/" style="font-size: 0.88rem;">svn<sup>2</sup></a><a href="/tags/%E5%9B%BE%E5%90%A7%E5%B7%A5%E5%85%B7%E7%AE%B1/" style="font-size: 0.88rem;">图吧工具箱<sup>1</sup></a><a href="/tags/%E5%9B%BE%E5%BA%8A/" style="font-size: 0.88rem;">图床<sup>7</sup></a><a href="/tags/%E5%BC%80%E6%BA%90%E5%88%86%E4%BA%AB/" style="font-size: 0.88rem;">开源分享<sup>6</sup></a><a href="/tags/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/" style="font-size: 0.88rem;">搜索引擎<sup>2</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D/" style="font-size: 0.88rem;">数据恢复<sup>1</sup></a><a href="/tags/%E6%A8%A1%E6%9D%BF/" style="font-size: 0.88rem;">模板<sup>4</sup></a><a href="/tags/%E8%B8%A9%E5%9D%91/" style="font-size: 0.88rem;">踩坑<sup>6</sup></a><a href="/tags/%E9%B1%BC%E7%9A%AE/" style="font-size: 0.88rem;">鱼皮<sup>10</sup></a></div></div><hr></div></div><div id="keyboard-tips"><div class="keyboardTitle">博客快捷键</div><div class="keybordList"><div class="keybordItem"><div class="keyGroup"><div class="key">shift K</div></div><div class="keyContent"><div class="content">关闭快捷键功能</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift A</div></div><div class="keyContent"><div class="content">打开/关闭中控台</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift M</div></div><div class="keyContent"><div class="content">播放/暂停音乐</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift D</div></div><div class="keyContent"><div class="content">深色/浅色显示模式</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift S</div></div><div class="keyContent"><div class="content">站内搜索</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift R</div></div><div class="keyContent"><div class="content">随机访问</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift H</div></div><div class="keyContent"><div class="content">返回首页</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift F</div></div><div class="keyContent"><div class="content">友链鱼塘</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift L</div></div><div class="keyContent"><div class="content">友链页面</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift P</div></div><div class="keyContent"><div class="content">关于本站</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift I</div></div><div class="keyContent"><div class="content">原版/本站右键菜单</div></div></div></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="anzhiyufont anzhiyu-icon-comments"></i></a><a id="switch-commentBarrage" href="javascript:anzhiyu.switchCommentBarrage();" title="开关弹幕"><i class="anzhiyufont anzhiyu-icon-danmu"></i></a><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="nav-music"><a id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()" accesskey="m">播放音乐</a><div id="console-music-bg"></div><meting-js id="10051718332" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random" volume="0.7"></meting-js></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="anzhiyufont anzhiyu-icon-xmark"></i></button></nav><div class="is-center" id="loading-database"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-pulse-icon"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"></div></div><hr><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://music.163.com/#/my/m/music/playlist?id=10051718332&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><canvas id="universe"></canvas><script async="" src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("05/01/2023 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2023 By 安知鱼 V1.6.14",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 時光 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async="" src="/anzhiyu/random.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>(() => {
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo.shiguangdev.eu.org',
+      region: '',
+      onCommentLoaded: () => {
+        anzhiyu.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') setTimeout(runFn,0)
+    else getScript('https://cdn.cbd.int/twikoo@1.6.39/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo.shiguangdev.eu.org',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(res => {
+      countELement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  const runFn = () => {
+    init();
+    GLOBAL_CONFIG_SITE.isPost && getCount()
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) anzhiyu.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else {
+      loadTwikoo()
+    }
+  } else {
+    window.loadOtherComment = loadTwikoo
+  }
+})()</script><input type="hidden" name="page-type" id="page-type" value="post"><script async="" src="/js/anzhiyu/comment_barrage.js"></script></div><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getComment = () => {
+    const runTwikoo = () => {
+      twikoo.getRecentComments({
+        envId: 'https://twikoo.shiguangdev.eu.org',
+        region: '',
+        pageSize: 6,
+        includeReply: true
+      }).then(function (res) {
+        const twikooArray = res.map(e => {
+          return {
+            'content': changeContent(e.comment),
+            'avatar': e.avatar,
+            'nick': e.nick,
+            'url': e.url + '#' + e.id,
+            'date': new Date(e.created).toISOString()
+          }
+        })
+
+        saveToLocal.set('twikoo-newest-comments', JSON.stringify(twikooArray), 10/(60*24))
+        generateHtml(twikooArray)
+      }).catch(function (err) {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.textContent= "无法获取评论，请确认相关配置是否正确"
+      })
+    }
+
+    if (typeof twikoo === 'object') {
+      runTwikoo()
+    } else {
+      getScript('https://cdn.cbd.int/twikoo@1.6.39/dist/twikoo.all.min.js').then(runTwikoo)
+    }
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'><div class='name'><span>${array[i].nick} </span></div></a>`
+        }
+        
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <time datetime="${array[i].date}">${anzhiyu.diffDate(array[i].date, true)}</time></div>
+        </div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom && ($dom.innerHTML= result)
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('twikoo-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script async="" data-pjax="" src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><script src="/js/anzhiyu/right_click_menu.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><script src="/js/custom/footer-animal.js" defer=""></script><script src="/api/card-welcome.js"></script><script id="click-heart" src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/dist/click-heart.min.js" async="async" mobile="false"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","meta[property=\"og:type\"]","meta[property=\"og:site_name\"]","meta[property=\"og:description\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div><!-- hexo injector body_end start -->
+  <script data-pjax="" src="/js/hexo_githubcalendar.js"></script>
+  <script data-pjax="">
+        function GithubCalendarConfig(){
+            var git_githubapiurl ="https://githubcalendarapi.shiguang666.eu.org/api?user=shiguang-coding";
+            var git_color =['#ebedf0', '#a2f7af', '#6ce480', '#54ad63', '#469252', '#31753c', '#1f5f2a', '#13531f', '#084111', '#032b09', '#000000'];
+            var git_user ="shiguang-coding";
+            var parent_div_git = document.getElementById('recent-posts');
+            var git_div_html = '<div class="recent-post-item" style="width:100%;height:auto;padding:10px;"><div id="github_loading" style="width:10%;height:100%;margin:0 auto;display: block"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animateTransform></path></svg></div><div id="github_container"></div></div>';
+            if(parent_div_git && location.pathname =='/'){
+                console.log("已挂载hexo-github-calendar https://github.com/Barry-Flynn/hexo-github-calendar");
+                // parent_div_git.innerHTML=git_div_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",git_div_html) // 有报错，但不影响使用(支持pjax跳转)
+            };
+            GithubCalendar(git_githubapiurl,git_color,git_user)
+        }
+        if(document.getElementById('recent-posts')){
+            GithubCalendarConfig()
+        }
+    </script>
+    <style>#github_container{min-height:280px}@media screen and (max-width:650px) {#github_container{background-image:;min-height:0px}}</style>
+    <style></style><!-- hexo injector body_end end -->
+    <link rel="stylesheet" href="https://ai.tianli0.top/static/public/postChatUser_summary.min.css">
+    <script>
+        let tianliGPT_key = '75439fb77e5551eacf54f0df75565616dcf2ad';
+        let tianliGPT_postSelector = '#article-container';
+        let tianliGPT_Title = '文章摘要';
+        let tianliGPT_postURL = '/^https?://[^/]+/[0-9]{4}/[0-9]{2}/[0-9]{2}/';
+        let tianliGPT_blacklist = '';
+        let tianliGPT_wordLimit = '1000';
+        let tianliGPT_typingAnimate = true;
+        var postChatConfig = {
+          backgroundColor: "#3e86f6",
+          bottom: "16px",
+          left: "16px",
+          fill: "#FFFFFF",
+          width: "44px",
+          frameWidth: "375px",
+          frameHeight: "600px",
+          defaultInput: true,
+          upLoadWeb: true,
+          showInviteLink: true,
+          userTitle: "PostChat",
+          userDesc: "如果你对网站的内容有任何疑问，可以来问我哦～",
+          addButton: true,
+          beginningText: "这篇文章介绍了"
+        };
+    </script>
+    <script data-postchat_key="75439fb77e5551eacf54f0df75565616dcf2ad" src="https://ai.tianli0.top/static/public/postChatUser_summary.min.js"></script>
+  </body></html>

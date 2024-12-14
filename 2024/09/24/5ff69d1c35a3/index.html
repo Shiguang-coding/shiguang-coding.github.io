@@ -1,0 +1,854 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>【尚硅谷】MySQL-事务基础知识 | 時光</title><meta name="keywords" content="SQL,尚硅谷"><meta name="author" content="時光"><meta name="copyright" content="時光"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="【尚硅谷】MySQL-事务基础知识"><meta name="application-name" content="【尚硅谷】MySQL-事务基础知识"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="【尚硅谷】MySQL-事务基础知识"><meta property="og:url" content="https://blog.shiguang666.eu.org/2024/09/24/5ff69d1c35a3/index.html"><meta property="og:site_name" content="時光"><meta property="og:description" content="在线视频:MySQL数据库入门到大牛，mysql安装到优化，百科全书级，全网天花板官方资料: 尚硅谷MySQL入门到高级-宋红康版 代码仓库Gitee：https:&amp;#x2F;&amp;#x2F;gitee.com&amp;#x2F;an_shiguang&amp;#x2F;learn-mysql  事务是数据库区别于文件系统的重要特性之一，当我们有了事务就会"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg"><meta property="article:author" content="時光"><meta property="article:tag" content="博客,時光,時光的博客,時光博客园子,实用博客,开源,共享"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg"><meta name="description" content="在线视频:MySQL数据库入门到大牛，mysql安装到优化，百科全书级，全网天花板官方资料: 尚硅谷MySQL入门到高级-宋红康版 代码仓库Gitee：https:&amp;#x2F;&amp;#x2F;gitee.com&amp;#x2F;an_shiguang&amp;#x2F;learn-mysql  事务是数据库区别于文件系统的重要特性之一，当我们有了事务就会"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://blog.shiguang666.eu.org/2024/09/24/5ff69d1c35a3/"><link rel="preconnect" href="//cdn.cbd.int"><meta name="google-site-verification" content="xxx"><meta name="baidu-site-verification" content="code-xxx"><meta name="msvalidate.01" content="xxx"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: {"enable":true,"title":"与各类博主无限进步","addFriendPlaceholder":"昵称（请勿包含博客等字样）：\n网站地址（要求博客地址，请勿提交个人主页）：\n头像图片url（请提供尽可能清晰的图片，我会上传到我自己的图床）：\n描述：\n站点截图（可选）：\n"},
+  peoplecanvas: undefined,
+  postHeadAiDescription: undefined,
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: {"enable":true,"default":"晚上好👋","list":[{"greeting":"晚安😴","startTime":0,"endTime":5},{"greeting":"早上好鸭👋, 祝你一天好心情！","startTime":6,"endTime":9},{"greeting":"上午好👋, 状态很好，鼓励一下～","startTime":10,"endTime":10},{"greeting":"11点多啦, 在坚持一下就吃饭啦～","startTime":11,"endTime":11},{"greeting":"午安👋, 宝贝","startTime":12,"endTime":14},{"greeting":"🌈充实的一天辛苦啦！","startTime":14,"endTime":18},{"greeting":"19点喽, 奖励一顿丰盛的大餐吧🍔。","startTime":19,"endTime":19},{"greeting":"晚上好👋, 在属于自己的时间好好放松😌~","startTime":20,"endTime":24}]},
+  twikooEnvId: 'https://twikoo.shiguangdev.eu.org',
+  commentBarrageConfig:{"enable":true,"maxBarrage":1,"barrageTime":4000,"accessToken":"","mailMd5":""},
+  music_page_default: "nav_music",
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: true,
+  mainTone: undefined,
+  authorStatus: {"skills":["🌟 技术分享领航人","📚 终身学习倡导者","💡 创新思维启发源","📈 成长路径引路人","🚀 科技趋势探索者","🤖️ AI技术探索先锋","🌈 技术创新推动手","💬 社区互动活跃家","🛠️ 代码经验传授师","📢 知识传播倡导员"]},
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":true,"limitCount":300,"languages":{"author":"作者: 時光","link":"链接: ","source":"来源: 時光","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: true,
+  shortcutKey: {"enable":true,"delay":100,"shiftDelay":200},
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: '時光',
+  title: '【尚硅谷】MySQL-事务基础知识',
+  postAI: '',
+  pageFillDescription: '存储引擎支持情况, 基本概念, 事务的ACID特性, 事务的状态, 如何使用事务, 显式事务, 隐式事务, 隐式提交数据的情况, 使用举例1：提交与回滚, 使用举例2：测试不支持事务的engine, 使用举例3：SAVEPOINT, 事务隔离级别, 数据准备, 数据并发问题, SQL中的四种隔离级别, MySQL支持的四种隔离级别, 如何设置事务的隔离级别, 不同隔离级别举例, 事务的常见分类在线视频数据库入门到大牛安装到优化百科全书级全网天花板官方资料尚硅谷入门到高级宋红康版代码仓库事务是数据库区别于文件系统的重要特性之一当我们有了事务就会让数据库始终保持一致性同时我们还能通过事务的机制恢复到某个时间点这样可以保证已提交到数据库的修改不会因为系统崩溃而丢失存储引擎支持情况命令来查看当前支持的存储引擎都有哪些以及这些存储引擎是否支持事务基本概念事务一组逻辑操作单元使数据从一种状态变换到另一种状态一组不可分隔的操作事务处理的原则保证所有事务都作为一个工作单元来执行即使出现了故障都不能改变这种执行方式当在一个事务中执行多个操作时要么所有的事务都被提交那么这些修改就永久地保存下来要么数据库管理系统将放弃所作的所有修改整个事务回滚到最初状态案例用户给用户转账服务器宕机事务的特性原子性原子性是指事务是一个不可分割的工作单位要么全部提交要么全部失败回滚即要么转账成功要么转账失败是不存在中间的状态如果无法保证原子性会怎么样就会出现数据不一致的情形账户减去元而账户增加元操作失败系统将无故丢失元一致性国内很多网站上对一致性的阐述有误具体你可以参考对的阐述根据定义一致性是指事务执行前后数据从一个合法性状态变换到另外一个合法性状态这种状态是语义上的而不是语法上的跟具体的业务有关那什么是合法的数据状态呢满足预定的约束的状态就叫做合法的状态通俗一点这状态是由你自己来定义的比如满足现实世界中的约束满足这个状态数据就是一致的不满足这个状态数据就是不一致的如果事务中的某个操作失败了系统就会自动撤销当前正在执行的事务返回到事务操作之前的状态举例账户有元转账元出去此时账户余额为元你自然就发现此时数据是不一致的为什么呢因为你定义了一个状态余额这列必须举例账户有元转账元给账户账户的钱扣了但是账户因为各种意外余额并没有增加你也知道此时的数据是不一致的为什么呢因为你定义了一个状态要求的总余额必须不变举例在数据表中我们将姓名字段设置为唯一性约束这时当事务进行提交或者事务发生回滚的时候如果数据表的姓名不唯一就破坏了事务的一致性要求隔离型事务的隔离性是指一个事务的执行不能被其他事务干扰即一个事务内部的操作及使用的数据对并发的其他事务是隔离的并发执行的各个事务之间不能相互干扰如果无法保证隔离性会怎么样假设账户有元账户元账户往账户转账两次每次金额为元分别在两个事务中执行如果无法保证隔离性会出现下面的情形持久性持久性是指一个事务一旦被提交它对数据库中数据的改变就是永久性的接下来的其他操作和数据库故障不应该对其有任何影响持久性是通过事务日志来保证的日志包括了重做日志和回滚日志当我们通过事务对数据进行修改的时候首先会将数据库的变化信息记录到重做日志中然后再对数据库中对应的行进行修改这样做的好处是即使数据库系统崩溃数据库重启后也能找到没有更新到数据库系统中的重做日志重新执行从而使事务具有持久性总结是事务的四大特征在这四个特性中原子性是基础隔离性是手段一致性是约束条件而持久性是我们的目的数据库事务其实就是数据库设计者为了方便起见把需要保证原子性隔离性一致性和持久性的一个或多个数据库操作称为一个事务事务的状态我们现在知道事务是一个抽象的概念它其实对应着一个或多个数据库操作根据这些操作所执行的不同阶段把事务大致划分成几个状态活动的事务对应的数据库操作正在执行过程中时我们就说该事务处在活动的状态部分提交的当事务中的最后一个操作执行完成但由于操作都在内存中执行所造成的影响并没有刷新到磁盘时我们就说该事务处在部分提交的状态失败的当事务处在活动的或者部分提交的状态时可能遇到了某些错误数据库自身的错误操作系统错误或者直接断电等而无法继续执行或者人为的停止当前事务的执行我们就说该事务处在失败的状态中止的如果事务执行了一部分而变为失败的状态那么就需要把已经修改的事务中的操作还原到事务执行前的状态换句话说就是要撤销失败事务对当前数据库造成的影响我们把这个撤销的过程称之为回滚当回滚操作执行完毕时也就是数据库恢复到了执行事务之前的状态我们就说该事务处在了中止的状态举例提交的当一个处在部分提交的状态的事务将修改过的数据都同步到磁盘上之后我们就可以说该事务处在了提交的状态一个基本的状态转换图如下所示图中可见只有当事务处于提交的或者中止的状态时一个事务的生命周期才算是结束了对于已经提交的事务来说该事务对数据库所做的修改将永久生效对于处于中止状态的事务该事务对数据库所做的所有修改都会被回滚到没执行该事务之前的状态如何使用事务使用事务有两种方式分别为显式事务和隐式事务显式事务步骤或者作用是显式开启一个事务或者语句相较于特别之处在于后边能跟随几个修饰符标识当前事务是一个只读事务也就是属于该事务的数据库操作只能读取数据而不能修改数据补充只读事务中只是不允许修改那些其他事务也能访问到的表中的数据对于临时表来说我们使用创建的表由于它们只能再当前会话中可见所有只读事务其实也是可以对临时表进行增删改操作的默认标识当前事务是一个读写事务也就是属于该事务的数据库操作既可以读取数据也可以修改数据启动一致性读比如开启一个只读事务开启只读事务和一致性读开启读写事务和一致性读注意和是用来设置所谓的事务访问模式的就是以只读还是读写的方式来访问数据库中的数据一个事务的访问模式不能同时即设置为只读的也设置为读写的所以不能同时把和放到语句后边如果我们不显式指定事务的访问模式那么该事务的访问模式就是读写模式步骤一系列事务中的操作主要是不含步骤提交事务或中止事务即回滚事务提交事务当提交事务后对数据库的修改是永久性的回滚事务即撤销正在进行的所有没有提交的修改将事务回滚到某个保存点其中关于相关操作有在事务中创建保存点方便后续针对保存点进行回滚一个事务中可以存在多个保存点保存点名称删除某个保存点保存点名称隐式事务中有一个系统变量默认开启当然如果我们想关闭这种自动提交的功能可以使用下边两种方法之一显式的的使用或者语句开启一个事务这样在本次事务提交或者回滚前会暂时关闭掉自动提交的功能把系统变量的值设置为就像这样针对操作有效针对或隐式提交数据的情况数据定义语言缩写为数据库对象指的就是数据库表视图存储过程等结构当我们等语句去修改数据库对象时就会隐式的提交前边语句所属于的事务即事务中的一条语句事务中的一条语句事务中的其他语句此语句会隐式的提交前边语句所属于的事务隐式使用或修改数据库中的表当我们使用等语句时也会隐式的提交前边语句所属于的事务事务控制或关于锁定的语句当我们在一个事务还没提交或者回滚时就又使用或者语句开启了另一个事务时会隐式的提交上一个事务即事务中的一条语句事务中的一条语句事务中的其他语句此语句会隐式的提交前边语句所属于的事务当前的系统变量的值为我们手动把它调为时也会隐式的提交前边语句所属的事务使用等关于锁定的语句也会隐式的提交前边语句所属的事务加载数据的语句使用语句来批量往数据库中导入数据时也会隐式的提交前边语句所属的事务关于复制的一些语句使用等语句会隐式的提交前边语句所属的事务其他的一些语句使用等语句也会隐式的提交前边语句所属的事务使用举例提交与回滚我们看下在的默认状态下下面这个事务最后的处理结果是什么情况张三李四李四运行结果行数据秒秒李四秒李四李四秒张三行于数据集秒情况张三李四李四运行结果行数据张三李四行于数据集秒情况张三李四李四运行结果行数据张三行于数据集秒你能看到相同的代码只是在事务开始之前设置了结果就和我们第一次处理的一样只有一个张三这是为什么呢这里我讲解下中参数的作用实际上这个参数有种可能这是默认情况当我们执行的时候会提交事务在执行下一个事务时还需要使用或者来开启这种情况下当我们提交事务后相当于执行了也就是开启一个链式事务即当我们提交事务之后会开启一个相同隔离级别的事务这种情况下也就是当我们提交后会自动与服务器断开连接当我们设置时不论是否采用或者的方式来开启事务都需要用进行提交让事务生效使用对事务进行回滚当我们设置时每条语句都会自动进行提交不过这时如果你采用或者的方式来显式地开启事务那么这个事务只有在时才会生效在时才会回滚使用举例测试不支持事务的针对于表结果没有数据针对于表结果有一条数据使用举例创建表并添加数据张三李四张三张三设置保存点张三回滚到保存点结果张三结果张三事务隔离级别是一个客户端服务器架构的软件对于同一个服务器来说可以有若干个客户端与之连接每个客户端与服务器连接上之后就可以称为一个会话每个客户端都可以在自己的会话中向服务器发出请求语句一个请求语句可能是某个事务的一部分也就是对于服务器来说可能同时处理多个事务事务有隔离性的特性理论上在某个事务对某个数据进行访问时其他事务应该进行排队当该事务提交之后其他事务才可以继续访问这个数据但是这样对性能影响太大我们既想保持事务的隔离性又想让服务器在处理访问同一数据的多个事务时性能尽量高些那就看二者如何权衡取舍了数据准备然后向这个表里插入一条数据小谷班现在表里的数据就是这样的小谷班数据并发问题针对事务的隔离性和并发性我们怎么做取舍呢先看一下访问相同数据的事务在不保证串行执行也就是执行完一个再执行另一个的情况下可能会出现哪些问题脏写对于两个事务如果事务修改了另一个未提交事务修改过的数据那就意味着发生了脏写示意图如下和各开启了一个事务中的事务先将列为的记录的列更新为李四然后中的事务接着又把这条列为的记录的列更新为张三如果之后中的事务进行了回滚那么中的更新也将不复存在这种现象称之为脏写这时中的事务就没有效果了明明把数据更新了最后也提交事务了最后看到的数据什么变化也没有这里大家对事务的隔离性比较了解的话会发现默认隔离级别下上面中的更新语句会处于等待状态这里只是跟大家说明一下会出现这样的现象脏读对于两个事务读取了已经被更新但还没有被提交的字段之后若回滚读取的内容就是临时且无效的和各开启了一个事务中的事务先将列为的记录的列更新为张三然后中的事务再去查询这条为的记录如果读到列的值为张三而中的事务稍后进行了回滚那么中的事务相当于读到了一个不存在的数据这种现象就称之为脏读不可重复读对于两个事务读取了一个字段然后更新了该字段之后再次读取同一个字段值就不同了那就意味着发生了不可重复读我们在中提交了几个隐式事务注意是隐式事务意味着语句结束事务就提交了这些事务都修改了列为的记录的列的值每次事务提交之后如果中的事务都可以查看到最新的值这种现象也被称之为不可重复读幻读对于两个事务从一个表中读取了一个字段然后在该表中插入了一些新的行之后如果再次读取同一个表就会多出几行那就意味着发生了幻读中的事务先根据条件这个条件查询表得到了列值为张三的记录之后中提交了一个隐式事务该事务向表中插入了一条新记录之后中的事务再根据相同的条件查询表得到的结果集中包含中的事务新插入的那条记录这种现象也被称之为幻读我们把新插入的那些记录称之为幻影记录注意有的同学会有疑问那如果中删除了一些符合的记录而不是插入新记录那之后再根据的条件读取的记录变少了这种现象算不算幻读呢这种现象不属于幻读幻读强调的是一个事务按照某个相同条件多次读取记录时后读取时读到了之前没有读到的记录注意那对于先前已经读到的记录之后又读取不到这种情况算啥呢这相当于对每一条记录都发生了不可重复读的现象幻读只是重点强调了读取到了之前读取没有获取到的记录中的四种隔离级别上面介绍了几种并发事务执行过程中可能遇到的一些问题这些问题有轻重缓急之分我们给这些问题按照严重性来排一下序脏写脏读不可重复读幻读我们愿意舍弃一部分隔离性来换取一部分性能在这里就体现在设立一些隔离级别隔离级别越低并发问题发生的就越多标准中设立了个隔离级别读未提交在该隔离级别所有事务都可以看到其他未提交事务的执行结果不能避免脏读不可重复读幻读读已提交它满足了隔离的简单定义一个事务只能看见已经提交事务所做的改变这是大多数数据库系统的默认隔离级别但不是默认的可以避免脏读但不可重复读幻读问题仍然存在可重复读事务在读到一条数据之后此时事务对该数据进行了修改并提交那么事务再读该数据读到的还是原来的内容可以避免脏读不可重复读但幻读问题仍然存在这是的默认隔离级别可串行化确保事务可以从一个表中读取相同的行在这个事务持续期间禁止其他事务对该表执行插入更新和删除操作所有的并发问题都可以避免但性能十分低下能避免脏读不可重复读和幻读标准中规定针对不同的隔离级别并发事务可以发生不同严重程度的问题具体情况如下脏写怎么没涉及到因为脏写这个问题太严重了不论是哪种隔离级别都不允许脏写的情况发生不同的隔离级别有不同的现象并有不同的锁和并发机制隔离级别越高数据库的并发性能就越差种事务隔离级别与并发性能的关系如下支持的四种隔离级别不同的数据库厂商对标准中规定的四种隔离级别支持不一样比如就只支持默认隔离级别和隔离级别虽然支持种隔离级别但与标准中所规定的各级隔离级别允许发生的问题却有些出入在隔离级别下是可以禁止幻读问题的发生的禁止幻读的原因我们在第章讲解的默认隔离级别为我们可以手动修改一下事务的隔离级别查看隔离级别的版本之前版本之后引入来替换查看隔离级别的版本及之后或者不同版本中都可以使用的如何设置事务的隔离级别通过下面的语句修改事务的隔离级别隔离级别其中隔离级别格式或者隔离级别其中隔离级别格式关于设置时使用或的影响使用关键字在全局范围影响或则当前已经存在的会话无效只对执行完该语句之后产生的会话起作用使用关键字在会话范围影响或则对当前会话的所有后续的事务有效如果在事务之间执行则对后续的事务有效该语句可以在已经开启的事务中间执行但不会影响当前正在执行的事务如果在服务器启动时想改变事务的默认隔离级别可以修改启动参数的值比如在启动服务器时指定了那么事务的默认隔离界别就从原来的变成了小结数据库规定了多种事务隔离级别不同隔离级别对应不同的干扰程度隔离级别越高数据一致性就越好但并发性越弱不同隔离级别举例初始化数据张三李四演示读未提交之脏读设置隔离级别为未提交读脏读就是指当前事务就在访问数据并且对数据进行了修改而这种修改还没有提交到数据库中这时另外一个事务也访问了这个数据然后使用了这个数据演示读已提交演示不可重复读设置隔离级别为可重复读事务的执行流程如下当我们将当前会话的隔离级别设置为可重复读的时候当前会话可以重复读就是每次读取的结果集都相同而不管其他事务有没有提交但是在可重复读的隔离级别上会出现幻读的问题演示幻读这里要灵活的理解读取的意思第一次是读取第二次的其实也属于隐式的读取只不过是在的机制中读取的插入数据也是要先读取一下有没有主键冲突才能决定是否执行插入幻读并不是说两次读取获取的结果集不同幻读侧重的方面是某一次的操作得到的结果所表征的数据状态无法支撑后续的业务操作更为具体一些某记录是否存在不存在准备插入此记录但执行时发现此记录已存在无法插入此时就发生了幻读在隔离级别下是会正常执行的则会报错主键冲突对于事务的业务来说是执行失败的这里事务就是发生了幻读因为事务在中读取的数据状态并不能支撑后续的业务操作事务见鬼了我刚才读到的结果应该可以支持我这样操作才对啊为什么现在不可以事务不敢相信的又执行了发现和读取的结果是一样的下的机制此时幻读无疑已经发生事务无论读取多少次都查不到的记录但它的确无法插入这条他通过读取来认定不存在的记录此数据已被事务插入对于事务来说它幻读了其实也是可以避免幻读的通过对操作手动加行锁独占锁这也正是隔离级别下会隐式为你做的事情同时即便当前记录不存在比如是不存在的当前事务也会获得一把记录锁因为的行锁锁定的是索引故记录实体存在与否没关系存在就加行锁不存在就加间隙锁其他事务则无法插入此索引的记录故杜绝了幻读在隔离级别下执行时是会隐式的添加行锁锁的从而会被阻塞会正常执行待事务提交后事务才能继续执行主键冲突执行失败对于事务来说业务是正确的成功的阻塞扼杀了扰乱业务的事务对于事务来说他前期读取的结果是可以支撑其后续业务的所以的幻读并非什么读取两次返回结果集不同而是事务在插入事先检测不存在的记录时惊奇的发现这些数据已经存在了之前的检测读获取到的数据如同鬼影一般事务的常见分类从事务理论的角度来看可以把事务分为以下几种类型扁平事务带有保存点的扁平事务链事务嵌套事务分布式事务',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-09-25 10:54:48',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><script async="" defer="" src="https://umami.shiguangdev.cn/script.js" data-website-id="ac8d5698-b224-4ea4-aa79-eefb80c47eef"></script><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="時光" type="application/atom+xml">
+</head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="/img/avatar.png"><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><div class="back-home-button"><i class="anzhiyufont anzhiyu-icon-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://www.shiguang666.eu.org" title="時光主页"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="時光主页"><span class="back-menu-item-text">時光主页</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://nav.shiguang666.eu.org" title="時光导航站"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="時光导航站"><span class="back-menu-item-text">時光导航站</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://game.shiguang666.eu.org" title="怀旧游戏机"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="怀旧游戏机"><span class="back-menu-item-text">怀旧游戏机</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://games.shiguang666.eu.org" title="在线小游戏"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="在线小游戏"><span class="back-menu-item-text">在线小游戏</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">后台管理</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://img.shiguangdev.cn/" title="時光图床"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/favicon.ico" alt="時光图床"><span class="back-menu-item-text">時光图床</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://qexo.shiguang666.eu.org/" title="Hexo管理面板"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://qexo.shiguang666.eu.org/favicon.ico" alt="Hexo管理面板"><span class="back-menu-item-text">Hexo管理面板</span></a></div></div></div></div><a id="site-name" href="/" accesskey="h"><div class="title">時光</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 归档</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随机</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/news/"><i class="fa fa-calendar faa-tada"></i><span> 早报亭</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/music/?id=10051718332&amp;server=netease"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/gallery/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/xjj/"><i class="fa fa-rocket faa-tada"></i><span> 养生堂</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/flink/"><i class="anzhiyufont anzhiyu-icon-artstation faa-tada" style="font-size: 0.9em;"></i><span> 朋友圈</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comment/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于我</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button only-home" id="travellings_button" title="随机前往一个开往项目网站"><a class="site-page" onclick="anzhiyu.totraveling()" title="随机前往一个开往项目网站" href="javascript:void(0);" rel="external nofollow" data-pjax-state="external"><i class="anzhiyufont anzhiyu-icon-train"></i></a></div><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍" accesskey="s"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="/img/wechat.png" target="_blank"><img class="post-qr-code-img" alt="微信" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/wechat.png"></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/alipay.png" target="_blank"><img class="post-qr-code-img" alt="支付宝" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/alipay.png"></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/12/"><span class="card-archive-list-date">十二月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">9</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/11/"><span class="card-archive-list-date">十一月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">8</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/10/"><span class="card-archive-list-date">十月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">31</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/09/"><span class="card-archive-list-date">九月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">38</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/08/"><span class="card-archive-list-date">八月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">9</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/07/"><span class="card-archive-list-date">七月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">18</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/06/"><span class="card-archive-list-date">六月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">30</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/05/"><span class="card-archive-list-date">五月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">20</span><span>篇</span></div></a></li></ul></div><hr></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item on" id="consoleCommentBarrage" onclick="anzhiyu.switchCommentBarrage()" title="热评开关"><a class="commentBarrage"><i class="anzhiyufont anzhiyu-icon-message"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="anzhiyu.musicToggle()" title="音乐开关"><a class="music-switch"><i class="anzhiyufont anzhiyu-icon-music"></i></a></div><div class="console-btn-item" id="consoleKeyboard" onclick="anzhiyu.keyboardToggle()" title="快捷键开关"><a class="keyboard-switch"><i class="anzhiyufont anzhiyu-icon-keyboard"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url">学习笔记</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/SQL/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>SQL</span></a><a class="article-meta__tags" href="/tags/%E5%B0%9A%E7%A1%85%E8%B0%B7/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>尚硅谷</span></a></span></div></div><h1 class="post-title" itemprop="name headline">【尚硅谷】MySQL-事务基础知识</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2024-09-24T14:16:25.000Z" title="发表于 2024-09-24 22:16:25">2024-09-24</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2024-09-25T02:54:48.280Z" title="更新于 2024-09-25 10:54:48">2024-09-25</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="anzhiyufont anzhiyu-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">7.7k</span><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>25分钟</span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为上海"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>上海</span><span class="post-meta-separator"></span><span class="post-meta-commentcount"><i class="anzhiyufont anzhiyu-icon-comments post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2024/09/24/5ff69d1c35a3/#post-comment" tabindex="-1"><span id="twikoo-count"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></a></span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope="" itemtype="https://blog.shiguang666.eu.org/2024/09/24/5ff69d1c35a3/"><header><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url">学习笔记</a><a href="/tags/SQL/" tabindex="-1" itemprop="url">SQL</a><a href="/tags/%E5%B0%9A%E7%A1%85%E8%B0%B7/" tabindex="-1" itemprop="url">尚硅谷</a><h1 id="CrawlerTitle" itemprop="name headline">【尚硅谷】MySQL-事务基础知识</h1><span itemprop="author" itemscope="" itemtype="http://schema.org/Person">時光</span><time itemprop="dateCreated datePublished" datetime="2024-09-24T14:16:25.000Z" title="发表于 2024-09-24 22:16:25">2024-09-24</time><time itemprop="dateCreated datePublished" datetime="2024-09-25T02:54:48.280Z" title="更新于 2024-09-25 10:54:48">2024-09-25</time></header><div id="postchat_postcontent"><blockquote>
+<p>在线视频:<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1iq4y1u7vj?p=161">MySQL数据库入门到大牛，mysql安装到优化，百科全书级，全网天花板</a><br>官方资料: <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1ztbzMVF9qRJ2xCOpySXl3Q?pwd=yyds">尚硅谷MySQL入门到高级-宋红康版</a></p>
+<p>代码仓库<br>Gitee：<a target="_blank" rel="noopener" href="https://gitee.com/an_shiguang/learn-mysql">https://gitee.com/an_shiguang/learn-mysql</a></p>
+</blockquote>
+<p>事务是数据库区别于文件系统的重要特性之一，当我们有了事务就会让数据库始终保持<code>一致性</code>，同时我们还能通<br>过事务的机制<code>恢复到某个时间点</code>，这样可以保证已提交到数据库的修改不会因为系统崩溃而丢失。</p>
+<h1 id="存储引擎支持情况"><a href="#存储引擎支持情况" class="headerlink" title="存储引擎支持情况"></a>存储引擎支持情况</h1><p><code>SHOW ENGINES</code> 命令来查看当前 MySQL 支持的存储引擎都有哪些，以及这些存储引擎是否支持事务。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/24/66f2ca4cb45c2.png" alt="image-20240924221853655"></p>
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p><strong>事务：</strong>一组逻辑操作单元，使数据从一种状态变换到另一种状态。(一组不可分隔的操作)</p>
+<p><strong>事务处理的原则：</strong>保证所有事务都作为 <code>一个工作单元</code> 来执行，即使出现了故障，都不能改变这种执行方 式。当在一个事务中执行多个操作时，要么所有的事务都被提交( <code>commit</code> )，那么这些修改就 <code>永久</code> 地保 <code>存下来</code>；要么数据库管理系统将 <code>放弃</code> 所作的所有 <code>修改</code> ，整个事务回滚( rollback )到最初状态。</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 案例：AA用户给BB用户转账100</span><br><span class="line">update account set money = money - 100 where name = 'AA';</span><br><span class="line"># 服务器宕机</span><br><span class="line">update account set money = money + 100 where name = 'BB';</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="事务的ACID特性"><a href="#事务的ACID特性" class="headerlink" title="事务的ACID特性"></a>事务的ACID特性</h2><ul>
+<li><strong>原子性（atomicity）：</strong></li>
+</ul>
+<p>原子性是指事务是一个不可分割的工作单位，<strong>要么全部提交，要么全部失败回滚</strong>。即要么转账成功，要么转账失败，是不存在中间的状态。如果无法保证原子性会怎么样？就会出现数据不一致的情形，A账户减去100元，而B账户增加100元操作失败，系统将无故丢失100元。</p>
+<ul>
+<li><strong>一致性（consistency）：</strong></li>
+</ul>
+<p>（国内很多网站上对一致性的阐述有误，具体你可以参考 Wikipedia 对<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/ACID">Consistency</a>的阐述）</p>
+<p>根据定义，一致性是指事务执行前后，数据从一个 <code>合法性状态</code> 变换到另外一个 <code>合法性状态</code> 。这种状态是 <code>语义上</code> 的而不是语法上的，跟具体的业务有关。</p>
+<p>那什么是合法的数据状态呢？满足 <code>预定的约束</code> 的状态就叫做合法的状态。通俗一点，这状态是由你自己来定义的（比如满足现实世界中的约束）。满足这个状态，数据就是一致的，不满足这个状态，数据就 是不一致的！如果事务中的某个操作失败了，系统就会自动撤销当前正在执行的事务，返回到事务操作 之前的状态。</p>
+<p><strong>举例1：</strong>A账户有200元，转账300元出去，此时A账户余额为-100元。你自然就发现此时数据是不一致的，为什么呢？因为你定义了一个状态，余额这列必须&gt;=0。</p>
+<p><strong>举例2：</strong>A账户有200元，转账50元给B账户，A账户的钱扣了，但是B账户因为各种意外，余额并没有增加。你也知道此时的数据是不一致的，为什么呢？因为你定义了一个状态，要求A+B的总余额必须不变。</p>
+<p><strong>举例3：</strong>在数据表中我们将<code>姓名</code>字段设置为<code>唯一性约束</code>，这时当事务进行提交或者事务发生回滚的时候，如果数据表的姓名不唯一，就破坏了事务的一致性要求。</p>
+<ul>
+<li><strong>隔离型（isolation）：</strong></li>
+</ul>
+<p>事务的隔离性是指一个事务的执行<code>不能被其他事务干扰</code>，即一个事务内部的操作及使用的数据对<code>并发</code>的其他事务是隔离的，并发执行的各个事务之间不能相互干扰。</p>
+<p>如果无法保证隔离性会怎么样？假设A账户有200元，B账户0元。A账户往B账户转账两次，每次金额为50 元，分别在两个事务中执行。如果无法保证隔离性，会出现下面的情形：</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> accounts <span class="keyword">SET</span> money <span class="operator">=</span> money <span class="operator">-</span> <span class="number">50</span> <span class="keyword">WHERE</span> NAME <span class="operator">=</span> <span class="string">'AA'</span>;</span><br><span class="line"><span class="keyword">UPDATE</span> accounts <span class="keyword">SET</span> money <span class="operator">=</span> money <span class="operator">+</span> <span class="number">50</span> <span class="keyword">WHERE</span> NAME <span class="operator">=</span> <span class="string">'BB'</span>;</span><br></pre></td></tr></tbody></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/24/66f2cca67ddf9.png" alt="image-20240924222855450"><strong>持久性（durability）：</strong></p>
+<p>持久性是指一个事务一旦被提交，它对数据库中数据的改变就是 <code>永久性的</code> ，接下来的其他操作和数据库故障不应该对其有任何影响。</p>
+<p>持久性是通过 <code>事务日志</code> 来保证的。日志包括了 <code>重做日志</code> 和 <code>回滚日志</code> 。当我们通过事务对数据进行修改 的时候，首先会将数据库的变化信息记录到重做日志中，然后再对数据库中对应的行进行修改。这样做 的好处是，即使数据库系统崩溃，数据库重启后也能找到没有更新到数据库系统中的重做日志，重新执 行，从而使事务具有持久性。</p>
+<blockquote>
+<p>总结</p>
+<p>ACID是事务的四大特征，在这四个特性中，原子性是基础，隔离性是手段，一致性是约束条件， 而持久性是我们的目的。</p>
+<p>数据库事务，其实就是数据库设计者为了方便起见，把需要保证<code>原子性</code>、<code>隔离性</code>、<code>一致性</code>和<code>持久性</code>的一个或多个数据库操作称为一个事务。</p>
+</blockquote>
+<h2 id="事务的状态"><a href="#事务的状态" class="headerlink" title="事务的状态"></a><strong>事务的状态</strong></h2><p>我们现在知道 <code>事务</code> 是一个抽象的概念，它其实对应着一个或多个数据库操作，MySQL根据这些操作所执 行的不同阶段把 <code>事务</code> 大致划分成几个状态：</p>
+<ul>
+<li><p><strong>活动的（active）</strong></p>
+<p>事务对应的数据库操作正在执行过程中时，我们就说该事务处在 <code>活动的</code> 状态。</p>
+</li>
+<li><p><strong>部分提交的（partially committed）</strong></p>
+<p>当事务中的最后一个操作执行完成，但由于操作都在内存中执行，所造成的影响并 <code>没有刷新到磁盘</code> 时，我们就说该事务处在 <code>部分提交的</code> 状态。</p>
+</li>
+<li><p><strong>失败的（failed）</strong></p>
+<p>当事务处在 <code>活动的</code> 或者 部分提交的 状态时，可能遇到了某些错误（数据库自身的错误、操作系统 错误或者直接断电等）而无法继续执行，或者人为的停止当前事务的执行，我们就说该事务处在 失 败的 状态。</p>
+</li>
+<li><p><strong>中止的（aborted）</strong></p>
+<p>如果事务执行了一部分而变为 <code>失败的</code> 状态，那么就需要把已经修改的事务中的操作还原到事务执 行前的状态。换句话说，就是要撤销失败事务对当前数据库造成的影响。我们把这个撤销的过程称之为 <code>回滚</code> 。当 <code>回滚</code> 操作执行完毕时，也就是数据库恢复到了执行事务之前的状态，我们就说该事 务处在了 <code>中止的</code> 状态。</p>
+<p>举例：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">UPDATE accounts SET money = money - 50 WHERE NAME = 'AA';</span><br><span class="line"></span><br><span class="line">UPDATE accounts SET money = money + 50 WHERE NAME = 'BB';</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p><strong>提交的（committed）</strong></p>
+<p>当一个处在 <code>部分提交的</code> 状态的事务将修改过的数据都 <code>同步到磁盘</code> 上之后，我们就可以说该事务处在了 <code>提交的</code> 状态。</p>
+<p>一个基本的状态转换图如下所示：</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/24/66f2ce192699f.png" alt="image-20220708171859055" style="zoom:80%;">
+
+<p>图中可见，只有当事务处于<code>提交的</code>或者<code>中止的</code>状态时，一个事务的生命周期才算是结束了。对于已经提交的事务来说，该事务对数据库所做的修改将永久生效，对于处于中止状态的事务，该事务对数据库所做的所有修改都会被回滚到没执行该事务之前的状态。</p>
+</li>
+</ul>
+<h1 id="如何使用事务"><a href="#如何使用事务" class="headerlink" title="如何使用事务"></a>如何使用事务</h1><p>使用事务有两种方式，分别为 <code>显式事务</code> 和 <code>隐式事务</code> 。</p>
+<h2 id="显式事务"><a href="#显式事务" class="headerlink" title="显式事务"></a>显式事务</h2><p>  <strong>步骤1：</strong> START TRANSACTION 或者 BEGIN ，作用是显式开启一个事务。</p>
+  <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; BEGIN;</span><br><span class="line">#或者</span><br><span class="line">mysql&gt; START TRANSACTION;</span><br></pre></td></tr></tbody></table></figure>
+
+<p>  <code>START TRANSACTION</code> 语句相较于 <code>BEGIN</code> 特别之处在于，后边能跟随几个 <code>修饰符</code> ：</p>
+<p>  ① <code>READ ONLY</code> ：标识当前事务是一个 <code>只读事务</code> ，也就是属于该事务的数据库操作只能读取数据，而不能修改数据。</p>
+<blockquote>
+<p>补充：只读事务中只是不允许修改那些其他事务也能访问到的表中的数据，对于临时表来说（我们使用 CREATE TMEPORARY TABLE 创建的表），由于它们只能再当前会话中可见，所有只读事务其实也是可以对临时表进行增、删、改操作的。</p>
+</blockquote>
+<p>  ② <code>READ WRITE(默认)</code> ：标识当前事务是一个 <code>读写事务</code> ，也就是属于该事务的数据库操作既可以读取数据， 也可以修改数据。</p>
+<p>  ③ <code>WITH CONSISTENT SNAPSHOT</code> ：启动一致性读。</p>
+<p>  比如：</p>
+  <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">START TRANSACTION READ ONLY; # 开启一个只读事务</span><br></pre></td></tr></tbody></table></figure>
+
+  <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">START TRANSACTION READ ONLY, WITH CONSISTENT SNAPSHOT # 开启只读事务和一致性读</span><br></pre></td></tr></tbody></table></figure>
+
+  <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">START TRANSACTION READ WRITE, WITH CONSISTENT SNAPSHOT # 开启读写事务和一致性读</span><br></pre></td></tr></tbody></table></figure>
+
+<p>  注意：</p>
+<ul>
+<li><code>READ ONLY</code>和<code>READ WRITE</code>是用来设置所谓的事务<code>访问模式</code>的，就是以只读还是读写的方式来访问数据库中的数据，一个事务的访问模式不能同时即设置为<code>只读</code>的也设置为<code>读写</code>的，所以不能同时把<code>READ ONLY</code>和<code>READ WRITE</code>放到<code>START TRANSACTION</code>语句后边。</li>
+<li>如果我们不显式指定事务的访问模式，那么该事务的访问模式就是<code>读写</code>模式</li>
+</ul>
+<p>  <strong>步骤2：</strong>一系列事务中的操作（主要是DML，不含DDL）</p>
+<p>  <strong>步骤3：</strong>提交事务 或 中止事务（即回滚事务）</p>
+  <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 提交事务。当提交事务后，对数据库的修改是永久性的。</span><br><span class="line">mysql&gt; COMMIT;</span><br></pre></td></tr></tbody></table></figure>
+
+  <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 回滚事务。即撤销正在进行的所有没有提交的修改</span><br><span class="line">mysql&gt; ROLLBACK;</span><br><span class="line"></span><br><span class="line"># 将事务回滚到某个保存点。</span><br><span class="line">mysql&gt; ROLLBACK TO [SAVEPOINT]</span><br></pre></td></tr></tbody></table></figure>
+
+<p>  其中关于SAVEPOINT相关操作有：</p>
+  <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 在事务中创建保存点，方便后续针对保存点进行回滚。一个事务中可以存在多个保存点。</span><br><span class="line">SAVEPOINT 保存点名称;</span><br></pre></td></tr></tbody></table></figure>
+
+  <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 删除某个保存点</span><br><span class="line">RELEASE SAVEPOINT 保存点名称;</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="隐式事务"><a href="#隐式事务" class="headerlink" title="隐式事务"></a>隐式事务</h2><p>MySQL中有一个系统变量 <code>autocommit</code> ，默认开启</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SHOW VARIABLES LIKE 'autocommit';</span><br><span class="line">+---------------+-------+</span><br><span class="line">| Variable_name | Value |</span><br><span class="line">+---------------+-------+</span><br><span class="line">| autocommit    |  ON   |</span><br><span class="line">+---------------+-------+</span><br><span class="line">1 row in set (0.01 sec)</span><br></pre></td></tr></tbody></table></figure>
+
+<p>当然，如果我们想关闭这种 <code>自动提交</code> 的功能，可以使用下边两种方法之一：</p>
+<ul>
+<li><p>显式的的使用 <code>START TRANSACTION</code> 或者 <code>BEGIN</code> 语句开启一个事务。这样在本次事务提交或者回滚前会暂时关闭掉自动提交的功能。</p>
+</li>
+<li><p>把系统变量 <code>autocommit</code> 的值设置为 <code>OFF</code> ，就像这样：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 针对DML操作有效,针对DDLc</span><br><span class="line">SET autocommit = OFF;</span><br><span class="line">#或</span><br><span class="line">SET autocommit = 0;</span><br></pre></td></tr></tbody></table></figure></li>
+</ul>
+<h2 id="隐式提交数据的情况"><a href="#隐式提交数据的情况" class="headerlink" title="隐式提交数据的情况"></a>隐式提交数据的情况</h2><ul>
+<li><p>数据定义语言（Data definition language，缩写为：DDL）</p>
+<p>数据库对象，指的就是<code>数据库、表、视图、存储过程</code>等结构。当我们<code>CREATE、ALTER、DROP</code>等语句去修改数据库对象时，就会隐式的提交前边语句所属于的事务。即：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">BEGIN;</span><br><span class="line"></span><br><span class="line">SELECT ... # 事务中的一条语句</span><br><span class="line">UPDATE ... # 事务中的一条语句</span><br><span class="line">... # 事务中的其他语句</span><br><span class="line"></span><br><span class="line">CREATE TABLE ... # 此语句会隐式的提交前边语句所属于的事务</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>隐式使用或修改mysql数据库中的表</p>
+<p>当我们使用<code>ALTER USER</code>、<code>CREATE USER</code>、<code>DROP USER</code>、<code>GRANT</code>、<code>RENAME USER</code>、<code>REVOKE</code>、<code>SET PASSWORD</code>等语句时也会隐式的提交前边语句所属于的事务。</p>
+</li>
+<li><p>事务控制或关于锁定的语句</p>
+<p>① 当我们在一个事务还没提交或者回滚时就又使用 START TRANSACTION 或者 BEGIN 语句开启了另一个事务时，会隐式的提交上一个事务。即：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">BEGIN;</span><br><span class="line"></span><br><span class="line">SELECT ... # 事务中的一条语句</span><br><span class="line">UPDATE ... # 事务中的一条语句</span><br><span class="line">... # 事务中的其他语句</span><br><span class="line"></span><br><span class="line">BEGIN; # 此语句会隐式的提交前边语句所属于的事务</span><br></pre></td></tr></tbody></table></figure>
+
+<p>② 当前的 autocommit 系统变量的值为 OFF ，我们手动把它调为 ON 时，也会 隐式的提交前边语句所属的事务。</p>
+<p>③ 使用 LOCK TABLES 、 UNLOCK TABLES 等关于锁定的语句也会 隐式的提交 前边语句所属的事务。</p>
+</li>
+<li><p>加载数据的语句</p>
+<p>使用<code>LOAD DATA</code>语句来批量往数据库中导入数据时，也会<code>隐式的提交</code>前边语句所属的事务。</p>
+</li>
+<li><p>关于MySQL复制的一些语句</p>
+<p>使用<code>START SLAVE、STOP SLAVE、RESET SLAVE、CHANGE MASTER TO</code>等语句会隐式的提交前边语句所属的事务</p>
+</li>
+<li><p>其他的一些语句</p>
+<p>使用<code>ANALYZE TABLE、CACHE INDEX、CAECK TABLE、FLUSH、LOAD INDEX INTO CACHE、OPTIMIZE TABLE、REPAIR TABLE、RESET</code>等语句也会隐式的提交前边语句所属的事务。</p>
+</li>
+</ul>
+<h2 id="使用举例1：提交与回滚"><a href="#使用举例1：提交与回滚" class="headerlink" title="使用举例1：提交与回滚"></a>使用举例1：提交与回滚</h2><p>我们看下在 MySQL 的默认状态下，下面这个事务最后的处理结果是什么。</p>
+<p><strong>情况1：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE user(name varchar(20), PRIMARY KEY (name)) ENGINE=InnoDB;</span><br><span class="line"></span><br><span class="line">BEGIN;</span><br><span class="line">INSERT INTO user SELECT '张三';</span><br><span class="line">COMMIT;</span><br><span class="line"></span><br><span class="line">BEGIN;</span><br><span class="line">INSERT INTO user SELECT '李四';</span><br><span class="line">INSERT INTO user SELECT '李四';</span><br><span class="line">ROLLBACK;</span><br><span class="line"></span><br><span class="line">SELECT * FROM user;</span><br></pre></td></tr></tbody></table></figure>
+
+<p>运行结果（1 行数据）：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; commit;</span><br><span class="line">Query OK, 0 rows affected (0.00 秒)</span><br><span class="line"></span><br><span class="line">mysql&gt; BEGIN;</span><br><span class="line">Query OK, 0 rows affected (0.00 秒)</span><br><span class="line"></span><br><span class="line">mysql&gt; INSERT INTO user SELECT '李四';</span><br><span class="line">Query OK, 1 rows affected (0.00 秒)</span><br><span class="line"></span><br><span class="line">mysql&gt; INSERT INTO user SELECT '李四';</span><br><span class="line">Duplicate entry '李四' for key 'user.PRIMARY'</span><br><span class="line">mysql&gt; ROLLBACK;</span><br><span class="line">Query OK, 0 rows affected (0.01 秒)</span><br><span class="line"></span><br><span class="line">mysql&gt; select * from user;</span><br><span class="line">+--------+</span><br><span class="line">| name   |</span><br><span class="line">+--------+</span><br><span class="line">| 张三    |</span><br><span class="line">+--------+</span><br><span class="line">1 行于数据集 (0.01 秒)</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>情况2：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE user (name varchar(20), PRIMARY KEY (name)) ENGINE=InnoDB;</span><br><span class="line"></span><br><span class="line">BEGIN;</span><br><span class="line">INSERT INTO user SELECT '张三';</span><br><span class="line">COMMIT;</span><br><span class="line"></span><br><span class="line">INSERT INTO user SELECT '李四';</span><br><span class="line">INSERT INTO user SELECT '李四';</span><br><span class="line">ROLLBACK;</span><br></pre></td></tr></tbody></table></figure>
+
+<p>运行结果（2 行数据）：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT * FROM user;</span><br><span class="line">+--------+</span><br><span class="line">| name   |</span><br><span class="line">+--------+</span><br><span class="line">| 张三    |</span><br><span class="line">| 李四    |</span><br><span class="line">+--------+</span><br><span class="line">2 行于数据集 (0.01 秒)</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>情况3：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE user(name varchar(255), PRIMARY KEY (name)) ENGINE=InnoDB;</span><br><span class="line"></span><br><span class="line">SET @@completion_type = 1;</span><br><span class="line">BEGIN;</span><br><span class="line">INSERT INTO user SELECT '张三';</span><br><span class="line">COMMIT;</span><br><span class="line"></span><br><span class="line">INSERT INTO user SELECT '李四';</span><br><span class="line">INSERT INTO user SELECT '李四';</span><br><span class="line">ROLLBACK;</span><br><span class="line"></span><br><span class="line">SELECT * FROM user;</span><br></pre></td></tr></tbody></table></figure>
+
+<p>运行结果（1 行数据）：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT * FROM user;</span><br><span class="line">+--------+</span><br><span class="line">| name   |</span><br><span class="line">+--------+</span><br><span class="line">| 张三    |</span><br><span class="line">+--------+</span><br><span class="line">1 行于数据集 (0.01 秒)</span><br></pre></td></tr></tbody></table></figure>
+
+<p>你能看到相同的SQL代码，只是在事务开始之前设置了<code>SET @@completion_type=1;</code>,结果就和我们第一次<br>处理的一样，只有一个“张三”。这是为什么呢？<br>这里我讲解下MySQL中completion_type参数的作用，实际上这个参数有3种可能：</p>
+<ol>
+<li><code>completion=0</code>,这是<code>默认情况</code>。当我们执行COMMIT的时候会提交事务，在执行下一个事务时，还需要使<br>用<code>START TRANSACTION</code>或者<code>BEGIN</code>来开启</li>
+<li><code>completion=1</code>,这种情况下，当我们提交事务后，相当于执行了<code>COMMIT AND CHAIN</code>,也就是开启一个<br>链式事务，即当我们提交事务之后会开启一个相同隔离级别的事务。</li>
+<li><code>completion=2</code>,这种情况下<code>COMMIT=COMMIT AND RELEASE</code>,也就是当我们提交后，会自动与服务器断<br>开连接。</li>
+</ol>
+<blockquote>
+<p>当我们设置 autocommit=0 时，不论是否采用 START TRANSACTION 或者 BEGIN 的方式来开启事 务，都需要用 COMMIT 进行提交，让事务生效，使用 ROLLBACK 对事务进行回滚。</p>
+<p>当我们设置 autocommit=1 时，每条 SQL 语句都会自动进行提交。 不过这时，如果你采用 START TRANSACTION 或者 BEGIN 的方式来显式地开启事务，那么这个事务只有在 COMMIT 时才会生效， 在 ROLLBACK 时才会回滚。</p>
+</blockquote>
+<h2 id="使用举例2：测试不支持事务的engine"><a href="#使用举例2：测试不支持事务的engine" class="headerlink" title="使用举例2：测试不支持事务的engine"></a>使用举例2：测试不支持事务的engine</h2><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE test1(i INT) ENGINE=InnoDB;</span><br><span class="line"></span><br><span class="line">CREATE TABLE test2(i INT) ENGINE=MYISAM;</span><br></pre></td></tr></tbody></table></figure>
+
+<p>针对于InnoDB表</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">BEGIN;</span><br><span class="line">INSERT INTO test1 VALUES(1);</span><br><span class="line">ROLLBACK;</span><br><span class="line"></span><br><span class="line">SELECT * FROM test1;</span><br></pre></td></tr></tbody></table></figure>
+
+<p>结果：没有数据</p>
+<p>针对于MYISAM表：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">BEGIN;</span><br><span class="line">INSERT INTO test1 VALUES(1);</span><br><span class="line">ROLLBACK;</span><br><span class="line"></span><br><span class="line">SELECT * FROM test2;</span><br></pre></td></tr></tbody></table></figure>
+
+<p>结果：有一条数据</p>
+<h2 id="使用举例3：SAVEPOINT"><a href="#使用举例3：SAVEPOINT" class="headerlink" title="使用举例3：SAVEPOINT"></a>使用举例3：SAVEPOINT</h2><p>创建表并添加数据：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE account(</span><br><span class="line">id INT PRIMARY KEY AUTO_INCREMENT,</span><br><span class="line">NAME VARCHAR(15),</span><br><span class="line">balance DECIMAL(10,2)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">INSERT INTO account(NAME,balance)</span><br><span class="line">VALUES</span><br><span class="line">('张三',1000),</span><br><span class="line">('李四',1000);</span><br></pre></td></tr></tbody></table></figure>
+
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">BEGIN;</span><br><span class="line">UPDATE account SET balance = balance - 100 WHERE NAME = '张三';</span><br><span class="line">UPDATE account SET balance = balance - 100 WHERE NAME = '张三';</span><br><span class="line">SAVEPOINT s1; # 设置保存点</span><br><span class="line">UPDATE account SET balance = balance + 1 WHERE NAME = '张三';</span><br><span class="line">ROLLBACK TO s1; # 回滚到保存点</span><br></pre></td></tr></tbody></table></figure>
+
+<p>结果：张三：800.00</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ROLLBACK;</span><br></pre></td></tr></tbody></table></figure>
+
+<p>结果：张三：1000.00</p>
+<h1 id="事务隔离级别"><a href="#事务隔离级别" class="headerlink" title="事务隔离级别"></a>事务隔离级别</h1><p>MySQL是一个 <code>客户端／服务器</code> 架构的软件，对于同一个服务器来说，可以有若干个客户端与之连接，每 个客户端与服务器连接上之后，就可以称为一个会话（ <code>Session</code> ）。每个客户端都可以在自己的会话中 向服务器发出请求语句，一个请求语句可能是某个事务的一部分，也就是对于服务器来说可能同时处理多个事务。事务有 <code>隔离性</code> 的特性，理论上在某个事务 <code>对某个数据进行访问</code> 时，其他事务应该进行<code>排队</code> ，当该事务提交之后，其他事务才可以继续访问这个数据。但是这样对 <code>性能影响太大</code> ，我们既想保持事务的隔离性，又想让服务器在处理访问同一数据的多个事务时 <code>性能尽量高些</code> ，那就看二者如何权衡取 舍了。</p>
+<h2 id="数据准备"><a href="#数据准备" class="headerlink" title="数据准备"></a>数据准备</h2><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE student (</span><br><span class="line">    studentno INT,</span><br><span class="line">    name VARCHAR(20),</span><br><span class="line">    class varchar(20),</span><br><span class="line">    PRIMARY KEY (studentno)</span><br><span class="line">) Engine=InnoDB CHARSET=utf8;</span><br></pre></td></tr></tbody></table></figure>
+
+<p>然后向这个表里插入一条数据：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO student VALUES(1, '小谷', '1班');</span><br></pre></td></tr></tbody></table></figure>
+
+<p>现在表里的数据就是这样的：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from student;</span><br><span class="line">+-----------+--------+-------+</span><br><span class="line">| studentno | name   | class |</span><br><span class="line">+-----------+--------+-------+</span><br><span class="line">|      1    |   小谷  | 1班   |</span><br><span class="line">+-----------+--------+-------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="数据并发问题"><a href="#数据并发问题" class="headerlink" title="数据并发问题"></a>数据并发问题</h2><p>针对事务的隔离性和并发性，我们怎么做取舍呢？先看一下访问相同数据的事务在 不保证串行执行 （也 就是执行完一个再执行另一个）的情况下可能会出现哪些问题：</p>
+<p><strong>1. 脏写（ Dirty Write ）</strong></p>
+<p>对于两个事务 Session A、Session B，如果事务Session A <code>修改了</code> 另一个 <code>未提交</code> 事务Session B <code>修改过</code> 的数据，那就意味着发生了 <code>脏写</code>，示意图如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/25/66f37549cf668.png" alt="image-20220708214453902"></p>
+<p>Session A 和 Session B 各开启了一个事务，Sesssion B 中的事务先将studentno列为1的记录的name列更新为’李四’，然后Session A中的事务接着又把这条studentno列为1的记录的name列更新为’张三’。如果之后Session B中的事务进行了回滚，那么Session A中的更新也将不复存在，这种现象称之为脏写。这时Session A中的事务就没有效果了，明明把数据更新了，最后也提交事务了，最后看到的数据什么变化也没有。这里大家对事务的隔离性比较了解的话，会发现默认隔离级别下，上面Session A中的更新语句会处于等待状态，这里只是跟大家说明一下会出现这样的现象。</p>
+<p><strong>2. 脏读（ Dirty Read ）</strong></p>
+<p> 对于两个事务 Session A、Session B，Session A <code>读取</code> 了已经被 Session B <code>更新</code> 但还 <code>没有被提交</code> 的字段。 之后若 Session B <code>回滚</code> ，Session A <code>读取 </code>的内容就是 <code>临时且无效</code> 的。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/25/66f37549d6796.png" alt="image-20220708215109480"></p>
+<p>Session A和Session B各开启了一个事务，Session B中的事务先将studentno列为1的记录的name列更新 为’张三’，然后Session A中的事务再去查询这条studentno为1的记录，如果读到列name的值为’张三’，而 Session B中的事务稍后进行了回滚，那么Session A中的事务相当于读到了一个不存在的数据，这种现象就称之为 <code>脏读</code> 。</p>
+<p><strong>3. 不可重复读（ Non-Repeatable Read ）</strong></p>
+<p>对于两个事务Session A、Session B，Session A <code>读取</code>了一个字段，然后 Session B <code>更新</code>了该字段。 之后 Session A <code>再次读取</code> 同一个字段， <code>值就不同</code> 了。那就意味着发生了不可重复读。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/25/66f3754a07cc8.png" alt="image-20220708215626435"></p>
+<p>我们在Session B中提交了几个 <code>隐式事务</code> （注意是隐式事务，意味着语句结束事务就提交了），这些事务 都修改了studentno列为1的记录的列name的值，每次事务提交之后，如果Session A中的事务都可以查看到最新的值，这种现象也被称之为 <code>不可重复读 </code>。</p>
+<p><strong>4. 幻读（ Phantom ）</strong></p>
+<p>对于两个事务Session A、Session B, Session A 从一个表中 <code>读取</code> 了一个字段, 然后 Session B 在该表中 插 入 了一些新的行。 之后, 如果 Session A <code>再次读取</code> 同一个表, 就会多出几行。那就意味着发生了<code>幻读</code>。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/25/66f3754a0c239.png" alt="image-20220708220102342"></p>
+<p>Session A中的事务先根据条件 studentno &gt; 0这个条件查询表student，得到了name列值为’张三’的记录； 之后Session B中提交了一个 <code>隐式事务</code> ，该事务向表student中插入了一条新记录；之后Session A中的事务 再根据相同的条件 studentno &gt; 0查询表student，得到的结果集中包含Session B中的事务新插入的那条记 录，这种现象也被称之为 幻读 。我们把新插入的那些记录称之为 <code>幻影记录</code> 。</p>
+<p><strong>注意1：</strong><br>有的同学会有疑问，那如果Session B中<code>删除了</code>一些符合<code>studentno &gt;  0</code> 的记录而不是插入新记录，那Session A之后再根据<code>studentno &gt; 0</code>的条件读取的记录变少了，这种现象算不算<code>幻读</code>呢？这种现象<code>不属于幻读</code>，幻读强调的是一个事务按照某个相同条件多次读取记录时，后读取时读到了<code>之前没有读到的记录</code>。</p>
+<p><strong>注意2：</strong><br>那对于先前已经读到的记录，之后又读取不到这种情况，算啥呢？这相当于对每一条记录都发生了<code>不可重复读</code>的<br>现象。幻读只是重点强调了读取到了之前读取没有获取到的记录。</p>
+<h2 id="SQL中的四种隔离级别"><a href="#SQL中的四种隔离级别" class="headerlink" title="SQL中的四种隔离级别"></a>SQL中的四种隔离级别</h2><p>上面介绍了几种并发事务执行过程中可能遇到的一些问题，这些问题有轻重缓急之分，我们给这些问题 按照严重性来排一下序：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">脏写 &gt; 脏读 &gt; 不可重复读 &gt; 幻读</span><br></pre></td></tr></tbody></table></figure>
+
+<p>我们愿意舍弃一部分隔离性来换取一部分性能在这里就体现在：设立一些隔离级别，隔离级别越低，并发问题发生的就越多。 <code>SQL标准</code> 中设立了4个 <code>隔离级别</code> ：</p>
+<ul>
+<li><code>READ UNCOMMITTED</code> ：读未提交，在该隔离级别，所有事务都可以看到其他未提交事务的执行结 果。不能避免脏读、不可重复读、幻读。 </li>
+<li><code>READ COMMITTED</code> ：读已提交，它满足了隔离的简单定义：一个事务只能看见已经提交事务所做 的改变。这是大多数数据库系统的默认隔离级别（但不是MySQL默认的）。可以避免脏读，但不可 重复读、幻读问题仍然存在。 </li>
+<li><code>REPEATABLE READ</code> ：可重复读，事务A在读到一条数据之后，此时事务B对该数据进行了修改并提 交，那么事务A再读该数据，读到的还是原来的内容。可以避免脏读、不可重复读，但幻读问题仍 然存在。这是MySQL的默认隔离级别。 </li>
+<li><code>SERIALIZABLE</code> ：可串行化，确保事务可以从一个表中读取相同的行。在这个事务持续期间，禁止 其他事务对该表执行插入、更新和删除操作。所有的并发问题都可以避免，但性能十分低下。能避 免脏读、不可重复读和幻读。</li>
+</ul>
+<p><code>SQL标准</code> 中规定，针对不同的隔离级别，并发事务可以发生不同严重程度的问题，具体情况如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/25/66f3764ce4d6d.png" alt="image-20240925103246396"></p>
+<p><code>脏写 </code>怎么没涉及到？因为脏写这个问题太严重了，不论是哪种隔离级别，都不允许脏写的情况发生。</p>
+<p>不同的隔离级别有不同的现象，并有不同的锁和并发机制，隔离级别越高，数据库的并发性能就越差，4 种事务隔离级别与并发性能的关系如下：</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/25/66f375edc39e5.png" alt="image-20220708220957108" style="zoom:80%;">
+
+<h2 id="MySQL支持的四种隔离级别"><a href="#MySQL支持的四种隔离级别" class="headerlink" title="MySQL支持的四种隔离级别"></a>MySQL支持的四种隔离级别</h2><p>不同的数据库厂商对SQL标准中规定的四种隔离级别支持不一样。比如，Oracle就只支持<code>READ C0MMITTED(默 认隔离级别)</code>和<code>SERIALIZABLE</code>隔离级别。MySQL虽然支持4种隔离级别，但与SQL标准中所规定的各级隔离级别<br>允许发生的问题却有些出入，MySQL在REPEATABLE READ隔离级别下，是可以禁止幻读问题的发生的，禁止幻读<br>的原因我们在第16章讲解。</p>
+<p>MySQL的默认隔离级别为REPEATABLE READ，我们可以手动修改一下事务的隔离级别。</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"># 查看隔离级别，MySQL 5.7.20的版本之前：</span><br><span class="line">mysql&gt; SHOW VARIABLES LIKE 'tx_isolation';</span><br><span class="line">+---------------+-----------------+</span><br><span class="line">| Variable_name | Value           |</span><br><span class="line">+---------------+-----------------+</span><br><span class="line">| tx_isolation  | REPEATABLE-READ |</span><br><span class="line">+---------------+-----------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br><span class="line"># MySQL 5.7.20版本之后，引入transaction_isolation来替换tx_isolation</span><br><span class="line"></span><br><span class="line"># 查看隔离级别，MySQL 5.7.20的版本及之后：</span><br><span class="line">mysql&gt; SHOW VARIABLES LIKE 'transaction_isolation';</span><br><span class="line">+-----------------------+-----------------+</span><br><span class="line">| Variable_name         | Value           |</span><br><span class="line">+-----------------------+-----------------+</span><br><span class="line">| transaction_isolation | REPEATABLE-READ |</span><br><span class="line">+-----------------------+-----------------+</span><br><span class="line">1 row in set (0.02 sec)</span><br><span class="line"></span><br><span class="line">#或者不同MySQL版本中都可以使用的：</span><br><span class="line">SELECT @@transaction_isolation;</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="如何设置事务的隔离级别"><a href="#如何设置事务的隔离级别" class="headerlink" title="如何设置事务的隔离级别"></a>如何设置事务的隔离级别</h2><p><strong>通过下面的语句修改事务的隔离级别：</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">SET [GLOBAL|SESSION] TRANSACTION ISOLATION LEVEL 隔离级别;</span><br><span class="line">#其中，隔离级别格式：</span><br><span class="line">&gt; READ UNCOMMITTED</span><br><span class="line">&gt; READ COMMITTED</span><br><span class="line">&gt; REPEATABLE READ</span><br><span class="line">&gt; SERIALIZABLE</span><br></pre></td></tr></tbody></table></figure>
+
+<p>或者：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">SET [GLOBAL|SESSION] TRANSACTION_ISOLATION = '隔离级别'</span><br><span class="line">#其中，隔离级别格式：</span><br><span class="line">&gt; READ-UNCOMMITTED</span><br><span class="line">&gt; READ-COMMITTED</span><br><span class="line">&gt; REPEATABLE-READ</span><br><span class="line">&gt; SERIALIZABLE</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>关于设置时使用GLOBAL或SESSION的影响：</strong></p>
+<ul>
+<li><p>使用 GLOBAL 关键字（在全局范围影响）：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SET GLOBAL TRANSACTION ISOLATION LEVEL SERIALIZABLE;</span><br><span class="line">#或</span><br><span class="line">SET GLOBAL TRANSACTION_ISOLATION = 'SERIALIZABLE';</span><br></pre></td></tr></tbody></table></figure>
+
+<p>则：</p>
+<ul>
+<li>当前已经存在的会话无效</li>
+<li>只对执行完该语句之后产生的会话起作用</li>
+</ul>
+</li>
+<li><p>使用 <code>SESSION</code> 关键字（在会话范围影响）：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SET SESSION TRANSACTION ISOLATION LEVEL SERIALIZABLE;</span><br><span class="line">#或</span><br><span class="line">SET SESSION TRANSACTION_ISOLATION = 'SERIALIZABLE';</span><br></pre></td></tr></tbody></table></figure>
+
+<p>则：</p>
+<ul>
+<li>对当前会话的所有后续的事务有效</li>
+<li>如果在事务之间执行，则对后续的事务有效</li>
+<li>该语句可以在已经开启的事务中间执行，但不会影响当前正在执行的事务</li>
+</ul>
+</li>
+</ul>
+<p>如果在服务器启动时想改变事务的默认隔离级别，可以修改启动参数<code>transaction_isolation</code>的值。比如，在启动服务器时指定了<code>transaction_isolation=SERIALIZABLE</code>，那么事务的默认隔离界别就从原来的<code>REPEATABLE-READ</code>变成了<code>SERIALIZABLE</code>。</p>
+<blockquote>
+<p>小结： </p>
+<p>数据库规定了多种事务隔离级别，不同隔离级别对应不同的干扰程度，隔离级别越高，数据一致性就越好，但并发性越弱。</p>
+</blockquote>
+<h2 id="不同隔离级别举例"><a href="#不同隔离级别举例" class="headerlink" title="不同隔离级别举例"></a>不同隔离级别举例</h2><p>初始化数据：</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">TRUNCATE</span> <span class="keyword">TABLE</span> account;</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> account <span class="keyword">VALUES</span> (<span class="number">1</span>,<span class="string">'张三'</span>,<span class="string">'100'</span>), (<span class="number">2</span>,<span class="string">'李四'</span>,<span class="string">'0'</span>);</span><br></pre></td></tr></tbody></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/25/66f379a673363.png" alt="image-20240925104704000"></p>
+<p><strong>演示1. 读未提交之脏读</strong></p>
+<p>设置隔离级别为未提交读：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/25/66f379b46f8be.png" alt="image-20240925104717995"></p>
+<p>脏读就是指当前事务就在访问数据，并且对数据进行了修改，而这种修改还没有提交到数据库中，这时，另外一个事务也访问了这个数据，然后使用了这个数据。</p>
+<p><strong>演示2：读已提交</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/25/66f379c879806.png" alt="image-20240925104737969"></p>
+<p><strong>演示3. 不可重复读</strong></p>
+<p>设置隔离级别为可重复读，事务的执行流程如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/25/66f379dd7257d.png" alt="image-20240925104758932"></p>
+<p>当我们将当前会话的隔离级别设置为可重复读的时候，当前会话可以重复读，就是每次读取的结果集都相同，而不管其他事务有没有提交。但是在可重复读的隔离级别上会出现幻读的问题。</p>
+<p><strong>演示4：幻读</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/25/66f379f1d6cb2.png" alt="image-20240925104819369"></p>
+<p>这里要灵活的<code>理解读取</code>的意思，第一次select是读取，第二次的insert其实也属于隐式的读取，只不过是在mysql<br>的机制中读取的，插入数据也是要先读取一下有没有主键冲突才能决定是否执行插入。</p>
+<p>幻读，并不是说两次读取获取的结果集不同，幻读侧重的方面是某一次的select操作得到的结果所表征的数据状<br>态无法支撑后续的业务操作。更为具体一些：select某记录是否存在，不存在，准备插入此记录，但执行insert<br>时发现此记录已存在，无法插入，此时就发生了幻读。</p>
+<p>在RR隔离级别下，step1、step2是会正常执行的，step3则会报错主键冲突，对于事务1的业务来说是执行失败的，这里事务1就是发生了幻读，因为事务1在step1中读取的数据状态并不能支撑后续的业务操作，事务1：“见鬼了，我刚才读到的结果应该可以支持我这样操作才对啊，为什么现在不可以”。事务1不敢相信的又执行了step4,发现和setp1读取的结果是一样的(R下的MVCC机制)。此时，幻读无疑已经发生，事务1无论读取多少次，都查不到i=3的记录，但它的确无法插入这条他通过读取来认定不存在的记录（此数据已被事务2插入)，对于事务1来说，它幻读了。</p>
+<p>其实RR也，是可以避免幻读的，通过对select操作手动加<code>行X锁（独占锁）</code>(SELECT … FROM UPDATE这也正是<br>SERIALIZABLE隔离级别下会隐式为你做的事情)。同时，即便当前记录不存在，比如id=3是不存在的，当前事务也会获得一把记录锁（因为InnoDB的行锁锁定的是索引，故记录实体存在与否没关系，存在就加<code>行X锁</code>，不存在就加<code>间隙锁</code>)，其他事务则无法插入此索引的记录，故杜绝了幻读。</p>
+<p>在<code>SERIALIZABLE隔离级别下</code>，step1执行时是会隐式的添加<code>行(X)锁</code>/<code>gap(X)锁</code>的，从而step2会被阻塞，step3会正常执行，待事务1提交后，事务2才能继续执行（主键冲突执行失败），对于事务1来说业务是正确的，成功的阻塞扼杀了扰乱业务的事务2，对于事务1来说他前期读取的结果是可以支撑其后续业务的。</p>
+<p>所以MySQL的幻读并非什么读取两次返回结果集不同，而是事务在插入事先检测不存在的记录时，惊奇的发现这<br>些数据已经存在了，之前的检测读获取到的数据如同鬼影一般。</p>
+<h1 id="事务的常见分类"><a href="#事务的常见分类" class="headerlink" title="事务的常见分类"></a>事务的常见分类</h1><p>从事务理论的角度来看，可以把事务分为以下几种类型：</p>
+<ul>
+<li>扁平事务（Flat Transactions） </li>
+<li>带有保存点的扁平事务（Flat Transactions with Savepoints） </li>
+<li>链事务（Chained Transactions） </li>
+<li>嵌套事务（Nested Transactions） </li>
+<li>分布式事务（Distributed Transactions）</li>
+</ul>
+</div></article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/avatar.png" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/avatar.png" title="头像" alt="头像"></a><div class="post-copyright__author_name">時光</div><div class="post-copyright__author_desc">心寄朗朗乾坤，胸怀真修之道。</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://blog.shiguang666.eu.org/2024/09/24/5ff69d1c35a3/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://blog.shiguang666.eu.org/2024/09/24/5ff69d1c35a3/')">【尚硅谷】MySQL-事务基础知识</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="anzhiyu.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="anzhiyufont anzhiyu-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="/img/wechat.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/wechat.png" alt="微信"></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/alipay.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/alipay.png" alt="支付宝"></a><div class="post-qr-code-desc">支付宝</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="anzhiyu.removeRewardMask()" style="display: none"></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://blog.shiguang666.eu.org/2024/09/24/5ff69d1c35a3/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=【尚硅谷】MySQL-事务基础知识&amp;url=https://blog.shiguang666.eu.org/2024/09/24/5ff69d1c35a3/&amp;pic=https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.shiguang666.eu.org" target="_blank">時光</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/SQL/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>SQL<span class="tagsPageCount">12</span></a><a class="post-meta__box__tags" href="/tags/%E5%B0%9A%E7%A1%85%E8%B0%B7/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>尚硅谷<span class="tagsPageCount">42</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://img.shiguangdev.cn/i/2024/12/13/675c5996649aa.webp" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/09/24/9ddefc9f8faa/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">【尚硅谷】MySQL-索引优化与查询优化</div></div></a></div><div class="next-post pull-right"><a href="/2024/09/25/076bbddc6716/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">【尚硅谷】MySQL-MySQL事务日志</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/2024/09/25/076bbddc6716/" title="【尚硅谷】MySQL-MySQL事务日志"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-09-25</div><div class="title">【尚硅谷】MySQL-MySQL事务日志</div></div></a></div><div><a href="/2024/09/26/f7ad294f7377/" title="【尚硅谷】MySQL-主从复制"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-09-26</div><div class="title">【尚硅谷】MySQL-主从复制</div></div></a></div><div><a href="/2024/09/26/8aeb9df6c710/" title="【尚硅谷】MySQL-多版本并发控制"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-09-26</div><div class="title">【尚硅谷】MySQL-多版本并发控制</div></div></a></div><div><a href="/2024/09/26/922071561806/" title="【尚硅谷】MySQL-其他数据库日志"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-09-26</div><div class="title">【尚硅谷】MySQL-其他数据库日志</div></div></a></div><div><a href="/2024/09/26/e441e650956c/" title="【尚硅谷】MySQL-数据库备份与恢复"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-09-26</div><div class="title">【尚硅谷】MySQL-数据库备份与恢复</div></div></a></div><div><a href="/2024/09/22/88ec74bb220c/" title="【尚硅谷】MySQL-性能分析工具的使用"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-09-22</div><div class="title">【尚硅谷】MySQL-性能分析工具的使用</div></div></a></div></div></div><hr><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="anzhiyufont anzhiyu-icon-comments"></i><span> 评论</span></div><div class="comment-randomInfo"><a onclick="anzhiyu.addRandomCommentInfo()" href="javascript:void(0)" style="display: none">匿名评论</a><a href="/privacy" style="margin-left: 4px">隐私政策</a></div><div class="comment-tips" id="comment-tips"><span>✅ 你无需删除空行，直接评论以获取最佳展示效果</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div><div class="comment-barrage"></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"><div class="author-status"><img class="g-status" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://emotion.acs.pw/emotion/Heo/送福.png" alt="status"></div></div><div class="author-info__description">代码成就万事基积沙镇海,<br>梦想永在凌云意意气风发。</div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/"><h1 class="author-info__name">時光</h1><div class="author-info__desc">心寄朗朗乾坤，胸怀真修之道。</div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/shiguang-coding" target="_blank" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a></div></div></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bullhorn anzhiyu-shake"></i><span>公告</span></div><div class="announcement_content"><span>🌟欢迎光临時光的博客园子🌟</span><br> <span><a href="https://blog.shiguang666.eu.org"><b>blog.shiguang666.eu.org</b></a></span><br> <span><a target="_blank" rel="noopener" href="https://blog.shiguangdev.cn"><b>blog.shiguangdev.cn</b></a></span><br> <span><a target="_blank" rel="noopener" href="https://blog.shiguang88.icu"><b>blog.shiguang88.icu</b></a></span><br> <span>🤔 如有问题欢迎评论区交流！</span><br> <span>📧 如需联系我：<a href="mailto:an_shiguang@163.com"><b>发送邮件🚀</b></a></span> <div id="welcome-info"></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%E6%94%AF%E6%8C%81%E6%83%85%E5%86%B5"><span class="toc-number">1.</span> <span class="toc-text">存储引擎支持情况</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">1.1.</span> <span class="toc-text">基本概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8B%E5%8A%A1%E7%9A%84ACID%E7%89%B9%E6%80%A7"><span class="toc-number">1.2.</span> <span class="toc-text">事务的ACID特性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8B%E5%8A%A1%E7%9A%84%E7%8A%B6%E6%80%81"><span class="toc-number">1.3.</span> <span class="toc-text">事务的状态</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E4%BA%8B%E5%8A%A1"><span class="toc-number">2.</span> <span class="toc-text">如何使用事务</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%98%BE%E5%BC%8F%E4%BA%8B%E5%8A%A1"><span class="toc-number">2.1.</span> <span class="toc-text">显式事务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9A%90%E5%BC%8F%E4%BA%8B%E5%8A%A1"><span class="toc-number">2.2.</span> <span class="toc-text">隐式事务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9A%90%E5%BC%8F%E6%8F%90%E4%BA%A4%E6%95%B0%E6%8D%AE%E7%9A%84%E6%83%85%E5%86%B5"><span class="toc-number">2.3.</span> <span class="toc-text">隐式提交数据的情况</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E4%B8%BE%E4%BE%8B1%EF%BC%9A%E6%8F%90%E4%BA%A4%E4%B8%8E%E5%9B%9E%E6%BB%9A"><span class="toc-number">2.4.</span> <span class="toc-text">使用举例1：提交与回滚</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E4%B8%BE%E4%BE%8B2%EF%BC%9A%E6%B5%8B%E8%AF%95%E4%B8%8D%E6%94%AF%E6%8C%81%E4%BA%8B%E5%8A%A1%E7%9A%84engine"><span class="toc-number">2.5.</span> <span class="toc-text">使用举例2：测试不支持事务的engine</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E4%B8%BE%E4%BE%8B3%EF%BC%9ASAVEPOINT"><span class="toc-number">2.6.</span> <span class="toc-text">使用举例3：SAVEPOINT</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB"><span class="toc-number">3.</span> <span class="toc-text">事务隔离级别</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%87%86%E5%A4%87"><span class="toc-number">3.1.</span> <span class="toc-text">数据准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%B9%B6%E5%8F%91%E9%97%AE%E9%A2%98"><span class="toc-number">3.2.</span> <span class="toc-text">数据并发问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL%E4%B8%AD%E7%9A%84%E5%9B%9B%E7%A7%8D%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB"><span class="toc-number">3.3.</span> <span class="toc-text">SQL中的四种隔离级别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MySQL%E6%94%AF%E6%8C%81%E7%9A%84%E5%9B%9B%E7%A7%8D%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB"><span class="toc-number">3.4.</span> <span class="toc-text">MySQL支持的四种隔离级别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E8%AE%BE%E7%BD%AE%E4%BA%8B%E5%8A%A1%E7%9A%84%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB"><span class="toc-number">3.5.</span> <span class="toc-text">如何设置事务的隔离级别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8D%E5%90%8C%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E4%B8%BE%E4%BE%8B"><span class="toc-number">3.6.</span> <span class="toc-text">不同隔离级别举例</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8B%E5%8A%A1%E7%9A%84%E5%B8%B8%E8%A7%81%E5%88%86%E7%B1%BB"><span class="toc-number">4.</span> <span class="toc-text">事务的常见分类</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/12/13/2ec3ab3954b3/" title="通过SSH密钥连接Linux"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/12/13/675c5996649aa.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="通过SSH密钥连接Linux"></a><div class="content"><a class="title" href="/2024/12/13/2ec3ab3954b3/" title="通过SSH密钥连接Linux">通过SSH密钥连接Linux</a><time datetime="2024-12-13T15:37:00.000Z" title="发表于 2024-12-13 23:37:00">2024-12-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/12/13/0616411766f4/" title="【Hexo】一键部署至远程服务器"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/12/13/675c59eff34f4.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【Hexo】一键部署至远程服务器"></a><div class="content"><a class="title" href="/2024/12/13/0616411766f4/" title="【Hexo】一键部署至远程服务器">【Hexo】一键部署至远程服务器</a><time datetime="2024-12-13T13:35:49.000Z" title="发表于 2024-12-13 21:35:49">2024-12-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/12/12/60bae9f9d9cc/" title="【尚硅谷】JVM-类的加载篇"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【尚硅谷】JVM-类的加载篇"></a><div class="content"><a class="title" href="/2024/12/12/60bae9f9d9cc/" title="【尚硅谷】JVM-类的加载篇">【尚硅谷】JVM-类的加载篇</a><time datetime="2024-12-12T04:02:59.000Z" title="发表于 2024-12-12 12:02:59">2024-12-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/12/11/0a6035f3745c/" title="【尚硅谷】JVM-字节码篇"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【尚硅谷】JVM-字节码篇"></a><div class="content"><a class="title" href="/2024/12/11/0a6035f3745c/" title="【尚硅谷】JVM-字节码篇">【尚硅谷】JVM-字节码篇</a><time datetime="2024-12-11T00:33:29.000Z" title="发表于 2024-12-11 08:33:29">2024-12-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/12/09/68b16c939c95/" title="【智能协同云图库】2-项目初始化"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/12/09/6756ee980378a.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【智能协同云图库】2-项目初始化"></a><div class="content"><a class="title" href="/2024/12/09/68b16c939c95/" title="【智能协同云图库】2-项目初始化">【智能协同云图库】2-项目初始化</a><time datetime="2024-12-09T14:12:44.000Z" title="发表于 2024-12-09 22:12:44">2024-12-09</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div id="footer_deal"><a class="deal_link" target="_blank" rel="noopener" href="https://github.com/shiguang-coding" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a><a class="deal_link" href="mailto:an_shiguang@163.com" title="email"><i class="anzhiyufont anzhiyu-icon-envelope"></i></a><img class="footer_mini_logo" title="返回顶部" alt="返回顶部" onclick="anzhiyu.scrollToDest(0, 500)" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/avatar.png" size="50px"><a class="deal_link" href="/atom.xml" title="RSS"><i class="anzhiyufont anzhiyu-icon-rss"></i></a><a class="deal_link" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC"><i class="anzhiyufont anzhiyu-icon-copyright-line"></i></a></div><div id="anzhiyu-footer"><div class="footer-group"><div class="footer-title">服务</div><div class="footer-links"><a class="footer-item" title="开往" target="_blank" rel="noopener" href="https://www.travellings.cn/go.html">开往</a><a class="footer-item" title="异次元之旅" target="_blank" rel="noopener" href="https://travel.moe/go.html?travel=on">异次元之旅</a><a class="footer-item" title="列表导航" target="_blank" rel="noopener" href="https://zhblogs.ohyee.cc/">列表导航</a><a class="footer-item" title="十年之约" target="_blank" rel="noopener" href="https://www.foreverblog.cn/">十年之约</a></div></div><div class="footer-group"><div class="footer-title">文章</div><div class="footer-links"><a class="footer-item" title="归档" href="/archives/">归档</a><a class="footer-item" title="分类" href="/categories/">分类</a><a class="footer-item" title="标签" href="/tags/">标签</a><a class="footer-item" title="RSS" href="/tom.xml">RSS</a></div></div><div class="footer-group"><div class="footer-title">导航</div><div class="footer-links"><a class="footer-item" title="即刻短文" href="/essay/">即刻短文</a><a class="footer-item" title="留言板" href="/comment/">留言板</a><a class="footer-item" title="关于我" href="/about/">关于我</a></div></div><div class="footer-group"><div class="footer-title-group"><div class="footer-title">友链</div><a class="random-friends-btn" id="footer-random-friends-btn" href="javascript:addFriendLinksInFooter();" title="换一批友情链接"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right"></i></a></div><div class="footer-links" id="friend-links-in-footer"></div></div></div><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo_v5.4.0" title="博客框架为Hexo_v5.4.0"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Frame-Hexo.svg" alt="博客框架为Hexo_v5.4.0"></a><a class="github-badge" target="_blank" href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu" style="margin-inline:5px" data-title="本站使用AnZhiYu主题" title="本站使用AnZhiYu主题"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.9/img/Theme-AnZhiYu-2E67D3.svg" alt="本站使用AnZhiYu主题"></a><a class="github-badge" target="_blank" href="https://icp.gov.moe/?keyword=blog.shiguangdev.cn" style="margin-inline:5px" data-title="萌ICP备20246006号" title="萌ICP备20246006号"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shields.io/badge/%E8%90%8Cicp%E5%A4%87-20246006%E5%8F%B7-FF1485" alt="萌ICP备20246006号"></a><a class="github-badge" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" style="margin-inline:5px" data-title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可" title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.2.0/img/badge/Copyright-BY-NC-SA.svg" alt="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"></a></p></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">©2023 - 2024 By <a class="footer-bar-link" href="/" title="時光" target="_blank">時光</a></div></div><div id="footer-type-tips"></div><div class="js-pjax"><script>function subtitleType () {
+  fetch('https://v1.hitokoto.cn')
+    .then(response => response.json())
+    .then(data => {
+      if (true) {
+        const from = '出自 ' + data.from
+        const sub = []
+        sub.unshift(data.hitokoto, from)
+        window.typed = new Typed('#footer-type-tips', {
+          strings: sub,
+          startDelay: 300,
+          typeSpeed: 150,
+          loop: true,
+          backSpeed: 50,
+        })
+      } else {
+        document.getElementById('footer-type-tips').innerHTML = data.hitokoto
+      }
+    })
+}
+
+if (true) {
+  if (typeof Typed === 'function') {
+    subtitleType()
+  } else {
+    getScript('https://cdn.cbd.int/typed.js@2.1.0/dist/typed.umd.js').then(subtitleType)
+  }
+} else {
+  subtitleType()
+}
+</script></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu" title="主题">主题</a><a class="footer-bar-link" target="_blank" rel="noopener" href="https://img.shiguangdev.cn/" title="图床">图床</a><a class="footer-bar-link" target="_blank" rel="noopener" href="https://beian.miit.gov.cn/" title="豫ICP备2024070732号">豫ICP备2024070732号</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">254</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">191</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">16</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://www.shiguang666.eu.org" title="時光主页"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="時光主页"><span class="back-menu-item-text">時光主页</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://nav.shiguang666.eu.org" title="時光导航站"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="時光导航站"><span class="back-menu-item-text">時光导航站</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://game.shiguang666.eu.org" title="怀旧游戏机"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="怀旧游戏机"><span class="back-menu-item-text">怀旧游戏机</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://games.shiguang666.eu.org" title="在线小游戏"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="在线小游戏"><span class="back-menu-item-text">在线小游戏</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">后台管理</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://img.shiguangdev.cn/" title="時光图床"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/favicon.ico" alt="時光图床"><span class="back-menu-item-text">時光图床</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://qexo.shiguang666.eu.org/" title="Hexo管理面板"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://qexo.shiguang666.eu.org/favicon.ico" alt="Hexo管理面板"><span class="back-menu-item-text">Hexo管理面板</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 归档</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随机</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/news/"><i class="fa fa-calendar faa-tada"></i><span> 早报亭</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/music/?id=10051718332&amp;server=netease"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/gallery/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/xjj/"><i class="fa fa-rocket faa-tada"></i><span> 养生堂</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/flink/"><i class="anzhiyufont anzhiyu-icon-artstation faa-tada" style="font-size: 0.9em;"></i><span> 朋友圈</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comment/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于我</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/AI/" style="font-size: 0.88rem;">AI<sup>9</sup></a><a href="/tags/Alist/" style="font-size: 0.88rem;">Alist<sup>3</sup></a><a href="/tags/CentOs/" style="font-size: 0.88rem;">CentOs<sup>1</sup></a><a href="/tags/ChatGPT/" style="font-size: 0.88rem;">ChatGPT<sup>13</sup></a><a href="/tags/ChatGPt/" style="font-size: 0.88rem;">ChatGPt<sup>1</sup></a><a href="/tags/Chrome/" style="font-size: 0.88rem;">Chrome<sup>1</sup></a><a href="/tags/CloudFlare/" style="font-size: 0.88rem;">CloudFlare<sup>3</sup></a><a href="/tags/DNS/" style="font-size: 0.88rem;">DNS<sup>1</sup></a><a href="/tags/Ecology/" style="font-size: 0.88rem;">Ecology<sup>1</sup></a><a href="/tags/GPT-4o/" style="font-size: 0.88rem;">GPT-4o<sup>2</sup></a><a href="/tags/Gemini/" style="font-size: 0.88rem;">Gemini<sup>2</sup></a><a href="/tags/Git/" style="font-size: 0.88rem;">Git<sup>8</sup></a><a href="/tags/GitHub/" style="font-size: 0.88rem;">GitHub<sup>6</sup></a><a href="/tags/Hexo/" style="font-size: 0.88rem;">Hexo<sup>24</sup></a><a href="/tags/IDEA/" style="font-size: 0.88rem;">IDEA<sup>3</sup></a><a href="/tags/KeyBoardTestUtility/" style="font-size: 0.88rem;">KeyBoardTestUtility<sup>1</sup></a><a href="/tags/Linux/" style="font-size: 0.88rem;">Linux<sup>4</sup></a><a href="/tags/Lombok/" style="font-size: 0.88rem;">Lombok<sup>1</sup></a><a href="/tags/Markdown/" style="font-size: 0.88rem;">Markdown<sup>2</sup></a><a href="/tags/MindManager/" style="font-size: 0.88rem;">MindManager<sup>1</sup></a><a href="/tags/Mysql/" style="font-size: 0.88rem;">Mysql<sup>2</sup></a><a href="/tags/Navicat/" style="font-size: 0.88rem;">Navicat<sup>1</sup></a><a href="/tags/Perplexity-AI/" style="font-size: 0.88rem;">Perplexity AI<sup>1</sup></a><a href="/tags/PicGo/" style="font-size: 0.88rem;">PicGo<sup>1</sup></a><a href="/tags/QQ/" style="font-size: 0.88rem;">QQ<sup>1</sup></a><a href="/tags/SSL/" style="font-size: 0.88rem;">SSL<sup>3</sup></a><a href="/tags/Sqlserver/" style="font-size: 0.88rem;">Sqlserver<sup>1</sup></a><a href="/tags/Typora/" style="font-size: 0.88rem;">Typora<sup>5</sup></a><a href="/tags/drawio/" style="font-size: 0.88rem;">drawio<sup>1</sup></a><a href="/tags/git/" style="font-size: 0.88rem;">git<sup>1</sup></a><a href="/tags/mysql/" style="font-size: 0.88rem;">mysql<sup>1</sup></a><a href="/tags/svn/" style="font-size: 0.88rem;">svn<sup>2</sup></a><a href="/tags/%E5%9B%BE%E5%90%A7%E5%B7%A5%E5%85%B7%E7%AE%B1/" style="font-size: 0.88rem;">图吧工具箱<sup>1</sup></a><a href="/tags/%E5%9B%BE%E5%BA%8A/" style="font-size: 0.88rem;">图床<sup>7</sup></a><a href="/tags/%E5%BC%80%E6%BA%90%E5%88%86%E4%BA%AB/" style="font-size: 0.88rem;">开源分享<sup>6</sup></a><a href="/tags/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/" style="font-size: 0.88rem;">搜索引擎<sup>2</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D/" style="font-size: 0.88rem;">数据恢复<sup>1</sup></a><a href="/tags/%E6%A8%A1%E6%9D%BF/" style="font-size: 0.88rem;">模板<sup>4</sup></a><a href="/tags/%E8%B8%A9%E5%9D%91/" style="font-size: 0.88rem;">踩坑<sup>6</sup></a><a href="/tags/%E9%B1%BC%E7%9A%AE/" style="font-size: 0.88rem;">鱼皮<sup>10</sup></a></div></div><hr></div></div><div id="keyboard-tips"><div class="keyboardTitle">博客快捷键</div><div class="keybordList"><div class="keybordItem"><div class="keyGroup"><div class="key">shift K</div></div><div class="keyContent"><div class="content">关闭快捷键功能</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift A</div></div><div class="keyContent"><div class="content">打开/关闭中控台</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift M</div></div><div class="keyContent"><div class="content">播放/暂停音乐</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift D</div></div><div class="keyContent"><div class="content">深色/浅色显示模式</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift S</div></div><div class="keyContent"><div class="content">站内搜索</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift R</div></div><div class="keyContent"><div class="content">随机访问</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift H</div></div><div class="keyContent"><div class="content">返回首页</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift F</div></div><div class="keyContent"><div class="content">友链鱼塘</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift L</div></div><div class="keyContent"><div class="content">友链页面</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift P</div></div><div class="keyContent"><div class="content">关于本站</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift I</div></div><div class="keyContent"><div class="content">原版/本站右键菜单</div></div></div></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="anzhiyufont anzhiyu-icon-comments"></i></a><a id="switch-commentBarrage" href="javascript:anzhiyu.switchCommentBarrage();" title="开关弹幕"><i class="anzhiyufont anzhiyu-icon-danmu"></i></a><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="nav-music"><a id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()" accesskey="m">播放音乐</a><div id="console-music-bg"></div><meting-js id="10051718332" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random" volume="0.7"></meting-js></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="anzhiyufont anzhiyu-icon-xmark"></i></button></nav><div class="is-center" id="loading-database"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-pulse-icon"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"></div></div><hr><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://music.163.com/#/my/m/music/playlist?id=10051718332&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><canvas id="universe"></canvas><script async="" src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("05/01/2023 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2023 By 安知鱼 V1.6.14",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 時光 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async="" src="/anzhiyu/random.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>(() => {
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo.shiguangdev.eu.org',
+      region: '',
+      onCommentLoaded: () => {
+        anzhiyu.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') setTimeout(runFn,0)
+    else getScript('https://cdn.cbd.int/twikoo@1.6.39/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo.shiguangdev.eu.org',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(res => {
+      countELement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  const runFn = () => {
+    init();
+    GLOBAL_CONFIG_SITE.isPost && getCount()
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) anzhiyu.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else {
+      loadTwikoo()
+    }
+  } else {
+    window.loadOtherComment = loadTwikoo
+  }
+})()</script><input type="hidden" name="page-type" id="page-type" value="post"><script async="" src="/js/anzhiyu/comment_barrage.js"></script></div><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getComment = () => {
+    const runTwikoo = () => {
+      twikoo.getRecentComments({
+        envId: 'https://twikoo.shiguangdev.eu.org',
+        region: '',
+        pageSize: 6,
+        includeReply: true
+      }).then(function (res) {
+        const twikooArray = res.map(e => {
+          return {
+            'content': changeContent(e.comment),
+            'avatar': e.avatar,
+            'nick': e.nick,
+            'url': e.url + '#' + e.id,
+            'date': new Date(e.created).toISOString()
+          }
+        })
+
+        saveToLocal.set('twikoo-newest-comments', JSON.stringify(twikooArray), 10/(60*24))
+        generateHtml(twikooArray)
+      }).catch(function (err) {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.textContent= "无法获取评论，请确认相关配置是否正确"
+      })
+    }
+
+    if (typeof twikoo === 'object') {
+      runTwikoo()
+    } else {
+      getScript('https://cdn.cbd.int/twikoo@1.6.39/dist/twikoo.all.min.js').then(runTwikoo)
+    }
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'><div class='name'><span>${array[i].nick} </span></div></a>`
+        }
+        
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <time datetime="${array[i].date}">${anzhiyu.diffDate(array[i].date, true)}</time></div>
+        </div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom && ($dom.innerHTML= result)
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('twikoo-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script async="" data-pjax="" src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><script src="/js/anzhiyu/right_click_menu.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><script src="/js/custom/footer-animal.js" defer=""></script><script src="/api/card-welcome.js"></script><script id="click-heart" src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/dist/click-heart.min.js" async="async" mobile="false"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","meta[property=\"og:type\"]","meta[property=\"og:site_name\"]","meta[property=\"og:description\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div><!-- hexo injector body_end start -->
+  <script data-pjax="" src="/js/hexo_githubcalendar.js"></script>
+  <script data-pjax="">
+        function GithubCalendarConfig(){
+            var git_githubapiurl ="https://githubcalendarapi.shiguang666.eu.org/api?user=shiguang-coding";
+            var git_color =['#ebedf0', '#a2f7af', '#6ce480', '#54ad63', '#469252', '#31753c', '#1f5f2a', '#13531f', '#084111', '#032b09', '#000000'];
+            var git_user ="shiguang-coding";
+            var parent_div_git = document.getElementById('recent-posts');
+            var git_div_html = '<div class="recent-post-item" style="width:100%;height:auto;padding:10px;"><div id="github_loading" style="width:10%;height:100%;margin:0 auto;display: block"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animateTransform></path></svg></div><div id="github_container"></div></div>';
+            if(parent_div_git && location.pathname =='/'){
+                console.log("已挂载hexo-github-calendar https://github.com/Barry-Flynn/hexo-github-calendar");
+                // parent_div_git.innerHTML=git_div_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",git_div_html) // 有报错，但不影响使用(支持pjax跳转)
+            };
+            GithubCalendar(git_githubapiurl,git_color,git_user)
+        }
+        if(document.getElementById('recent-posts')){
+            GithubCalendarConfig()
+        }
+    </script>
+    <style>#github_container{min-height:280px}@media screen and (max-width:650px) {#github_container{background-image:;min-height:0px}}</style>
+    <style></style><!-- hexo injector body_end end -->
+    <link rel="stylesheet" href="https://ai.tianli0.top/static/public/postChatUser_summary.min.css">
+    <script>
+        let tianliGPT_key = '75439fb77e5551eacf54f0df75565616dcf2ad';
+        let tianliGPT_postSelector = '#article-container';
+        let tianliGPT_Title = '文章摘要';
+        let tianliGPT_postURL = '/^https?://[^/]+/[0-9]{4}/[0-9]{2}/[0-9]{2}/';
+        let tianliGPT_blacklist = '';
+        let tianliGPT_wordLimit = '1000';
+        let tianliGPT_typingAnimate = true;
+        var postChatConfig = {
+          backgroundColor: "#3e86f6",
+          bottom: "16px",
+          left: "16px",
+          fill: "#FFFFFF",
+          width: "44px",
+          frameWidth: "375px",
+          frameHeight: "600px",
+          defaultInput: true,
+          upLoadWeb: true,
+          showInviteLink: true,
+          userTitle: "PostChat",
+          userDesc: "如果你对网站的内容有任何疑问，可以来问我哦～",
+          addButton: true,
+          beginningText: "这篇文章介绍了"
+        };
+    </script>
+    <script data-postchat_key="75439fb77e5551eacf54f0df75565616dcf2ad" src="https://ai.tianli0.top/static/public/postChatUser_summary.min.js"></script>
+  </body></html>

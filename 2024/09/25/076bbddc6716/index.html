@@ -1,0 +1,912 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>【尚硅谷】MySQL-MySQL事务日志 | 時光</title><meta name="keywords" content="SQL,尚硅谷"><meta name="author" content="時光"><meta name="copyright" content="時光"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="【尚硅谷】MySQL-MySQL事务日志"><meta name="application-name" content="【尚硅谷】MySQL-MySQL事务日志"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="【尚硅谷】MySQL-MySQL事务日志"><meta property="og:url" content="https://blog.shiguang666.eu.org/2024/09/25/076bbddc6716/index.html"><meta property="og:site_name" content="時光"><meta property="og:description" content="在线视频:MySQL数据库入门到大牛，mysql安装到优化，百科全书级，全网天花板官方资料: 尚硅谷MySQL入门到高级-宋红康版 代码仓库Gitee：https:&amp;#x2F;&amp;#x2F;gitee.com&amp;#x2F;an_shiguang&amp;#x2F;learn-mysql  事务有4种特性：原子性、一致性、隔离性和持久性。那么事务的四"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg"><meta property="article:author" content="時光"><meta property="article:tag" content="博客,時光,時光的博客,時光博客园子,实用博客,开源,共享"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg"><meta name="description" content="在线视频:MySQL数据库入门到大牛，mysql安装到优化，百科全书级，全网天花板官方资料: 尚硅谷MySQL入门到高级-宋红康版 代码仓库Gitee：https:&amp;#x2F;&amp;#x2F;gitee.com&amp;#x2F;an_shiguang&amp;#x2F;learn-mysql  事务有4种特性：原子性、一致性、隔离性和持久性。那么事务的四"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://blog.shiguang666.eu.org/2024/09/25/076bbddc6716/"><link rel="preconnect" href="//cdn.cbd.int"><meta name="google-site-verification" content="xxx"><meta name="baidu-site-verification" content="code-xxx"><meta name="msvalidate.01" content="xxx"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: {"enable":true,"title":"与各类博主无限进步","addFriendPlaceholder":"昵称（请勿包含博客等字样）：\n网站地址（要求博客地址，请勿提交个人主页）：\n头像图片url（请提供尽可能清晰的图片，我会上传到我自己的图床）：\n描述：\n站点截图（可选）：\n"},
+  peoplecanvas: undefined,
+  postHeadAiDescription: undefined,
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: {"enable":true,"default":"晚上好👋","list":[{"greeting":"晚安😴","startTime":0,"endTime":5},{"greeting":"早上好鸭👋, 祝你一天好心情！","startTime":6,"endTime":9},{"greeting":"上午好👋, 状态很好，鼓励一下～","startTime":10,"endTime":10},{"greeting":"11点多啦, 在坚持一下就吃饭啦～","startTime":11,"endTime":11},{"greeting":"午安👋, 宝贝","startTime":12,"endTime":14},{"greeting":"🌈充实的一天辛苦啦！","startTime":14,"endTime":18},{"greeting":"19点喽, 奖励一顿丰盛的大餐吧🍔。","startTime":19,"endTime":19},{"greeting":"晚上好👋, 在属于自己的时间好好放松😌~","startTime":20,"endTime":24}]},
+  twikooEnvId: 'https://twikoo.shiguangdev.eu.org',
+  commentBarrageConfig:{"enable":true,"maxBarrage":1,"barrageTime":4000,"accessToken":"","mailMd5":""},
+  music_page_default: "nav_music",
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: true,
+  mainTone: undefined,
+  authorStatus: {"skills":["🌟 技术分享领航人","📚 终身学习倡导者","💡 创新思维启发源","📈 成长路径引路人","🚀 科技趋势探索者","🤖️ AI技术探索先锋","🌈 技术创新推动手","💬 社区互动活跃家","🛠️ 代码经验传授师","📢 知识传播倡导员"]},
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":true,"limitCount":300,"languages":{"author":"作者: 時光","link":"链接: ","source":"来源: 時光","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: true,
+  shortcutKey: {"enable":true,"delay":100,"shiftDelay":200},
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: '時光',
+  title: '【尚硅谷】MySQL-MySQL事务日志',
+  postAI: '',
+  pageFillDescription: 'redo日志, 为什么需要REDO日志, REDO日志的好处、特点, 好处, 特点, redo的组成, redo的整体流程, redo log的刷盘策略, 不同刷盘策略演示, 流程图, 举例, 写入redo log buffer 过程, 补充概念：Mini-Transaction, redo 日志写入log buffer, redo log block的结构图, redo log file, 相关参数设置, 日志文件组, checkpoint, redo log 小结, Undo日志, 如何理解Undo日志, Undo日志的作用, undo的存储结构, 回滚段与undo页, 回滚段与事务, 回滚段中的数据分类, undo的类型, undo log的生命周期, 简要生成过程, 详细生成过程, undo log是如何回滚的, undo log的删除, Undo log 小结在线视频数据库入门到大牛安装到优化百科全书级全网天花板官方资料尚硅谷入门到高级宋红康版代码仓库事务有种特性原子性一致性隔离性和持久性那么事务的四种特性到底是基于什么机制实现呢事务的隔离性由锁机制实现而事务的原子性一致性和持久性由事务的日志和日志来保证称为重做日志提供再写入操作恢复提交事务修改的页操作用来保证事务的持久性称为回滚日志回滚行记录到某个特定版本用来保证事务的原子性一致性有的或许会认为是的逆过程其实不然和都可以视为是一种恢复操作但是是存储引擎层生成的日志记录的是物理级别上的页修改操作比如页号偏移量写入了数据主要为了保证数据的可靠性是存储引擎层生成的日志记录的是逻辑操作日志比如对某一行数据进行了语句操作那么就记录一条与之相反的操作主要用于事务的回滚记录的是每个修改操作的逆操作和一致性非锁定读回滚行记录到某种特定的版本即多版本并发控制日志存储引擎是以页为单位来管理存储空间的在真正访问页面之前需要把在磁盘上的页缓存到内存中的之后才可以访问所有的变更都必须先更新缓冲池中的数据然后缓冲池中的脏页会以一定的频率被刷入磁盘机制通过缓冲池来优化和磁盘之间的鸿沟这样就可以保证整体的性能不会下降太快为什么需要日志一方面缓冲池可以帮助我们消除和磁盘之间的鸿沟机制可以保证数据的最终落盘然而由于并不是每次变更的时候就触发的而是线程隔一段时间去处理的所以最坏的情况就是事务提交后刚写完缓冲池数据库宕机了那么这段数据就是丢失的无法恢复另一方面事务包含持久性的特性就是说对于一个已经提交的事务在事务提交后即使系统发生了崩溃这个事务对数据库中所做的更改也不能丢失那么如何保证这个持久性呢一个简单的做法在事务提交完成之前把该事务所修改的所有页面都刷新到磁盘但是这个简单粗暴的做法有些问题修改量与刷新磁盘工作量严重不成比例有时候我们仅仅修改了某个页面中的一个字节但是我们知道在中是以页为单位来进行磁盘的也就是说我们在该事务提交时不得不将一个完整的页面从内存中刷新到磁盘我们又知道一个默认页面时大小只修改一个字节就要刷新的数据到磁盘上显然是小题大做了随机刷新较慢一个事务可能包含很多语句即使是一条语句也可能修改许多页面假如该事务修改的这些页面可能并不相邻这就意味着在将某个事务修改的中的页面刷新到磁盘时需要进行很多的随机随机比顺序要慢尤其对于传统的机械硬盘来说另一个解决的思路我们只是想让已经提交了的事务对数据库中数据所做的修改永久生效即使后来系统崩溃在重启后也能把这种修改恢复出来所以我们其实没有必要在每次事务提交时就把该事务在内存中修改过的全部页面刷新到磁盘只需要把修改了哪些东西记录一下就好比如某个事务将系统表空间中第号页面中偏移量为处的那个字节的值改成我们只需要记录一下将第号表空间的号页面的偏移量为处的值更新为引擎的事务采用了技术这种技术的思想就是先写日志再写磁盘只有日志写入成功才算事务提交成功这里的日志就是当发生宕机且数据未刷到磁盘的时候可以通过来恢复保证中的这就是的作用日志的好处特点好处日志降低了刷盘频率日志占用的空间非常小存储表空间页号偏移量以及需要更新的值所需的存储空间是很小的刷盘快特点日志是顺序写入磁盘的在执行事务的过程中每执行一条语句就可能产生若干条日志这些日志是按照产生的顺序写入磁盘的也就是使用顺序效率比随机快事务执行过程中不断记录跟的区别是存储引擎层产生的而是数据库层产生的假设一个事务对表做万行的记录插入在这个过程中一直不断的往顺序记录而不会记录直到这个事务提交才会一次写入到文件中的组成可以简单分为以下两个部分重做日志的缓冲保存在内存中是易失的在服务器启动时就会向操作系统申请了一大片称之为的连续内存空间翻译成中文就是日志缓冲区这片内存空间被划分为若干个连续的一个占用字节大小参数设置大小默认最大值是最小值为重做日志文件保存在硬盘中是持久的日志文件如图所示其中和即为日志的整体流程以一个更新事务为例流转过程如下图所示第步先将原始数据从磁盘中读入内存中来修改数据的内存拷贝第步生成一条重做日志并写入记录的是数据被修改后的值第步当事务时将中的内容刷新到对采用追加写的方式第步定期将内存中修改的数据刷新到磁盘中体会预先日志持久化在持久化一个数据页之前先将内存中相应的日志页持久化的刷盘策略的写入并不是直接写入磁盘的引擎会在写的时候先写之后以一定的频率刷入到真正的中这里的一定频率怎么看待呢这就是我们要说的刷盘策略注意刷盘到的过程并不是真正的刷到磁盘中去只是刷入到文件系统缓存中去这是现代操作系统为了提高文件写入效率做的一个优化真正的写入会交给系统自己来决定比如足够大了那么对于来说就存在一个问题如果交给系统来同步同样如果系统宕机那么数据也丢失了虽然整个系统宕机的概率还是比较小的针对这种情况给出参数该参数控制提交事务时如何将中的日志刷新到中它支持三种策略设置为表示每次事务提交时不进行刷盘操作系统默认每隔进行一次重做日志的同步设置为表示每次事务提交时都将进行同步刷盘操作默认值设置为表示每次事务提交时都只把内容写入不进行同步由自己决定什么时候同步到磁盘文件另外存储引擎有一个后台线程每隔秒就会把中的内容写到文件系统缓存然后调用刷盘操作也就是说一个没有提交事务的记录也可能会刷盘因为在事务执行过程记录是会写入中这些记录会被后台线程刷盘除了后台线程每秒次的轮询操作还有一种情况当占用的空间即将达到这个参数默认是的一半的时候后台线程会主动刷盘不同刷盘策略演示流程图小结为时中每秒进行一次重做日志的操作因此实例最多丢失秒钟内的事务是负责将缓冲池中的数据异步刷新到磁盘保证数据的一致性数值的话是一种折中的做法它的效率理论是高于的低于的这种策略也有丢失数据的风险也无法保证小结为时只要事务提交成功记录就一定在硬盘里不会有任何数据丢失如果事务执行期间挂了或宕机这部分日志丢了但是事务并没有提交所以日志丢了也不会有损失可以保证的数据绝对不会丢失但是效率最差的建议使用默认值虽然操作系统宕机的概率理论小于数据库宕机的概率但是一般既然使用了事务那么数据的安全相对来说更重要些小结为时只要事务提交成功中的内容只写入文件系统缓存如果仅仅只是挂了不会有任何数据丢失但是操作系统宕机可能会有秒数据的丢失这种情况下无法满足中的但是数值肯定是效率最高的举例比较对事务的影响存储过程代码中每插入一条数据就进行一次显式的操作在默认的设置下即参数为的情况下存储引擎会将重做日志缓冲中的日志写入文件并调用一次操作执行命令向表中插入万行的记录并执行万次的操作在默认情况下所需的时间的时间显然是不能接受的而造成时间比较长的原因就在于操作所需要的时间修改参数设置为修改参数设置为而形成这个现象的主要原因是后者大大减少了的次数从而提高了数据库执行的性能下表显示了在的不同设置下调用存储过程插入万行记录所需的时间执行所用时间秒分秒秒而针对上述存储过程为了提高事务的提交性能应该在将万行记录插入表后进行一次的操作而不是每插入一条记录后进行一次操作这样做的好处是可以使事务方法在时回滚到事务最开始的确定状态虽然用户可以通过设置参数为或来提高事务提交的性能但需清楚这种设置方法丧失了事务的特性写入过程补充概念把对底层页面中的一次原子访问过程称之为一个简称比如向某个索引对应的树中插入一条记录的过程就是一个一个所谓的可以包含一组日志在进行崩溃恢复时这一组日志可以作为一个不可分割的整体一个事务可以包含若干条语句每一条语句其实是由若干个组成每一个又可以包含若干条日志画个图表示它们的关系就是这样日志写入向中写入日志的过程是顺序的也就是先往前边的中写当该的空闲空间用完之后再往下一个中写当我们想往中写入日志时第一个遇到的问题就是应该写在哪个的哪个偏移量处所以的设计者特意提供了一个称之为的全局变量该变量指明后续写入的日志应该写入到中的哪个位置如图所示一个执行过程中可能产生若干条日志这些日志是一个不可分割的组所以其实并不是每生成一条日志就将其插入到中而是每个运行过程中产生的日志先暂时存到一个地方当该结束的时候将过程中产生的一组日志再全部复制到中我们现在假设有两个名为的事务每个事务都包含个我们给这几个命名一下事务的两个分别称为和事务的两个分别称为和每个都会产生一组日志用示意图来描述一下这些产生的日志情况不同的事务可能是并发执行的所以之间的可能是交替执行的每当一个执行完成时伴随该生成的一组日志就需要被复制到中也就是说不同事务的可能是交替写入的我们画个示意图为了美观我们把一个中产生的所有日志当做一个整体来画有的产生的日志量非常大比如产生的日志占用空间比较大占用了个来存储的结构图一个是由日志头日志体日志尾组成日志头占用字节日志尾占用字节所以一个真正能存储的数据是字节为什么一个设计成字节这个和磁盘的扇区有关机械磁盘默认的扇区就是字节如果你要写入的数据大于字节那么要写入的扇区肯定不止一个这时就要涉及到盘片的转动找到下一个扇区假设现在需要写入两个扇区和如果扇区写入成功而扇区写入失败那么就会出现非原子性的写入而如果每次只写入和扇区的大小一样的字节那么每次的写入都是原子性的真正的日志都是存储到占用字节大小的中图中的和存储的是一些管理信息我们来看看这些所谓管理信息都有什么的属分别如下是由组成在内部就好似一个数组因此用来标记这个数组中的位置其是递增并且循环使用的占用个字节但是由于第一位用来判断是否是所以最大的值为表示中已经使用了多少字节初始值为因为从第个字节处开始随着往中写入的日志越来也多本属性值也跟着增长如果已经被全部写满那么本属性的值被设置为一条日志也可以称之为一条日志记录一个会生产多条日志记录这些日志记录被称之为一个日志记录组就代表该中第一个生成的日志记录组的偏移量其实也就是这个里第一个生成的第一条日志的偏移量如果该值的大小和相同则表示当前不包含新的日志占用字节表示该最后被写时的中属性的意思如下表示的校验值用于正确性校验其值和相同我们暂时不关心它相关参数设置指定文件组所在的路径默认值为表示在数据库的数据目录下的默认数据目录下默认有两个名为和的文件中的日志默认情况下就是刷新到这两个磁盘文件中此日志文件位置还可以修改指明的个数命名方式如默认个最大个控制刷新到磁盘的策略默认为单个文件设置大小默认值为最大值为注意最大值指的是整个系列文件之和即不能大于最大值根据业务修改其大小以便容纳较大的事务编辑文件并重启数据库生效如下所示在数据库实例更新比较频繁的情况下可以适当加大数组和大小但也不推荐设置过大在崩溃时会重新执行日志中的记录日志文件组从上边的描述中可以看到磁盘上的日志文件不只一个而是以一个日志文件组的形式出现的这些文件以数字数字可以是的形式进行命名每个的日志文件大小都是一样的在将日志写入日志文件组时是从开始写如果写满了就接着写同理写满了就去写依此类推如果写到最后一个文件该昨办那就重新转到继续写所以整个过程如下图所示总共的日志文件大小其实就是采用循环使用的方式向日志文件组里写数据的话会导致后写入的日志覆盖掉前边写的日志当然所以的设计者提出了的概念在整个日志文件组中还有两个重要的属性分别是是当前记录的位置一边写一边后移是当前要擦除的位置也是往后推移每次刷盘记录到日志文件组中位置就会后移更新每次加载日志文件组恢复数据时会清空加载过的记录并把后移更新和之间的还空着的部分可以用来写入新的记录如果追上表示日志文件组满了这时候不能再写入新的记录得停下来清空一些记录把推进一下小结的更新操作采用的是预先日志持久化策略即先写日志再写入磁盘日志是事务持久性的保证是事务原子性的保证在事务中更新数据的前置操作其实是要先写入一个如何理解日志事务需要保证原子性也就是事务中的操作要么全部完成要么什么也不做但有时候事务执行到一半会出现一些情况比如情况一事务执行过程中可能遇到各种错误比如服务器本身的错误操作系统错误甚至是突然断电导致的错误情况二程序员可以在事务执行过程中手动输入语句结束当前事务的执行以上情况出现我们需要把数据改回原先的样子这个过程称之为回滚这样就可以造成一个假象这个事务看起来什么都没做所以符合原子性要求每当我们要对一条记录做改动时这里的改动可以指都需要留一手一一把回滚时所需的东西记下来比如当你插入一条记录时至少要把这条记录的主键值记下来之后回滚的时候只需要把这个主键值对应的记录删除就好了对于每个存储引擎会完成一个当你删除了一条记录至少要把这条记录中的内容都记下来这样之后回滚时再把由这些内容组成的记录插入到表中就好了对于每个存储引擎会执行一个当你修改了一条记录至少要把修改这条记录前的旧值都记录下来这样之后回滚时再把这条记录更新为旧值就好了对于每个存储引擎会执行一个相反的将修改前的行放回去把这些为了回滚而记录的这些内容称之为撤销日志或者回滚日志即注意由于查询操作并不会修改任何用户记录所以在查询操作执行时并不需要记录相应的日志此外会产生也就是的产生会伴随着的产生这是因为也需要持久性的保护日志的作用作用回滚数据用户对日志可能有误解用于将数据库物理地恢复到执行语句或事务之前的样子但事实并非此是逻辑日志因此只是将数据库逻辑地恢复到原来的样子所有修改都被逻辑地取消了但是数据结构和页本身在回滚之后可能大不相同这是因为在多用户并发系统中可能会有数十数百甚至数千个并发事务数据库的主要任务就是协调对数据记录的并发访问比如一个事务在修改当前一个页中某几条记录同时还有别的事务在对同一个页中另几条记录进行修改因此不能将一个页回滚到事务开始的样子因为这样会影响其他事务正在进行的工作作用的另一个作用是即在存储引擎中的实现是通过来完成当用户读取一行记录时若该记录以及被其他事务占用当前事务可以通过读取之前的行版本信息以此实现非锁定读取的存储结构回滚段与页对的管理采用段的方式也就是回滚段每个回滚段记录了个而在每个段中进行页的申请在版本之前不包括版本只有一个因此支持同时在线的事务限制为虽然对绝大多数的应用来说都已经够用从版本开始支持最大个故其支持同时在线的事务限制提高到了虽然版本支持了个但是这些都存储于共享表空间中从版本开始可通过参数对做进一步的设置这些参数包括设置文件所在的路径这意味着可以存放在共享表空间以外的位置即可以设置为独立表空间该参数的默认值为表示当前存储引擎的目设置的个数默认值为在版本中该参数用来替换之前版本的参数设置构成文件的数量这样可以较为平均地分布在多个文件中设置该参数后会在路径看到为前缀的文件该文件就代表文件相关参数一般很少改动页的重用当我们开启一个事务需要写的时候就得先去中去找到一个空闲的位置当有空位的时候就去申请页在这个申请到的页中进行的写入我们知道默认一页的大小是为每一个事务分配一个页是非常浪费的除非你的事务非常长假设你的应用的每秒处理的事务数目为那么就需要个页大概需要的存储分钟大概需要的存储如果照这样下去除非清理的非常勤快否则随着时间的推移磁盘空间会增长的非常快而且很多空间都是浪费的于是页就被设计的可以重用了当事务提交时并不会立刻删除页因为重用所以这个页可能混杂着其他事务的在后会被放到一个链表中然后判断页的使用空间是否小于如果小于的话则表示当前的页可以被重用那么它就不会被回收其他事务的可以记录在当前页的后面由于是离散的所以清理对应的磁盘空间时效率不高回滚段与事务每个事务只会使用一个回滚段一个回滚段在同一时刻可能会服务于多个事务当一个事务开始的时候会制定一个回滚段在事务进行的过程中当数据被修改时原始的数据会被复制到回滚段在回滚段中事务会不断填充盘区直到事务结束或所有的空间被用完如果当前的盘区不够用事务会在段中请求扩展下一个盘区如果所有已分配的盘区都被用完事务会覆盖最初的盘区或者在回滚段允许的情况下扩展新的盘区来使用回滚段存在于表空间中在数据库中可以存在多个表空间但同一时刻只能使用一个表空间的数量最少为的操作有协调线程发起在某个表空间的过程中保证有一个可用的可用当事务提交时存储引擎会做以下两件事情将放入列表中以供之后的操作判断所在的页是否可以重用若可以则分配给下个事务使用回滚段中的数据分类未提交的回滚数据该数据所关联的事务并未提交用于实现读一致性所以该数据不能被其他事务的数据覆盖已经提交但未过期的回滚数据该数据关联的事务已经提交但是仍受到参数的保持时间的影响事务已经提交并过期的数据事务已经提交而且数据保存时间已经超过参数指定的时间属于已经过期的数据当回滚段满了之后就优先覆盖事务已经提交并过期的数据事务提交后不能马上删除及所在的页这是因为可能还有其他事务需要通过来得到行记录之前的版本故事务提交时将放入一个链表中是否可以最终删除以所在页由线程来判断的类型在存储引擎中分为是指操作中产生的因为操作的记录只对事务本身可见对其他事务不可见这是事务隔离性的要求故该可以在事务提交后直接删除不需要进行操作记录的是对和操作产生的该可能需要提供机制因此不能在事务提交时就进行删除提交时放入链表等待线程进行最后的删除的生命周期简要生成过程以下是事务的简化过程假设有两个数值分别为和然后将修改为修改为记录到记录到记录到记录到将刷新到磁盘在步骤的任意一步系统宕机事务未提交该事务就不会对磁盘上的数据做任何影响如果在之间宕机恢复之后可以选择回滚也可以选择继续完成事务提交因为此时已经持久化若在之后系统宕机内存映射中变更的数据还来不及刷回磁盘那么系统恢复之后可以根据把数据刷回磁盘只有的流程有了和之后在更新中的数据之前我们需要先将该数据事务开始之前的状态写入中假设更新到一半出错了我们就可以通过来回滚到事务开始前详细生成过程对于引擎来说每个行记录除了记录本身的数据之外还有几个隐藏的列如果没有为表显式的定义主键并且表中也没有定义唯一索引那么会自动为表添加一个的隐藏列作为主键每个事务都会分配一个事务当对某条记录发生变更时就会将这个事务的事务写入中回滚指针本质上就是指向的指针当我们执行时插入的数据都会生成一条并且数据的回滚指针会指向它会记录的序号插入主键的列和值那么在进行的时候通过主键直接把对应的数据删除即可当我们执行时对应更新的操作会产生并且会分更新主键和不更新主键的假设现在执行这时会把老的记录写入新的让回滚指针指向新的它的是并且新的会指向老的假设现在执行对于更新主键的操作会先把原来的数据标识打开这时并没有真正的删除数据真正的删除会交给清理线程去判断然后在后面插入一条新的数据新的数据也会产生并且的序号会递增可以发现每次对数据的变更都会产生一个当一条记录被变更多次时那么就会产生多条记录的是变更前的日志并且每个的序号是递增的那么当要回滚的时候按照序号依次向前推就可以找到我们的原始数据了是如何回滚的以上面的例子来说假设执行那么对应的流程应该是这样通过的日志把的数据删除通过的日志把的数据的还原成通过的日志把的数据的还原成通过的日志把的数据删除的删除针对于因为操作的记录只对事务本身可见对其他事务不可见故该可以在事务提交后直接删除不需要进行操作针对于该可能需要提供机制因此不能在事务提交时就进行删除提交时放入链表等待线程进行最后的删除补充线程两个主要作用是清理页和清理里面带有标识的数据行在中事务中的操作实际上并不是真正的删除掉数据行而是一种操作在记录上标识而不删除记录是一种假删除只是做了个标记真正的删除工作需要后台线程去完成小结是逻辑日志对事务回滚时只是将数据库逻辑地恢复到原来的样子是物理日志记录的是数据页的物理变化不是的逆过程',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-09-25 14:14:46',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><script async="" defer="" src="https://umami.shiguangdev.cn/script.js" data-website-id="ac8d5698-b224-4ea4-aa79-eefb80c47eef"></script><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="時光" type="application/atom+xml">
+</head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="/img/avatar.png"><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><div class="back-home-button"><i class="anzhiyufont anzhiyu-icon-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://www.shiguang666.eu.org" title="時光主页"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="時光主页"><span class="back-menu-item-text">時光主页</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://nav.shiguang666.eu.org" title="時光导航站"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="時光导航站"><span class="back-menu-item-text">時光导航站</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://game.shiguang666.eu.org" title="怀旧游戏机"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="怀旧游戏机"><span class="back-menu-item-text">怀旧游戏机</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://games.shiguang666.eu.org" title="在线小游戏"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="在线小游戏"><span class="back-menu-item-text">在线小游戏</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">后台管理</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://img.shiguangdev.cn/" title="時光图床"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/favicon.ico" alt="時光图床"><span class="back-menu-item-text">時光图床</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://qexo.shiguang666.eu.org/" title="Hexo管理面板"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://qexo.shiguang666.eu.org/favicon.ico" alt="Hexo管理面板"><span class="back-menu-item-text">Hexo管理面板</span></a></div></div></div></div><a id="site-name" href="/" accesskey="h"><div class="title">時光</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 归档</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随机</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/news/"><i class="fa fa-calendar faa-tada"></i><span> 早报亭</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/music/?id=10051718332&amp;server=netease"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/gallery/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/xjj/"><i class="fa fa-rocket faa-tada"></i><span> 养生堂</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/flink/"><i class="anzhiyufont anzhiyu-icon-artstation faa-tada" style="font-size: 0.9em;"></i><span> 朋友圈</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comment/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于我</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button only-home" id="travellings_button" title="随机前往一个开往项目网站"><a class="site-page" onclick="anzhiyu.totraveling()" title="随机前往一个开往项目网站" href="javascript:void(0);" rel="external nofollow" data-pjax-state="external"><i class="anzhiyufont anzhiyu-icon-train"></i></a></div><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍" accesskey="s"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="/img/wechat.png" target="_blank"><img class="post-qr-code-img" alt="微信" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/wechat.png"></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/alipay.png" target="_blank"><img class="post-qr-code-img" alt="支付宝" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/alipay.png"></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/12/"><span class="card-archive-list-date">十二月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">9</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/11/"><span class="card-archive-list-date">十一月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">8</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/10/"><span class="card-archive-list-date">十月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">31</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/09/"><span class="card-archive-list-date">九月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">38</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/08/"><span class="card-archive-list-date">八月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">9</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/07/"><span class="card-archive-list-date">七月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">18</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/06/"><span class="card-archive-list-date">六月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">30</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/05/"><span class="card-archive-list-date">五月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">20</span><span>篇</span></div></a></li></ul></div><hr></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item on" id="consoleCommentBarrage" onclick="anzhiyu.switchCommentBarrage()" title="热评开关"><a class="commentBarrage"><i class="anzhiyufont anzhiyu-icon-message"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="anzhiyu.musicToggle()" title="音乐开关"><a class="music-switch"><i class="anzhiyufont anzhiyu-icon-music"></i></a></div><div class="console-btn-item" id="consoleKeyboard" onclick="anzhiyu.keyboardToggle()" title="快捷键开关"><a class="keyboard-switch"><i class="anzhiyufont anzhiyu-icon-keyboard"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url">学习笔记</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/SQL/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>SQL</span></a><a class="article-meta__tags" href="/tags/%E5%B0%9A%E7%A1%85%E8%B0%B7/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>尚硅谷</span></a></span></div></div><h1 class="post-title" itemprop="name headline">【尚硅谷】MySQL-MySQL事务日志</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2024-09-25T03:07:48.000Z" title="发表于 2024-09-25 11:07:48">2024-09-25</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2024-09-25T06:14:46.094Z" title="更新于 2024-09-25 14:14:46">2024-09-25</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="anzhiyufont anzhiyu-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">9k</span><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>29分钟</span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为上海"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>上海</span><span class="post-meta-separator"></span><span class="post-meta-commentcount"><i class="anzhiyufont anzhiyu-icon-comments post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2024/09/25/076bbddc6716/#post-comment" tabindex="-1"><span id="twikoo-count"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></a></span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope="" itemtype="https://blog.shiguang666.eu.org/2024/09/25/076bbddc6716/"><header><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url">学习笔记</a><a href="/tags/SQL/" tabindex="-1" itemprop="url">SQL</a><a href="/tags/%E5%B0%9A%E7%A1%85%E8%B0%B7/" tabindex="-1" itemprop="url">尚硅谷</a><h1 id="CrawlerTitle" itemprop="name headline">【尚硅谷】MySQL-MySQL事务日志</h1><span itemprop="author" itemscope="" itemtype="http://schema.org/Person">時光</span><time itemprop="dateCreated datePublished" datetime="2024-09-25T03:07:48.000Z" title="发表于 2024-09-25 11:07:48">2024-09-25</time><time itemprop="dateCreated datePublished" datetime="2024-09-25T06:14:46.094Z" title="更新于 2024-09-25 14:14:46">2024-09-25</time></header><div id="postchat_postcontent"><blockquote>
+<p>在线视频:<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1iq4y1u7vj?p=169">MySQL数据库入门到大牛，mysql安装到优化，百科全书级，全网天花板</a><br>官方资料: <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1ztbzMVF9qRJ2xCOpySXl3Q?pwd=yyds">尚硅谷MySQL入门到高级-宋红康版</a></p>
+<p>代码仓库<br>Gitee：<a target="_blank" rel="noopener" href="https://gitee.com/an_shiguang/learn-mysql">https://gitee.com/an_shiguang/learn-mysql</a></p>
+</blockquote>
+<p>事务有4种特性：原子性、一致性、隔离性和持久性。那么事务的四种特性到底是基于什么机制实现呢？</p>
+<ul>
+<li>事务的隔离性由 <code>锁机制</code> 实现。</li>
+<li>而事务的原子性、一致性和持久性由事务的 redo 日志和undo 日志来保证。<ul>
+<li>REDO LOG 称为 <code>重做日志 </code>，提供再写入操作，恢复提交事务修改的页操作，用来保证事务的持久性。</li>
+<li>UNDO LOG 称为 <code>回滚日志</code> ，回滚行记录到某个特定版本，用来保证事务的原子性、一致性。</li>
+</ul>
+</li>
+</ul>
+<p>有的DBA或许会认为 UNDO 是 REDO 的逆过程，其实不然。REDO 和 UNDO都可以视为是一种 <code>恢复操作</code>，但是：</p>
+<ul>
+<li>redo log: 是存储引擎层 (innodb) 生成的日志，记录的是<code>"物理级别"</code>上的页修改操作，比如页号xxx，偏移量yyy写入了’zzz’数据。主要为了保证数据的可靠性。</li>
+<li>undo log: 是存储引擎层 (innodb) 生成的日志，记录的是 <code>逻辑操作</code> 日志，比如对某一行数据进行了INSERT语句操作，那么undo log就记录一条与之相反的DELETE操作。主要用于 <code>事务的回滚</code> (undo log 记录的是每个修改操作的 <code>逆操作</code>) 和 <code>一致性非锁定读</code> (undo log 回滚行记录到某种特定的版本——MVCC，即多版本并发控制)。</li>
+</ul>
+<h1 id="redo日志"><a href="#redo日志" class="headerlink" title="redo日志"></a>redo日志</h1><p>InnoDB存储引擎是以<code>页为单位</code>来管理存储空间的。在真正访问页面之前，需要把在<code>磁盘上</code>的页缓存到内存中的<code>Buffer Pool</code>之后才可以访问。所有的变更都必须<code>先更新缓冲池</code>中的数据，然后缓冲池中的<code>脏页</code>会以一定的频率被刷入磁盘 (<code>checkPoint</code>机制)，通过缓冲池来优化CPU和磁盘之间的鸿沟，这样就可以保证整体的性能不会下降太快。</p>
+<h2 id="为什么需要REDO日志"><a href="#为什么需要REDO日志" class="headerlink" title="为什么需要REDO日志"></a>为什么需要REDO日志</h2><p>一方面，缓冲池可以帮助我们消除CPU和磁盘之间的鸿沟，checkpoint机制可以保证数据的最终落盘，然 而由于checkpoint <code>并不是每次变更的时候就触发</code> 的，而是master线程隔一段时间去处理的。所以最坏的情 况就是事务提交后，刚写完缓冲池，数据库宕机了，那么这段数据就是丢失的，无法恢复。</p>
+<p>另一方面，事务包含 <code>持久性</code> 的特性，就是说对于一个已经提交的事务，在事务提交后即使系统发生了崩溃，这个事务对数据库中所做的更改也不能丢失。</p>
+<p>那么如何保证这个持久性呢？ <code>一个简单的做法</code> ：在事务提交完成之前把该事务所修改的所有页面都刷新 到磁盘，但是这个简单粗暴的做法有些问题:</p>
+<ul>
+<li><p><strong>修改量与刷新磁盘工作量严重不成比例</strong></p>
+<p>有时候我们仅仅修改了某个页面中的一个字节，但是我们知道在InnoDB中是以页为单位来进行磁盘IO的，也就是说我们在该事务提交时不得不将一个完整的页面从内存中刷新到磁盘，我们又知道一个默认页面时16KB大小，只修改一个字节就要刷新16KB的数据到磁盘上显然是小题大做了。</p>
+</li>
+<li><p><strong>随机IO刷新较慢</strong></p>
+<p>一个事务可能包含很多语句，即使是一条语句也可能修改许多页面，假如该事务修改的这些页面可能并不相邻，这就意味着在将某个事务修改的Buffer Pool中的页面<code>刷新到磁盘</code>时，需要进行很多的<code>随机IO</code>，随机IO比顺序IO要慢，尤其对于传统的机械硬盘来说。</p>
+</li>
+</ul>
+<p><code>另一个解决的思路</code> ：我们只是想让已经提交了的事务对数据库中数据所做的修改永久生效，即使后来系 统崩溃，在重启后也能把这种修改恢复出来。所以我们其实没有必要在每次事务提交时就把该事务在内 存中修改过的全部页面刷新到磁盘，只需要把 修改 了哪些东西 记录一下 就好。比如，某个事务将系统 表空间中 第10号 页面中偏移量为 100 处的那个字节的值 1 改成 2 。我们只需要记录一下：将第0号表 空间的10号页面的偏移量为100处的值更新为 2 </p>
+<p>InnoDB引擎的事务采用了WAL技术 (<code>Write-Ahead Logging</code>)，这种技术的思想就是<strong>先写日志，再写磁盘</strong>，只有日志写入成功，才算事务提交成功，这里的日志就是redo log。当发生宕机且数据未刷到磁盘的时候，可以通过redo log来恢复，保证ACID中的D，这就是redo log的作用。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/25/66f38358de0b6.png" alt="image-20220710202517977"></p>
+<h2 id="REDO日志的好处、特点"><a href="#REDO日志的好处、特点" class="headerlink" title="REDO日志的好处、特点"></a>REDO日志的好处、特点</h2><h3 id="好处"><a href="#好处" class="headerlink" title="好处"></a>好处</h3><ul>
+<li>redo日志降低了刷盘频率 </li>
+<li>redo日志占用的空间非常小</li>
+</ul>
+<p>存储表空间ID、页号、偏移量以及需要更新的值，所需的存储空间是很小的，刷盘快。</p>
+<h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><ul>
+<li><p><strong>redo日志是顺序写入磁盘的</strong></p>
+<p>在执行事务的过程中，每执行一条语句，就可能产生若干条redo日志，这些日志是按照<code>产生的顺序写入磁盘的</code>，也就是使用顺序ID，效率比随机IO快。</p>
+</li>
+<li><p><strong>事务执行过程中，redo log不断记录</strong></p>
+<p>redo log跟bin log的区别，redo log是<code>存储引擎层</code>产生的，而bin log是<code>数据库层</code>产生的。假设一个事务，对表做10万行的记录插入，在这个过程中，一直不断的往redo log顺序记录，而bin log不会记录，直到这个事务提交，才会一次写入到bin log文件中。</p>
+</li>
+</ul>
+<h2 id="redo的组成"><a href="#redo的组成" class="headerlink" title="redo的组成"></a>redo的组成</h2><p>Redo log可以简单分为以下两个部分：</p>
+<ul>
+<li><code>重做日志的缓冲 (redo log buffer)</code> ，保存在内存中，是易失的。</li>
+</ul>
+<p>在服务器启动时就会向操作系统申请了一大片称之为 redo log buffer 的 <code>连续内存</code> 空间，翻译成中文就是redo日志缓冲区。这片内存空间被划分为若干个连续的<code>redo log block</code>。一个redo log block占用<code>512字节</code>大小。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/25/66f38d0293a13.png" alt="image-20240925120940072"></p>
+<p><strong>参数设置：innodb_log_buffer_size：</strong></p>
+<p>redo log buffer 大小，默认 <code>16M</code> ，最大值是4096M，最小值为1M。</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; show variables like '%innodb_log_buffer_size%';</span><br><span class="line">+------------------------+----------+</span><br><span class="line">| Variable_name          | Value    |</span><br><span class="line">+------------------------+----------+</span><br><span class="line">| innodb_log_buffer_size | 16777216 |</span><br><span class="line">+------------------------+----------+</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li><code>重做日志文件 (redo log file) </code>，保存在硬盘中，是持久的。</li>
+</ul>
+<p>REDO日志文件如图所示，其中<code>ib_logfile0</code>和<code>ib_logfile1</code>即为REDO日志。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/25/66f38d0ae837a.png" alt="image-20240925120948241"></p>
+<h2 id="redo的整体流程"><a href="#redo的整体流程" class="headerlink" title="redo的整体流程"></a>redo的整体流程</h2><p>以一个更新事务为例，redo log 流转过程，如下图所示：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/25/66f38d117fdcb.png" alt="image-20240925120955066"></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">第1步：先将原始数据从磁盘中读入内存中来，修改数据的内存拷贝</span><br><span class="line">第2步：生成一条重做日志并写入redo log buffer，记录的是数据被修改后的值</span><br><span class="line">第3步：当事务commit时，将redo log buffer中的内容刷新到 redo log file，对 redo log file采用追加写的方式</span><br><span class="line">第4步：定期将内存中修改的数据刷新到磁盘中</span><br></pre></td></tr></tbody></table></figure>
+
+<blockquote>
+<p>体会： Write-Ahead Log(预先日志持久化)：在持久化一个数据页之前，先将内存中相应的日志页持久化。</p>
+</blockquote>
+<h2 id="redo-log的刷盘策略"><a href="#redo-log的刷盘策略" class="headerlink" title="redo log的刷盘策略"></a>redo log的刷盘策略</h2><p>redo log的写入并不是直接写入磁盘的，InnoDB引擎会在写redo log的时候先写redo log buffer，之后以<code>一 定的频率</code>刷入到真正的redo log file 中。这里的一定频率怎么看待呢？这就是我们要说的刷盘策略。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/25/66f38d171009d.png" alt="image-20240925121000625"></p>
+<p>注意，redo log buffer刷盘到redo log file的过程并不是真正的刷到磁盘中去，只是刷入到 <code>文件系统缓存 （page cache）</code>中去（这是现代操作系统为了提高文件写入效率做的一个优化），真正的写入会交给系统自己来决定（比如page cache足够大了）。那么对于InnoDB来说就存在一个问题，如果交给系统来同步，同样如果系统宕机，那么数据也丢失了（虽然整个系统宕机的概率还是比较小的）。</p>
+<p>针对这种情况，InnoDB给出 <code>innodb_flush_log_at_trx_commit</code> 参数，该参数控制 commit提交事务 时，如何将 redo log buffer 中的日志刷新到 redo log file 中。它支持三种策略：</p>
+<ul>
+<li><code>设置为0</code> ：表示每次事务提交时不进行刷盘操作。（系统默认master thread每隔<code>1s</code>进行一次重做日 志的同步） </li>
+<li><code>设置为1</code> ：表示每次事务提交时都将进行同步，刷盘操作（ 默认值 ） </li>
+<li><code>设置为2</code> ：表示每次事务提交时都只把 redo log buffer 内容写入 page cache，不进行同步。由os自己决定什么时候同步到磁盘文件。</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/25/66f38d1fbfeca.png" alt="image-20240925121009346"></p>
+<p>另外，InnoDB存储引擎有一个后台线程，每隔<code>1秒</code>，就会把<code>redo log buffer</code>中的内容写到文件系统缓存(<code>page cache</code>)，然后调用刷盘操作。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/25/66f38d253024b.png" alt="image-20240925121014768"></p>
+<p>也就是说，一个没有提交事务的<code>redo log</code>记录，也可能会刷盘。因为在事务执行过程 redo log 记录是会写入 <code>redo log buffer</code>中，这些redo log 记录会被<code>后台线程</code>刷盘。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/25/66f38d2c842ce.png" alt="image-20240925121022012"></p>
+<p>除了后台线程每秒<code>1次</code>的轮询操作，还有一种情况，当<code>redo log buffer</code>占用的空间即将达到<code>innodb_log_buffer_size</code>（这个参数默认是16M）的一半的时候，后台线程会主动刷盘。</p>
+<h2 id="不同刷盘策略演示"><a href="#不同刷盘策略演示" class="headerlink" title="不同刷盘策略演示"></a>不同刷盘策略演示</h2><h3 id="流程图"><a href="#流程图" class="headerlink" title="流程图"></a>流程图</h3><p>   <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/25/66f3931077d3c.png" alt="image-20240925123528154"></p>
+<blockquote>
+<p>小结：innodb_flush_log_at_trx_commit=0</p>
+<p>为<code>0</code>时，master thread中每1秒进行一次重做日志的fsync操作，因此实例crash最多丢失1秒钟内的事务。<br>(master thread是负责将缓冲池中的数据异步刷新到磁盘，保证数据的一致性)</p>
+<p>数值0的话，是一种折中的做法，它的0效率理论是高于1的，低于2的，这种策略也有丢失数据的风险，也无法保证D。</p>
+</blockquote>
+<p>   <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/25/66f391b5ddcd9.png" alt="image-20240925122943424"></p>
+<blockquote>
+<p>小结：innodb_flush_log_at_trx_commit=1<br>为<code>1</code>时，只要事务提交成功，<code>redo 1og</code>记录就一定在硬盘里，不会有任何数据丢失。</p>
+<p>如果事务执行期间<code>MySQL</code>挂了或宕机，这部分日志丢了，但是事务并没有提交，所以日志丢了也不会有损失。可以保证ACID的D,数据绝对不会丢失，但是<code>效率最差</code>的。</p>
+<p>建议使用默认值，虽然操作系统宕机的概率理论小于数据库宕机的概率，但是一般既然使用了事务，那么数据的安全相对来说更重要些。</p>
+</blockquote>
+<p>   <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/25/66f39264171d5.png" alt="image-20240925123237616"></p>
+<blockquote>
+<p>小结 innodb_flush_log_at_trx_commit=2</p>
+<p>为<code>2</code>时，只要事务提交成功，<code>redo log buffer</code>中的内容只写入文件系统缓存(<code>page cache</code>)。</p>
+<p>如果仅仅只是<code>MySQL</code>挂了不会有任何数据丢失，但是操作系统宕机可能会有<code>1</code>秒数据的丢失，这种情况下无法满足ACID中的D。但是数值2肯定是效率最高的。</p>
+</blockquote>
+<h3 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h3><p>比较innodb_flush_log_at_trx_commit对事务的影响。</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> test_load(</span><br><span class="line">a <span class="type">INT</span>,</span><br><span class="line">b <span class="type">CHAR</span>(<span class="number">80</span>)</span><br><span class="line">)ENGINE<span class="operator">=</span>INNODB;</span><br></pre></td></tr></tbody></table></figure>
+
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">DELIMITER<span class="operator">/</span><span class="operator">/</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">PROCEDURE</span> p_load(COUNT <span class="type">INT</span> UNSIGNED)</span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line"><span class="keyword">DECLARE</span> s <span class="type">INT</span> UNSIGNED <span class="keyword">DEFAULT</span> <span class="number">1</span>;</span><br><span class="line"><span class="keyword">DECLARE</span> c <span class="type">CHAR</span>(<span class="number">80</span>) <span class="keyword">DEFAULT</span> REPEAT(<span class="string">'a'</span>,<span class="number">80</span>);</span><br><span class="line">WHILE s<span class="operator">&lt;=</span>COUNT DO</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> test_load <span class="keyword">SELECT</span> <span class="keyword">NULL</span>, c;</span><br><span class="line"><span class="keyword">COMMIT</span>;</span><br><span class="line"><span class="keyword">SET</span> s<span class="operator">=</span>s<span class="operator">+</span><span class="number">1</span>;</span><br><span class="line"><span class="keyword">END</span> WHILE;</span><br><span class="line"><span class="keyword">END</span> <span class="operator">/</span><span class="operator">/</span></span><br><span class="line">DELIMITER;</span><br></pre></td></tr></tbody></table></figure>
+
+<p>存储过程代码中，每插入一条数据就进行一次显式的C0MMT操作。在默认的设置下，即参数<br><code>innodb_flush_log_at_trx_commit</code>为<code>1</code>的情况下，InnoDB存储引擎会将重做日志缓冲中的日志写入文件，并调用一次<code>fsync</code>操作。</p>
+<p>执行命令CALL p_load(30000),向表中插入3万行的记录，并执行3万次的fsync操作。在默认情况下所需的时间</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">CALL</span> p_load(<span class="number">30000</span>);</span><br><span class="line">Query OK, <span class="number">0</span> <span class="keyword">rows</span> affected(<span class="number">1</span> min <span class="number">23</span> sec)</span><br></pre></td></tr></tbody></table></figure>
+
+<p><code>1 min 23 sec</code>的时间显然是不能接受的。而造成时间比较长的原因就在于fsync操作所需要的时间。</p>
+<p>修改参数<code>innodb_flush_log_at_trx_commit</code>，设置为<code>0</code>：</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">set</span> <span class="keyword">global</span> innodb_flush_log_at_trx_commit <span class="operator">=</span> <span class="number">0</span>;</span><br></pre></td></tr></tbody></table></figure>
+
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">CALL</span> p_load(<span class="number">30000</span>);</span><br><span class="line">Query OK, <span class="number">0</span> <span class="keyword">rows</span> affected(<span class="number">38</span> sec)</span><br></pre></td></tr></tbody></table></figure>
+
+<p>修改参数<code>innodb_flush_log_at_trx_commit</code>，设置为<code>2</code>：</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">set</span> <span class="keyword">global</span> innodb_flush_log_at_trx_commit <span class="operator">=</span> <span class="number">2</span>;</span><br></pre></td></tr></tbody></table></figure>
+
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">CALL</span> p_load(<span class="number">30000</span>);</span><br><span class="line">Query OK, <span class="number">0</span> <span class="keyword">rows</span> affected(<span class="number">46</span> sec)</span><br></pre></td></tr></tbody></table></figure>
+
+<p>而形成这个现象的主要原因是：后者大大减少了fsyc的次数，从而提高了数据库执行的性能。<br>下表显示了在innodb_flush_log_at_trx_commit的不同设置下，调用存储过程p_load插入3万行记录所需的时间：</p>
+<table>
+<thead>
+<tr>
+<th>innodb_flush_log_at_trx_commit</th>
+<th>执行所用时间</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>38.709秒</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1分23秒</td>
+</tr>
+<tr>
+<td>2</td>
+<td>46.016秒</td>
+</tr>
+</tbody></table>
+<p>而针对上述存储过程，为了提高事务的提交性能，应该在将3万行记录插入表后进行一次的C0MMT操作，而不是<br>每插入一条记录后进行一次COMMIT操作。这样做的好处是可以使事务方法在rollback时回滚到事务最开始的确定<br>状态。</p>
+<blockquote>
+<p>虽然用户可以通过设置参数innodb_flush_log_at_trx_commit为0或2来提高事务提交的性能，但需清楚，这种<br>设置方法丧失了事务的ACID特性。</p>
+</blockquote>
+<h2 id="写入redo-log-buffer-过程"><a href="#写入redo-log-buffer-过程" class="headerlink" title="写入redo log buffer 过程"></a>写入redo log buffer 过程</h2><h3 id="补充概念：Mini-Transaction"><a href="#补充概念：Mini-Transaction" class="headerlink" title="补充概念：Mini-Transaction"></a>补充概念：Mini-Transaction</h3><p>MySQL把对底层页面中的一次原子访问过程称之为一个<code>Mini-Transaction</code>，简称<code>mtr</code>，比如，向某个索引对应的B+树中插入一条记录的过程就是一个<code>Mini-Transaction</code>。一个所谓的<code>mtr</code>可以包含一组redo日志，在进行崩溃恢复时这一组<code>redo</code>日志可以作为一个不可分割的整体。</p>
+<p>一个事务可以包含若干条语句，每一条语句其实是由若干个 <code>mtr</code> 组成，每一个 <code>mtr</code> 又可以包含若干条 redo日志，画个图表示它们的关系就是这样：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/25/66f3953977ee4.png" alt="image-20240925124441207"></p>
+<h3 id="redo-日志写入log-buffer"><a href="#redo-日志写入log-buffer" class="headerlink" title="redo 日志写入log buffer"></a>redo 日志写入log buffer</h3><p>向<code>log buffer</code>中写入redo日志的过程是顺序的，也就是先往前边的block中写，当该block的空闲空间用完之后再往下一个block中写。当我们想往<code>log buffer</code>中写入redo日志时，第一个遇到的问题就是应该写在哪个<code>block</code>的哪个偏移量处，所以InnoDB的设计者特意提供了一个称之为<code>buf_free</code>的全局变量，该变量指明后续写入的<br>redo日志应该写入到<code>log buffer</code>中的哪个位置，如图所示：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/25/66f395eb560f5.png" alt="image-20240925124739050"></p>
+<p>一个mtr执行过程中可能产生若干条redo日志，<code>这些redo日志是一个不可分割的组</code>，所以其实并不是每生成一条<br>redo日志，就将其插入到log buffer中，而是每个mtr运行过程中产生的日志先暂时存到一个地方，当该mtr结束的时候，将过程中产生的一组redo日志再全部复制到log buffert中。我们现在假设有两个名为<code>T1</code>、<code>T2</code>的事务，每个事务都包含2个mtr,我们给这几个mtr命名一下：</p>
+<ul>
+<li>事务<code>T1</code>的两个<code>mtr</code>分别称为<code>mtr_T1_1</code>和<code>mtr_T1_2</code>。</li>
+<li>事务<code>T2</code>的两个<code>mtr</code>分别称为<code>mtr_T2_1</code>和<code>mtr_T2_2</code></li>
+</ul>
+<p>每个mtr都会产生一组redo日志，用示意图来描述一下这些mtr产生的日志情况：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/25/66f396ad8862c.png" alt="image-20240925125053236"></p>
+<p>不同的事务可能是 <code>并发</code> 执行的，所以 T1 、 T2 之间的 mtr 可能是 <code>交替执行</code> 的。每当一个mtr执行完成时，伴随该mtr生成的一组redo日志就需要被复制到log buffer中，也就是说不同事务的mtr可能是交替写入log buffer的，我们画个示意图（为了美观，我们把一个mtr中产生的所有redo日志当做一个整体来画）：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/25/66f3971d5b243.png" alt="image-20240925125245082"></p>
+<p>有的mtr产生的redo日志量非常大，比如<code>mtr_t1_2</code>产生的redo日志占用空间比较大，占用了3个block来存储。</p>
+<h3 id="redo-log-block的结构图"><a href="#redo-log-block的结构图" class="headerlink" title="redo log block的结构图"></a>redo log block的结构图</h3><p>一个redo log block是由<code>日志头、日志体、日志尾</code>组成。日志头占用12字节，日志尾占用8字节，所以一个block真正能存储的数据是512-12-8=492字节。</p>
+<blockquote>
+<p><strong>为什么一个block设计成512字节？</strong></p>
+<p>这个和磁盘的扇区有关，机械磁盘默认的扇区就是512字节，如果你要写入的数据大于512字节，那么要写入<br>的扇区肯定不止一个，这时就要涉及到盘片的转动，找到下一个扇区，假设现在需要写入两个扇区A和B,如果扇区A写入成功，而扇区B写入失败，那么就会出现<code>非原子性</code>的写入，而如果每次只写入和扇区的大小一样<br>的512字节，那么每次的写入都是原子性的。</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/25/66f3978f76c13.png" alt="image-20240925125439200"></p>
+<p>真正的redo日志都是存储到占用<code>496</code>字节大小的<code>log block body</code>中，图中的<code>log block header</code>和<code>log block trailer</code>存储的是一些管理信息。我们来看看这些所谓<code>管理信息</code>都有什么。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/25/66f397ab122a6.png" alt="image-20240925125506782"></p>
+<ul>
+<li><code>log block header</code>的属分别如下：<ul>
+<li><code>LOG_BL0CK_HDR_NO</code>: log buffer是由log block组成，在内部log buffer就好似一个数组，因此<br>LOG_BLOCK_HDR_NO 用来标记这个数组中的位置。其是递增并且循环使用的，占用4个字节，但是由于第一位用来判断是否是flush bit，所以最大的值为2G。</li>
+<li><code>L0G_BL0CK_HDR_DATA_LEN</code>: 表示block中已经使用了多少字节，初始值为<code>12</code>（因为<code>log block body</code><br>从第12个字节处开始)。随着往block中写入的redo日志越来也多，本属性值也跟着增长。如果<code>log block body </code>已经被全部写满，那么本属性的值被设置为<code>512</code>。</li>
+<li><code>LOG_BLOCK_FIRST_REC_GROUP</code>: 一条redo日志也可以称之为一条redo日志记录(redo log record)，一个mtr会生产多条redo日志记录，这些redo日志记录被称之为一个redo日志记录组(redo log record group)。LOG_BLOCK_FIRST_REC_GROUP 就代表该block中第一个mtr生成的redo日志记录组的偏移量（其实也就是这个block里第一个mtr生成的第一条redo日志的偏移量)。如果该值的大小和LOG_BLOCK_HDR_DATA_LEN相同，则表示当前log block不包含新的日志。</li>
+<li><code>L0G_BL0CK_CHECKPOINT_No</code>：占用4字节，表示该log block最后被写时的<code>checkpoint</code></li>
+</ul>
+</li>
+<li><code>log block trailer</code>中属性的意思如下：<ul>
+<li><code>LOG_BLOCK_CHECKSUM</code>: 表示block的校验值，用于正确性校验（其值和LOG_BLOCK_HDR_NO相同），我们暂时不关心它。</li>
+</ul>
+</li>
+</ul>
+<h2 id="redo-log-file"><a href="#redo-log-file" class="headerlink" title="redo log file"></a>redo log file</h2><h3 id="相关参数设置"><a href="#相关参数设置" class="headerlink" title="相关参数设置"></a>相关参数设置</h3><ul>
+<li><p><code>innodb_log_group_home_dir</code> ：指定 redo log 文件组所在的路径，默认值为 <code>./</code> ，表示在数据库 的数据目录下。MySQL的默认数据目录（ <code>var/lib/mysql</code>）下默认有两个名为 <code>ib_logfile0</code> 和 <code>ib_logfile1</code> 的文件，log buffer中的日志默认情况下就是刷新到这两个磁盘文件中。此redo日志 文件位置还可以修改。</p>
+</li>
+<li><p><code>innodb_log_files_in_group</code>：指明redo log file的个数，命名方式如：ib_logfile0，iblogfile1… iblogfilen。默认2个，最大100个。</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; show variables like 'innodb_log_files_in_group';</span><br><span class="line">+---------------------------+-------+</span><br><span class="line">| Variable_name             | Value |</span><br><span class="line">+---------------------------+-------+</span><br><span class="line">| innodb_log_files_in_group | 2     |</span><br><span class="line">+---------------------------+-------+</span><br><span class="line">#ib_logfile0</span><br><span class="line">#ib_logfile1</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p><code>innodb_flush_log_at_trx_commit</code>：控制 redo log 刷新到磁盘的策略，默认为1。</p>
+</li>
+<li><p><code>innodb_log_file_size</code>：单个 redo log 文件设置大小，默认值为 <code>48M</code> 。最大值为512G，注意最大值 指的是整个 redo log 系列文件之和，即（innodb_log_files_in_group * innodb_log_file_size ）不能大 于最大值512G。</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; show variables like 'innodb_log_file_size';</span><br><span class="line">+----------------------+----------+</span><br><span class="line">| Variable_name        | Value    |</span><br><span class="line">+----------------------+----------+</span><br><span class="line">| innodb_log_file_size | 50331648 |</span><br><span class="line">+----------------------+----------+</span><br></pre></td></tr></tbody></table></figure></li>
+</ul>
+<p>根据业务修改其大小，以便容纳较大的事务。编辑my.cnf文件并重启数据库生效，如下所示</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# vim /etc/my.cnf</span><br><span class="line">innodb_log_file_size=200M</span><br></pre></td></tr></tbody></table></figure>
+
+<blockquote>
+<p>在数据库实例更新比较频繁的情况下，可以适当加大 redo log 数组和大小。但也不推荐 redo log 设置过大，在MySQL崩溃时会重新执行REDO日志中的记录。</p>
+</blockquote>
+<h3 id="日志文件组"><a href="#日志文件组" class="headerlink" title="日志文件组"></a>日志文件组</h3><p>从上边的描述中可以看到，磁盘上的<code>redo</code>日志文件不只一个，而是以一个<code>日志文件组</code>的形式出现的。这些文件以<code>ib_logfile[数字]</code>（数字可以是0、1、2)的形式进行命名，每个的redo日志文件大小都是一样的。</p>
+<p>在将redo日志写入日志文件组时，是从<code>ib_logfile0</code>开始写，如果<code>ib_1ogfile0</code>写满了，就接着<code>ib_1ogfile1</code><br>写。同理，<code>ib_logfi1e1</code>写满了就去写<code>ib_1ogfile2</code>,依此类推。如果写到最后一个文件该昨办？那就重新转<br>到<code>ib_1ogfile0</code>继续写，所以整个过程如下图所示：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/25/66f39ad0defa0.png" alt="image-20240925130832626"></p>
+<p>总共的redo日志文件大小其实就是： <code>innodb_log_file_size × innodb_log_files_in_group</code> 。</p>
+<p>采用循环使用的方式向redo日志文件组里写数据的话，会导致后写入的redo日志覆盖掉前边写的redo日志？当然！所以InnoDB的设计者提出了<code>checkpoint</code>的概念。</p>
+<h3 id="checkpoint"><a href="#checkpoint" class="headerlink" title="checkpoint"></a>checkpoint</h3><p>在整个日志文件组中还有两个重要的属性，分别是 <code>write pos</code>、<code>checkpoint</code></p>
+<ul>
+<li><code>write pos</code>是当前记录的位置，一边写一边后移</li>
+<li><code>checkpoint</code>是当前要擦除的位置，也是往后推移</li>
+</ul>
+<p>每次刷盘 redo log 记录到日志文件组中，write pos 位置就会后移更新。每次MySQL加载日志文件组恢复数据时，会清空加载过的 redo log 记录，并把check point后移更新。write pos 和 checkpoint 之间的还空着的部分可以用来写入新的 redo log 记录。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/25/66f39b2f5f1c6.png" alt="image-20240925131007125"></p>
+<p>如果 write pos 追上 checkpoint ，表示<code>日志文件组</code>满了，这时候不能再写入新的 redo log记录，MySQL得停下来，清空一些记录，把 checkpoint 推进一下。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/25/66f39b8c0066b.png" alt="image-20240925131139695"></p>
+<h2 id="redo-log-小结"><a href="#redo-log-小结" class="headerlink" title="redo log 小结"></a>redo log 小结</h2><p><strong><font color="red">InnoDB的更新操作采用的是Write Ahead Log(预先日志持久化)策略，即先写日志，再写入磁盘。</font></strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/25/66f39bef75738.png" alt="image-20240925131319161"></p>
+<h1 id="Undo日志"><a href="#Undo日志" class="headerlink" title="Undo日志"></a>Undo日志</h1><p>redo log是事务持久性的保证，undo log是事务原子性的保证。在事务中 <code>更新数据</code> 的 <code>前置操作</code> 其实是要先写入一个 <code>undo log</code> 。</p>
+<h2 id="如何理解Undo日志"><a href="#如何理解Undo日志" class="headerlink" title="如何理解Undo日志"></a>如何理解Undo日志</h2><p>事务需要保证 <code>原子性 </code>，也就是事务中的操作要么全部完成，要么什么也不做。但有时候事务执行到一半会出现一些情况，比如：</p>
+<ul>
+<li>情况一：事务执行过程中可能遇到各种错误，比如<code> 服务器本身的错误</code> ， <code>操作系统错误</code> ，甚至是突然 <code>断电</code> 导致的错误。</li>
+<li>情况二：程序员可以在事务执行过程中手动输入 <code>ROLLBACK</code> 语句结束当前事务的执行。</li>
+</ul>
+<p>以上情况出现，我们需要把数据改回原先的样子，这个过程称之为 <code>回滚</code> ，这样就可以造成一个假象：这 个事务看起来什么都没做，所以符合 <code>原子性</code> 要求。</p>
+<p>每当我们要对一条记录做改动时（这里的<code>改动</code>可以指<code>INSERT</code>、<code>DELETE</code>、<code>UPDATE</code>),都需要”留一手”一一把回<br>滚时所需的东西记下来。比如：</p>
+<ul>
+<li>当你<code>插入一条记录</code>时，至少要把这条记录的主键值记下来，之后回滚的时候只需要把这个主键值对应的记录<code>删除</code>就好了。（对于每个INSERT，InnoDB存储引擎会完成一个DELETE)</li>
+<li>当你<code>删除了一条记录</code>，至少要把这条记录中的内容都记下来，这样之后回滚时再把由这些内容组成的记录<code>插入</code>到表中就好了。（对于每个DELETE，InnoDB存储引擎会执行一个INSERT)</li>
+<li>当你修改了一条记录，至少要把修改这条记录前的旧值都记录下来，这样之后回滚时再把这条记录<code>更新为旧值</code>就好了。（对于每个UPDATE，InnoDB存储引擎会执行一个相反的UPDATE，将修改前的行放回去）</li>
+</ul>
+<p>MySQL把这些为了回滚而记录的这些内容称之为<code>撤销日志</code>或者<code>回滚日志</code>（即undo log)。注意，由于查询操作<br>(<code>SELECT</code>)并不会修改任何用户记录，所以在查询操作执行时，并<code>不需要记录</code>相应的undo日志。</p>
+<p>此外，undo log<code>会产生redo log</code>,也就是undo log的产生会伴随着redo log的产生，这是因为undo logt也需要持久<br>性的保护。</p>
+<h2 id="Undo日志的作用"><a href="#Undo日志的作用" class="headerlink" title="Undo日志的作用"></a>Undo日志的作用</h2><ul>
+<li><p><strong>作用1：回滚数据</strong></p>
+<p>用户对undo日志可能<code>有误解</code>：undo用于将数据库物理地恢复到执行语句或事务之前的样子。但事实并非此。</p>
+<p>undo log 是<code>逻辑日志</code>，因此只是将数据库逻辑地恢复到原来的样子。所有修改都被逻辑地取消了，但是数据结构和页本身在回滚之后可能大不相同。</p>
+<p>这是因为在多用户并发系统中，可能会有数十、数百甚至数千个并发事务。数据库的主要任务就是协调对数据记录的并发访问。比如，一个事务在修改当前一个页中某几条记录，同时还有别的事务在对同一个页中另几条记录进行修改。因此，不能将一个页回滚到事务开始的样子，因为这样会影响其他事务正在进行的工作。</p>
+</li>
+<li><p><strong>作用2：MVCC</strong></p>
+<p>undo的另一个作用是MVCC，即在InnoDB存储引擎中MVCC的实现是通过undo来完成。当用户读取一行记录时，若该记录以及被其他事务占用，当前事务可以通过undo读取之前的行版本信息，以此实现非锁定读取。</p>
+</li>
+</ul>
+<h2 id="undo的存储结构"><a href="#undo的存储结构" class="headerlink" title="undo的存储结构"></a>undo的存储结构</h2><h3 id="回滚段与undo页"><a href="#回滚段与undo页" class="headerlink" title="回滚段与undo页"></a>回滚段与undo页</h3><p>InnoDB对undo log的管理采用段的方式，也就是 <code>回滚段（rollback segment）</code> 。每个回滚段记录了 <code>1024</code> 个 <code>undo log segment</code> ，而在每个undo log segment段中进行 <code>undo页</code> 的申请。</p>
+<ul>
+<li>在<code> InnoDB1.1版本之前</code> （不包括1.1版本），只有一个rollback segment，因此支持同时在线的事务限制为 <code>1024</code> 。虽然对绝大多数的应用来说都已经够用。 </li>
+<li>从1.1版本开始InnoDB支持最大 <code>128个rollback segment</code> ，故其支持同时在线的事务限制提高到 了 <code>128*1024</code> 。</li>
+</ul>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; show variables like 'innodb_undo_logs';</span><br><span class="line">+------------------+-------+</span><br><span class="line">| Variable_name    | Value |</span><br><span class="line">+------------------+-------+</span><br><span class="line">| innodb_undo_logs | 128   |</span><br><span class="line">+------------------+-------+</span><br></pre></td></tr></tbody></table></figure>
+
+<p>虽然InnoDB.1.1版本支持了128个rollback segment,但是这些rollback segment都存储于共享表空间ibdata中。从<br>InnoDB1.2版本开始，可通过参数对rollback segment做进一步的设置。这些参数包括：</p>
+<ul>
+<li><code>innodb_undo_directory</code>: 设置rollback segment文件所在的路径。这意味着rollback segment可以存放在共享表空间以外的位置，即可以设置为独立表空间。该参数的默认值为<code>./</code>，表示当前InnoDB存储引擎的目</li>
+<li><code>innodb_undo_logs</code>: 设置rollback segment的个数，默认值为128。在InnoDB1.2版本中，该参数用来替换之<br>前版本的参数innodb_rollback_segments。</li>
+<li><code>innodb_undo_tablespaces</code>：设置构成rollback segment文件的数量，这样rollback segment可以较为平均地<br>分布在多个文件中。设置该参数后，会在路径innodb_undo_directory看到undo为前缀的文件，该文件就代表<br>rollback segment文件。</li>
+</ul>
+<p>undo log相关参数一般很少改动。</p>
+<p><strong>undo页的重用</strong><br>当我们开启一个事务需要写undo log的时候，就得先去undo log segment中去找到一个空闲的位置，当有空位的时候，就去申请undo页，在这个申请到的undo页中进行undo log的写入。我们知道mysql默认一页的大小是16k。</p>
+<p>为每一个事务分配一个页，是非常浪费的（除非你的事务非常长），假设你的应用的TPS(每秒处理的事务数目)为1000，那么1s就需要1000个页，大概需要16M的存储，1分钟大概需要1G的存储。如果照这样下去除非MySQL清理的非常勤快，否则随着时间的推移，磁盘空间会增长的非常快，而且很多空间都是浪费的。</p>
+<p>于是undo页就被设计的<code>可以重用</code>了，当事务提交时，并不会立刻删除undo页。因为重用，所以这个undo页可能混杂着其他事务的undo log。undo log在commit后，会被放到一个<code>链表</code>中，然后判断undo页的使用空间是否小于<code>3/4</code>,如果小于3/4的话，则表示当前的undo页可以被重用，那么它就不会被回收，其他事务的undo log可以记录<br>在当前undo页的后面。由于undo log是<code>离散的</code>，所以清理对应的磁盘空间时，效率不高。</p>
+<h3 id="回滚段与事务"><a href="#回滚段与事务" class="headerlink" title="回滚段与事务"></a>回滚段与事务</h3><ol>
+<li><p>每个事务只会使用一个回滚段，一个回滚段在同一时刻可能会服务于多个事务。</p>
+</li>
+<li><p>当一个事务开始的时候，会制定一个回滚段，在事务进行的过程中，当数据被修改时，原始的数据会被复制到回滚段。</p>
+</li>
+<li><p>在回滚段中，事务会不断填充盘区，直到事务结束或所有的空间被用完。如果当前的盘区不够用，事务会在段中请求扩展下一个盘区，如果所有已分配的盘区都被用完，事务会覆盖最初的盘区或者在回滚段允许的情况下扩展新的盘区来使用。</p>
+</li>
+<li><p>回滚段存在于undo表空间中，在数据库中可以存在多个undo表空间，但同一时刻只能使用一个 undo表空间。</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; show variables like 'innodb_undo_tablespaces';</span><br><span class="line">+-------------------------+-------+</span><br><span class="line">| Variable_name           | Value |</span><br><span class="line">+-------------------------+-------+</span><br><span class="line">| innodb_undo_tablespaces | 2     |</span><br><span class="line">+-------------------------+-------+</span><br><span class="line"># undo log的数量，最少为2. undo log的truncate操作有purge协调线程发起。在truncate某个undo log表空间的过程中，保证有一个可用的undo log可用。</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>当事务提交时，InnoDB存储引擎会做以下两件事情：</p>
+<ul>
+<li>将undo log放入列表中，以供之后的purge操作 </li>
+<li>判断undo log所在的页是否可以重用，若可以则分配给下个事务使用</li>
+</ul>
+</li>
+</ol>
+<h3 id="回滚段中的数据分类"><a href="#回滚段中的数据分类" class="headerlink" title="回滚段中的数据分类"></a>回滚段中的数据分类</h3><ol>
+<li><code>未提交的回滚数据(uncommitted undo information)</code>：该数据所关联的事务并未提交，用于实现读一致性，所以该数据不能被其他事务的数据覆盖。</li>
+<li><code>已经提交但未过期的回滚数据(committed undo information)</code>：该数据关联的事务已经提交，但是仍受到undo retention参数的保持时间的影响。</li>
+<li><code>事务已经提交并过期的数据(expired undo information)</code>：事务已经提交，而且数据保存时间已经超过 undo retention参数指定的时间，属于已经过期的数据。当回滚段满了之后，就优先覆盖“事务已经提交并过期的数据”。</li>
+</ol>
+<p>事务提交后不能马上删除undo log及undo log所在的页。这是因为可能还有其他事务需要通过undo log来得到行记录之前的版本。故事务提交时将undo log放入一个链表中，是否可以最终删除undo log以undo log所在页由purge线程来判断。</p>
+<h2 id="undo的类型"><a href="#undo的类型" class="headerlink" title="undo的类型"></a>undo的类型</h2><p>在InnoDB存储引擎中，undo log分为：</p>
+<ul>
+<li><p>insert undo log</p>
+<p>insert undo log是指insert操作中产生的undo log。因为insert操作的记录，只对事务本身可见，对其他事务不可见（这是事务隔离性的要求），故该undo log可以在事务提交后直接删除。不需要进行purge操作。</p>
+</li>
+<li><p>update undo log</p>
+<p>update undo log记录的是对delete和update操作产生的undo log。该undo log可能需要提供MVCC机制，因此不能在事务提交时就进行删除。提交时放入undo log链表，等待purge线程进行最后的删除。</p>
+</li>
+</ul>
+<h2 id="undo-log的生命周期"><a href="#undo-log的生命周期" class="headerlink" title="undo log的生命周期"></a>undo log的生命周期</h2><h3 id="简要生成过程"><a href="#简要生成过程" class="headerlink" title="简要生成过程"></a>简要生成过程</h3><p>以下是undo+redo事务的简化过程</p>
+<p>假设有两个数值，分别为A=1和B=2，然后将A修改为3，B修改为4</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1. start transaction;</span><br><span class="line">2. 记录 A=1 到undo1og</span><br><span class="line">3. update A 3:</span><br><span class="line">4. 记录 A=3 到redo 1og:</span><br><span class="line">5. 记录 B=2到 undo 1og:</span><br><span class="line">6. update B =4:</span><br><span class="line">7. 记录B=4到redo 1og:</span><br><span class="line">8. 将redo log刷新到磁盘</span><br><span class="line">9. commit</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>在1-8步骤的任意一步系统宕机，事务未提交，该事务就不会对磁盘上的数据做任何影响。</li>
+<li>如果在8-9之间宕机，恢复之后可以选择回滚，也可以选择继续完成事务提交，因为此时redo log已经持久化。</li>
+<li>若在9之后系统宕机，内存映射中变更的数据还来不及刷回磁盘，那么系统恢复之后，可以根据redo log把数<br>据刷回磁盘。</li>
+</ul>
+<p><strong>只有Buffer Pool的流程：</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/25/66f3a7137c574.png" alt="image-20240925140051202"></p>
+<p><strong>有了Redo Log和Undo Log之后：</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/25/66f3a71ed75fa.png" alt="image-20240925140102641"></p>
+<p>在更新Buffer Pool中的数据之前，我们需要先将该数据事务开始之前的状态写入Undo Log中。假设更新到一半出错了，我们就可以通过Undo Log来回滚到事务开始前。</p>
+<h3 id="详细生成过程"><a href="#详细生成过程" class="headerlink" title="详细生成过程"></a>详细生成过程</h3><p>对于InnoDB引擎来说，每个行记录除了记录本身的数据之外，还有几个隐藏的列：</p>
+<ul>
+<li><code>DB_ROW_ID</code>: 如果没有为表显式的定义主键，并且表中也没有定义唯一索引，那么InnoDB会自动为表添加一<br>个row_id的隐藏列作为主键。</li>
+<li><code>DB_TRX_ID</code>: 每个事务都会分配一个事务ID,当对某条记录发生变更时，就会将这个事务的事务ID写入trx_id中。</li>
+<li><code>DB_ROLL_PTR</code>:回滚指针，本质上就是指向undo log的指针。</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/25/66f3a7e8dfb55.png" alt="image-20240925140424684"></p>
+<p><strong>当我们执行INSERT时：</strong></p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">begin</span>;</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">user</span> (name) <span class="keyword">VALUES</span> ("tom");</span><br></pre></td></tr></tbody></table></figure>
+
+<p>插入的数据都会生成一条insert undo log，并且数据的回滚指针会指向它。undo log会记录undo log的序号、插入主键的列和值…，那么在进行rollback的时候，通过主键直接把对应的数据删除即可。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/25/66f3a82b16488.png" alt="image-20240925140530862"></p>
+<p><strong>当我们执行UPDATE时：</strong></p>
+<p>对应更新的操作会产生update undo log，并且会分更新主键和不更新主键的，假设现在执行：</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> <span class="keyword">user</span> <span class="keyword">SET</span> name<span class="operator">=</span>"Sun" <span class="keyword">WHERE</span> id<span class="operator">=</span><span class="number">1</span>;</span><br></pre></td></tr></tbody></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/25/66f3a8501faf7.png" alt="image-20240925140607905"></p>
+<p>这时会把老的记录写入新的undo log，让回滚指针指向新的undo log，它的undo no是1，并且新的undo log会指向老的undo log（undo no=0）。</p>
+<p>假设现在执行：</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> <span class="keyword">user</span> <span class="keyword">SET</span> id<span class="operator">=</span><span class="number">2</span> <span class="keyword">WHERE</span> id<span class="operator">=</span><span class="number">1</span>;</span><br></pre></td></tr></tbody></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/25/66f3a8d9cd721.png" alt="image-20240925140825594"></p>
+<p>对于更新主键的操作，会先把原来的数据<code>deletemark</code>标识打开，这时并没有真正的删除数据，真正的删除会交给清理线程去判断，然后在后面插入一条新的数据，新的数据也会产生undo log，并且undo log的序号会递增。</p>
+<p>可以发现每次对数据的变更都会产生一个undo log，当一条记录被变更多次时，那么就会产生多条undo log，undo log记录的是变更前的日志，并且每个undo log的序号是递增的，那么当要回滚的时候，按照序号<code>依次向前推</code>，就可以找到我们的原始数据了。</p>
+<h3 id="undo-log是如何回滚的"><a href="#undo-log是如何回滚的" class="headerlink" title="undo log是如何回滚的"></a>undo log是如何回滚的</h3><p>以上面的例子来说，假设执行rollback，那么对应的流程应该是这样：</p>
+<ol>
+<li>通过undo no=3的日志把id=2的数据删除 </li>
+<li>通过undo no=2的日志把id=1的数据的deletemark还原成0 </li>
+<li>通过undo no=1的日志把id=1的数据的name还原成Tom </li>
+<li>通过undo no=0的日志把id=1的数据删除</li>
+</ol>
+<h3 id="undo-log的删除"><a href="#undo-log的删除" class="headerlink" title="undo log的删除"></a>undo log的删除</h3><ul>
+<li><p>针对于insert undo log</p>
+<p>因为insert操作的记录，只对事务本身可见，对其他事务不可见。故该undo log可以在事务提交后直接删除，不需要进行purge操作。</p>
+</li>
+<li><p>针对于update undo log</p>
+<p>该undo log可能需要提供MVCC机制，因此不能在事务提交时就进行删除。提交时放入undo log链表，等待purge线程进行最后的删除。</p>
+</li>
+</ul>
+<blockquote>
+<p>补充：</p>
+<p>purge线程两个主要作用是：<code>清理undo页</code>和<code>清理page里面带有Delete_Bit标识的数据行</code>。在InnoDB中，事务中的Delete操作实际上并不是真正的删除掉数据行，而是一种Delete Mark操作，在记录上标识Delete_Bit，而不删除记录。是一种“假删除”，只是做了个标记，真正的删除工作需要后台purge线程去完成。</p>
+</blockquote>
+<h2 id="Undo-log-小结"><a href="#Undo-log-小结" class="headerlink" title="Undo log 小结"></a>Undo log 小结</h2><p>undo log是逻辑日志，对事务回滚时，只是将数据库逻辑地恢复到原来的样子。</p>
+<p>redo log是物理日志，记录的是数据页的物理变化，undo log不是redo log的逆过程。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/25/66f39bef75738.png" alt="image-20240925131319161"></p>
+</div></article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/avatar.png" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/avatar.png" title="头像" alt="头像"></a><div class="post-copyright__author_name">時光</div><div class="post-copyright__author_desc">心寄朗朗乾坤，胸怀真修之道。</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://blog.shiguang666.eu.org/2024/09/25/076bbddc6716/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://blog.shiguang666.eu.org/2024/09/25/076bbddc6716/')">【尚硅谷】MySQL-MySQL事务日志</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="anzhiyu.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="anzhiyufont anzhiyu-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="/img/wechat.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/wechat.png" alt="微信"></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/alipay.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/alipay.png" alt="支付宝"></a><div class="post-qr-code-desc">支付宝</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="anzhiyu.removeRewardMask()" style="display: none"></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://blog.shiguang666.eu.org/2024/09/25/076bbddc6716/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=【尚硅谷】MySQL-MySQL事务日志&amp;url=https://blog.shiguang666.eu.org/2024/09/25/076bbddc6716/&amp;pic=https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.shiguang666.eu.org" target="_blank">時光</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/SQL/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>SQL<span class="tagsPageCount">12</span></a><a class="post-meta__box__tags" href="/tags/%E5%B0%9A%E7%A1%85%E8%B0%B7/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>尚硅谷<span class="tagsPageCount">42</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://img.shiguangdev.cn/i/2024/12/13/675c5996649aa.webp" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/09/24/5ff69d1c35a3/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">【尚硅谷】MySQL-事务基础知识</div></div></a></div><div class="next-post pull-right"><a href="/2024/09/25/ce0ab3c73ed6/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">【尚硅谷】MySQL-锁</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/2024/09/26/f7ad294f7377/" title="【尚硅谷】MySQL-主从复制"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-09-26</div><div class="title">【尚硅谷】MySQL-主从复制</div></div></a></div><div><a href="/2024/09/24/5ff69d1c35a3/" title="【尚硅谷】MySQL-事务基础知识"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-09-24</div><div class="title">【尚硅谷】MySQL-事务基础知识</div></div></a></div><div><a href="/2024/09/26/8aeb9df6c710/" title="【尚硅谷】MySQL-多版本并发控制"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-09-26</div><div class="title">【尚硅谷】MySQL-多版本并发控制</div></div></a></div><div><a href="/2024/09/26/922071561806/" title="【尚硅谷】MySQL-其他数据库日志"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-09-26</div><div class="title">【尚硅谷】MySQL-其他数据库日志</div></div></a></div><div><a href="/2024/09/26/e441e650956c/" title="【尚硅谷】MySQL-数据库备份与恢复"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-09-26</div><div class="title">【尚硅谷】MySQL-数据库备份与恢复</div></div></a></div><div><a href="/2024/09/22/88ec74bb220c/" title="【尚硅谷】MySQL-性能分析工具的使用"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-09-22</div><div class="title">【尚硅谷】MySQL-性能分析工具的使用</div></div></a></div></div></div><hr><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="anzhiyufont anzhiyu-icon-comments"></i><span> 评论</span></div><div class="comment-randomInfo"><a onclick="anzhiyu.addRandomCommentInfo()" href="javascript:void(0)" style="display: none">匿名评论</a><a href="/privacy" style="margin-left: 4px">隐私政策</a></div><div class="comment-tips" id="comment-tips"><span>✅ 你无需删除空行，直接评论以获取最佳展示效果</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div><div class="comment-barrage"></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"><div class="author-status"><img class="g-status" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://emotion.acs.pw/emotion/Heo/送福.png" alt="status"></div></div><div class="author-info__description">代码成就万事基积沙镇海,<br>梦想永在凌云意意气风发。</div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/"><h1 class="author-info__name">時光</h1><div class="author-info__desc">心寄朗朗乾坤，胸怀真修之道。</div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/shiguang-coding" target="_blank" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a></div></div></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bullhorn anzhiyu-shake"></i><span>公告</span></div><div class="announcement_content"><span>🌟欢迎光临時光的博客园子🌟</span><br> <span><a href="https://blog.shiguang666.eu.org"><b>blog.shiguang666.eu.org</b></a></span><br> <span><a target="_blank" rel="noopener" href="https://blog.shiguangdev.cn"><b>blog.shiguangdev.cn</b></a></span><br> <span><a target="_blank" rel="noopener" href="https://blog.shiguang88.icu"><b>blog.shiguang88.icu</b></a></span><br> <span>🤔 如有问题欢迎评论区交流！</span><br> <span>📧 如需联系我：<a href="mailto:an_shiguang@163.com"><b>发送邮件🚀</b></a></span> <div id="welcome-info"></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#redo%E6%97%A5%E5%BF%97"><span class="toc-number">1.</span> <span class="toc-text">redo日志</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81REDO%E6%97%A5%E5%BF%97"><span class="toc-number">1.1.</span> <span class="toc-text">为什么需要REDO日志</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#REDO%E6%97%A5%E5%BF%97%E7%9A%84%E5%A5%BD%E5%A4%84%E3%80%81%E7%89%B9%E7%82%B9"><span class="toc-number">1.2.</span> <span class="toc-text">REDO日志的好处、特点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A5%BD%E5%A4%84"><span class="toc-number">1.2.1.</span> <span class="toc-text">好处</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%B9%E7%82%B9"><span class="toc-number">1.2.2.</span> <span class="toc-text">特点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#redo%E7%9A%84%E7%BB%84%E6%88%90"><span class="toc-number">1.3.</span> <span class="toc-text">redo的组成</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#redo%E7%9A%84%E6%95%B4%E4%BD%93%E6%B5%81%E7%A8%8B"><span class="toc-number">1.4.</span> <span class="toc-text">redo的整体流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#redo-log%E7%9A%84%E5%88%B7%E7%9B%98%E7%AD%96%E7%95%A5"><span class="toc-number">1.5.</span> <span class="toc-text">redo log的刷盘策略</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8D%E5%90%8C%E5%88%B7%E7%9B%98%E7%AD%96%E7%95%A5%E6%BC%94%E7%A4%BA"><span class="toc-number">1.6.</span> <span class="toc-text">不同刷盘策略演示</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%81%E7%A8%8B%E5%9B%BE"><span class="toc-number">1.6.1.</span> <span class="toc-text">流程图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BE%E4%BE%8B"><span class="toc-number">1.6.2.</span> <span class="toc-text">举例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%99%E5%85%A5redo-log-buffer-%E8%BF%87%E7%A8%8B"><span class="toc-number">1.7.</span> <span class="toc-text">写入redo log buffer 过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A5%E5%85%85%E6%A6%82%E5%BF%B5%EF%BC%9AMini-Transaction"><span class="toc-number">1.7.1.</span> <span class="toc-text">补充概念：Mini-Transaction</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#redo-%E6%97%A5%E5%BF%97%E5%86%99%E5%85%A5log-buffer"><span class="toc-number">1.7.2.</span> <span class="toc-text">redo 日志写入log buffer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#redo-log-block%E7%9A%84%E7%BB%93%E6%9E%84%E5%9B%BE"><span class="toc-number">1.7.3.</span> <span class="toc-text">redo log block的结构图</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#redo-log-file"><span class="toc-number">1.8.</span> <span class="toc-text">redo log file</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE"><span class="toc-number">1.8.1.</span> <span class="toc-text">相关参数设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%E7%BB%84"><span class="toc-number">1.8.2.</span> <span class="toc-text">日志文件组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#checkpoint"><span class="toc-number">1.8.3.</span> <span class="toc-text">checkpoint</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#redo-log-%E5%B0%8F%E7%BB%93"><span class="toc-number">1.9.</span> <span class="toc-text">redo log 小结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Undo%E6%97%A5%E5%BF%97"><span class="toc-number">2.</span> <span class="toc-text">Undo日志</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3Undo%E6%97%A5%E5%BF%97"><span class="toc-number">2.1.</span> <span class="toc-text">如何理解Undo日志</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Undo%E6%97%A5%E5%BF%97%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-number">2.2.</span> <span class="toc-text">Undo日志的作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undo%E7%9A%84%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84"><span class="toc-number">2.3.</span> <span class="toc-text">undo的存储结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9E%E6%BB%9A%E6%AE%B5%E4%B8%8Eundo%E9%A1%B5"><span class="toc-number">2.3.1.</span> <span class="toc-text">回滚段与undo页</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9E%E6%BB%9A%E6%AE%B5%E4%B8%8E%E4%BA%8B%E5%8A%A1"><span class="toc-number">2.3.2.</span> <span class="toc-text">回滚段与事务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9E%E6%BB%9A%E6%AE%B5%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E5%88%86%E7%B1%BB"><span class="toc-number">2.3.3.</span> <span class="toc-text">回滚段中的数据分类</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undo%E7%9A%84%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.4.</span> <span class="toc-text">undo的类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undo-log%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-number">2.5.</span> <span class="toc-text">undo log的生命周期</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E8%A6%81%E7%94%9F%E6%88%90%E8%BF%87%E7%A8%8B"><span class="toc-number">2.5.1.</span> <span class="toc-text">简要生成过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%A6%E7%BB%86%E7%94%9F%E6%88%90%E8%BF%87%E7%A8%8B"><span class="toc-number">2.5.2.</span> <span class="toc-text">详细生成过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undo-log%E6%98%AF%E5%A6%82%E4%BD%95%E5%9B%9E%E6%BB%9A%E7%9A%84"><span class="toc-number">2.5.3.</span> <span class="toc-text">undo log是如何回滚的</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undo-log%E7%9A%84%E5%88%A0%E9%99%A4"><span class="toc-number">2.5.4.</span> <span class="toc-text">undo log的删除</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Undo-log-%E5%B0%8F%E7%BB%93"><span class="toc-number">2.6.</span> <span class="toc-text">Undo log 小结</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/12/13/2ec3ab3954b3/" title="通过SSH密钥连接Linux"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/12/13/675c5996649aa.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="通过SSH密钥连接Linux"></a><div class="content"><a class="title" href="/2024/12/13/2ec3ab3954b3/" title="通过SSH密钥连接Linux">通过SSH密钥连接Linux</a><time datetime="2024-12-13T15:37:00.000Z" title="发表于 2024-12-13 23:37:00">2024-12-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/12/13/0616411766f4/" title="【Hexo】一键部署至远程服务器"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/12/13/675c59eff34f4.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【Hexo】一键部署至远程服务器"></a><div class="content"><a class="title" href="/2024/12/13/0616411766f4/" title="【Hexo】一键部署至远程服务器">【Hexo】一键部署至远程服务器</a><time datetime="2024-12-13T13:35:49.000Z" title="发表于 2024-12-13 21:35:49">2024-12-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/12/12/60bae9f9d9cc/" title="【尚硅谷】JVM-类的加载篇"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【尚硅谷】JVM-类的加载篇"></a><div class="content"><a class="title" href="/2024/12/12/60bae9f9d9cc/" title="【尚硅谷】JVM-类的加载篇">【尚硅谷】JVM-类的加载篇</a><time datetime="2024-12-12T04:02:59.000Z" title="发表于 2024-12-12 12:02:59">2024-12-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/12/11/0a6035f3745c/" title="【尚硅谷】JVM-字节码篇"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【尚硅谷】JVM-字节码篇"></a><div class="content"><a class="title" href="/2024/12/11/0a6035f3745c/" title="【尚硅谷】JVM-字节码篇">【尚硅谷】JVM-字节码篇</a><time datetime="2024-12-11T00:33:29.000Z" title="发表于 2024-12-11 08:33:29">2024-12-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/12/09/68b16c939c95/" title="【智能协同云图库】2-项目初始化"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/12/09/6756ee980378a.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【智能协同云图库】2-项目初始化"></a><div class="content"><a class="title" href="/2024/12/09/68b16c939c95/" title="【智能协同云图库】2-项目初始化">【智能协同云图库】2-项目初始化</a><time datetime="2024-12-09T14:12:44.000Z" title="发表于 2024-12-09 22:12:44">2024-12-09</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div id="footer_deal"><a class="deal_link" target="_blank" rel="noopener" href="https://github.com/shiguang-coding" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a><a class="deal_link" href="mailto:an_shiguang@163.com" title="email"><i class="anzhiyufont anzhiyu-icon-envelope"></i></a><img class="footer_mini_logo" title="返回顶部" alt="返回顶部" onclick="anzhiyu.scrollToDest(0, 500)" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/avatar.png" size="50px"><a class="deal_link" href="/atom.xml" title="RSS"><i class="anzhiyufont anzhiyu-icon-rss"></i></a><a class="deal_link" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC"><i class="anzhiyufont anzhiyu-icon-copyright-line"></i></a></div><div id="anzhiyu-footer"><div class="footer-group"><div class="footer-title">服务</div><div class="footer-links"><a class="footer-item" title="开往" target="_blank" rel="noopener" href="https://www.travellings.cn/go.html">开往</a><a class="footer-item" title="异次元之旅" target="_blank" rel="noopener" href="https://travel.moe/go.html?travel=on">异次元之旅</a><a class="footer-item" title="列表导航" target="_blank" rel="noopener" href="https://zhblogs.ohyee.cc/">列表导航</a><a class="footer-item" title="十年之约" target="_blank" rel="noopener" href="https://www.foreverblog.cn/">十年之约</a></div></div><div class="footer-group"><div class="footer-title">文章</div><div class="footer-links"><a class="footer-item" title="归档" href="/archives/">归档</a><a class="footer-item" title="分类" href="/categories/">分类</a><a class="footer-item" title="标签" href="/tags/">标签</a><a class="footer-item" title="RSS" href="/tom.xml">RSS</a></div></div><div class="footer-group"><div class="footer-title">导航</div><div class="footer-links"><a class="footer-item" title="即刻短文" href="/essay/">即刻短文</a><a class="footer-item" title="留言板" href="/comment/">留言板</a><a class="footer-item" title="关于我" href="/about/">关于我</a></div></div><div class="footer-group"><div class="footer-title-group"><div class="footer-title">友链</div><a class="random-friends-btn" id="footer-random-friends-btn" href="javascript:addFriendLinksInFooter();" title="换一批友情链接"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right"></i></a></div><div class="footer-links" id="friend-links-in-footer"></div></div></div><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo_v5.4.0" title="博客框架为Hexo_v5.4.0"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Frame-Hexo.svg" alt="博客框架为Hexo_v5.4.0"></a><a class="github-badge" target="_blank" href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu" style="margin-inline:5px" data-title="本站使用AnZhiYu主题" title="本站使用AnZhiYu主题"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.9/img/Theme-AnZhiYu-2E67D3.svg" alt="本站使用AnZhiYu主题"></a><a class="github-badge" target="_blank" href="https://icp.gov.moe/?keyword=blog.shiguangdev.cn" style="margin-inline:5px" data-title="萌ICP备20246006号" title="萌ICP备20246006号"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shields.io/badge/%E8%90%8Cicp%E5%A4%87-20246006%E5%8F%B7-FF1485" alt="萌ICP备20246006号"></a><a class="github-badge" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" style="margin-inline:5px" data-title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可" title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.2.0/img/badge/Copyright-BY-NC-SA.svg" alt="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"></a></p></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">©2023 - 2024 By <a class="footer-bar-link" href="/" title="時光" target="_blank">時光</a></div></div><div id="footer-type-tips"></div><div class="js-pjax"><script>function subtitleType () {
+  fetch('https://v1.hitokoto.cn')
+    .then(response => response.json())
+    .then(data => {
+      if (true) {
+        const from = '出自 ' + data.from
+        const sub = []
+        sub.unshift(data.hitokoto, from)
+        window.typed = new Typed('#footer-type-tips', {
+          strings: sub,
+          startDelay: 300,
+          typeSpeed: 150,
+          loop: true,
+          backSpeed: 50,
+        })
+      } else {
+        document.getElementById('footer-type-tips').innerHTML = data.hitokoto
+      }
+    })
+}
+
+if (true) {
+  if (typeof Typed === 'function') {
+    subtitleType()
+  } else {
+    getScript('https://cdn.cbd.int/typed.js@2.1.0/dist/typed.umd.js').then(subtitleType)
+  }
+} else {
+  subtitleType()
+}
+</script></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu" title="主题">主题</a><a class="footer-bar-link" target="_blank" rel="noopener" href="https://img.shiguangdev.cn/" title="图床">图床</a><a class="footer-bar-link" target="_blank" rel="noopener" href="https://beian.miit.gov.cn/" title="豫ICP备2024070732号">豫ICP备2024070732号</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">254</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">191</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">16</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://www.shiguang666.eu.org" title="時光主页"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="時光主页"><span class="back-menu-item-text">時光主页</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://nav.shiguang666.eu.org" title="時光导航站"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="時光导航站"><span class="back-menu-item-text">時光导航站</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://game.shiguang666.eu.org" title="怀旧游戏机"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="怀旧游戏机"><span class="back-menu-item-text">怀旧游戏机</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://games.shiguang666.eu.org" title="在线小游戏"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="在线小游戏"><span class="back-menu-item-text">在线小游戏</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">后台管理</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://img.shiguangdev.cn/" title="時光图床"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/favicon.ico" alt="時光图床"><span class="back-menu-item-text">時光图床</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://qexo.shiguang666.eu.org/" title="Hexo管理面板"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://qexo.shiguang666.eu.org/favicon.ico" alt="Hexo管理面板"><span class="back-menu-item-text">Hexo管理面板</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 归档</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随机</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/news/"><i class="fa fa-calendar faa-tada"></i><span> 早报亭</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/music/?id=10051718332&amp;server=netease"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/gallery/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/xjj/"><i class="fa fa-rocket faa-tada"></i><span> 养生堂</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/flink/"><i class="anzhiyufont anzhiyu-icon-artstation faa-tada" style="font-size: 0.9em;"></i><span> 朋友圈</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comment/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于我</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/AI/" style="font-size: 0.88rem;">AI<sup>9</sup></a><a href="/tags/Alist/" style="font-size: 0.88rem;">Alist<sup>3</sup></a><a href="/tags/CentOs/" style="font-size: 0.88rem;">CentOs<sup>1</sup></a><a href="/tags/ChatGPT/" style="font-size: 0.88rem;">ChatGPT<sup>13</sup></a><a href="/tags/ChatGPt/" style="font-size: 0.88rem;">ChatGPt<sup>1</sup></a><a href="/tags/Chrome/" style="font-size: 0.88rem;">Chrome<sup>1</sup></a><a href="/tags/CloudFlare/" style="font-size: 0.88rem;">CloudFlare<sup>3</sup></a><a href="/tags/DNS/" style="font-size: 0.88rem;">DNS<sup>1</sup></a><a href="/tags/Ecology/" style="font-size: 0.88rem;">Ecology<sup>1</sup></a><a href="/tags/GPT-4o/" style="font-size: 0.88rem;">GPT-4o<sup>2</sup></a><a href="/tags/Gemini/" style="font-size: 0.88rem;">Gemini<sup>2</sup></a><a href="/tags/Git/" style="font-size: 0.88rem;">Git<sup>8</sup></a><a href="/tags/GitHub/" style="font-size: 0.88rem;">GitHub<sup>6</sup></a><a href="/tags/Hexo/" style="font-size: 0.88rem;">Hexo<sup>24</sup></a><a href="/tags/IDEA/" style="font-size: 0.88rem;">IDEA<sup>3</sup></a><a href="/tags/KeyBoardTestUtility/" style="font-size: 0.88rem;">KeyBoardTestUtility<sup>1</sup></a><a href="/tags/Linux/" style="font-size: 0.88rem;">Linux<sup>4</sup></a><a href="/tags/Lombok/" style="font-size: 0.88rem;">Lombok<sup>1</sup></a><a href="/tags/Markdown/" style="font-size: 0.88rem;">Markdown<sup>2</sup></a><a href="/tags/MindManager/" style="font-size: 0.88rem;">MindManager<sup>1</sup></a><a href="/tags/Mysql/" style="font-size: 0.88rem;">Mysql<sup>2</sup></a><a href="/tags/Navicat/" style="font-size: 0.88rem;">Navicat<sup>1</sup></a><a href="/tags/Perplexity-AI/" style="font-size: 0.88rem;">Perplexity AI<sup>1</sup></a><a href="/tags/PicGo/" style="font-size: 0.88rem;">PicGo<sup>1</sup></a><a href="/tags/QQ/" style="font-size: 0.88rem;">QQ<sup>1</sup></a><a href="/tags/SSL/" style="font-size: 0.88rem;">SSL<sup>3</sup></a><a href="/tags/Sqlserver/" style="font-size: 0.88rem;">Sqlserver<sup>1</sup></a><a href="/tags/Typora/" style="font-size: 0.88rem;">Typora<sup>5</sup></a><a href="/tags/drawio/" style="font-size: 0.88rem;">drawio<sup>1</sup></a><a href="/tags/git/" style="font-size: 0.88rem;">git<sup>1</sup></a><a href="/tags/mysql/" style="font-size: 0.88rem;">mysql<sup>1</sup></a><a href="/tags/svn/" style="font-size: 0.88rem;">svn<sup>2</sup></a><a href="/tags/%E5%9B%BE%E5%90%A7%E5%B7%A5%E5%85%B7%E7%AE%B1/" style="font-size: 0.88rem;">图吧工具箱<sup>1</sup></a><a href="/tags/%E5%9B%BE%E5%BA%8A/" style="font-size: 0.88rem;">图床<sup>7</sup></a><a href="/tags/%E5%BC%80%E6%BA%90%E5%88%86%E4%BA%AB/" style="font-size: 0.88rem;">开源分享<sup>6</sup></a><a href="/tags/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/" style="font-size: 0.88rem;">搜索引擎<sup>2</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D/" style="font-size: 0.88rem;">数据恢复<sup>1</sup></a><a href="/tags/%E6%A8%A1%E6%9D%BF/" style="font-size: 0.88rem;">模板<sup>4</sup></a><a href="/tags/%E8%B8%A9%E5%9D%91/" style="font-size: 0.88rem;">踩坑<sup>6</sup></a><a href="/tags/%E9%B1%BC%E7%9A%AE/" style="font-size: 0.88rem;">鱼皮<sup>10</sup></a></div></div><hr></div></div><div id="keyboard-tips"><div class="keyboardTitle">博客快捷键</div><div class="keybordList"><div class="keybordItem"><div class="keyGroup"><div class="key">shift K</div></div><div class="keyContent"><div class="content">关闭快捷键功能</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift A</div></div><div class="keyContent"><div class="content">打开/关闭中控台</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift M</div></div><div class="keyContent"><div class="content">播放/暂停音乐</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift D</div></div><div class="keyContent"><div class="content">深色/浅色显示模式</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift S</div></div><div class="keyContent"><div class="content">站内搜索</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift R</div></div><div class="keyContent"><div class="content">随机访问</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift H</div></div><div class="keyContent"><div class="content">返回首页</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift F</div></div><div class="keyContent"><div class="content">友链鱼塘</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift L</div></div><div class="keyContent"><div class="content">友链页面</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift P</div></div><div class="keyContent"><div class="content">关于本站</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift I</div></div><div class="keyContent"><div class="content">原版/本站右键菜单</div></div></div></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="anzhiyufont anzhiyu-icon-comments"></i></a><a id="switch-commentBarrage" href="javascript:anzhiyu.switchCommentBarrage();" title="开关弹幕"><i class="anzhiyufont anzhiyu-icon-danmu"></i></a><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="nav-music"><a id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()" accesskey="m">播放音乐</a><div id="console-music-bg"></div><meting-js id="10051718332" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random" volume="0.7"></meting-js></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="anzhiyufont anzhiyu-icon-xmark"></i></button></nav><div class="is-center" id="loading-database"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-pulse-icon"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"></div></div><hr><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://music.163.com/#/my/m/music/playlist?id=10051718332&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><canvas id="universe"></canvas><script async="" src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("05/01/2023 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2023 By 安知鱼 V1.6.14",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 時光 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async="" src="/anzhiyu/random.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>(() => {
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo.shiguangdev.eu.org',
+      region: '',
+      onCommentLoaded: () => {
+        anzhiyu.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') setTimeout(runFn,0)
+    else getScript('https://cdn.cbd.int/twikoo@1.6.39/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo.shiguangdev.eu.org',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(res => {
+      countELement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  const runFn = () => {
+    init();
+    GLOBAL_CONFIG_SITE.isPost && getCount()
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) anzhiyu.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else {
+      loadTwikoo()
+    }
+  } else {
+    window.loadOtherComment = loadTwikoo
+  }
+})()</script><input type="hidden" name="page-type" id="page-type" value="post"><script async="" src="/js/anzhiyu/comment_barrage.js"></script></div><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getComment = () => {
+    const runTwikoo = () => {
+      twikoo.getRecentComments({
+        envId: 'https://twikoo.shiguangdev.eu.org',
+        region: '',
+        pageSize: 6,
+        includeReply: true
+      }).then(function (res) {
+        const twikooArray = res.map(e => {
+          return {
+            'content': changeContent(e.comment),
+            'avatar': e.avatar,
+            'nick': e.nick,
+            'url': e.url + '#' + e.id,
+            'date': new Date(e.created).toISOString()
+          }
+        })
+
+        saveToLocal.set('twikoo-newest-comments', JSON.stringify(twikooArray), 10/(60*24))
+        generateHtml(twikooArray)
+      }).catch(function (err) {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.textContent= "无法获取评论，请确认相关配置是否正确"
+      })
+    }
+
+    if (typeof twikoo === 'object') {
+      runTwikoo()
+    } else {
+      getScript('https://cdn.cbd.int/twikoo@1.6.39/dist/twikoo.all.min.js').then(runTwikoo)
+    }
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'><div class='name'><span>${array[i].nick} </span></div></a>`
+        }
+        
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <time datetime="${array[i].date}">${anzhiyu.diffDate(array[i].date, true)}</time></div>
+        </div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom && ($dom.innerHTML= result)
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('twikoo-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script async="" data-pjax="" src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><script src="/js/anzhiyu/right_click_menu.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><script src="/js/custom/footer-animal.js" defer=""></script><script src="/api/card-welcome.js"></script><script id="click-heart" src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/dist/click-heart.min.js" async="async" mobile="false"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","meta[property=\"og:type\"]","meta[property=\"og:site_name\"]","meta[property=\"og:description\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div><!-- hexo injector body_end start -->
+  <script data-pjax="" src="/js/hexo_githubcalendar.js"></script>
+  <script data-pjax="">
+        function GithubCalendarConfig(){
+            var git_githubapiurl ="https://githubcalendarapi.shiguang666.eu.org/api?user=shiguang-coding";
+            var git_color =['#ebedf0', '#a2f7af', '#6ce480', '#54ad63', '#469252', '#31753c', '#1f5f2a', '#13531f', '#084111', '#032b09', '#000000'];
+            var git_user ="shiguang-coding";
+            var parent_div_git = document.getElementById('recent-posts');
+            var git_div_html = '<div class="recent-post-item" style="width:100%;height:auto;padding:10px;"><div id="github_loading" style="width:10%;height:100%;margin:0 auto;display: block"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animateTransform></path></svg></div><div id="github_container"></div></div>';
+            if(parent_div_git && location.pathname =='/'){
+                console.log("已挂载hexo-github-calendar https://github.com/Barry-Flynn/hexo-github-calendar");
+                // parent_div_git.innerHTML=git_div_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",git_div_html) // 有报错，但不影响使用(支持pjax跳转)
+            };
+            GithubCalendar(git_githubapiurl,git_color,git_user)
+        }
+        if(document.getElementById('recent-posts')){
+            GithubCalendarConfig()
+        }
+    </script>
+    <style>#github_container{min-height:280px}@media screen and (max-width:650px) {#github_container{background-image:;min-height:0px}}</style>
+    <style></style><!-- hexo injector body_end end -->
+    <link rel="stylesheet" href="https://ai.tianli0.top/static/public/postChatUser_summary.min.css">
+    <script>
+        let tianliGPT_key = '75439fb77e5551eacf54f0df75565616dcf2ad';
+        let tianliGPT_postSelector = '#article-container';
+        let tianliGPT_Title = '文章摘要';
+        let tianliGPT_postURL = '/^https?://[^/]+/[0-9]{4}/[0-9]{2}/[0-9]{2}/';
+        let tianliGPT_blacklist = '';
+        let tianliGPT_wordLimit = '1000';
+        let tianliGPT_typingAnimate = true;
+        var postChatConfig = {
+          backgroundColor: "#3e86f6",
+          bottom: "16px",
+          left: "16px",
+          fill: "#FFFFFF",
+          width: "44px",
+          frameWidth: "375px",
+          frameHeight: "600px",
+          defaultInput: true,
+          upLoadWeb: true,
+          showInviteLink: true,
+          userTitle: "PostChat",
+          userDesc: "如果你对网站的内容有任何疑问，可以来问我哦～",
+          addButton: true,
+          beginningText: "这篇文章介绍了"
+        };
+    </script>
+    <script data-postchat_key="75439fb77e5551eacf54f0df75565616dcf2ad" src="https://ai.tianli0.top/static/public/postChatUser_summary.min.js"></script>
+  </body></html>

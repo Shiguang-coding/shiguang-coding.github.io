@@ -1,0 +1,950 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>【尚硅谷】MySQL-InnoDB数据存储结构 | 時光</title><meta name="keywords" content="尚硅谷,MySQL"><meta name="author" content="時光"><meta name="copyright" content="時光"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="【尚硅谷】MySQL-InnoDB数据存储结构"><meta name="application-name" content="【尚硅谷】MySQL-InnoDB数据存储结构"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="【尚硅谷】MySQL-InnoDB数据存储结构"><meta property="og:url" content="https://blog.shiguang666.eu.org/2024/09/20/dbfa846f2f03/index.html"><meta property="og:site_name" content="時光"><meta property="og:description" content="在线视频:MySQL数据库入门到大牛，mysql安装到优化，百科全书级，全网天花板官方资料: 尚硅谷MySQL入门到高级-宋红康版 代码仓库Gitee：https:&amp;#x2F;&amp;#x2F;gitee.com&amp;#x2F;an_shiguang&amp;#x2F;learn-mysql  数据库的存储结构：页索引结构给我们提供了高效的索引方式，不过"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg"><meta property="article:author" content="時光"><meta property="article:tag" content="博客,時光,時光的博客,時光博客园子,实用博客,开源,共享"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg"><meta name="description" content="在线视频:MySQL数据库入门到大牛，mysql安装到优化，百科全书级，全网天花板官方资料: 尚硅谷MySQL入门到高级-宋红康版 代码仓库Gitee：https:&amp;#x2F;&amp;#x2F;gitee.com&amp;#x2F;an_shiguang&amp;#x2F;learn-mysql  数据库的存储结构：页索引结构给我们提供了高效的索引方式，不过"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://blog.shiguang666.eu.org/2024/09/20/dbfa846f2f03/"><link rel="preconnect" href="//cdn.cbd.int"><meta name="google-site-verification" content="xxx"><meta name="baidu-site-verification" content="code-xxx"><meta name="msvalidate.01" content="xxx"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: {"enable":true,"title":"与各类博主无限进步","addFriendPlaceholder":"昵称（请勿包含博客等字样）：\n网站地址（要求博客地址，请勿提交个人主页）：\n头像图片url（请提供尽可能清晰的图片，我会上传到我自己的图床）：\n描述：\n站点截图（可选）：\n"},
+  peoplecanvas: undefined,
+  postHeadAiDescription: undefined,
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: {"enable":true,"default":"晚上好👋","list":[{"greeting":"晚安😴","startTime":0,"endTime":5},{"greeting":"早上好鸭👋, 祝你一天好心情！","startTime":6,"endTime":9},{"greeting":"上午好👋, 状态很好，鼓励一下～","startTime":10,"endTime":10},{"greeting":"11点多啦, 在坚持一下就吃饭啦～","startTime":11,"endTime":11},{"greeting":"午安👋, 宝贝","startTime":12,"endTime":14},{"greeting":"🌈充实的一天辛苦啦！","startTime":14,"endTime":18},{"greeting":"19点喽, 奖励一顿丰盛的大餐吧🍔。","startTime":19,"endTime":19},{"greeting":"晚上好👋, 在属于自己的时间好好放松😌~","startTime":20,"endTime":24}]},
+  twikooEnvId: 'https://twikoo.shiguangdev.eu.org',
+  commentBarrageConfig:{"enable":true,"maxBarrage":1,"barrageTime":4000,"accessToken":"","mailMd5":""},
+  music_page_default: "nav_music",
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: true,
+  mainTone: undefined,
+  authorStatus: {"skills":["🌟 技术分享领航人","📚 终身学习倡导者","💡 创新思维启发源","📈 成长路径引路人","🚀 科技趋势探索者","🤖️ AI技术探索先锋","🌈 技术创新推动手","💬 社区互动活跃家","🛠️ 代码经验传授师","📢 知识传播倡导员"]},
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":true,"limitCount":300,"languages":{"author":"作者: 時光","link":"链接: ","source":"来源: 時光","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: true,
+  shortcutKey: {"enable":true,"delay":100,"shiftDelay":200},
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: '時光',
+  title: '【尚硅谷】MySQL-InnoDB数据存储结构',
+  postAI: '',
+  pageFillDescription: '数据库的存储结构：页, 磁盘与内存交互基本单位：页, 页结构概述, 页的大小, 页的上层结构, 页的内部结构, 第一部分：File Header (文件头部) 和 File Trailer (文件尾部), File Header (文件头部), File Trailer（文件尾部）, 第二部分：User Records (用户记录)、最大最小记录、Free Space (空闲空间), Free Space (空闲空间), User Records (用户记录), 第三部分：Page Directory (页目录) 和 Page Header (页面头部), Page Directory (页目录), Page Header (页面头部), 从数据页的角度看B+树如何查询, B+树是如何进行记录检索的？, 普通索和唯一索引在查询效率上有什么不同？, InnoDB行格式（或记录格式）, 指定行格式的语法, COMPACT行格式, 变长字段长度列表, Null值列表, 记录头信息, delete_mark, min_rec_mask, record_type, heap_no, n_owned, next_record, 记录的真实数据, Dynamic和Compressed行格式, 行溢出, Dynamic和Compressed行格式, Redundant行格式, 字段长度偏移列表, 记录头信息（record header）, 区、段与碎片区, 为什么要有区？, 为什么要有段？, 为什么要有碎片区?, 区的分类, 表空间, 独立表空间, 系统表空间, 附录：数据页加载的三种方式, 内存读取, 随机读取, 顺序读取在线视频数据库入门到大牛安装到优化百科全书级全网天花板官方资料尚硅谷入门到高级宋红康版代码仓库数据库的存储结构页索引结构给我们提供了高效的索引方式不过索引信息以及数据记录都是保存在文件上的确切说是存储在页结构中另一方面索引是在存储引擎中实现的服务器上的存储引擎负责对表中数据的读取和写入工作不同存储引擎中存放的格式一般是不同的甚至有的存储引擎比如都不用磁盘来存储数据由于是的默认存储引擎所以本章剖析存储引擎的数据存储结构磁盘与内存交互基本单位页将数据划分为若干个页中页的大小默认为以页作为磁盘和内存之间交互的基本单位也就是一次最少从磁盘中读取的内容到内存中一次最少把内存中的内容刷新到磁盘中也就是说在数据库中不论读一行还是读多行都是将这些行所在的页进行加载也就是说数据库管理存储空间的基本单位是页数据库操作的最小单位也是页一个页中可以存储多个行记录记录是按照行来存储的但是数据库的读取并不以行为单位否则一次读取也就是一次操作只能处理一行数据效率会非常低页结构概述页页页页这些页可以不在物理结构上相连只要通过双向链表相关联即可每个数据页中的记录会按照主键值从小到大的顺序组成一个单向链表每个数据页都会为存储在它里边的记录生成一个页目录在通过主键查找某条记录的时候可以在页目录中使用二分法快速定位到对应的槽然后再遍历该槽对应分组中的记录即可快速找到指定的记录页的大小不同的数据库管理系统简称的页大小不同比如在的存储引擎中默认页的大小是我们可以通过下面的命令来进行查看中页的大小为而在中我们用术语块来表示页支持的快大小为和页的上层结构另外在数据库中还存在着区段和表空间的概念行页区段表空间的关系如下图所示区是比页大一级的存储结构在存储引擎中一个区会分配个连续的页因为中的页大小默认是所以一个区的大小是段由一个或多个区组成区在文件系统是一个连续分配的空间在中是连续的个页不过在段中不要求区与区之间是相邻的段是数据库中的分配单位不同类型的数据库对象以不同的段形式存在当我们创建数据表索引的时候就会相应创建对应的段比如创建一张表时会创建一个表段创建一个索引时会创建一个索引段表空间是一个逻辑容器表空间存储的对象是段在一个表空间中可以有一个或多个段但是一个段只能属于一个表空间数据库由一个或多个表空间组成表空间从管理上可以划分为系统表空间用户表空间撒销表空间临时表空间等页的内部结构页如果按类型划分的话常见的有数据页保存树节点系统页页和事务数据页等数据页是我们最常使用的页数据页的大小的存储空间被划分为七个部分分别是文件头页头最大最小记录用户记录空闲空间页目录和文件尾页结构的示意图如下所示如下表所示我们可以把这个结构分为个部分第一部分文件头部和文件尾部首先是文件通用部分也就是文件头和文件尾文件头部作用描述各种页的通用信息比如页的编号其上一页下一页是谁等大小字节构成字节每一个页都有一个单独的页号就跟你的身份证号码一样通过页号可以唯一定位一个页字节这个代表当前页的类型字节和字节都是以页为单位存放数据的如果数据分散到多个不连续的页中存储的话需要把这些页关联起来和就分别代表本页的上一个和下一个页的页号这样通过建立一个双向链表把许许多多的页就都串联起来了保证这些页之间不需要是物理上的连续而是逻辑上的连续字节代表当前页面的校验和什么是校验和就是对于一个很长的字节串来说我们会通过某种算法来计算一个比较短的值来代表这个很长的字节串这个比较短的值就称为校验和在比较两个很长的字节串之前先比较这两个长字节串的校验和如果校验和都不一样则两个长字节串肯定是不同的所以省去了直接比较两个比较长的字节串的时间损耗文件头部和文件尾部都有属性作用存储引擎以页为单位把数据加载到内存中处理如果该页中的数据在内存中被修改了那么在修改后的某个时间需要把数据同步到磁盘中但是在同步了一半的时候断电了造成了该页传输的不完整为了检测一个页是否完整也就是在同步的时候有没有发生只同步一半的尴尬情况这时可以通过文件尾的校验和值与文件头的校验和做比对如果两个值不相等则证明页的传输有问题需要重新进行传输否则认为页的传输已经完成具体的每当一个页面在内存中修改了在同步之前就要把它的校验和算出来因为在页面的前边所以校验和会被首先同步到磁盘当完全写完时校验和也会被写到页的尾部如果完全同步成功则页的首部和尾部的校验和应该是一致的如果写了一半儿断电了那么在中的校验和就代表着已经修改过的页而在中的校验和代表着原先的页二者不同则意味着同步中间出了错这里校验方式就是采用算法进行校验字节页面被最后修改时对应的日志序列位置英文名是文件尾部大小字节前个字节代表页的校验和这个部分是和中的校验和相对应的后个字节代表页面被最后修改时对应的日志序列位置这个部分也是为了校验页的完整性的如果首部和尾部的值校验不成功的话就说明同步过程出现了问题第二部分用户记录最大最小记录空闲空间第二个部分是记录部分页的主要作用是存储记录所以最大和最小记录和用户记录部分占了页结构的主要空间空闲空间我们自己存储的记录会按照指定的行格式存储到部分但是在一开始生成页的时候其实并没有这个部分每当我们插入一条记录都会从部分也就是尚未使用的存储空间中申请一个记录大小的空间划分到部分当部分的空间全部被部分替代掉之后也就意味着这个页使用完了如果还有新的记录插入的话就需要去申请新的页了用户记录中的这些记录按照指定的行格式一条一条摆在部分相互之间形成单链表用户记录里的一条条数据如何记录详见记录行格式的记录头信息第三部分页目录和页面头部页目录为什么需要页目录在页中记录是以单向链表的形式进行存储的单向链表的特点就是插入删除非常方便但是检索效率不高最差的情况下需要遍历链表上的所有节点才能完成检索因此在页结构中专门设计了页目录这个模块专门给记录做一个目录通过二分查找法的方式进行检索提升效率需求根据主键值查找页中的某条记录如何实现快速查找呢方式顺序查找从记录最小记录开始沿着链表一直往后找总有一天会找到或者找不到在找的时候还能投机取巧因为链表中各个记录的值是按照从小到大顺序排列的所以当链表的某个节点代表的记录的主键值大于你想要查找的主键值时你就可以停止查找了因为该节点后边的节点的主键值依次递增方式使用页目录二分法查找将所有的记录分成几个组这些记录包括最小记录和最大记录但不包括标记为已删除的记录第组也就是最小记录所在的分组只有个记录最后一组就是最大记录所在的分组会有条记录其余的组记录数量在条之间这样做的好处是除了第组最小记录所在组以外其余组的记录数会尽量平分在每个组中最后一条记录的头信息中会存储该组一共有多少条记录作为字段页目录用来存储每组最后一条记录的地址偏移量这些地址偏移量会按照先后顺序存储起来每组的地址偏移量也被称之为槽每个槽相当于指针指向了不同组的最后一个记录举例举例现在的表中正常的记录共有条会把它们分成两组第一组中只有一个最小记录第二组中是剩余的条记录如下图从这个图中我们需要注意这么几点现在页目录部分中有两个槽也就意味着我们的记录被分成了两个组槽中的值是代表最大记录的地址偏移量就是从页面的字节开始数数个字节槽中的值是代表最小记录的地址偏移量注意最小和最大记录的头信息中的属性最小记录的值为代表着以最小记录结尾的这个分组中只有条记录也就是最小记录本身最大记录的值为代表着以最大记录结尾的这个分组中只有条记录包括最大记录本身还有我们自己插入的条记录用箭头指向的方式替代数字这样更易于我们理解修改后如下再换个角度看一下单纯从逻辑上看一下这些记录和页目录的关系页目录分组的个数如何确定为什么最小记录的值为而最大记录的值为呢规定对于最小记录所在的分组只能有条记录最大记录所在的分组拥有的记录条数只能在条之间剩下的分组中记录的条数范围只能在是条之间分组是按照下边的步骤进行的初始情况下一个数据页里只有最小记录和最大记录两条记录它们分属于两个分组之后每插入一条记录都会从页目录中找到主键值比本记录的主键值大并且差值最小的槽然后把该槽对应的记录的值加表示本组内又添加了一条记录直到该组中的记录数等于个在一个组中的记录数等于个后再插入一条记录时会将组中的记录拆分成两个组一个组中条记录另一个条记录这个过程会在页目录中新增一个槽来记录这个新增分组中最大的那条记录的偏移量页目录结构下如何快速查找记录现在向表中添加更多的数据如下添加了条记录现在页里一共有条记录了包括最小和最大记录这些记录被分成了个组如图所示这里只保留了条记录的记录头信息中的和属性省略了各个记录之间的箭头现在看怎么从这个页目录中查找记录因为各个槽代表的记录的主键值都是从小到大排序的所以我们可以使用二分法来进行快速查找个槽的编号分别是所以初始情况下最低的槽就是最高的槽就是比方说我们想找主键值为的记录过程是这样的计算中间槽的位置所以查看槽对应记录的主键值为又因为所以设置保持不变重新计算中间槽的位置所以查看槽对应的主键值为又因为所以设置保持不变因为的值为所以确定主键值为的记录在槽对应的组中此刻我们需要找到槽中主键值最小的那条记录然后沿着单向链表遍历槽中的记录但是我们前边又说过每个槽对应的记录都是该组中主键值最大的记录这里槽对应的记录是主键值为的记录怎么定位一个组中最小的记录呢别忘了各个槽都是挨着的我们可以很轻易的拿到槽对应的记录主键值为该条记录的下一条记录就是槽中主键值最小的记录该记录的主键值为所以我们可以从这条主键值为的记录出发遍历槽中的各条记录直到找到主键值为的那条记录即可由于一个组中包含的记录条数只能是条所以遍历一个组中的记录的代价是很小的小结在一个数据页中查找指定主键值的记录的过程分为两步通过二分法确定该记录所在的槽并找到该槽所在分组中主键值最小的那条记录通过记录的属性遍历该槽所在的组中的各个记录页面头部假如新插入的一条记录的主键值比上一条记录的主键值大我们说这条记录的插入方向是右边反之则是左边用来表示最后一条记录插入方向的状态就是假设连续几次插入新记录的方向都是一致的会把沿着同一个方向插入记录的条数记下来这个条数就用这个状态表示当然如果最后一条记录的插入方向改变了的话这个状态的值会被清零重新统计从数据页的角度看树如何查询一棵树按照节点类型可以分成两部分叶子节点树最底层的节点节点的高度为存储行记录非叶子节点节点的高度大于存储索引键和页面指针并不存储行记录本身当我们从页结构来理解树的结构的时候可以帮我们理解一些通过索引进行检索的原理树是如何进行记录检索的如果通过树的索引查询行记录首先是从树的根开始逐层检索直到找到叶子节点也就是找到对应的数据页为止将数据页加载到内存中页目录中的槽采用二分查找的方式先找到一个粗略的记录分组然后再在分组中通过链表遍历的方式查找记录普通索和唯一索引在查询效率上有什么不同我们创建索引的时候可以是普通索引也可以是唯一索引那么这两个索引在查询效率上有什么不同呢唯一索引就是在普通索引上增加了约束性也就是关键字唯一找到了关键字就停止检索而普通索引可能会存在用户记录中的关键字相同的情况根据页结构的原理当我们读取一条记录的时候不是单独将这条记录从磁盘中读出去而是将这个记录所在的页加载到内存中进行读取存储引擎的页大小为在一个页中可能存储着上干个记录因此在普通索引的字段上进行查找也就是在内存中多几次判断下一条记录的操作对于来说这些操作所消耗的时间是可以忽略不计的所以对一个索引字段进行检索采用普通索引还是唯一索引在检索效率上基本上没有差别行格式或记录格式我们平时的数据以行为单位来向表中插入数据这些记录在磁盘上的存放方式也被称为行格式或者记录格式存储引擎设计了种不同类型的行格式分别是和行格式查看的默认行格式也可以使用如下语法查看具体表使用的行格式表名指定行格式的语法在创建或修改表的语句中指定行格式表名列的信息行格式名称表名行格式名称举例向表中插入两条记录行格式在版本中默认设置为行格式一条完整的记录其实可以被分为记录的额外信息和记录的真实数据两大部分变长字段长度列表支持一些变长的数据类型比如类型类型这些数据类型修列称为变长字段变长字段中存储多少字节的数据不是固定的所以我们在存储真实数据的时候需要顺便把这些数据占用的字节数也存起来在行格式中把所有变长字段的真实数据占用的字节长度都存放在记录的开头部位从而形成一个变长字段长度列表注意这里面存储的变长长度和字段顺序是反过来的比如两个字段在表结构的顺序是那么在变长字段长度列表中存储的长度顺序就是是反过来的以表中的第一条记录举例因为表的列都是类型的所以这三个列的值的长度都需要保存在记录开头处注意表中的各个列都使用的是字符集每个字符只需要个字节来进行编码又因为这些长度值需要按照列的逆序存放所以最后变长字段长度列表的字节串用十六进制表示的效果就是各个字节之间实际上没有空格用空格隔开只是方便理解把这个字节串组成的变长字段长度列表填入上边的示意图中的效果就是值列表行格式会把可以为的列统一管理起来存在一个标记为值列表中如果表中没有允许存储的列则值列表也不存在了为什么定义值列表之所以要存储是因为数据都是需要对齐的如果没有标注出来值的位置就有可能在查询数据的时候出现混乱如果使用一个特定的符号放到相应的数据位表示空置的话虽然能达到效果但是这样很浪费空间所以直接就在行数据得头部开辟出一块空间专门用来记录该行数据哪些是非空数据哪些是空数据格式如下二进制位的值为时代表该列的值为二进制位的值为时代表该列的值不为例如字段其中是主键在某一行中存储的数依次是那么行格式中的值列表中存储第一个表示不为第二个表示是这里之所以没有是因为数据库会自动跳过主键因为主键肯定是非且唯一的在值列表的数据中就会自动跳过主键的两条记录的值列表就如下第一条记录第二条记录记录头信息大小字节这个表中记录的行格式示意图这些记录头信息中各个属性如下简化后的行格式示意图插入数据图示如下这个属性标记着当前记录是否被删除占用个二进制位值为代表记录并没有被删除值为代表记录被删除掉了被删除的记录为什么还在页中存储呢你以为它删除了可它还在真实的磁盘上这些被删除的记录之所以不立即从磁盘上移除是因为移除它们之后其他的记录在磁盘上需要重新排列导致性能消耗所以只是打一个删除标记而已所有被删除掉的记录都会组成一个所谓的垃圾链表在这个链表中的记录占用的空间称之为可重用空间之后如果有新记录插入到表中的话可能把这些被删除的记录占用的存储空间覆盖掉树的每层非叶子节点中的最小记录都会添加该标记值为我们自己插入的四条记录的值都是意味着它们都不是树的非叶子节点中的最小记录这个属性表示当前记录的类型一共有种类型的记录表示普通记录表示树非叶节点记录表示最小记录表示最大记录从图中我们也可以看出来我们自己插入的记录就是普通记录它们的值都是而最小记录和最大记录的值分别为和至于为的情况我们在索引的数据结构章节讲过这个属性表示当前记录在本页中的位置从图中可以看出来我们插入的条记录在本页中的位置分别是怎么不见值为和的记录呢会自动给每个页里加了两个记录由于这两个记录并不是我们自己插入的所以有时候也称为伪记录或者虚拟记录这两个伪记录一个代表最小记录一个代表最大记录最小记录和最大记录的值分别是和也就是说它们的位置最靠前页目录中每个组中最后一条记录的头信息中会存储该组一共有多少条记录作为字段详情见记录头信息里该属性非常重要它表示从当前记录的真实数据到下一条记录的真实数据的地址偏移量比如第一条记录的值为意味着从第一条记录的真实数据的地址处向后找个字节便是下一条记录的真实数据注意下一条记录指得并不是按照我们插入顺序的下一条记录而是按照主键值由小到大的顺序的下一条记录而且规定记录也就是最小记录的下一条记录就是本页中主键值最小的用户记录而本页中主键值最大的用户记录的下一条记录就是记录也就是最大记录下图用箭头代替偏移量表示演示删除操作从表中删除掉一条记录这个链表也是会跟着变化删掉第条记录后的示意图就是从图中可以看出来删除第条记录前后主要发生了这些变化第条记录并没有从存储空间中移除而是把该条记录的值设置为第条记录的值变为了意味着该记录没有下一条记录了第条记录的指向了第条记录最大记录的值从变成了所以不论我们怎么对页中的记录做增删改操作始终会维护一条记录的单链表链表中的各个节点是按照主键值由小到大的顺序连接起来的演示添加操作主键值为的记录被我们删掉了但是存储空间却没有回收如果我们再次把这条记录插入到表中会发生什么事呢我们看一下记录的存储情况直接复用了原来被删除记录的存储空间说明当数据页中存在多条被删除掉的记录时这些记录的属性将会把这些被删除掉的记录组成一个垃圾链表以备之后重用这部分存储空间记录的真实数据记录的真实数据除了我们自己定义的列的数据以外还会有三个隐藏列实际上这几个列的真正名称其实是一个表没有手动定义主键则会选取一个键作为主键如果连键都没有定义的话则会为表默认添加一个名为的隐藏列作为主键所以是在没有自定义主键以及键的情况下才会存在的事务和回滚指针在后面的第章事务日志章节中讲解举例分析行记录的内部结构在操作系统下可以选择通过程序打开表空间文件这个二进制文件内容如下该行记录从开始若整理一下相信大家会有更好的理解变长字段长度列表逆序标志位第一行没有值固定字节长度自动创建字节列数据列数据列数据列数据注意每行有隐藏列和注意固定长度字段在未能完全占用其长度空间时会用来进行填充接着再来分析下的最后两个字节这两个字节代表代表下一个记录的偏移量即当前记录的位置加上偏移量就是下条记录的起始位置第二行将不做整理除了不同外它和第一行大同小异现在来分析有值的第三行变长字段长度列表逆序标志位第三行有值列数据列数据第三行有值因此标志位不再是而是转换成二进制为为的值代表第列和第列的数据为在其后存储列数据的部分用户会发现没有存储列而只存储了第列和第列非的值因此这个例子很好地说明了不管是类型还是类型在格式下值都不占用任何存储空间和行格式行溢出存储引擎可以将一条记录中的某些数据存储在真正的数据页面之外很多喜欢数据库提供的类型认为可以存放字节这是真的吗如果我们使用字符集的话一个字符就代表一个字节我们看看是否可用结果如下报错信息表达的意思是对一条记录占用的最大存储空间是有限制的除或者类型的列之外其他所有的列不包括隐藏列和记录头信息占用的字节长度加起来不能超过个字节这个个字节除了列本身的数据之外还包括一些其他的数据以行格式为例比如说我们为了存储一个类型的列除了真实数据占有空间以外还需要记录的额外信息如果该类型的列没有属性那最多只能存储个字节的数据因为变长字段的长度占用个字节值标识需要占用个字节如果有属性那么就不需要值标识也就可以多存储一个字节即个字节通过上面的案例我们可以知道一个页的大小一般是也就是字节而一个类型的列就最多可以存储个字节这样就可能出现一个页存放不了一条记录这种现象称为行溢出在和行格式中对于占用存储空间非常大的列在记录的真实数据处只会存储该列的一部分数据把剩余的数据分散存储在几个其他的页中进行分页存储然后记录的真实数据处用个字节存储指向这些页的地址当然这个字节中还包括这些分散在其他页面中的数据的占用的字节数从而可以找到剩余数据所在的页这称为页的扩展举例如下和行格式在中默认行格式就是行格式和行格式挺像只不过在处理行溢出数据时有分歧和两种记录格式对于存放在中的数据采用了完全的行溢出的方式如图在数据页中只存放个字节的指针溢出页的地址实际的数据都存放在溢出页中和两种格式会在记录的真实数据处存储一部分数据存放个前缀字节行记录格式的另一个功能就是存储在其中的行数据会以的算法进行压缩因此对于这类大长度类型的数据能够进行非常有效的存储行格式是版本之前的行记录存储方式支持是为了兼容之前版本的页格式现在我们把表的行格式修改为从上图可以看到不同于行记录格式行格式的首部是一个字段长度偏移列表同样是按照列的顺序逆序放置的下边我们从各个方面看一下行格式有什么不同的地方字段长度偏移列表注意行格式的开头是变长字段长度列表而行格式的开头是字段长度偏移列表与变长字段长度列表有两处不同少了变长两个字行格式会把该条记录中所有列包括隐藏列的长度信息都按照逆序存储到字段长度偏移列表多了偏移两个字这意味着计算列值长度的方式不像行格式那么直观它是采用两个相邻数值的差值来计算各个列值的长度举例比如第一条记录的字段长度偏移列表就是因为它是逆序排放的所以按照列的顺序排列就是按照两个相邻数值的差值来计算各个列值的长度的意思就是第一列的长度就是个字节也就是个字节第二列的长度就是个字节也就是个字节第三列的长度就是个字节也就是个字节第四列的长度就是个字节也就是个字节第五列的长度就是个字节也就是个字节第六列的长度就是个字节也就是个字节第七列的长度就是个字节也就是个字节记录头信息不同于行格式行格式中的记录头信息固定占用个字节位每位的含义见下表与行格式的记录头信息对比来看有两处不同行格式多了和这两个属性行格式没有这个属性其中代表一行中列的数量占用位这也很好地解释了为什么一个行支持最多的列为另一个值为该值定义了偏移列表占用个字节还是个字节当它的值为时表明使用个字节存储当它的值为时表明使用个字节存储的值是怎么选择的我们前边说过每个列对应的偏移量可以占用个字节或者个字节来存储那到底什么时候用个字节什么时候用个字节呢其实是根据该条行格式记录的真实数据占用的总大小来判断的当记录的真实数据占用的字节数值不大于十六进制二进制时每个列对应的偏移量占用个字节当记录的真实数据占用的字节数大于但不大于十六进制二进制时每个列对应的偏移量占用个字节有没有记录的真实数据大于的情况呢有不过此时的记录已经存放到了溢出页中在本页中只保留前个字节和个字节的溢出页面地址因为字段长度偏移列表处只需要记录每个列在本页面中的偏移就好了所以每个列使用个字节来存储偏移量就够了大家可以看出来行格式还是比较简单粗暴的直接使用整个记录的真实数据长度来决定使用个字节还是个字节存储列对应的偏移量只要整条记录的真实数据占用的存储空间大小大于即使第一个列的值占用存储空间小于那对不起也需要使用个字节来表示该列对应的偏移量简单粗暴就是这么简单粗暴所以这种行格式有些过时了为了在解析记录时知道每个列的偏移量是使用个字节还是个字节表示的行格式特意在记录头信息里放置了一个称之为的属性行格式中值的处理因为行格式并没有值列表所以行格式在字段长度偏移列表中的各个列对应的偏移量处做了一些特殊处理将列对应的偏移量值的第一个比特位作为是否为的依据该比特位也可以被称之为比特位也就是说在解析一条记录的某个列时首先看一下该列对应的偏移量的比特位是不是为如果为那么该列的值就是否则不是这也就解释了上边介绍为什么只要记录的真实数据大于十六进制二进制时就采用个字节来表示一个列对应的偏移量主要是第一个比特位是所谓的比特位用来标记该列的值是否为但是还有一点要注意对于值为的列来说该列的类型是否为定长类型决定了值的实际存储方式我们接下来分析一下表的第二条记录它对应的字段长度偏移列表如下按照列的顺序排放就是我们分情况看一下如果存储值的字段是定长类型的比方说数据类型的则值也将占用记录的真实数据部分并把该字段对应的数据使用字节填充如图第二条记录的列的值是而列的类型是占用记录的真实数据部分字节所以我们看到在行格式中使用来表示值另外列对应的偏移量为它对应的二进制实际是可以看到最高位为意味着该列的值是将最高位去掉后的值变成了对应的十进制值为而列对应的偏移量为也就是十进制的也就是说最终列占用的存储空间为个字节如果该存储值的字段是变长数据类型的则不在记录的真实数据处占用任何存储空间比如表的列是类型的是一个变长数据类型列对应的偏移量为与列对应的偏移量相同这也就意味着它的值也为将的最高位去掉后对应的十进制值也是也就意味着列本身不占用任何记录的实际数据处的空间除了以上的几点之外行格式和行格式还是大致相同的区段与碎片区为什么要有区随机数据访问模式不遵循任何顺序数据块的读取或写入是随机的可能分散在存储设备的各个位置连续数据访问模式遵循一定的顺序数据块的读取或写入是连续的通常是按顺序访问存储设备上的数据块树的每一层中的页都会形成一个双向链表如果是以页为单位来分配存储空间的话双向链表相邻的两个页之间的物理位置可能离得非常远我们介绍树索引的适用场景的时候特别提到范围查询只需要定位到最左边的记录和最右边的记录然后沿着双向链表一直扫描就可以了而如果链表中相邻的两个页物理位置离得非常远就是所谓的随机再一次强调磁盘的速度和内存的速度差了好几个数量级随机是非常慢的所以我们应该尽量让链表中相邻的页的物理位置也相邻这样进行范围查询的时候才可以使用所谓的顺序引入区的概念一个区就是在物理位置上连续的个页因为中的页大小默认是所以一个区的大小是在表中数据量大的时候为某个索引分配空间的时候就不再按照页为单位分配了而是按照区为单位分配甚至在表中的数据特别多的时候可以一次性分配多个连续的区虽然可能造成一点点空间的浪费数据不足以填充满整个区但是从性能角度看可以消除很多的随机功大于过为什么要有段对于范围查询其实是对树叶子节点中的记录进行顺序扫描而如果不区分叶子节点和非叶子节点统统把节点代表的页面放到申请到的区中的话进行范围扫描的效果就大打折扣了所以对树的叶子节点和非叶子节点进行了区别对待也就是说叶子节点有自己独有的区非叶子节点也有自己独有的区存放叶子节点的区的集合就算是一个段存放非叶子节点的区的集合也算是一个段也就是说一个索引会生成个段一个叶子节点段一个非叶子节点段除了索引的叶子节点段和非叶子节点段之外中还有为存储一些特殊的数据而定义的段比如回滚段所以常见的段有数据段索引段回滚段数据段即为树的叶子节点索引段即为树的非叶子节点在存储引擎中对段的管理都是由引擎自身所完成不能也没有必要对其进行控制这从一定程度上简化了对于段的管理段其实不对应表空间中某一个连续的物理区域而是一个逻辑上的概念由若干个零散的页面以及一些完整的区组成为什么要有碎片区默认情况下一个使用存储引擎的表只有一个聚簇索引一个索引会生成个段而段是以区为单位申请存储空间的一个区默认占用存储空间所以默认情况下一个只存了几条记录的小表也需要的存储空间么以后每次添加一个索引都要多申请的存储空间么这对于存储记录比较少的表简直是天大的浪费这个问题的症结在于到现在为止我们介绍的区都是非常纯粹的也就是一个区被整个分配给某一个段或者说区中的所有页面都是为了存储同一个段的数据而存在的即使段的数据填不满区中所有的页面那余下的页面也不能挪作他用为了考虑以完整的区为单位分配给某个段对于数据量较小的表太浪费存储空间的这种情况提出了一个碎片区的概念在一个碎片区中并不是所有的页都是为了存储同一个段的数据而存在的而是碎片区中的页可以用于不同的目的比如有些页用于段有些页用于段有些页甚至哪个段都不属于碎片区直属于表空间并不属于任何一个段所以此后为某个段分配存储空间的策略是这样的在刚开始向表中插入数据的时候段是从某个碎片区以单个页面为单位来分配存储空间的当某个段已经占用了个碎片区页面之后就会申请以完整的区为单位来分配存储空间所以现在段不能仅定义为是某些区的集合更精确的应该是某些零散的页面以及一些完整的区的集合区的分类如果把表空间比作是一个集团军段就相当于师区就相当于团一般的团都是隶属于某个师的就像是处于的区全都隶属于某个段而处于以及这三种状态的区却直接隶属于表空间就像独立团直接听命于军部一样区大体上可以分为种类型空闲的区现在还没有用到这个区中的任何页面有剩余空间的碎片区表示碎片区中还有可用的页面没有剩余空间的碎片区表示碎片区中的所有页面都被使用没有空闲页面附属于某个段的区每一个索引都可以分为叶子节点段和非叶子节点段处于以及这三种状态的区都是独立的直属于表空间而处于状态的区是附属于某个段的表空间表空间可以看做是存储引擎逻辑结构的最高层所有的数据都存放在表空间中表空间是一个逻辑容器表空间存储的对象是段在一个表空间中可以有一个或多个段但是一个段只能属于一个表空间表空间数据库由一个或多个表空间组成表空间从管理上可以划分为系统表空间独立表空间撤销表空间和临时表空间独立表空间独立表空间即每张表有一个独立的表空间也就是数据和索引信息都会保存在自己的表空间中独立的表空间即单表可以在不同的数据库之间进行迁移空间可以回收操作可自动回收表空间其他情况表空间不能自己回收如果对于统计分析或是日志表删除大量数据后可以通过回收不用的空间对于使用独立表空间的表不管怎么删除表空间的碎片不会太严重的影响性能而且还有机会处理独立表空间结构独立表空间由段区页组成详见上文真实表空间对应的文件大小我们到数据目录里看会发现一个新建的对应的文件只占用了才个页面大小中这是因为一开始表空间占用的空间很小因为表里边都没有数据不过别忘了这些文件是自扩展的随着表中数据的增多表空间对应的文件也逐渐增大查看的表空间类型你能看到这就意味着每张表都会单独保存为一个文件系统表空间系统表空间的结构和独立表空间基本类似只不过由于整个进程只有一个系统表空间在系统表空间中会额外记录一些有关整个系统信息的页面这部分是独立表空间中没有的数据字典每当我们向一个表中插入一条记录的时候校验过程如下先要校验一下插入语句对应的表存不存在插入的列和表中的列是否符合如果语法没有问题的话还需要知道该表的聚簇索引和所有二级索引对应的根页面是哪个表空间的哪个页面然后把记录插入对应索引的树中所以说除了保存着我们插入的用户数据之外还需要保存许多额外的信息比方说某表属于哪个表空间表里边有多少列表对应的每一个列的类型是什么该表有多少索引每个索引对应哪几个字段该索引对应的根页面在哪个表空间的哪个页面该表有哪些外键外键对应哪个表的哪些列某个表空间对应文件系统上文件路径是什么上述这些数据并不是我们使用语句插入的用户数据实际上是为了更好的管理我们这些用户数据而不得已引入的一些额外数据这些数据也称为元数据存储引擎特意定义了一些列的内部系统表来记录这些这些元数据这些系统表也被称为数据字典它们都是以树的形式保存在系统表空间的某些页面中其中这四个表尤其重要称之为基本系统表我们先看看这个表的结构表结构表结构表结构表结构注意用户是不能直接访问的这些内部系统表除非你直接去解析系统表空间对应文件系统上的文件不过考虑到查看这些表的内容可能有助于大家分析问题所以在系统数据库中提供了一些以开头的表在数据库中的这些以开头的表并不是真正的内部系统表内部系统表就是我们上边以开头的那些表而是在存储引擎启动时读取这些以开头的系统表然后填充到这些以开头的表中以开头的表和以开头的表中的字段并不完全一样但供大家参考已经足矣附录数据页加载的三种方式从磁盘中读取数据的最小单位是数据页而你想得到的的数据就是这个数据页众多行中的一行对于存放的数据逻辑概念上我们称之为表在磁盘等物理层面而言是按数据页形式进行存放的当其加载到中我们称之为缓存页如果缓冲池中没有该页数据那么缓冲池有以下三种读取数据的方式每种方式的读取效率都是不同的内存读取如果该数据存在于内存中基本上执行时间在左右效率还是很高的随机读取如果数据没有在存中就需要在磁盘上对该页进行查找整体时间预估在左右这中有是磁盘的实际繁忙时间包括了寻道和半圈旋转时间有是对可能发生的排队时间的估计值另外还有的传输时间将页从磁盘服务器缓冲区传输到数据库缓冲区中这看起来很快但实际上对于数据库来说消耗的时间已经非常长了因为这还只是一个页的读取时间顺序读取顺序读取其实是一种批量读取的方式因为我们请求的数据在磁盘上往往都是相邻存储的顺序读取可以帮我们批量读取页面这样的话一次性加载到缓冲池中就不需要再对其他页面单独进行磁盘操作了如果一个磁盘的吞吐量是那么对于一个大小的页来说一次可以顺序读取个页相当于一个页的读取时间为采用批量读取的方式即使是从磁盘上进行读取效率也比从内存中只单独读取一个页的效率要高',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-09-21 13:33:01',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><script async="" defer="" src="https://umami.shiguangdev.cn/script.js" data-website-id="ac8d5698-b224-4ea4-aa79-eefb80c47eef"></script><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="時光" type="application/atom+xml">
+</head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="/img/avatar.png"><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><div class="back-home-button"><i class="anzhiyufont anzhiyu-icon-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://www.shiguang666.eu.org" title="時光主页"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="時光主页"><span class="back-menu-item-text">時光主页</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://nav.shiguang666.eu.org" title="時光导航站"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="時光导航站"><span class="back-menu-item-text">時光导航站</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://game.shiguang666.eu.org" title="怀旧游戏机"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="怀旧游戏机"><span class="back-menu-item-text">怀旧游戏机</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://games.shiguang666.eu.org" title="在线小游戏"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="在线小游戏"><span class="back-menu-item-text">在线小游戏</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">后台管理</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://img.shiguangdev.cn/" title="時光图床"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/favicon.ico" alt="時光图床"><span class="back-menu-item-text">時光图床</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://qexo.shiguang666.eu.org/" title="Hexo管理面板"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://qexo.shiguang666.eu.org/favicon.ico" alt="Hexo管理面板"><span class="back-menu-item-text">Hexo管理面板</span></a></div></div></div></div><a id="site-name" href="/" accesskey="h"><div class="title">時光</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 归档</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随机</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/news/"><i class="fa fa-calendar faa-tada"></i><span> 早报亭</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/music/?id=10051718332&amp;server=netease"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/gallery/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/xjj/"><i class="fa fa-rocket faa-tada"></i><span> 养生堂</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/flink/"><i class="anzhiyufont anzhiyu-icon-artstation faa-tada" style="font-size: 0.9em;"></i><span> 朋友圈</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comment/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于我</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button only-home" id="travellings_button" title="随机前往一个开往项目网站"><a class="site-page" onclick="anzhiyu.totraveling()" title="随机前往一个开往项目网站" href="javascript:void(0);" rel="external nofollow" data-pjax-state="external"><i class="anzhiyufont anzhiyu-icon-train"></i></a></div><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍" accesskey="s"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="/img/wechat.png" target="_blank"><img class="post-qr-code-img" alt="微信" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/wechat.png"></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/alipay.png" target="_blank"><img class="post-qr-code-img" alt="支付宝" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/alipay.png"></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/12/"><span class="card-archive-list-date">十二月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">9</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/11/"><span class="card-archive-list-date">十一月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">8</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/10/"><span class="card-archive-list-date">十月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">31</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/09/"><span class="card-archive-list-date">九月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">38</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/08/"><span class="card-archive-list-date">八月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">9</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/07/"><span class="card-archive-list-date">七月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">18</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/06/"><span class="card-archive-list-date">六月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">30</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/05/"><span class="card-archive-list-date">五月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">20</span><span>篇</span></div></a></li></ul></div><hr></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item on" id="consoleCommentBarrage" onclick="anzhiyu.switchCommentBarrage()" title="热评开关"><a class="commentBarrage"><i class="anzhiyufont anzhiyu-icon-message"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="anzhiyu.musicToggle()" title="音乐开关"><a class="music-switch"><i class="anzhiyufont anzhiyu-icon-music"></i></a></div><div class="console-btn-item" id="consoleKeyboard" onclick="anzhiyu.keyboardToggle()" title="快捷键开关"><a class="keyboard-switch"><i class="anzhiyufont anzhiyu-icon-keyboard"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="article-meta tags"><a class="article-meta__tags" href="/tags/%E5%B0%9A%E7%A1%85%E8%B0%B7/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>尚硅谷</span></a><a class="article-meta__tags" href="/tags/MySQL/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>MySQL</span></a></span></div></div><h1 class="post-title" itemprop="name headline">【尚硅谷】MySQL-InnoDB数据存储结构</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2024-09-20T12:24:42.000Z" title="发表于 2024-09-20 20:24:42">2024-09-20</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2024-09-21T05:33:01.045Z" title="更新于 2024-09-21 13:33:01">2024-09-21</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="anzhiyufont anzhiyu-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">14.5k</span><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>46分钟</span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为上海"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>上海</span><span class="post-meta-separator"></span><span class="post-meta-commentcount"><i class="anzhiyufont anzhiyu-icon-comments post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2024/09/20/dbfa846f2f03/#post-comment" tabindex="-1"><span id="twikoo-count"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></a></span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope="" itemtype="https://blog.shiguang666.eu.org/2024/09/20/dbfa846f2f03/"><header><a href="/tags/%E5%B0%9A%E7%A1%85%E8%B0%B7/" tabindex="-1" itemprop="url">尚硅谷</a><a href="/tags/MySQL/" tabindex="-1" itemprop="url">MySQL</a><h1 id="CrawlerTitle" itemprop="name headline">【尚硅谷】MySQL-InnoDB数据存储结构</h1><span itemprop="author" itemscope="" itemtype="http://schema.org/Person">時光</span><time itemprop="dateCreated datePublished" datetime="2024-09-20T12:24:42.000Z" title="发表于 2024-09-20 20:24:42">2024-09-20</time><time itemprop="dateCreated datePublished" datetime="2024-09-21T05:33:01.045Z" title="更新于 2024-09-21 13:33:01">2024-09-21</time></header><div id="postchat_postcontent"><blockquote>
+<p>在线视频:<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1iq4y1u7vj?p=121">MySQL数据库入门到大牛，mysql安装到优化，百科全书级，全网天花板</a><br>官方资料: <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1ztbzMVF9qRJ2xCOpySXl3Q?pwd=yyds">尚硅谷MySQL入门到高级-宋红康版</a></p>
+<p>代码仓库<br>Gitee：<a target="_blank" rel="noopener" href="https://gitee.com/an_shiguang/learn-mysql">https://gitee.com/an_shiguang/learn-mysql</a></p>
+</blockquote>
+<h1 id="数据库的存储结构：页"><a href="#数据库的存储结构：页" class="headerlink" title="数据库的存储结构：页"></a>数据库的存储结构：页</h1><p>索引结构给我们提供了高效的索引方式，不过索引信息以及数据记录都是保存在文件上的，确切说是存储在页结构中。另一方面，索引是在存储引擎中实现的，MySQL服务器上的存储引擎负责对表中数据的读取和写入工作。不同存储引擎中<code>存放的格式</code>一般是不同的，甚至有的存储引擎比如Memory都不用磁盘来存储数据。</p>
+<p>由于<code>InnoDB是MySQL的默认存储引擎</code>，所以本章剖析InnoDB存储引擎的数据存储结构。</p>
+<h2 id="磁盘与内存交互基本单位：页"><a href="#磁盘与内存交互基本单位：页" class="headerlink" title="磁盘与内存交互基本单位：页"></a>磁盘与内存交互基本单位：页</h2><p>InnoDB将数据划分为若干个页，InnoDB中页的大小默认为<code>16KB</code>。</p>
+<p>以<code>页</code>作为磁盘和内存之间交互的<code>基本单位</code>，也就是一次最少从磁盘中读取16KB的内容到内存中，一次最少把内存中的16KB内容刷新到磁盘中。也就是说，<font color="red">在数据库中，不论读一行，还是读多行，都是将这些行所在的页进行加载。也就是说，数据库管理存储空间的基本单位是页(Page),数据库I/0操作的最小单位也是页。</font>一个页中可以存储多个行记录。</p>
+<blockquote>
+<p>记录是按照行来存储的，但是数据库的读取并不以行为单位，否则一次读取（也就是一次/0操作）只能处<br>理一行数据，效率会非常低。</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/20/66ed6d79bef1e.png" alt="image-20240920204128662"></p>
+<h2 id="页结构概述"><a href="#页结构概述" class="headerlink" title="页结构概述"></a>页结构概述</h2><p>页a、页b、页c…页n 这些页可以<code>不在物理结构上相连</code>，只要通过双向链表相关联即可。每个数据页中的记录会按<br>照主键值从小到大的顺序组成一个<code>单向链表</code>，每个数据页都会为存储在它里边的记录生成一个<code>页目录</code>，在通过主<br>键查找某条记录的时候可以<code>在页目录中使用二分法快速定位到对应的槽</code>，然后再遍历该槽对应分组中的记录即可快速找到指定的记录。</p>
+<h2 id="页的大小"><a href="#页的大小" class="headerlink" title="页的大小"></a>页的大小</h2><p>不同的数据库管理系统（简称DBMS）的页大小不同。比如在 MySQL 的 InnoDB 存储引擎中，默认页的大小是 <code>16KB</code>，我们可以通过下面的命令来进行查看：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show variables like '%innodb_page_size%'</span><br></pre></td></tr></tbody></table></figure>
+
+<p>SQL Server 中页的大小为 <code>8KB</code>，而在 Oracle 中我们用术语 “<code>块</code>“ （Block）来表示 “页”，Oracle 支持的快大小为2KB, 4KB, 8KB, 16KB, 32KB 和 64KB。</p>
+<h2 id="页的上层结构"><a href="#页的上层结构" class="headerlink" title="页的上层结构"></a>页的上层结构</h2><p>另外在数据库中，还存在着区（Extent）、段（Segment）和表空间（Tablespace）的概念。行、页、区、段、表空间的关系如下图所示：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/20/66ed702ce2b3f.png" alt="image-20240920205259873"></p>
+<p>区(Extent)是比页大一级的存储结构，在InnoDB存储引擎中，<code>一个区会分配64个连续的页</code>。因为InnoDB中的页大小默认是16KB,所以一个区的大小是<code>64 * 16KB = 1MB</code>。</p>
+<p>段(Segment)由一个或多个区组成，区在文件系统是一个连续分配的空间（在InnoDB中是连续的64个页），不过在段中不要求区与区之间是相邻的。<code>段是数据库中的分配单位，不同类型的数据库对象以不同的段形式存在</code>。当<br>我们创建数据表、索引的时候，就会相应创建对应的段，比如创建一张表时会创建一个表段，创建一个索引时会<br>创建一个索引段。</p>
+<p>表空间(Tablespace)是一个逻辑容器，表空间存储的对象是段，在一个表空间中可以有一个或多个段，但是一<br>个段只能属于一个表空间。数据库由一个或多个表空间组成，表空间从管理上可以划分为<code>系统表空间</code>、<code>用户表空间</code>、<code>撒销表空间</code>、<code>临时表空间</code>等。</p>
+<h1 id="页的内部结构"><a href="#页的内部结构" class="headerlink" title="页的内部结构"></a>页的内部结构</h1><p>页如果按类型划分的话，常见的有 <code>数据页（保存B+树节点）</code>、<code>系统页</code>、<code>Undo页</code> 和 <code>事务数据页</code> 等。数据页是我们最常使用的页。</p>
+<p>数据页的 <code>16KB</code> 大小的存储空间被划分为七个部分，分别是文件头（File Header）、页头（Page Header）、最大最小记录（Infimum + supremum）、用户记录（User Records）、空闲空间（Free Space）、页目录（PageDirectory）和文件尾（File Tailer）。</p>
+<p>页结构的示意图如下所示：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/20/66ed722b60f74.png" alt="image-20240920210130369"></p>
+<p>如下表所示：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/20/66ed723c01d39.png" alt="image-20240920210146953"></p>
+<p>我们可以把这7个结构分为3个部分。</p>
+<h3 id="第一部分：File-Header-文件头部-和-File-Trailer-文件尾部"><a href="#第一部分：File-Header-文件头部-和-File-Trailer-文件尾部" class="headerlink" title="第一部分：File Header (文件头部) 和 File Trailer (文件尾部)"></a>第一部分：File Header (文件头部) 和 File Trailer (文件尾部)</h3><p>首先是<code>文件通用部分</code>，也就是<code>文件头</code>和<code>文件尾</code>。</p>
+<h4 id="File-Header-文件头部"><a href="#File-Header-文件头部" class="headerlink" title="File Header (文件头部)"></a>File Header (文件头部)</h4><p>作用：描述各种页的通用信息。（比如页的编号、其上一页、下一页是谁等）</p>
+<p>大小：38字节</p>
+<p>构成：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/21/66ee1d5778f48.png" alt="image-20240921091148653"></p>
+<p><strong>FIL_PAGE_OFFSET(4字节):</strong></p>
+<p>每一个页都有一个单独的页号，就跟你的身份证号码一样，InnoDB通过页号可以唯一定位一个页。</p>
+<p><strong>FIL_PAGE_TYPE(2字节):</strong></p>
+<p>这个代表当前页的类型。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/21/66ee1e9e4dd97.png" alt="image-20240921091716549"></p>
+<p><strong>FIL_PAGE_PREV(4字节)和 FIL_PAGE_NEXT(4字节):</strong></p>
+<p>InnoDB都是以页为单位存放数据的，如果数据分散到多个不连续的页中存储的话需要把这些页关联起来，FIL_PAGE_PREV和FIL_PAGE_NEXT就分别代表本页的上一个和下一个页的页号。这样通过建立一个双向链表把许许多多的页就都串联起来了，保证这些页之间，<font color="red">不需要是物理上的连续，而是逻辑上的连续</font>。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/21/66ee1f28855df.png" alt="image-20240921091934934"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/21/66ee1f3221e6d.png" alt="image-20240921091944509"></p>
+<p><strong>FIL_PAGE_SPACE_OR_CHKSUM(4字节):</strong></p>
+<p>代表当前页面的校验和（checksum）。</p>
+<p><strong>什么是校验和？</strong><br>就是对于一个很长的字节串来说，我们会通过某种算法来计算一个比较短的值来代表这个很长的字节串，这个比较短的值就称为校验和。</p>
+<p>在比较两个很长的字节串之前，先比较这两个长字节串的校验和，如果校验和都不一样，则两个长字节串肯定是不同的，所以省去了直接比较两个比较长的字节串的时间损耗。</p>
+<p><strong>文件头部和文件尾部都有属性</strong>：<code>FIL_PAGE_SPACE_OR_CHKSUM</code></p>
+<p><strong>作用</strong>：<br>InnoDB存储引擎以页为单位把数据加载到内存中处理，如果该页中的数据在内存中被修改了，那么<font color="red">在修改后的某个时间需要把数据同步到磁盘中</font>。但是在同步了一半的时候断电了，造成了该页传输的不完整。</p>
+<p>为了检测一个页是否完整（也就是在同步的时候有没有发生只同步一半的尴尬情况），这时可以通过文件尾的校验和（checksum 值）与文件头的校验和做比对，如果两个值不相等则证明页的传输有问题，需要重新进行传输，否则认为页的传输已经完成。</p>
+<p><strong>具体的：</strong><br>每当一个页面在内存中修改了，在同步之前就要把它的校验和算出来，因为<code>File Header</code>在页面的前边，所以校验和会被首先同步到磁盘，当完全写完时，校验和也会被写到页的尾部，如果完全同步成功，则页的首部和尾部的校验和应该是一致的。如果写了一半儿断电了，那么在<code>File Header</code>中的校验和就代表着已经修改过的页，而在<code>File Trailer</code>中的校验和代表着原先的页，二者不同则意味着同步中间出了错。这里，校验方式就是采用 <code>Hash</code> 算法进行校验。</p>
+<p><strong>FIL_PAGE_LSN(8字节):</strong></p>
+<p>页面被最后修改时对应的日志序列位置（英文名是：Log Sequence Number）</p>
+<h4 id="File-Trailer（文件尾部）"><a href="#File-Trailer（文件尾部）" class="headerlink" title="File Trailer（文件尾部）"></a>File Trailer（文件尾部）</h4><p>大小：8字节</p>
+<p>前4个字节代表页的校验和：这个部分是和File Header中的校验和相对应的。</p>
+<p>后4个字节代表页面被最后修改时对应的日志序列位置（LSN）：<br>这个部分也是为了校验页的完整性的，如果首部和尾部的LSN值校验不成功的话，就说明同步过程出现了问题。</p>
+<h3 id="第二部分：User-Records-用户记录-、最大最小记录、Free-Space-空闲空间"><a href="#第二部分：User-Records-用户记录-、最大最小记录、Free-Space-空闲空间" class="headerlink" title="第二部分：User Records (用户记录)、最大最小记录、Free Space (空闲空间)"></a>第二部分：User Records (用户记录)、最大最小记录、Free Space (空闲空间)</h3><p>第二个部分是记录部分，页的主要作用是存储记录，所以“最大和最小记录”和“用户记录”部分占了页结构的主要空间。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/21/66ee22c243f99.png" alt="image-20240921093456260"></p>
+<h4 id="Free-Space-空闲空间"><a href="#Free-Space-空闲空间" class="headerlink" title="Free Space (空闲空间)"></a>Free Space (空闲空间)</h4><p>我们自己存储的记录会按照指定的<code>行格式</code>存储到<code>User Records</code>部分。但是在一开始生成页的时候，其实并没有<code>User Records</code>这个部分，<font color="red">每当我们插入一条记录，都会从Free Space部分，也就是尚未使用的存储空间中申请一个记录大小的空间划分到User Records部分</font>，当Free Space部分的空间全部被User Records部分替代掉之后，也就意味着这个页使用完了，如果还有新的记录插入的话，就需要去申请新的页了。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/21/66ee235783553.png" alt="image-20240921093725892"></p>
+<h4 id="User-Records-用户记录"><a href="#User-Records-用户记录" class="headerlink" title="User Records (用户记录)"></a>User Records (用户记录)</h4><p>User Records中的这些记录按照<code>指定的行格式</code>一条一条摆在User Records部分，相互之间形成<code>单链表</code>。</p>
+<p><strong>用户记录里的一条条数据如何记录？</strong><br>详见记录行格式的记录头信息。</p>
+<h3 id="第三部分：Page-Directory-页目录-和-Page-Header-页面头部"><a href="#第三部分：Page-Directory-页目录-和-Page-Header-页面头部" class="headerlink" title="第三部分：Page Directory (页目录) 和 Page Header (页面头部)"></a>第三部分：Page Directory (页目录) 和 Page Header (页面头部)</h3><h4 id="Page-Directory-页目录"><a href="#Page-Directory-页目录" class="headerlink" title="Page Directory (页目录)"></a>Page Directory (页目录)</h4><p><strong>为什么需要页目录？</strong><br>在页中，记录是以<code>单向链表</code>的形式进行存储的。单向链表的特点就是插入、删除非常方便，但是<code>检索效率不高</code>，最差的情况下需要遍历链表上的所有节点才能完成检索。因此在页结构中<code>专门设计了页目录</code>这个模块，专门给记录做一个目录，通过<code>二分查找法</code>的方式进行检索，提升效率。</p>
+<p><strong>需求：根据主键值查找页中的某条记录，如何实现快速查找呢？</strong></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM page_demo WHERE c1 = 3;</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>方式1：顺序查找</strong><br>从<code>Infimum记录</code>（最小记录）开始，沿着链表一直往后找，总有一天会找到（或者找不到），在找的时候还能投机取巧，因为链表中各个记录的值是按照从小到大顺序排列的，所以当链表的某个节点代表的记录的主键值大于你想要查找的主键值时，你就可以停止查找了，因为该节点后边的节点的主键值依次递增。</p>
+<p><strong>方式2：使用页目录，二分法查找</strong></p>
+<ol>
+<li>将所有的记录<code>分成几个组</code>，这些记录包括最小记录和最大记录，但不包括标记为“已删除”的记录。</li>
+<li>第 1 组，也就是最小记录所在的分组只有 1 个记录；<br> 最后一组，就是最大记录所在的分组，会有 1-8 条记录；<br> 其余的组记录数量在 4-8 条之间。<br> 这样做的好处是，除了第 1 组（最小记录所在组）以外，其余组的记录数会<code>尽量平分</code>。</li>
+<li>在每个组中最后一条记录的头信息中会存储该组一共有多少条记录，作为 <code>n_owned</code> 字段。</li>
+<li><code>页目录用来存储每组最后一条记录的地址偏移量</code>，这些地址偏移量会<code>按照先后顺序存储</code>起来，每组的地址偏移量也被称之为<code>槽（slot）</code>，每个槽相当于指针指向了不同组的最后一个记录。</li>
+</ol>
+<p><strong>举例1：</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/21/66ee2a8fabd10.png" alt="image-20240921100813978"></p>
+<p><strong>举例2：</strong><br>现在的page_demo表中正常的记录共有6条，InnoDB会把它们分成两组，第一组中只有一个最小记录，第二组中是剩余的5条记录。如下图：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/21/66ee2ac1251c7.png" alt="image-20240921100903444"></p>
+<p>从这个图中我们需要注意这么几点：</p>
+<ul>
+<li>现在页目录部分中有两个槽，也就意味着我们的记录被分成了两个组，槽1中的值是112，代表最大记录的地址偏移量（就是从页面的0字节开始数，数112个字节）；槽0中的值是99，代表最小记录的地址偏移量。</li>
+<li>注意最小和最大记录的头信息中的<code>n_owned</code>属性<br>最小记录的n_owned值为1，代表着以最小记录结尾的这个分组中只有1条记录，也就是最小记录本身。<br>最大记录的n_owned值为5，代表着以最大记录结尾的这个分组中只有5条记录，包括最大记录本身还有我们自己插入的4条记录。</li>
+</ul>
+<p>用箭头指向的方式替代数字，这样更易于我们理解，修改后如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/21/66ee2aecb2df8.png" alt="image-20240921100947009"></p>
+<p>再换个角度看一下：（单纯从逻辑上看一下这些记录和页目录的关系）</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/21/66ee2b07e1fea.png" alt="image-20240921101014225"></p>
+<p><strong>页目录分组的个数如何确定？</strong></p>
+<p>为什么最小记录的n_owned值为1，而最大记录的n_owned值为5呢？</p>
+<p>InnoDB规定：对于最小记录所在的分组只能有1条记录，最大记录所在的分组拥有的记录条数只能在1<del>8条之间，剩下的分组中记录的条数范围只能在是 4</del>8 条之间。</p>
+<p>分组是按照下边的步骤进行的：</p>
+<ul>
+<li>初始情况下一个数据页里只有最小记录和最大记录两条记录，它们分属于两个分组。</li>
+<li>之后每插入一条记录，都会从页目录中找到主键值比本记录的主键值大并且差值最小的槽，然后把该槽对应的记录的n_owned值加1，表示本组内又添加了一条记录，直到该组中的记录数等于8个。</li>
+<li>在一个组中的记录数等于8个后再插入一条记录时，会将组中的记录拆分成两个组，一个组中4条记录，另一个5条记录。这个过程会在页目录中新增一个槽来记录这个新增分组中最大的那条记录的偏移量。</li>
+</ul>
+<p><strong>页目录结构下如何快速查找记录？</strong></p>
+<p>现在向page_demo表中添加更多的数据。如下：</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> page_demo </span><br><span class="line"><span class="keyword">VALUES</span></span><br><span class="line">(<span class="number">5</span>, <span class="number">500</span>, <span class="string">'zhou'</span>), </span><br><span class="line">(<span class="number">6</span>, <span class="number">600</span>, <span class="string">'chen'</span>), </span><br><span class="line">(<span class="number">7</span>, <span class="number">700</span>, <span class="string">'deng'</span>), </span><br><span class="line">(<span class="number">8</span>, <span class="number">800</span>, <span class="string">'yang'</span>), </span><br><span class="line">(<span class="number">9</span>, <span class="number">900</span>, <span class="string">'wang'</span>), </span><br><span class="line">(<span class="number">10</span>, <span class="number">1000</span>, <span class="string">'zhao'</span>), </span><br><span class="line">(<span class="number">11</span>, <span class="number">1100</span>, <span class="string">'qian'</span>), </span><br><span class="line">(<span class="number">12</span>, <span class="number">1200</span>, <span class="string">'feng'</span>), </span><br><span class="line">(<span class="number">13</span>, <span class="number">1300</span>, <span class="string">'tang'</span>), </span><br><span class="line">(<span class="number">14</span>, <span class="number">1400</span>, <span class="string">'ding'</span>), </span><br><span class="line">(<span class="number">15</span>, <span class="number">1500</span>, <span class="string">'jing'</span>), </span><br><span class="line">(<span class="number">16</span>, <span class="number">1600</span>, <span class="string">'quan'</span>);</span><br></pre></td></tr></tbody></table></figure>
+
+<p>添加了12条记录，现在页里一共有18条记录了（包括最小和最大记录），这些记录被分成了5个组，如图所示：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/21/66ee31746b529.png" alt="image-20240921103738255"></p>
+<p>这里只保留了16条记录的记录头信息中的<code>n_owned</code>和<code>next_record</code>属性，省略了各个记录之间的箭头。<br>现在看怎么从这个页目录中查找记录。因为各个槽代表的记录的主键值都是从小到大排序的，所以我们可以使用二分法来进行快速查找。5个槽的编号分别是：0、1、2、3、4，所以初始情况下最低的槽就是low=0，最高的槽就是high=4。比方说我们想找主键值为6的记录，过程是这样的：</p>
+<ol>
+<li>计算中间槽的位置：(0+4)/2=2，所以查看槽2对应记录的主键值为8，又因为8 &gt; 6，所以设置high=2，low保持不变。</li>
+<li>重新计算中间槽的位置：(0+2)/2=1，所以查看槽1对应的主键值为4，又因为4 &lt; 6，所以设置low=1，high保持不变。</li>
+<li>因为high - low的值为1，所以确定主键值为6的记录在槽2对应的组中。此刻我们需要找到槽2中主键值最小的那条记录，然后沿着单向链表遍历槽2中的记录。</li>
+</ol>
+<p>但是我们前边又说过，每个槽对应的记录都是该组中主键值最大的记录，这里槽2对应的记录是主键值为8的记录，怎么定位一个组中最小的记录呢？别忘了各个槽都是挨着的，我们可以很轻易的拿到槽1对应的记录（主键值为4），该条记录的下一条记录就是槽2中主键值最小的记录，该记录的主键值为5。所以我们可以从这条主键值为5的记录出发，遍历槽2中的各条记录，直到找到主键值为6的那条记录即可。</p>
+<p>由于一个组中包含的记录条数只能是1~8条，所以遍历一个组中的记录的代价是很小的。</p>
+<p><strong>小结：</strong><br><strong>在一个数据页中查找指定主键值的记录的过程分为两步：</strong></p>
+<ol>
+<li><strong>通过二分法确定该记录所在的槽，并找到该槽所在分组中主键值最小的那条记录。</strong></li>
+<li><strong>通过记录的next_record属性遍历该槽所在的组中的各个记录。</strong></li>
+</ol>
+<h4 id="Page-Header-页面头部"><a href="#Page-Header-页面头部" class="headerlink" title="Page Header (页面头部)"></a>Page Header (页面头部)</h4><p><strong>PAGE_DIRECTION</strong>:</p>
+<p>假如新插入的一条记录的主键值比上一条记录的主键值大，我们说这条记录的插入方向是右边，反之则是左边。用来表示最后一条记录插入方向的状态就是<code>PAGE_DIRECTION</code>。</p>
+<p><strong>PGAE_N_DIRECTION:</strong></p>
+<p>假设连续几次插入新记录的方向都是一致的，InnoDB会把沿着同一个方向插入记录的条数记下来，这个条数就用<code>PAGE_N_DIRECTION</code>这个状态表示。当然，如果最后一条记录的插入方向改变了的话，这个状态的值会被清零重新统计。</p>
+<h3 id="从数据页的角度看B-树如何查询"><a href="#从数据页的角度看B-树如何查询" class="headerlink" title="从数据页的角度看B+树如何查询"></a>从数据页的角度看B+树如何查询</h3><p>一棵B+树按照节点类型可以分成两部分：</p>
+<ol>
+<li>叶子节点，B+树最底层的节点，节点的高度为0，存储行记录。</li>
+<li>非叶子节点，节点的高度大于0，存储索引键和页面指针，并不存储行记录本身。</li>
+</ol>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/21/66ee34519b3ba.png" alt="image-20240921104952003"></p>
+<p>当我们从页结构来理解B+树的结构的时候，可以帮我们理解一些通过索引进行检索的原理:</p>
+<h4 id="B-树是如何进行记录检索的？"><a href="#B-树是如何进行记录检索的？" class="headerlink" title="B+树是如何进行记录检索的？"></a>B+树是如何进行记录检索的？</h4><p>如果通过B+树的索引查询行记录，首先是从B+树的根开始，逐层检索，直到找到叶子节点，也就是找到对应的<br>数据页为止，将数据页加载到内存中，页目录中的槽(slot)采用<code>二分查找</code>的方式先找到一个粗略的记录分组，<br>然后再在分组中通过<code>链表遍历</code>的方式查找记录。</p>
+<h4 id="普通索和唯一索引在查询效率上有什么不同？"><a href="#普通索和唯一索引在查询效率上有什么不同？" class="headerlink" title="普通索和唯一索引在查询效率上有什么不同？"></a>普通索和唯一索引在查询效率上有什么不同？</h4><p>我们创建索引的时候可以是普通索引，也可以是唯一索引，那么这两个索引在查询效率上有什么不同呢？</p>
+<p>唯一索引就是在普通索引上增加了约束性，也就是关键字唯一，找到了关键字就停止检索。而普通索引，可能会存在用户记录中的关键字相同的情况，根据页结构的原理，当我们读取一条记录的时候，不是单独将这条记录从磁盘中读出去，而是将这个记录所在的页加载到内存中进行读取。InnoDB存储引擎的页大小为16KB,在一个页中可能存储着上干个记录，因此在普通索引的字段上进行查找也就是在内存中多几次“判断下一条记录”的操作，对于CPU来说，这些操作所消耗的时间是可以忽略不计的。所以对一个索引字段进行检索，采用普通索引还是唯一索引在检索效率上基本上没有差别。</p>
+<h1 id="InnoDB行格式（或记录格式）"><a href="#InnoDB行格式（或记录格式）" class="headerlink" title="InnoDB行格式（或记录格式）"></a>InnoDB行格式（或记录格式）</h1><p>我们平时的数据以行为单位来向表中插入数据，这些记录在磁盘上的存放方式也被称为<code>行格式</code>或者<code>记录格式</code>。InnoDB存储引擎设计了4种不同类型的<code>行格式</code>，分别是<code>Compact</code>、<code>Redundant</code>、<code>Dynamic</code>和<code>Compressed</code>行格式。</p>
+<p>查看MySQL8的默认行格式：</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">SELECT</span> @<span class="variable">@innodb_default_row_format</span>;</span><br><span class="line"><span class="operator">+</span><span class="comment">-------------------------------------+</span></span><br><span class="line"><span class="operator">|</span> @<span class="variable">@innodb_default_row_format</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------------------------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">dynamic</span>                                   <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------------------------------+</span></span><br><span class="line"><span class="number">1</span> <span class="type">row</span> <span class="keyword">in</span> <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></tbody></table></figure>
+
+<p>也可以使用如下语法查看具体表使用的行格式：</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> <span class="keyword">TABLE</span> STATUS <span class="keyword">like</span> <span class="string">'表名'</span>\G</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="指定行格式的语法"><a href="#指定行格式的语法" class="headerlink" title="指定行格式的语法"></a>指定行格式的语法</h2><p>在创建或修改表的语句中指定行格式：</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> 表名 (列的信息) ROW_FORMAT<span class="operator">=</span>行格式名称</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> 表名 ROW_FORMAT<span class="operator">=</span>行格式名称</span><br></pre></td></tr></tbody></table></figure>
+
+<p>举例：</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">CREATE</span> <span class="keyword">TABLE</span> record_test_table (</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span>     col1 <span class="type">VARCHAR</span>(<span class="number">8</span>),</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span>     col2 <span class="type">VARCHAR</span>(<span class="number">8</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span>     col3 <span class="type">CHAR</span>(<span class="number">8</span>),</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span>     col4 <span class="type">VARCHAR</span>(<span class="number">8</span>)</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> ) CHARSET<span class="operator">=</span>ascii ROW_FORMAT<span class="operator">=</span>COMPACT;</span><br><span class="line">Query OK, <span class="number">0</span> <span class="keyword">rows</span> affected (<span class="number">0.03</span> sec)</span><br></pre></td></tr></tbody></table></figure>
+
+<p>向表中插入两条记录：</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> record_test_table(col1, col2, col3, col4) </span><br><span class="line"><span class="keyword">VALUES</span></span><br><span class="line">(<span class="string">'zhangsan'</span>, <span class="string">'lisi'</span>, <span class="string">'wangwu'</span>, <span class="string">'songhk'</span>), </span><br><span class="line">(<span class="string">'tong'</span>, <span class="string">'chen'</span>, <span class="keyword">NULL</span>, <span class="keyword">NULL</span>);</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="COMPACT行格式"><a href="#COMPACT行格式" class="headerlink" title="COMPACT行格式"></a>COMPACT行格式</h2><p>在MySQL 5.1版本中，默认设置为<code>Compact</code>行格式。一条完整的记录其实可以被分为记录的额外信息和记录的真实数据两大部分。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/21/66ee38256eaf6.png" alt="image-20240921110611855"></p>
+<h3 id="变长字段长度列表"><a href="#变长字段长度列表" class="headerlink" title="变长字段长度列表"></a>变长字段长度列表</h3><p>MySQL支持一些变长的数据类型，比如<strong>VARCHAR(M)、VARBINARY(M)、TEXT</strong>类型，<strong>BLOB</strong>类型，这些数据类型修列称为<font color="red">变长字段</font>，变长字段中存储多少字节的数据不是固定的，所以我们在存储真实数据的时候需要顺便把这些数据占用的字节数也存起来。<font color="red">在Compact行格式中，把所有变长字段的真实数据占用的字节长度都存放在记录的开头部位，从而形成一个变长字段长度列表。</font></p>
+<p>注意：这里面<font color="red">存储的变长长度和字段顺序是反过来的</font>。比如两个varchar字段在表结构的顺序是a(10)，b(15)。那么在变长字段长度列表中存储的长度顺序就是15，10，是反过来的。</p>
+<p>以record_test_table表中的第一条记录举例：因为record_test_table表的col1、col2、col4列都是<strong>VARCHAR(8)<strong>类型的，所以这三个列的值的长度都需要保存在记录开头处，注意record_test_table表中的各个列都使用的是</strong>ascii</strong>字符集（每个字符只需要1个字节来进行编码）。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/21/66ee39e7491eb.png" alt="image-20240921111341716"></p>
+<p>又因为这些长度值需要按照列的逆序存放，所以最后变长字段长度列表的字节串用十六进制表示的效果就是（各个字节之间实际上没有空格，用空格隔开只是方便理解）：06 04 08 </p>
+<p>把这个字节串组成的变长字段长度列表填入上边的示意图中的效果就是：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/21/66ee3a1c4bc8b.png" alt="image-20240921111434768"></p>
+<h3 id="Null值列表"><a href="#Null值列表" class="headerlink" title="Null值列表"></a>Null值列表</h3><p>Compact行格式会把可以为NULL的列统一管理起来，存在一个标记为NULL值列表中。如果表中没有允许存储 NULL 的列，则 NULL值列表也不存在了。</p>
+<p><strong>为什么定义NULL值列表？</strong></p>
+<p>之所以要存储NULL是因为数据都是需要对齐的，如果没有标注出来NULL值的位置，就有可能在查询数据的时候出现混乱。如果使用一个特定的符号放到相应的数据位表示空置的话，虽然能达到效果，但是这样很浪费空间，所以直接就在行数据得头部开辟出一块空间专门用来记录该行数据哪些是非空数据，哪些是空数据，格式如下：</p>
+<ol>
+<li>二进制位的值为1时，代表该列的值为NULL。</li>
+<li>二进制位的值为0时，代表该列的值不为NULL。</li>
+</ol>
+<p>例如：字段 a、b、c，其中a是主键，在某一行中存储的数依次是 a=1、b=null、c=2。那么Compact行格式中的NULL值列表中存储：01。第一个0表示c不为null，第二个1表示b是null。这里之所以没有a是因为数据库会自动跳过主键，因为主键肯定是非NULL且唯一的，在NULL值列表的数据中就会自动跳过主键。</p>
+<p>record_test_table的两条记录的NULL值列表就如下：</p>
+<p>第一条记录：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/21/66ee3b6f090a3.png" alt="image-20240921112013465"></p>
+<p>第二条记录：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/21/66ee3b7bb22bd.png" alt="image-20240921112026162"></p>
+<h3 id="记录头信息"><a href="#记录头信息" class="headerlink" title="记录头信息"></a>记录头信息</h3><p>大小 : 5字节</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">CREATE</span> <span class="keyword">TABLE</span> page_demo(</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span>     c1 <span class="type">INT</span>,</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span>     c2 <span class="type">INT</span>,</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span>     c3 <span class="type">VARCHAR</span>(<span class="number">10000</span>),</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span>     <span class="keyword">PRIMARY</span> KEY (c1)</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> ) CHARSET<span class="operator">=</span>ascii ROW_FORMAT<span class="operator">=</span>Compact;</span><br><span class="line">Query OK, <span class="number">0</span> <span class="keyword">rows</span> affected (<span class="number">0.03</span> sec)</span><br></pre></td></tr></tbody></table></figure>
+
+<p>这个表中记录的行格式示意图：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/21/66ee3cdbd8d09.png" alt="image-20240921112618244"></p>
+<p>这些记录头信息中各个属性如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/21/66ee3cfdebff5.png" alt="image-20240921112652381"></p>
+<p>简化后的行格式示意图：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/21/66ee3d0acdd0a.png" alt="image-20240921112705266"></p>
+<p>插入数据：</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> page_demo </span><br><span class="line"><span class="keyword">VALUES</span></span><br><span class="line">(<span class="number">1</span>, <span class="number">100</span>, <span class="string">'song'</span>), </span><br><span class="line">(<span class="number">2</span>, <span class="number">200</span>, <span class="string">'tong'</span>), </span><br><span class="line">(<span class="number">3</span>, <span class="number">300</span>, <span class="string">'zhan'</span>), </span><br><span class="line">(<span class="number">4</span>, <span class="number">400</span>, <span class="string">'lisi'</span>);</span><br></pre></td></tr></tbody></table></figure>
+
+<p>图示如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/21/66ee3d3239c58.png" alt="image-20240921112744645"></p>
+<h4 id="delete-mark"><a href="#delete-mark" class="headerlink" title="delete_mark"></a>delete_mark</h4><p>这个属性标记着当前记录是否被删除，占用1个二进制位。<br>值为0：代表记录并没有被删除<br>值为1：代表记录被删除掉了</p>
+<p><strong>被删除的记录为什么还在页中存储呢？</strong><br>你以为它删除了，可它还在真实的磁盘上。这些被删除的记录之所以不立即从磁盘上移除，是因为移除它们之后其他的记录在磁盘上需要重新排列，导致性能消耗。所以只是打一个删除标记而已，所有被删除掉的记录都会组成一个所谓的<code>垃圾链表</code>，在这个链表中的记录占用的空间称之为<code>可重用空间</code>，之后如果有新记录插入到表中的话，可能把这些被删除的记录占用的存储空间覆盖掉。</p>
+<h4 id="min-rec-mask"><a href="#min-rec-mask" class="headerlink" title="min_rec_mask"></a>min_rec_mask</h4><p>B+树的每层非叶子节点中的最小记录都会添加该标记，min_rec_mask值为1。<br>我们自己插入的四条记录的min_rec_mask值都是0，意味着它们都不是B+树的非叶子节点中的最小记录。</p>
+<h4 id="record-type"><a href="#record-type" class="headerlink" title="record_type"></a>record_type</h4><p>这个属性表示当前记录的类型，一共有4种类型的记录：<br>   0：表示普通记录<br>   1：表示B+树非叶节点记录<br>   2：表示最小记录<br>   3：表示最大记录</p>
+<p>从图中我们也可以看出来，我们自己插入的记录就是普通记录，它们的record_type值都是0，而最小记录和最大记录的record_type值分别为2和3。至于record_type为1的情况，我们在索引的数据结构章节讲过。</p>
+<h4 id="heap-no"><a href="#heap-no" class="headerlink" title="heap_no"></a>heap_no</h4><p>这个属性表示当前记录在本页中的位置。</p>
+<p>从图中可以看出来，我们插入的4条记录在本页中的位置分别是：2、3、4、5。</p>
+<p><strong>怎么不见heap_no值为0和1的记录呢？</strong><br>MySQL会自动给每个页里加了两个记录，由于这两个记录并不是我们自己插入的，所以有时候也称为<code>伪记录</code>或者<code>虚拟记录</code>。这两个伪记录一个代表<code>最小记录</code>，一个代表<code>最大记录</code>。最小记录和最大记录的heap_no值分别是0和1，也就是说它们的位置最靠前。</p>
+<h4 id="n-owned"><a href="#n-owned" class="headerlink" title="n_owned"></a>n_owned</h4><p>页目录中每个组中最后一条记录的头信息中会存储该组一共有多少条记录，作为 n_owned 字段。</p>
+<p>详情见page directory。</p>
+<h4 id="next-record"><a href="#next-record" class="headerlink" title="next_record"></a>next_record</h4><p>记录头信息里该属性非常重要，它表示从当前记录的真实数据到下一条记录的真实数据的<code>地址偏移量</code>。<br>比如：第一条记录的next_record值为32，意味着从第一条记录的真实数据的地址处向后找32个字节便是下一条记录的真实数据。</p>
+<p><strong>注意，下一条记录指得并不是按照我们插入顺序的下一条记录，而是按照主键值由小到大的顺序的下一条记录</strong>。而且规定Infimum记录（也就是最小记录）的下一条记录就是本页中主键值最小的用户记录，而本页中主键值最大的用户记录的下一条记录就是 Supremum记录（也就是最大记录）。下图用箭头代替偏移量表示next_record。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/21/66ee3e9c19bae.png" alt="image-20240921113346455"></p>
+<p><strong>演示：删除操作</strong><br>从表中删除掉一条记录，这个链表也是会跟着变化：</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">DELETE</span> <span class="keyword">FROM</span> page_demo <span class="keyword">WHERE</span> c1 <span class="operator">=</span> <span class="number">2</span>;</span><br><span class="line">Query OK, <span class="number">1</span> <span class="type">row</span> affected (<span class="number">0.02</span> sec)</span><br></pre></td></tr></tbody></table></figure>
+
+<p>删掉第2条记录后的示意图就是：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/21/66ee3edd649af.png" alt="image-20240921113451806"></p>
+<p>从图中可以看出来，删除第2条记录前后主要发生了这些变化：</p>
+<ul>
+<li>第2条记录并没有从存储空间中移除，而是把该条记录的delete_mask值设置为1。</li>
+<li>第2条记录的next_record值变为了0，意味着该记录没有下一条记录了。</li>
+<li>第1条记录的next_record指向了第3条记录。</li>
+<li>最大记录的n_owned值从 5 变成了 4 。</li>
+</ul>
+<p><font color="red">所以，不论我们怎么对页中的记录做增删改操作，InnoDB始终会维护一条记录的单链表，链表中的各个节点是按照主键值由小到大的顺序连接起来的。</font></p>
+<p><strong>演示：添加操作</strong></p>
+<p>主键值为2的记录被我们删掉了，但是存储空间却没有回收，如果我们再次把这条记录插入到表中，会发生什么事呢？</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">INSERT</span> <span class="keyword">INTO</span> page_demo <span class="keyword">VALUES</span>(<span class="number">2</span>, <span class="number">200</span>, <span class="string">'tong'</span>);</span><br><span class="line">Query OK, <span class="number">1</span> <span class="type">row</span> affected (<span class="number">0.00</span> sec)</span><br></pre></td></tr></tbody></table></figure>
+
+<p>我们看一下记录的存储情况：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/21/66ee3f4fe0f13.png" alt="image-20240921113646207"></p>
+<p>直接复用了原来被删除记录的存储空间。</p>
+<p>说明：<br>当数据页中存在多条被删除掉的记录时，这些记录的next_record属性将会把这些被删除掉的记录组成一个垃圾链表，以备之后重用这部分存储空间。</p>
+<h3 id="记录的真实数据"><a href="#记录的真实数据" class="headerlink" title="记录的真实数据"></a>记录的真实数据</h3><p>记录的真实数据除了我们自己定义的列的数据以外，还会有三个隐藏列：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/21/66ee40583d3ef.png" alt="image-20240921114110651"></p>
+<p>实际上这几个列的真正名称其实是：<code>DB_ROW_ID</code>、<code>DB_TRX_ID</code>、<code>DB_ROLL_PTR</code>。</p>
+<ul>
+<li>一个表没有手动定义主键，则会选取一个Unique键作为主键，如果连Unique键都没有定义的话，则会为表默认添加一个名为row_id的隐藏列作为主键。所以row_id是在没有自定义主键以及Unique键的情况下才会存在的。</li>
+<li>事务ID和回滚指针在后面的《第14章_MySQL事务日志》章节中讲解。</li>
+</ul>
+<p>举例：分析Compact行记录的内部结构：</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> mytest(</span><br><span class="line">col1 <span class="type">VARCHAR</span>(<span class="number">10</span>),</span><br><span class="line">col2 <span class="type">VARCHAR</span>(<span class="number">10</span>),</span><br><span class="line">col3 <span class="type">CHAR</span>(<span class="number">10</span>),</span><br><span class="line">col4 <span class="type">VARCHAR</span>(<span class="number">10</span>)</span><br><span class="line">)ENGINE<span class="operator">=</span>INNODB CHARSET<span class="operator">=</span>LATIN1 ROW_FORMAT<span class="operator">=</span>COMPACT;</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> mytest</span><br><span class="line"><span class="keyword">VALUES</span>(<span class="string">'a'</span>,<span class="string">'bb'</span>,<span class="string">'bb'</span>,<span class="string">'ccc'</span>);</span><br><span class="line"> </span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> mytest</span><br><span class="line"><span class="keyword">VALUES</span>(<span class="string">'d'</span>,<span class="string">'ee'</span>,<span class="string">'ee'</span>,<span class="string">'fff'</span>);</span><br><span class="line"> </span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> mytest</span><br><span class="line"><span class="keyword">VALUES</span>(<span class="string">'d'</span>,<span class="keyword">NULL</span>,<span class="keyword">NULL</span>,<span class="string">'fff'</span>);</span><br></pre></td></tr></tbody></table></figure>
+
+<p>在Windows操作系统下，可以选择通过程序UltraEdit打开表空间文件mytest.ibd这个二进制文件。内容如下：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">------------------------------------------------------------------------------------------</span><br><span class="line">0000c070 73 75 70 72 65 6d 75 6d 03 02 01 00 00 00 10 00|supremum........|</span><br><span class="line">0000c080 2c 00 00 00 2b 68 00 00 00 00 00 06 05 80 00 00|,...+h..........|</span><br><span class="line">0000c090 00 32 01 10 61 62 62 62 62 20 20 20 20 20 20 20|.2..abbbb|</span><br><span class="line">0000c0a0 20 63 63 63 03 02 01 00 00 00 18 00 2b 00 00 00|ccc........+...|</span><br><span class="line">0000c0b0 2b 68 01 00 00 00 00 06 06 80 00 00 00 32 01 10|+h...........2..|</span><br><span class="line">0000c0c0 64 65 65 65 65 20 20 20 20 20 20 20 20 66 66 66|deeeefff|</span><br><span class="line">0000c0d0 03 01 06 00 00 20 ff 98 00 00 00 2b 68 02 00 00|..........+h...|</span><br><span class="line">0000c0e0 00 00 06 07 80 00 00 00 32 01 10 64 66 66 66 00|........2..dfff.|</span><br><span class="line">------------------------------------------------------------------------------------------</span><br></pre></td></tr></tbody></table></figure>
+
+<p>该行记录从0000c078开始，若整理一下，相信大家会有更好的理解：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">---------------------------------------------------------------------</span><br><span class="line">03 02 01                     /*变长字段长度列表，逆序*/</span><br><span class="line">00                              /*NULL标志位，第一行没有NULL值*/</span><br><span class="line">00 00 10 00 2c            /*Record Header，固定5字节长度*/</span><br><span class="line">00 00 00 2b 68 00       /*RowID InnoDB自动创建，6字节*/</span><br><span class="line">00 00 00 00 06 05       /*TransactionID*/</span><br><span class="line">80 00 00 00 32 01 10   /*Roll Pointer*/</span><br><span class="line">61                               /*列1数据<span class="string">'a'</span>*/</span><br><span class="line">62 62                          /*列2数据<span class="string">'bb'</span>*/</span><br><span class="line">62 62 20 20 20 20 20 20 20 20/*列3数据<span class="string">'bb'</span>*/</span><br><span class="line">63 63 63                     /*列4数据<span class="string">'ccc'</span>*/</span><br><span class="line">---------------------------------------------------------------------</span><br></pre></td></tr></tbody></table></figure>
+
+<p>注意1：InnoDB每行有隐藏列TransactionID和Roll Pointer。:<br>注意2：固定长度CHAR字段在未能完全占用其长度空间时，会用0x20来进行填充。</p>
+<p>接着再来分析下Record Header的最后两个字节，这两个字节代表next_recorder，0x2c代表下一个记录的偏移量，即当前记录的位置加上偏移量0x2c就是下条记录的起始位置。</p>
+<p>第二行将不做整理，除了RowID不同外，它和第一行大同小异，现在来分析有NULL值的第三行：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">---------------------------------------------------------------------</span><br><span class="line">03 01                               /*变长字段长度列表，逆序*/</span><br><span class="line">06                                   /*NULL标志位，第三行有NULL值*/</span><br><span class="line">00 00 20 ff 98                  /*Record Header*/</span><br><span class="line">00 00 00 2b 68 02           /*RowID*/</span><br><span class="line">00 00 00 00 06 07           /*TransactionID*/</span><br><span class="line">80 00 00 00 32 01 10       /*Roll Pointer*/</span><br><span class="line">64                                   /*列1数据<span class="string">'d'</span>*/</span><br><span class="line">66 66 66                         /*列4数据<span class="string">'fff'</span>*/</span><br><span class="line">---------------------------------------------------------------------</span><br></pre></td></tr></tbody></table></figure>
+
+<p>第三行有NULL值，因此NULL标志位不再是00而是06，转换成二进制为00000110，为1的值代表第2列和第3列的数据为NULL。在其后存储列数据的部分，用户会发现没有存储NULL列，而只存储了第1列和第4列非NULL的值。</p>
+<p>因此这个例子很好地说明了：不管是CHAR类型还是VARCHAR类型，在compact格式下NULL值都不占用任何存储空间。</p>
+<h2 id="Dynamic和Compressed行格式"><a href="#Dynamic和Compressed行格式" class="headerlink" title="Dynamic和Compressed行格式"></a>Dynamic和Compressed行格式</h2><h3 id="行溢出"><a href="#行溢出" class="headerlink" title="行溢出"></a>行溢出</h3><p><font color="red">InnoDB存储引擎可以将一条记录中的某些数据存储在真正的数据页面之外</font>。</p>
+<p>很多DBA喜欢MySQL数据库提供的VARCHAR(M)类型，认为可以存放65535字节。这是真的吗？如果我们使用 ascii字符集的话，一个字符就代表一个字节，我们看看VARCHAR(65535)是否可用。</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span>  <span class="keyword">TABLE</span>  varchar_size_demo(</span><br><span class="line"> c  <span class="type">VARCHAR</span>(<span class="number">65535</span>)</span><br><span class="line"> )  CHARSET<span class="operator">=</span>ascii  ROW_FORMAT<span class="operator">=</span>Compact;</span><br></pre></td></tr></tbody></table></figure>
+
+<p>结果如下：</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ERROR <span class="number">1118</span> (<span class="number">42000</span>): <span class="type">Row</span> size too large. The maximum <span class="type">row</span> size <span class="keyword">for</span> the used <span class="keyword">table</span> type, <span class="keyword">not</span> counting BLOBs, <span class="keyword">is</span> <span class="number">65535.</span> This includes storage overhead, <span class="keyword">check</span> the manual. You have  <span class="keyword">to</span>  change  <span class="keyword">some</span>  columns  <span class="keyword">to</span>  TEXT <span class="keyword">or</span>  BLOBs</span><br></pre></td></tr></tbody></table></figure>
+
+<p>报错信息表达的意思是：MySQL对一条记录占用的最大存储空间是有限制的，除BLOB或者TEXT类型的列之外， 其他所有的列（不包括隐藏列和记录头信息）占用的字节长度加起来不能超过65535个字节。</p>
+<p>这个65535个字节除了列本身的数据之外，还包括一些其他的数据，以Compact行格式为例，比如说我们为了存储一个VARCHAR(M)类型的列，除了真实数据占有空间以外，还需要记录的额外信息。</p>
+<p>如果该VARCHAR类型的列没有NOT NULL属性，那最多只能存储65532个字节的数据，因为变长字段的长度占用 2个字节，NULL值标识需要占用1个字节。</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span>  <span class="keyword">TABLE</span>  varchar_size_demo(</span><br><span class="line">    c  <span class="type">VARCHAR</span>(<span class="number">65532</span>)</span><br><span class="line">)  CHARSET<span class="operator">=</span>ascii  ROW_FORMAT<span class="operator">=</span>Compact;</span><br><span class="line"></span><br><span class="line">#如果有<span class="keyword">not</span> <span class="keyword">null</span>属性，那么就不需要<span class="keyword">NULL</span>值标识，也就可以多存储一个字节，即<span class="number">65533</span>个字节</span><br><span class="line"><span class="keyword">CREATE</span>  <span class="keyword">TABLE</span>  varchar_size_demo( </span><br><span class="line">  c  <span class="type">VARCHAR</span>(<span class="number">65533</span>)  <span class="keyword">not</span>  <span class="keyword">null</span></span><br><span class="line">)  CHARSET<span class="operator">=</span>ascii  ROW_FORMAT<span class="operator">=</span>Compact; </span><br></pre></td></tr></tbody></table></figure>
+
+<p>通过上面的案例，我们可以知道一个页的大小一般是16KB，也就是16384字节，而一个VARCHAR(M)类型的列就最多可以存储65533个字节，这样就可能出现一个页存放不了一条记录，这种现象称为<code>行溢出</code>。 </p>
+<p>在<strong>Compact</strong>和<strong>Reduntant</strong>行格式中，对于占用存储空间非常大的列，在记录的真实数据处只会存储该列的一部分数据，把剩余的数据分散存储在几个其他的页中进行<code>分页存储</code>，然后记录的真实数据处用20个字节存储指向这些页的地址（当然这20个字节中还包括这些分散在其他页面中的数据的占用的字节数），从而可以找到剩余数据所在的页。</p>
+<p>这称为页的扩展，举例如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/21/66ee436d368a5.png" alt="image-20240921115419667"></p>
+<h3 id="Dynamic和Compressed行格式-1"><a href="#Dynamic和Compressed行格式-1" class="headerlink" title="Dynamic和Compressed行格式"></a>Dynamic和Compressed行格式</h3><p>在MySQL 8.0中，默认行格式就是<strong>Dynamic</strong>，Dynamic、Compressed行格式和Compact行格式挺像，只不过在处理行溢出数据时有分歧：</p>
+<ul>
+<li>Compressed和Dynamic两种记录格式对于存放在<strong>BLOB</strong>中的数据采用了完全的行溢出的方式。如图，在数据页中只存放20个字节的指针（溢出页的地址），实际的数据都存放在Off Page（溢出页）中。</li>
+<li>Compact和Redundant两种格式会在记录的真实数据处存储一部分数据（存放768个前缀字节）。</li>
+</ul>
+<p>Compressed行记录格式的另一个功能就是，存储在其中的行数据会以zlib的算法进行压缩，因此对于BLOB、TEXT、VARCHAR这类大长度类型的数据能够进行非常有效的存储。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/21/66ee44f3ec318.png" alt="image-20240921120050424"></p>
+<h2 id="Redundant行格式"><a href="#Redundant行格式" class="headerlink" title="Redundant行格式"></a>Redundant行格式</h2><p>Redundant是MySQL 5.0版本之前InnoDB的行记录存储方式，MySQL 5.0支持Redundant是为了兼容之前版本的页格式。</p>
+<p>现在我们把表record_test_table的行格式修改为Redundant：</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> record_test_table ROW_FORMAT<span class="operator">=</span>Redundant;</span><br><span class="line">Query OK, <span class="number">0</span> <span class="keyword">rows</span> affected (<span class="number">0.05</span> sec)</span><br><span class="line">Records: <span class="number">0</span>  Duplicates: <span class="number">0</span>  Warnings: <span class="number">0</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/21/66ee455c495fd.png" alt="image-20240921120234737"></p>
+<p>从上图可以看到，不同于Compact行记录格式，Redundant行格式的首部是一个字段长度偏移列表，同样是按照列的顺序逆序放置的。</p>
+<p>下边我们从各个方面看一下Redundant行格式有什么不同的地方。</p>
+<h3 id="字段长度偏移列表"><a href="#字段长度偏移列表" class="headerlink" title="字段长度偏移列表"></a>字段长度偏移列表</h3><p>注意Compact行格式的开头是变长字段长度列表，而Redundant行格式的开头是字段长度偏移列表，与变长字段长度列表有两处不同：</p>
+<ul>
+<li>少了“变长”两个字：Redundant行格式会把该条记录中所有列（包括隐藏列）的长度信息都按照逆序存储到字段长度偏移列表。</li>
+<li>多了“偏移”两个字：这意味着计算列值长度的方式不像Compact行格式那么直观，它是采用两个相邻数值的差值来计算各个列值的长度。</li>
+</ul>
+<p>举例：比如第一条记录的字段长度偏移列表就是：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2B 25 1F 1B 13 0C 06</span><br></pre></td></tr></tbody></table></figure>
+
+<p>因为它是逆序排放的，所以按照列的顺序排列就是：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">06 0C 13 17 1A 24 25</span><br></pre></td></tr></tbody></table></figure>
+
+<p>按照两个相邻数值的差值来计算各个列值的长度的意思就是：</p>
+<ul>
+<li>第一列(row_id)的长度就是 0x06个字节，也就是6个字节。</li>
+<li>第二列(transaction_id)的长度就是 (0x0C - 0x06)个字节，也就是6个字节。</li>
+<li>第三列(roll_pointer)的长度就是 (0x13 - 0x0C)个字节，也就是7个字节。</li>
+<li>第四列(col1)的长度就是 (0x1B - 0x13)个字节，也就是8个字节。</li>
+<li>第五列(col2)的长度就是 (0x1F - 0x1B)个字节，也就是4个字节。</li>
+<li>第六列(col3)的长度就是 (0x25 - 0x1F)个字节，也就是6个字节。</li>
+<li>第七列(col4)的长度就是 (0x2B - 0x25)个字节，也就是6个字节。</li>
+</ul>
+<h3 id="记录头信息（record-header）"><a href="#记录头信息（record-header）" class="headerlink" title="记录头信息（record header）"></a>记录头信息（record header）</h3><p>不同于Compact行格式，Redundant行格式中的记录头信息固定占用6个字节（48位），每位的含义见下表。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/21/66ee4714988f4.png" alt="image-20240921120954995"></p>
+<p>与Compact行格式的记录头信息对比来看，有两处不同：</p>
+<ul>
+<li>Redundant行格式多了n_field和1byte_offs_flag这两个属性。</li>
+<li>Redundant行格式没有record_type这个属性。</li>
+</ul>
+<p> 其中，n_fields：代表一行中列的数量，占用10位，这也很好地解释了为什么MySQL一个行支持最多的列为1023。另一个值为1byte_offs_flags，该值定义了偏移列表占用1个字节还是2个字节。当它的值为1时，表明使用1个字节存储。当它的值为0时，表明使用2个字节存储。</p>
+<p><strong>1byte_offs_flag的值是怎么选择的?</strong></p>
+<p>我们前边说过每个列对应的偏移量可以占用1个字节或者2个字节来存储，那到底什么时候用1个字节，什么时候用2个字节呢？其实是根据该条Redundant行格式记录的真实数据占用的总大小来判断的：</p>
+<p>当记录的真实数据占用的字节数值不大于127（十六进制0x7F，二进制01111111）时，每个列对应的偏移量占用1个字节。<br>当记录的真实数据占用的字节数大于127，但不大于32767（十六进制0x7FFF，二进制0111111111111111）时，每个列对应的偏移量占用2个字节。</p>
+<p><strong>有没有记录的真实数据大于32767的情况呢？</strong></p>
+<p>有，不过此时的记录已经存放到了溢出页中，在本页中只保留前768个字节和20个字节的溢出页面地址。因为字段长度偏移列表处只需要记录每个列在本页面中的偏移就好了，所以每个列使用2个字节来存储偏移量就够了。</p>
+<p>大家可以看出来，Redundant行格式还是比较简单粗暴的，直接使用整个记录的真实数据长度来决定使用1个字节还是2个字节存储列对应的偏移量。只要整条记录的真实数据占用的存储空间大小大于127，即使第一个列的值占用存储空间小于127，那对不起，也需要使用2个字节来表示该列对应的偏移量。简单粗暴，就是这么简单粗暴（所以这种行格式有些过时了）。</p>
+<p>为了在解析记录时知道每个列的偏移量是使用1个字节还是2个字节表示的，Redundant行格式特意在<code>记录头信息</code>里放置了一个称之为1byte_offs_flag的属性：</p>
+<p><strong>Redundant行格式中NULL值的处理</strong><br>因为Redundant行格式并没有NULL值列表，所以Redundant行格式在字段长度偏移列表中的各个列对应的偏移量处做了一些特殊处理 —— 将列对应的偏移量值的第一个比特位作为是否为NULL的依据，该比特位也可以被称之为NULL比特位。也就是说在解析一条记录的某个列时，<font color="red">首先看一下该列对应的偏移量的NULL比特位是不是为1。如果为1，那么该列的值就是NULL，否则不是NULL</font>。</p>
+<p>这也就解释了上边介绍为什么只要记录的真实数据大于127（十六进制0x7F，二进制01111111）时，就采用2个字节来表示一个列对应的偏移量，主要是第一个比特位是所谓的NULL比特位，用来标记该列的值是否为NULL。</p>
+<p>但是还有一点要注意，对于值为NULL的列来说，该列的类型是否为定长类型决定了NULL值的实际存储方式，我们接下来分析一下record_test_table表的第二条记录，它对应的字段长度偏移列表如下：</p>
+ <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A4 A4 1A 17 13 0C 06</span><br></pre></td></tr></tbody></table></figure>
+
+<p>按照列的顺序排放就是：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">06 0C 13 17 1A A4 A4</span><br></pre></td></tr></tbody></table></figure>
+
+<p>我们分情况看一下：<br><strong>如果存储NULL值的字段是定长类型的，比方说<code>CHAR(M)</code>数据类型的，则NULL值也将占用记录的真实数据部分，并把该字段对应的数据使用0x00字节填充。</strong></p>
+<p>如图第二条记录的c3列的值是NULL，而c3列的类型是<code>CHAR(10)</code>，占用记录的真实数据部分10字节，所以我们看到在Redundant行格式中使用0x00000000000000000000来表示NULL值。</p>
+<p>另外，c3列对应的偏移量为0xA4，它对应的二进制实际是：10100100，可以看到最高位为1，意味着该列的值是NULL。将最高位去掉后的值变成了0100100，对应的十进制值为36，而c2列对应的偏移量为0x1A，也就是十进制的26。36 - 26 = 10，也就是说最终c3列占用的存储空间为10个字节。</p>
+<p><strong>如果该存储NULL值的字段是变长数据类型的，则不在记录的真实数据处占用任何存储空间。</strong><br>比如record_test_table表的c4列是VARCHAR(10)类型的，VARCHAR(10)是一个变长数据类型，c4列对应的偏移量为0xA4，与c3列对应的偏移量相同，这也就意味着它的值也为NULL，将0xA4的最高位去掉后对应的十进制值也是36，36 - 36 = 0，也就意味着c4列本身不占用任何记录的实际数据处的空间。</p>
+<p>除了以上的几点之外，Redundant行格式和Compact行格式还是大致相同的。</p>
+<h1 id="区、段与碎片区"><a href="#区、段与碎片区" class="headerlink" title="区、段与碎片区"></a>区、段与碎片区</h1><h2 id="为什么要有区？"><a href="#为什么要有区？" class="headerlink" title="为什么要有区？"></a>为什么要有区？</h2><blockquote>
+<p>随机IO:</p>
+<p>数据访问模式不遵循任何顺序，数据块的读取或写入是随机的，可能分散在存储设备的各个位置。</p>
+<p>连续IO:</p>
+<p>数据访问模式遵循一定的顺序，数据块的读取或写入是连续的，通常是按顺序访问存储设备上的数据块。</p>
+</blockquote>
+<p><code>B+</code>树的每一层中的页都会形成一个双向链表，如果是<code>以页为单位</code>来分配存储空间的话，双向链表相邻的两个页<br>之间的<code>物理位置可能离得非常远</code>。我们介绍B+树索引的适用场景的时候特别提到范围查询只需要定位到最左边的<br>记录和最右边的记录，然后沿着双向链表一直扫描就可以了，而如果链表中相邻的两个页物理位置离得非常远，<br>就是所谓的<code>随机I/0</code>。再一次强调，<strong>磁盘的速度和内存的速度差了好几个数量级</strong>，随机I/0是非常慢的，所以我<br>们应该尽量让链表中相邻的页的物理位置也相邻，这样进行范围查询的时候才可以使用所谓的<code>顺序I/0</code>。</p>
+<p>引入<code>区</code>的概念，一个区就是在物理位置上<code>连续的64个页</code>。因为InnoDB中的页大小默认是16KB,所以一个区的大小是<code>64*16KB=1MB</code>。在表中<code>数据量大</code>的时候，为某个索引分配空间的时候就不再按照页为单位分配了，而是按照区为单位分配，甚至在表中的数据特别多的时候，可以一次性分配多个连续的区。虽然可能造成<code>一点点空间的浪费</code>（数据不足以填充满整个区），但是从性能角度看，可以消除很多的随机I/O,<code>功大于过</code>！</p>
+<h2 id="为什么要有段？"><a href="#为什么要有段？" class="headerlink" title="为什么要有段？"></a>为什么要有段？</h2><p>对于范围查询，其实是对B+树叶子节点中的记录进行顺序扫描，而如果不区分叶子节点和非叶子节点，统统把节点代表的页面放到申请到的区中的话，进行范围扫描的效果就大打折扣了。</p>
+<p>所以InnoDB对B+树的<code>叶子节点</code>和<code>非叶子节点</code>进行了区别对待，也就是说叶子节点有自己独有的区，非叶子节点也有自己独有的区。存放叶子节点的区的集合就算是一个<code>段(segment)</code>，存放非叶子节点的区的集合也算是一个段。也就是说一个索引会生成2个段，一个<code>叶子节点段</code>，一个<code>非叶子节点段</code>。</p>
+<p>除了索引的叶子节点段和非叶子节点段之外，InnoDB中还有为存储一些特殊的数据而定义的段，比如回滚段。所<br>以，常见的段有<code>数据段</code>、<code>索引段</code>、<code>回滚段</code>。<strong>数据段即为B+树的叶子节点，索引段即为B+树的非叶子节点</strong>。</p>
+<p>在InnoDB存储引擎中，对段的管理都是由引擎自身所完成，DBA不能也没有必要对其进行控制。这从一定程度上<br>简化了DBA对于段的管理。</p>
+<p>段其实不对应表空间中某一个连续的物理区域，而是一个逻辑上的概念，由若干个零散的页面以及一些完整的区<br>组成。</p>
+<h2 id="为什么要有碎片区"><a href="#为什么要有碎片区" class="headerlink" title="为什么要有碎片区?"></a>为什么要有碎片区?</h2><p>默认情况下，一个使用InnoDB存储引擎的表只有一个聚簇索引，一个索引会生成2个段，而段是以区为单位申请存储空间的，一个区默认占用1M(64*16Kb=1024Kb)存储空间，所以<font color="red">默认情况下一个只存了几条记录的小表也需要2M的存储空间么？</font>以后每次添加一个索引都要多申请2M的存储空间么？这对于存储记录比较少的表简直是天大的浪费。这个问题的症结在于到现在为止我们介绍的区都是非常纯粹的，也就是一个区被整个分配给某一个段，或者说区中的所有页面都是为了存储同一个段的数据而存在的，即使段的数据填不满区中所有的页面，那余下的页面也不能挪作他用。</p>
+<p>为了考虑以完整的区为单位分配给某个段对于数据量较小的表太浪费存储空间的这种情况，InnoDB提出了一个碎片(fragment)区的概念。在一个碎片区中，并不是所有的页都是为了存储同一个段的数据而存在的，而是碎片区中的页可以用于不同的目的，比如有些页用于段A，有些页用于段B,有些页甚至哪个段都不属于。碎片区直属于表空间，并不属于任何一个段。</p>
+<p>所以此后为某个段分配存储空间的策略是这样的：</p>
+<ul>
+<li>在刚开始向表中插入数据的时候，段是从某个碎片区以单个页面为单位来分配存储空间的。</li>
+<li>当某个段已经占用了<code>32个碎片区</code>页面之后，就会申请以完整的区为单位来分配存储空间。</li>
+</ul>
+<p>所以现在段不能仅定义为是某些区的集合，更精确的应该是<code>某些零散的页面</code>以及一些<code>完整的区的集合</code>。</p>
+<h2 id="区的分类"><a href="#区的分类" class="headerlink" title="区的分类"></a>区的分类</h2><blockquote>
+<p>如果把表空间比作是一个集团军，段就相当于师，区就相当于团。一般的团都是隶属于某个师的，就像是处<br>于FSEG的区全都隶属于某个段，而处于FREE、FREE_FRAG以及FULL_FRAG这三种状态的区却直接隶属于表空间，就像独立团直接听命于军部一样。</p>
+</blockquote>
+<p>区大体上可以分为4种类型：</p>
+<ul>
+<li>**空闲的区(FREE)**：现在还没有用到这个区中的任何页面。</li>
+<li>**有剩余空间的碎片区(FREE_FRAG)**：表示碎片区中还有可用的页面。</li>
+<li>**没有剩余空间的碎片区(FULL_FRAG)**：表示碎片区中的所有页面都被使用，没有空闲页面。</li>
+<li>**附属于某个段的区(FSEG)**：每一个索引都可以分为叶子节点段和非叶子节点段。</li>
+</ul>
+<p>处于<code>FREE</code>、<code>FREE_FRAG</code>以及<code>FULL_FRAG</code>这三种状态的区都是独立的，直属于表空间。而处于<code>FSEG</code>状态的区是<br>附属于某个段的。</p>
+<h2 id="表空间"><a href="#表空间" class="headerlink" title="表空间"></a>表空间</h2><p>表空间可以看做是InnoDB存储引擎逻辑结构的最高层，所有的数据都存放在表空间中。<br>表空间是一个<code>逻辑容器</code>，表空间存储的对象是段，在一个表空间中可以有一个或多个段，但是一个段只能属于一个表空间。表空间数据库由一个或多个表空间组成，表空间从管理上可以划分为<code>系统表空间(System tablespace)</code>、<code>独立表空间(File-per-table tablespace)</code>、<code>撤销表空间(Undo Tablespace)</code>和<code>临时表空间 (Temporary Tablespace)</code></p>
+<h2 id="独立表空间"><a href="#独立表空间" class="headerlink" title="独立表空间"></a>独立表空间</h2><p>独立表空间，即每张表有一个独立的表空间，也就是数据和索引信息都会保存在自己的表空间中。独立的表空间<br>(即：单表)可以在不同的数据库之间进行<code>迁移</code>。</p>
+<p>空间可以回收(DROP TABLE操作可自动回收表空间；其他情况，表空间不能自己回收)。如果对于统计分析或是日志表，删除大量数据后可以通过：<code>alter table TableName engine=innodb;</code>回收不用的空间。对于使用独立表空间的表，不管怎么删除，表空间的碎片不会太严重的影响性能，而且还有机会处理。</p>
+<p><strong>独立表空间结构</strong></p>
+<p>独立表空间由段、区、页组成。详见上文</p>
+<p><strong>真实表空间对应的文件大小</strong></p>
+<p>我们到数据目录里看，会发现一个新建的对应的<code>.ibd</code>文件只占用了<code>96K</code>,才6个页面大小(MySQL5.7中)，这<br>是因为一开始表空间占用的空间很小，因为表里边都没有数据。不过别忘了这些.idb文件是<code>自扩展的</code>，随着表中<br>数据的增多，表空间对应的文件也逐渐增大。</p>
+<p><strong>查看InnoDB的表空间类型：</strong></p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql <span class="operator">&gt;</span> <span class="keyword">show</span> variables <span class="keyword">like</span> <span class="string">'innodb_file_per_table'</span>;</span><br></pre></td></tr></tbody></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/21/66ee541120c02.png" alt="image-20240921130519600"></p>
+<p>你能看到<code>innodb_file_per_table=ON</code>,这就意味着每张表都会单独保存为一个<code>.ibd</code>文件。</p>
+<h2 id="系统表空间"><a href="#系统表空间" class="headerlink" title="系统表空间"></a>系统表空间</h2><p>系统表空间的结构和独立表空间基本类似，只不过由于整个MySQL进程只有一个系统表空间，在系统表空间中会<br>额外记录一些有关整个系统信息的页面，这部分是独立表空间中没有的。</p>
+<p><strong>InnoDB数据字典</strong><br>每当我们向一个表中插入一条记录的时候，MySQL校验过程如下：<br>先要校验一下插入语句对应的表存不存在，插入的列和表中的列是否符合，如果语法没有问题的话，还需要知道<br>该表的聚簇索引和所有二级索引对应的根页面是哪个表空间的哪个页面，然后把记录插入对应索引的B+树中。所<br>以说，MySQL除了保存着我们插入的用户数据之外，还需要保存许多额外的信息，比方说：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">- 某表属于哪个表空间，表里边有多少列</span><br><span class="line">- 表对应的每一个列的类型是什么</span><br><span class="line">- 该表有多少索引,每个索引对应哪几个字段,该索引对应的根页面在哪个表空间的哪个页面</span><br><span class="line">- 该表有哪些外键,外键对应哪个表的哪些列</span><br><span class="line">- 某个表空间对应文件系统上文件路径是什么</span><br><span class="line">- ...</span><br></pre></td></tr></tbody></table></figure>
+
+<p>上述这些数据并不是我们使用<code>INSERT</code>语句插入的用户数据，实际上是为了更好的管理我们这些用户数据而不得已引入的一些额外数据，这些数据也称为<code>元数据</code>。InnoDB存储引擎特意定义了一些列的<code>内部系统表</code>(internal system table)来记录这些这些元数据：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/21/66ee56583ec3a.png" alt="image-20240921131502584"></p>
+<p>这些系统表也被称为<code>数据字典</code>，它们都是以<code>B+</code>树的形式保存在系统表空间的某些页面中，其中<code>SYS_TABLES</code>、<br><code>SYS_COLUMNS</code>、<code>SYS_INDEXES</code>、<code>SYS_FIELDS</code>这四个表尤其重要，称之为基本系统表(basic system tables),<br>我们先看看这4个表的结构：</p>
+<p><strong>SYS_TABLES表结构：</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/21/66ee56fad9a4e.png" alt="image-20240921131745216"></p>
+<p><strong>SYS_COLUMNS表结构：</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/21/66ee583e89728.png" alt="image-20240921132308874"></p>
+<p><strong>SYS_INDEXES表结构：</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/21/66ee576431195.png" alt="image-20240921131930452"></p>
+<p><strong>SYS_FIELDS表结构：</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/21/66ee57d76d864.png" alt="image-20240921132125810"></p>
+<p>注意：<strong>用户是不能直接访问InnoDB的这些内部系统表</strong>，除非你直接去解析系统表空间对应文件系统上的文件。不<br>过考虑到查看这些表的内容可能有助于大家分析问题，所以在系统数据库<code>information_schema</code>中提供了一些<br>以<code>innodb_sys</code>开头的表：</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mysql <span class="operator">&gt;</span> USE information_schema;</span><br><span class="line">Database changed</span><br><span class="line">mysq1 <span class="operator">&gt;</span> <span class="keyword">SHOW</span> TABLES <span class="keyword">LIKE</span> <span class="string">'innodb_sys%'</span>;</span><br></pre></td></tr></tbody></table></figure>
+
+<p>在<code>information_schema</code>数据库中的这些以<code>INNODB_SYS</code>开头的表并不是真正的内部系统表（内部系统表就是我<br>们上边以<code>SYS</code>开头的那些表)，而是在存储引擎启动时读取这些以<code>SYS</code>开头的系统表，然后填充到这些以<code>INNODB_SYS</code>开头的表中。以<code>INNODB_SYS</code>开头的表和以<code>SYS</code>开头的表中的字段并不完全一样，但供大家参考已<br>经足矣。</p>
+<h1 id="附录：数据页加载的三种方式"><a href="#附录：数据页加载的三种方式" class="headerlink" title="附录：数据页加载的三种方式"></a>附录：数据页加载的三种方式</h1><p>InnoDB从磁盘中读取数据的<code>最小单位</code>是数据页。而你想得到的id=xx的数据，就是这个数据页众多行中的一行。<br>对于MySQL存放的数据，逻辑概念上我们称之为表，在磁盘等物理层面而言是按<code>数据页</code>形式进行存放的，当其加<br>载到MySQL中我们称之为<code>缓存页</code>。</p>
+<p>如果缓冲池中没有该页数据，那么缓冲池有以下三种读取数据的方式，每种方式的读取效率都是不同的：</p>
+<h2 id="内存读取"><a href="#内存读取" class="headerlink" title="内存读取"></a>内存读取</h2><p>如果该数据存在于内存中，基本上执行时间在1ms左右，效率还是很高的。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/21/66ee4bbd234d7.png" alt="image-20240921122947542"></p>
+<h2 id="随机读取"><a href="#随机读取" class="headerlink" title="随机读取"></a>随机读取</h2><p>如果数据没有在存中，就需要在磁盘上对该页进行查找，整体时间预估在<code>10ms</code>左右，这10ms中有6ms是磁盘的实际繁忙时间（包括了<code>寻道和半圈旋转时间</code>），有3ms是对可能发生的排队时间的估计值，另外还有1ms的传输时间，将页从磁盘服务器缓冲区传输到数据库缓冲区中。这10s看起来很快，但实际上对于数据库来说消耗的时间已经非常长了，因为这还只是一个页的读取时间。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/09/21/66ee4c7b02d8a.png" alt="image-20240921123257351"></p>
+<h2 id="顺序读取"><a href="#顺序读取" class="headerlink" title="顺序读取"></a>顺序读取</h2><p>顺序读取其实是一种批量读取的方式，因为我们请求的<code>数据在磁盘上往往都是相邻存储的</code>，顺序读取可以帮我们批<br>量读取页面，这样的话，一次性加载到缓冲池中就不需要再对其他页面单独进行磁盘I/O操作了。如果一个磁盘的吞吐量是40MB/S,那么对于一个16KB大小的页来说，一次可以顺序读取2560(40MB/16KB)个页，相当于一个页的读取时间为0.4s。采用批量读取的方式，即使是从磁盘上进行读取，效率也比从内存中只单独读取一个页的效率要高。</p>
+</div></article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/avatar.png" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/avatar.png" title="头像" alt="头像"></a><div class="post-copyright__author_name">時光</div><div class="post-copyright__author_desc">心寄朗朗乾坤，胸怀真修之道。</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://blog.shiguang666.eu.org/2024/09/20/dbfa846f2f03/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://blog.shiguang666.eu.org/2024/09/20/dbfa846f2f03/')">【尚硅谷】MySQL-InnoDB数据存储结构</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="anzhiyu.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="anzhiyufont anzhiyu-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="/img/wechat.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/wechat.png" alt="微信"></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/alipay.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/alipay.png" alt="支付宝"></a><div class="post-qr-code-desc">支付宝</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="anzhiyu.removeRewardMask()" style="display: none"></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://blog.shiguang666.eu.org/2024/09/20/dbfa846f2f03/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=【尚硅谷】MySQL-InnoDB数据存储结构&amp;url=https://blog.shiguang666.eu.org/2024/09/20/dbfa846f2f03/&amp;pic=https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.shiguang666.eu.org" target="_blank">時光</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/%E5%B0%9A%E7%A1%85%E8%B0%B7/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>尚硅谷<span class="tagsPageCount">42</span></a><a class="post-meta__box__tags" href="/tags/MySQL/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>MySQL<span class="tagsPageCount">2</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://img.shiguangdev.cn/i/2024/12/13/675c5996649aa.webp" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/09/20/d84d1622a220/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">【尚硅谷】MySQL-索引的数据结构</div></div></a></div><div class="next-post pull-right"><a href="/2024/09/20/8b8ed03edcbf/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/10/18/671251a94f7a9.png?_r_=874fdc1c-5e6d-49c8-4baf-8a64ae96b4b5" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">MindManager下载与激活</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/2024/09/18/847c1ec4d4cd/" title="【尚硅谷】Docker快速通关"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-09-18</div><div class="title">【尚硅谷】Docker快速通关</div></div></a></div><div><a href="/2024/09/17/56a6db38519d/" title="【尚硅谷】JAVA基础-IO流"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-09-17</div><div class="title">【尚硅谷】JAVA基础-IO流</div></div></a></div><div><a href="/2024/09/16/a32606420cb2/" title="【尚硅谷】JAVA基础-API"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-09-16</div><div class="title">【尚硅谷】JAVA基础-API</div></div></a></div><div><a href="/2024/09/17/ef5bcf52c331/" title="【尚硅谷】JAVA基础-JDK新特性"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-09-17</div><div class="title">【尚硅谷】JAVA基础-JDK新特性</div></div></a></div><div><a href="/2024/09/16/277ab91cb5a0/" title="【尚硅谷】JAVA基础-多线程"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-09-16</div><div class="title">【尚硅谷】JAVA基础-多线程</div></div></a></div><div><a href="/2024/09/17/0e6002b1fa7f/" title="【尚硅谷】JAVA基础-网络编程"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2024-09-17</div><div class="title">【尚硅谷】JAVA基础-网络编程</div></div></a></div></div></div><hr><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="anzhiyufont anzhiyu-icon-comments"></i><span> 评论</span></div><div class="comment-randomInfo"><a onclick="anzhiyu.addRandomCommentInfo()" href="javascript:void(0)" style="display: none">匿名评论</a><a href="/privacy" style="margin-left: 4px">隐私政策</a></div><div class="comment-tips" id="comment-tips"><span>✅ 你无需删除空行，直接评论以获取最佳展示效果</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div><div class="comment-barrage"></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"><div class="author-status"><img class="g-status" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://emotion.acs.pw/emotion/Heo/送福.png" alt="status"></div></div><div class="author-info__description">代码成就万事基积沙镇海,<br>梦想永在凌云意意气风发。</div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/"><h1 class="author-info__name">時光</h1><div class="author-info__desc">心寄朗朗乾坤，胸怀真修之道。</div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/shiguang-coding" target="_blank" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a></div></div></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bullhorn anzhiyu-shake"></i><span>公告</span></div><div class="announcement_content"><span>🌟欢迎光临時光的博客园子🌟</span><br> <span><a href="https://blog.shiguang666.eu.org"><b>blog.shiguang666.eu.org</b></a></span><br> <span><a target="_blank" rel="noopener" href="https://blog.shiguangdev.cn"><b>blog.shiguangdev.cn</b></a></span><br> <span><a target="_blank" rel="noopener" href="https://blog.shiguang88.icu"><b>blog.shiguang88.icu</b></a></span><br> <span>🤔 如有问题欢迎评论区交流！</span><br> <span>📧 如需联系我：<a href="mailto:an_shiguang@163.com"><b>发送邮件🚀</b></a></span> <div id="welcome-info"></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84%EF%BC%9A%E9%A1%B5"><span class="toc-number">1.</span> <span class="toc-text">数据库的存储结构：页</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A3%81%E7%9B%98%E4%B8%8E%E5%86%85%E5%AD%98%E4%BA%A4%E4%BA%92%E5%9F%BA%E6%9C%AC%E5%8D%95%E4%BD%8D%EF%BC%9A%E9%A1%B5"><span class="toc-number">1.1.</span> <span class="toc-text">磁盘与内存交互基本单位：页</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%B5%E7%BB%93%E6%9E%84%E6%A6%82%E8%BF%B0"><span class="toc-number">1.2.</span> <span class="toc-text">页结构概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%B5%E7%9A%84%E5%A4%A7%E5%B0%8F"><span class="toc-number">1.3.</span> <span class="toc-text">页的大小</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%B5%E7%9A%84%E4%B8%8A%E5%B1%82%E7%BB%93%E6%9E%84"><span class="toc-number">1.4.</span> <span class="toc-text">页的上层结构</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%A1%B5%E7%9A%84%E5%86%85%E9%83%A8%E7%BB%93%E6%9E%84"><span class="toc-number">2.</span> <span class="toc-text">页的内部结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86%EF%BC%9AFile-Header-%E6%96%87%E4%BB%B6%E5%A4%B4%E9%83%A8-%E5%92%8C-File-Trailer-%E6%96%87%E4%BB%B6%E5%B0%BE%E9%83%A8"><span class="toc-number">2.0.1.</span> <span class="toc-text">第一部分：File Header (文件头部) 和 File Trailer (文件尾部)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#File-Header-%E6%96%87%E4%BB%B6%E5%A4%B4%E9%83%A8"><span class="toc-number">2.0.1.1.</span> <span class="toc-text">File Header (文件头部)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#File-Trailer%EF%BC%88%E6%96%87%E4%BB%B6%E5%B0%BE%E9%83%A8%EF%BC%89"><span class="toc-number">2.0.1.2.</span> <span class="toc-text">File Trailer（文件尾部）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E9%83%A8%E5%88%86%EF%BC%9AUser-Records-%E7%94%A8%E6%88%B7%E8%AE%B0%E5%BD%95-%E3%80%81%E6%9C%80%E5%A4%A7%E6%9C%80%E5%B0%8F%E8%AE%B0%E5%BD%95%E3%80%81Free-Space-%E7%A9%BA%E9%97%B2%E7%A9%BA%E9%97%B4"><span class="toc-number">2.0.2.</span> <span class="toc-text">第二部分：User Records (用户记录)、最大最小记录、Free Space (空闲空间)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Free-Space-%E7%A9%BA%E9%97%B2%E7%A9%BA%E9%97%B4"><span class="toc-number">2.0.2.1.</span> <span class="toc-text">Free Space (空闲空间)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#User-Records-%E7%94%A8%E6%88%B7%E8%AE%B0%E5%BD%95"><span class="toc-number">2.0.2.2.</span> <span class="toc-text">User Records (用户记录)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E9%83%A8%E5%88%86%EF%BC%9APage-Directory-%E9%A1%B5%E7%9B%AE%E5%BD%95-%E5%92%8C-Page-Header-%E9%A1%B5%E9%9D%A2%E5%A4%B4%E9%83%A8"><span class="toc-number">2.0.3.</span> <span class="toc-text">第三部分：Page Directory (页目录) 和 Page Header (页面头部)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Page-Directory-%E9%A1%B5%E7%9B%AE%E5%BD%95"><span class="toc-number">2.0.3.1.</span> <span class="toc-text">Page Directory (页目录)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Page-Header-%E9%A1%B5%E9%9D%A2%E5%A4%B4%E9%83%A8"><span class="toc-number">2.0.3.2.</span> <span class="toc-text">Page Header (页面头部)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8E%E6%95%B0%E6%8D%AE%E9%A1%B5%E7%9A%84%E8%A7%92%E5%BA%A6%E7%9C%8BB-%E6%A0%91%E5%A6%82%E4%BD%95%E6%9F%A5%E8%AF%A2"><span class="toc-number">2.0.4.</span> <span class="toc-text">从数据页的角度看B+树如何查询</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#B-%E6%A0%91%E6%98%AF%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E8%AE%B0%E5%BD%95%E6%A3%80%E7%B4%A2%E7%9A%84%EF%BC%9F"><span class="toc-number">2.0.4.1.</span> <span class="toc-text">B+树是如何进行记录检索的？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%99%AE%E9%80%9A%E7%B4%A2%E5%92%8C%E5%94%AF%E4%B8%80%E7%B4%A2%E5%BC%95%E5%9C%A8%E6%9F%A5%E8%AF%A2%E6%95%88%E7%8E%87%E4%B8%8A%E6%9C%89%E4%BB%80%E4%B9%88%E4%B8%8D%E5%90%8C%EF%BC%9F"><span class="toc-number">2.0.4.2.</span> <span class="toc-text">普通索和唯一索引在查询效率上有什么不同？</span></a></li></ol></li></ol></li></ol><li class="toc-item toc-level-1"><a class="toc-link" href="#InnoDB%E8%A1%8C%E6%A0%BC%E5%BC%8F%EF%BC%88%E6%88%96%E8%AE%B0%E5%BD%95%E6%A0%BC%E5%BC%8F%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">InnoDB行格式（或记录格式）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%87%E5%AE%9A%E8%A1%8C%E6%A0%BC%E5%BC%8F%E7%9A%84%E8%AF%AD%E6%B3%95"><span class="toc-number">3.1.</span> <span class="toc-text">指定行格式的语法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#COMPACT%E8%A1%8C%E6%A0%BC%E5%BC%8F"><span class="toc-number">3.2.</span> <span class="toc-text">COMPACT行格式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%98%E9%95%BF%E5%AD%97%E6%AE%B5%E9%95%BF%E5%BA%A6%E5%88%97%E8%A1%A8"><span class="toc-number">3.2.1.</span> <span class="toc-text">变长字段长度列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Null%E5%80%BC%E5%88%97%E8%A1%A8"><span class="toc-number">3.2.2.</span> <span class="toc-text">Null值列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%B0%E5%BD%95%E5%A4%B4%E4%BF%A1%E6%81%AF"><span class="toc-number">3.2.3.</span> <span class="toc-text">记录头信息</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#delete-mark"><span class="toc-number">3.2.3.1.</span> <span class="toc-text">delete_mark</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#min-rec-mask"><span class="toc-number">3.2.3.2.</span> <span class="toc-text">min_rec_mask</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#record-type"><span class="toc-number">3.2.3.3.</span> <span class="toc-text">record_type</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#heap-no"><span class="toc-number">3.2.3.4.</span> <span class="toc-text">heap_no</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#n-owned"><span class="toc-number">3.2.3.5.</span> <span class="toc-text">n_owned</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#next-record"><span class="toc-number">3.2.3.6.</span> <span class="toc-text">next_record</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%B0%E5%BD%95%E7%9A%84%E7%9C%9F%E5%AE%9E%E6%95%B0%E6%8D%AE"><span class="toc-number">3.2.4.</span> <span class="toc-text">记录的真实数据</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Dynamic%E5%92%8CCompressed%E8%A1%8C%E6%A0%BC%E5%BC%8F"><span class="toc-number">3.3.</span> <span class="toc-text">Dynamic和Compressed行格式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%8C%E6%BA%A2%E5%87%BA"><span class="toc-number">3.3.1.</span> <span class="toc-text">行溢出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Dynamic%E5%92%8CCompressed%E8%A1%8C%E6%A0%BC%E5%BC%8F-1"><span class="toc-number">3.3.2.</span> <span class="toc-text">Dynamic和Compressed行格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redundant%E8%A1%8C%E6%A0%BC%E5%BC%8F"><span class="toc-number">3.4.</span> <span class="toc-text">Redundant行格式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E6%AE%B5%E9%95%BF%E5%BA%A6%E5%81%8F%E7%A7%BB%E5%88%97%E8%A1%A8"><span class="toc-number">3.4.1.</span> <span class="toc-text">字段长度偏移列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%B0%E5%BD%95%E5%A4%B4%E4%BF%A1%E6%81%AF%EF%BC%88record-header%EF%BC%89"><span class="toc-number">3.4.2.</span> <span class="toc-text">记录头信息（record header）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8C%BA%E3%80%81%E6%AE%B5%E4%B8%8E%E7%A2%8E%E7%89%87%E5%8C%BA"><span class="toc-number">4.</span> <span class="toc-text">区、段与碎片区</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E6%9C%89%E5%8C%BA%EF%BC%9F"><span class="toc-number">4.1.</span> <span class="toc-text">为什么要有区？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E6%9C%89%E6%AE%B5%EF%BC%9F"><span class="toc-number">4.2.</span> <span class="toc-text">为什么要有段？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E6%9C%89%E7%A2%8E%E7%89%87%E5%8C%BA"><span class="toc-number">4.3.</span> <span class="toc-text">为什么要有碎片区?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8C%BA%E7%9A%84%E5%88%86%E7%B1%BB"><span class="toc-number">4.4.</span> <span class="toc-text">区的分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%A8%E7%A9%BA%E9%97%B4"><span class="toc-number">4.5.</span> <span class="toc-text">表空间</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8B%AC%E7%AB%8B%E8%A1%A8%E7%A9%BA%E9%97%B4"><span class="toc-number">4.6.</span> <span class="toc-text">独立表空间</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E8%A1%A8%E7%A9%BA%E9%97%B4"><span class="toc-number">4.7.</span> <span class="toc-text">系统表空间</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%99%84%E5%BD%95%EF%BC%9A%E6%95%B0%E6%8D%AE%E9%A1%B5%E5%8A%A0%E8%BD%BD%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F"><span class="toc-number">5.</span> <span class="toc-text">附录：数据页加载的三种方式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E8%AF%BB%E5%8F%96"><span class="toc-number">5.1.</span> <span class="toc-text">内存读取</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9A%8F%E6%9C%BA%E8%AF%BB%E5%8F%96"><span class="toc-number">5.2.</span> <span class="toc-text">随机读取</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%BA%E5%BA%8F%E8%AF%BB%E5%8F%96"><span class="toc-number">5.3.</span> <span class="toc-text">顺序读取</span></a></li></ol></li></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/12/13/2ec3ab3954b3/" title="通过SSH密钥连接Linux"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/12/13/675c5996649aa.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="通过SSH密钥连接Linux"></a><div class="content"><a class="title" href="/2024/12/13/2ec3ab3954b3/" title="通过SSH密钥连接Linux">通过SSH密钥连接Linux</a><time datetime="2024-12-13T15:37:00.000Z" title="发表于 2024-12-13 23:37:00">2024-12-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/12/13/0616411766f4/" title="【Hexo】一键部署至远程服务器"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/12/13/675c59eff34f4.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【Hexo】一键部署至远程服务器"></a><div class="content"><a class="title" href="/2024/12/13/0616411766f4/" title="【Hexo】一键部署至远程服务器">【Hexo】一键部署至远程服务器</a><time datetime="2024-12-13T13:35:49.000Z" title="发表于 2024-12-13 21:35:49">2024-12-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/12/12/60bae9f9d9cc/" title="【尚硅谷】JVM-类的加载篇"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【尚硅谷】JVM-类的加载篇"></a><div class="content"><a class="title" href="/2024/12/12/60bae9f9d9cc/" title="【尚硅谷】JVM-类的加载篇">【尚硅谷】JVM-类的加载篇</a><time datetime="2024-12-12T04:02:59.000Z" title="发表于 2024-12-12 12:02:59">2024-12-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/12/11/0a6035f3745c/" title="【尚硅谷】JVM-字节码篇"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/08/28/66cedaf5d014a.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【尚硅谷】JVM-字节码篇"></a><div class="content"><a class="title" href="/2024/12/11/0a6035f3745c/" title="【尚硅谷】JVM-字节码篇">【尚硅谷】JVM-字节码篇</a><time datetime="2024-12-11T00:33:29.000Z" title="发表于 2024-12-11 08:33:29">2024-12-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/12/09/68b16c939c95/" title="【智能协同云图库】2-项目初始化"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/i/2024/12/09/6756ee980378a.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【智能协同云图库】2-项目初始化"></a><div class="content"><a class="title" href="/2024/12/09/68b16c939c95/" title="【智能协同云图库】2-项目初始化">【智能协同云图库】2-项目初始化</a><time datetime="2024-12-09T14:12:44.000Z" title="发表于 2024-12-09 22:12:44">2024-12-09</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div id="footer_deal"><a class="deal_link" target="_blank" rel="noopener" href="https://github.com/shiguang-coding" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a><a class="deal_link" href="mailto:an_shiguang@163.com" title="email"><i class="anzhiyufont anzhiyu-icon-envelope"></i></a><img class="footer_mini_logo" title="返回顶部" alt="返回顶部" onclick="anzhiyu.scrollToDest(0, 500)" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/avatar.png" size="50px"><a class="deal_link" href="/atom.xml" title="RSS"><i class="anzhiyufont anzhiyu-icon-rss"></i></a><a class="deal_link" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC"><i class="anzhiyufont anzhiyu-icon-copyright-line"></i></a></div><div id="anzhiyu-footer"><div class="footer-group"><div class="footer-title">服务</div><div class="footer-links"><a class="footer-item" title="开往" target="_blank" rel="noopener" href="https://www.travellings.cn/go.html">开往</a><a class="footer-item" title="异次元之旅" target="_blank" rel="noopener" href="https://travel.moe/go.html?travel=on">异次元之旅</a><a class="footer-item" title="列表导航" target="_blank" rel="noopener" href="https://zhblogs.ohyee.cc/">列表导航</a><a class="footer-item" title="十年之约" target="_blank" rel="noopener" href="https://www.foreverblog.cn/">十年之约</a></div></div><div class="footer-group"><div class="footer-title">文章</div><div class="footer-links"><a class="footer-item" title="归档" href="/archives/">归档</a><a class="footer-item" title="分类" href="/categories/">分类</a><a class="footer-item" title="标签" href="/tags/">标签</a><a class="footer-item" title="RSS" href="/tom.xml">RSS</a></div></div><div class="footer-group"><div class="footer-title">导航</div><div class="footer-links"><a class="footer-item" title="即刻短文" href="/essay/">即刻短文</a><a class="footer-item" title="留言板" href="/comment/">留言板</a><a class="footer-item" title="关于我" href="/about/">关于我</a></div></div><div class="footer-group"><div class="footer-title-group"><div class="footer-title">友链</div><a class="random-friends-btn" id="footer-random-friends-btn" href="javascript:addFriendLinksInFooter();" title="换一批友情链接"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right"></i></a></div><div class="footer-links" id="friend-links-in-footer"></div></div></div><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo_v5.4.0" title="博客框架为Hexo_v5.4.0"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Frame-Hexo.svg" alt="博客框架为Hexo_v5.4.0"></a><a class="github-badge" target="_blank" href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu" style="margin-inline:5px" data-title="本站使用AnZhiYu主题" title="本站使用AnZhiYu主题"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.9/img/Theme-AnZhiYu-2E67D3.svg" alt="本站使用AnZhiYu主题"></a><a class="github-badge" target="_blank" href="https://icp.gov.moe/?keyword=blog.shiguangdev.cn" style="margin-inline:5px" data-title="萌ICP备20246006号" title="萌ICP备20246006号"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shields.io/badge/%E8%90%8Cicp%E5%A4%87-20246006%E5%8F%B7-FF1485" alt="萌ICP备20246006号"></a><a class="github-badge" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" style="margin-inline:5px" data-title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可" title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.2.0/img/badge/Copyright-BY-NC-SA.svg" alt="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"></a></p></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">©2023 - 2024 By <a class="footer-bar-link" href="/" title="時光" target="_blank">時光</a></div></div><div id="footer-type-tips"></div><div class="js-pjax"><script>function subtitleType () {
+  fetch('https://v1.hitokoto.cn')
+    .then(response => response.json())
+    .then(data => {
+      if (true) {
+        const from = '出自 ' + data.from
+        const sub = []
+        sub.unshift(data.hitokoto, from)
+        window.typed = new Typed('#footer-type-tips', {
+          strings: sub,
+          startDelay: 300,
+          typeSpeed: 150,
+          loop: true,
+          backSpeed: 50,
+        })
+      } else {
+        document.getElementById('footer-type-tips').innerHTML = data.hitokoto
+      }
+    })
+}
+
+if (true) {
+  if (typeof Typed === 'function') {
+    subtitleType()
+  } else {
+    getScript('https://cdn.cbd.int/typed.js@2.1.0/dist/typed.umd.js').then(subtitleType)
+  }
+} else {
+  subtitleType()
+}
+</script></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu" title="主题">主题</a><a class="footer-bar-link" target="_blank" rel="noopener" href="https://img.shiguangdev.cn/" title="图床">图床</a><a class="footer-bar-link" target="_blank" rel="noopener" href="https://beian.miit.gov.cn/" title="豫ICP备2024070732号">豫ICP备2024070732号</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">254</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">191</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">16</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://www.shiguang666.eu.org" title="時光主页"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="時光主页"><span class="back-menu-item-text">時光主页</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://nav.shiguang666.eu.org" title="時光导航站"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="時光导航站"><span class="back-menu-item-text">時光导航站</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://game.shiguang666.eu.org" title="怀旧游戏机"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="怀旧游戏机"><span class="back-menu-item-text">怀旧游戏机</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://games.shiguang666.eu.org" title="在线小游戏"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="在线小游戏"><span class="back-menu-item-text">在线小游戏</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">后台管理</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://img.shiguangdev.cn/" title="時光图床"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shiguangdev.cn/favicon.ico" alt="時光图床"><span class="back-menu-item-text">時光图床</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://qexo.shiguang666.eu.org/" title="Hexo管理面板"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://qexo.shiguang666.eu.org/favicon.ico" alt="Hexo管理面板"><span class="back-menu-item-text">Hexo管理面板</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 归档</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随机</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/news/"><i class="fa fa-calendar faa-tada"></i><span> 早报亭</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/music/?id=10051718332&amp;server=netease"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/gallery/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/xjj/"><i class="fa fa-rocket faa-tada"></i><span> 养生堂</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/flink/"><i class="anzhiyufont anzhiyu-icon-artstation faa-tada" style="font-size: 0.9em;"></i><span> 朋友圈</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comment/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于我</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/AI/" style="font-size: 0.88rem;">AI<sup>9</sup></a><a href="/tags/Alist/" style="font-size: 0.88rem;">Alist<sup>3</sup></a><a href="/tags/CentOs/" style="font-size: 0.88rem;">CentOs<sup>1</sup></a><a href="/tags/ChatGPT/" style="font-size: 0.88rem;">ChatGPT<sup>13</sup></a><a href="/tags/ChatGPt/" style="font-size: 0.88rem;">ChatGPt<sup>1</sup></a><a href="/tags/Chrome/" style="font-size: 0.88rem;">Chrome<sup>1</sup></a><a href="/tags/CloudFlare/" style="font-size: 0.88rem;">CloudFlare<sup>3</sup></a><a href="/tags/DNS/" style="font-size: 0.88rem;">DNS<sup>1</sup></a><a href="/tags/Ecology/" style="font-size: 0.88rem;">Ecology<sup>1</sup></a><a href="/tags/GPT-4o/" style="font-size: 0.88rem;">GPT-4o<sup>2</sup></a><a href="/tags/Gemini/" style="font-size: 0.88rem;">Gemini<sup>2</sup></a><a href="/tags/Git/" style="font-size: 0.88rem;">Git<sup>8</sup></a><a href="/tags/GitHub/" style="font-size: 0.88rem;">GitHub<sup>6</sup></a><a href="/tags/Hexo/" style="font-size: 0.88rem;">Hexo<sup>24</sup></a><a href="/tags/IDEA/" style="font-size: 0.88rem;">IDEA<sup>3</sup></a><a href="/tags/KeyBoardTestUtility/" style="font-size: 0.88rem;">KeyBoardTestUtility<sup>1</sup></a><a href="/tags/Linux/" style="font-size: 0.88rem;">Linux<sup>4</sup></a><a href="/tags/Lombok/" style="font-size: 0.88rem;">Lombok<sup>1</sup></a><a href="/tags/Markdown/" style="font-size: 0.88rem;">Markdown<sup>2</sup></a><a href="/tags/MindManager/" style="font-size: 0.88rem;">MindManager<sup>1</sup></a><a href="/tags/Mysql/" style="font-size: 0.88rem;">Mysql<sup>2</sup></a><a href="/tags/Navicat/" style="font-size: 0.88rem;">Navicat<sup>1</sup></a><a href="/tags/Perplexity-AI/" style="font-size: 0.88rem;">Perplexity AI<sup>1</sup></a><a href="/tags/PicGo/" style="font-size: 0.88rem;">PicGo<sup>1</sup></a><a href="/tags/QQ/" style="font-size: 0.88rem;">QQ<sup>1</sup></a><a href="/tags/SSL/" style="font-size: 0.88rem;">SSL<sup>3</sup></a><a href="/tags/Sqlserver/" style="font-size: 0.88rem;">Sqlserver<sup>1</sup></a><a href="/tags/Typora/" style="font-size: 0.88rem;">Typora<sup>5</sup></a><a href="/tags/drawio/" style="font-size: 0.88rem;">drawio<sup>1</sup></a><a href="/tags/git/" style="font-size: 0.88rem;">git<sup>1</sup></a><a href="/tags/mysql/" style="font-size: 0.88rem;">mysql<sup>1</sup></a><a href="/tags/svn/" style="font-size: 0.88rem;">svn<sup>2</sup></a><a href="/tags/%E5%9B%BE%E5%90%A7%E5%B7%A5%E5%85%B7%E7%AE%B1/" style="font-size: 0.88rem;">图吧工具箱<sup>1</sup></a><a href="/tags/%E5%9B%BE%E5%BA%8A/" style="font-size: 0.88rem;">图床<sup>7</sup></a><a href="/tags/%E5%BC%80%E6%BA%90%E5%88%86%E4%BA%AB/" style="font-size: 0.88rem;">开源分享<sup>6</sup></a><a href="/tags/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/" style="font-size: 0.88rem;">搜索引擎<sup>2</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D/" style="font-size: 0.88rem;">数据恢复<sup>1</sup></a><a href="/tags/%E6%A8%A1%E6%9D%BF/" style="font-size: 0.88rem;">模板<sup>4</sup></a><a href="/tags/%E8%B8%A9%E5%9D%91/" style="font-size: 0.88rem;">踩坑<sup>6</sup></a><a href="/tags/%E9%B1%BC%E7%9A%AE/" style="font-size: 0.88rem;">鱼皮<sup>10</sup></a></div></div><hr></div></div><div id="keyboard-tips"><div class="keyboardTitle">博客快捷键</div><div class="keybordList"><div class="keybordItem"><div class="keyGroup"><div class="key">shift K</div></div><div class="keyContent"><div class="content">关闭快捷键功能</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift A</div></div><div class="keyContent"><div class="content">打开/关闭中控台</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift M</div></div><div class="keyContent"><div class="content">播放/暂停音乐</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift D</div></div><div class="keyContent"><div class="content">深色/浅色显示模式</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift S</div></div><div class="keyContent"><div class="content">站内搜索</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift R</div></div><div class="keyContent"><div class="content">随机访问</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift H</div></div><div class="keyContent"><div class="content">返回首页</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift F</div></div><div class="keyContent"><div class="content">友链鱼塘</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift L</div></div><div class="keyContent"><div class="content">友链页面</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift P</div></div><div class="keyContent"><div class="content">关于本站</div></div></div><div class="keybordItem"><div class="keyGroup"><div class="key">shift I</div></div><div class="keyContent"><div class="content">原版/本站右键菜单</div></div></div></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="anzhiyufont anzhiyu-icon-comments"></i></a><a id="switch-commentBarrage" href="javascript:anzhiyu.switchCommentBarrage();" title="开关弹幕"><i class="anzhiyufont anzhiyu-icon-danmu"></i></a><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="nav-music"><a id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()" accesskey="m">播放音乐</a><div id="console-music-bg"></div><meting-js id="10051718332" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random" volume="0.7"></meting-js></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="anzhiyufont anzhiyu-icon-xmark"></i></button></nav><div class="is-center" id="loading-database"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-pulse-icon"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"></div></div><hr><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://music.163.com/#/my/m/music/playlist?id=10051718332&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><canvas id="universe"></canvas><script async="" src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("05/01/2023 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2023 By 安知鱼 V1.6.14",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 時光 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async="" src="/anzhiyu/random.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>(() => {
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo.shiguangdev.eu.org',
+      region: '',
+      onCommentLoaded: () => {
+        anzhiyu.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') setTimeout(runFn,0)
+    else getScript('https://cdn.cbd.int/twikoo@1.6.39/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo.shiguangdev.eu.org',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(res => {
+      countELement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  const runFn = () => {
+    init();
+    GLOBAL_CONFIG_SITE.isPost && getCount()
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) anzhiyu.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else {
+      loadTwikoo()
+    }
+  } else {
+    window.loadOtherComment = loadTwikoo
+  }
+})()</script><input type="hidden" name="page-type" id="page-type" value="post"><script async="" src="/js/anzhiyu/comment_barrage.js"></script></div><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getComment = () => {
+    const runTwikoo = () => {
+      twikoo.getRecentComments({
+        envId: 'https://twikoo.shiguangdev.eu.org',
+        region: '',
+        pageSize: 6,
+        includeReply: true
+      }).then(function (res) {
+        const twikooArray = res.map(e => {
+          return {
+            'content': changeContent(e.comment),
+            'avatar': e.avatar,
+            'nick': e.nick,
+            'url': e.url + '#' + e.id,
+            'date': new Date(e.created).toISOString()
+          }
+        })
+
+        saveToLocal.set('twikoo-newest-comments', JSON.stringify(twikooArray), 10/(60*24))
+        generateHtml(twikooArray)
+      }).catch(function (err) {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.textContent= "无法获取评论，请确认相关配置是否正确"
+      })
+    }
+
+    if (typeof twikoo === 'object') {
+      runTwikoo()
+    } else {
+      getScript('https://cdn.cbd.int/twikoo@1.6.39/dist/twikoo.all.min.js').then(runTwikoo)
+    }
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'><div class='name'><span>${array[i].nick} </span></div></a>`
+        }
+        
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <time datetime="${array[i].date}">${anzhiyu.diffDate(array[i].date, true)}</time></div>
+        </div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom && ($dom.innerHTML= result)
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('twikoo-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script async="" data-pjax="" src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><script src="/js/anzhiyu/right_click_menu.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><script src="/js/custom/footer-animal.js" defer=""></script><script src="/api/card-welcome.js"></script><script id="click-heart" src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/dist/click-heart.min.js" async="async" mobile="false"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","meta[property=\"og:type\"]","meta[property=\"og:site_name\"]","meta[property=\"og:description\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div><!-- hexo injector body_end start -->
+  <script data-pjax="" src="/js/hexo_githubcalendar.js"></script>
+  <script data-pjax="">
+        function GithubCalendarConfig(){
+            var git_githubapiurl ="https://githubcalendarapi.shiguang666.eu.org/api?user=shiguang-coding";
+            var git_color =['#ebedf0', '#a2f7af', '#6ce480', '#54ad63', '#469252', '#31753c', '#1f5f2a', '#13531f', '#084111', '#032b09', '#000000'];
+            var git_user ="shiguang-coding";
+            var parent_div_git = document.getElementById('recent-posts');
+            var git_div_html = '<div class="recent-post-item" style="width:100%;height:auto;padding:10px;"><div id="github_loading" style="width:10%;height:100%;margin:0 auto;display: block"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animateTransform></path></svg></div><div id="github_container"></div></div>';
+            if(parent_div_git && location.pathname =='/'){
+                console.log("已挂载hexo-github-calendar https://github.com/Barry-Flynn/hexo-github-calendar");
+                // parent_div_git.innerHTML=git_div_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",git_div_html) // 有报错，但不影响使用(支持pjax跳转)
+            };
+            GithubCalendar(git_githubapiurl,git_color,git_user)
+        }
+        if(document.getElementById('recent-posts')){
+            GithubCalendarConfig()
+        }
+    </script>
+    <style>#github_container{min-height:280px}@media screen and (max-width:650px) {#github_container{background-image:;min-height:0px}}</style>
+    <style></style><!-- hexo injector body_end end -->
+    <link rel="stylesheet" href="https://ai.tianli0.top/static/public/postChatUser_summary.min.css">
+    <script>
+        let tianliGPT_key = '75439fb77e5551eacf54f0df75565616dcf2ad';
+        let tianliGPT_postSelector = '#article-container';
+        let tianliGPT_Title = '文章摘要';
+        let tianliGPT_postURL = '/^https?://[^/]+/[0-9]{4}/[0-9]{2}/[0-9]{2}/';
+        let tianliGPT_blacklist = '';
+        let tianliGPT_wordLimit = '1000';
+        let tianliGPT_typingAnimate = true;
+        var postChatConfig = {
+          backgroundColor: "#3e86f6",
+          bottom: "16px",
+          left: "16px",
+          fill: "#FFFFFF",
+          width: "44px",
+          frameWidth: "375px",
+          frameHeight: "600px",
+          defaultInput: true,
+          upLoadWeb: true,
+          showInviteLink: true,
+          userTitle: "PostChat",
+          userDesc: "如果你对网站的内容有任何疑问，可以来问我哦～",
+          addButton: true,
+          beginningText: "这篇文章介绍了"
+        };
+    </script>
+    <script data-postchat_key="75439fb77e5551eacf54f0df75565616dcf2ad" src="https://ai.tianli0.top/static/public/postChatUser_summary.min.js"></script>
+  </body></html>
