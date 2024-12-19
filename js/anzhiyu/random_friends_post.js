@@ -1,5 +1,6 @@
 var fdata = {
-  apiurl: GLOBAL_CONFIG.friends_vue_info.apiurl,
+  // apiurl: GLOBAL_CONFIG.friends_vue_info.apiurl,
+  apiurl: GLOBAL_CONFIG.friends_vue.apiurl,
   defaultFish: 100,
   hungryFish: 100,
 };
