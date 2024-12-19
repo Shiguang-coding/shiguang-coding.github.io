@@ -1,6 +1,5 @@
 var fdata = {
-  // apiurl: GLOBAL_CONFIG.friends_vue_info.apiurl,
-  apiurl: theme.friends_vue.apiurl,
+  apiurl: GLOBAL_CONFIG.friends_vue_info.apiurl,
   defaultFish: 100,
   hungryFish: 100,
 };
@@ -151,7 +150,8 @@ function fetchRandomPost() {
         "因为只钓鱼不吃鱼，过分饥饿导致本次钓鱼失败...(点击任意一篇钓鱼获得的文章即可恢复）";
       randomPostWorking = false;
     } else {
-      var fetchUrl = fdata.apiurl + "randompost";
+      // var fetchUrl = fdata.apiurl + "randompost";
+      var fetchUrl =  "https://fcircle.shiguangdev.cn/randompost";
       fetch(fetchUrl)
         .then(res => res.json())
         .then(json => {
