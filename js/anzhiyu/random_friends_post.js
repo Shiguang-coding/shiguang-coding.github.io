@@ -150,8 +150,7 @@ function fetchRandomPost() {
         "因为只钓鱼不吃鱼，过分饥饿导致本次钓鱼失败...(点击任意一篇钓鱼获得的文章即可恢复）";
       randomPostWorking = false;
     } else {
-      // var fetchUrl = fdata.apiurl + "randompost";
-      var fetchUrl =  "https://fcircle.shiguangdev.cn/randompost";
+      var fetchUrl = fdata.apiurl + "randompost";
       fetch(fetchUrl)
         .then(res => res.json())
         .then(json => {
