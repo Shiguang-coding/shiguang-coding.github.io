@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://blog.shiguang666.eu.org/sitemap.xml
+Sitemap: https://blog.shiguang666.eu.org/baidusitemap.xml

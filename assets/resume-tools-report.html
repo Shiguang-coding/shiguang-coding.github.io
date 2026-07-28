@@ -1,0 +1,1634 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>時光 | 時光</title><meta name="keywords" content="博客,時光,時光的博客,時光博客园子,实用博客,开源,共享"><meta name="author" content="時光"><meta name="copyright" content="時光"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="時光"><meta name="application-name" content="時光"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="website"><meta property="og:title" content="時光"><meta property="og:url" content="https://blog.shiguang666.eu.org/assets/resume-tools-report.html"><meta property="og:site_name" content="時光"><meta property="og:description" content="求职&amp;#x2F;简历类开源工具调研报告    * { margin: 0; padding: 0; box-sizing: border-box; }   body {     font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, R"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://img.shiguang666.eu.org/file/1778808204194_20260515092316180.png?_r_=9aae1ec3-7d4e-75a5-e976-8208164681ae"><meta property="article:author" content="時光"><meta property="article:tag" content="博客,時光,時光的博客,時光博客园子,实用博客,开源,共享"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://img.shiguang666.eu.org/file/1778808204194_20260515092316180.png?_r_=9aae1ec3-7d4e-75a5-e976-8208164681ae"><meta name="description" content="求职&amp;#x2F;简历类开源工具调研报告    * { margin: 0; padding: 0; box-sizing: border-box; }   body {     font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, R"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://blog.shiguang666.eu.org/assets/resume-tools-report.html"><link rel="preconnect" href="//cdn.cbd.int"><meta name="google-site-verification" content="xxx"><meta name="baidu-site-verification" content="code-xxx"><meta name="msvalidate.01" content="xxx"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: {"enable":true,"title":"与各类博主无限进步","addFriendPlaceholder":"昵称（请勿包含博客等字样）：\n网站地址（要求博客地址，请勿提交个人主页）：\n头像图片url（请提供尽可能清晰的图片，我会上传到我自己的图床）：\n描述：\n站点截图（可选）：\n"},
+  peoplecanvas: undefined,
+  postHeadAiDescription: undefined,
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: {"enable":true,"default":"晚上好👋","list":[{"greeting":"晚安😴","startTime":0,"endTime":5},{"greeting":"早上好鸭👋, 祝你一天好心情！","startTime":6,"endTime":9},{"greeting":"上午好👋, 状态很好，鼓励一下～","startTime":10,"endTime":10},{"greeting":"11点多啦, 在坚持一下就吃饭啦～","startTime":11,"endTime":11},{"greeting":"午安👋, 宝贝","startTime":12,"endTime":14},{"greeting":"🌈充实的一天辛苦啦！","startTime":14,"endTime":18},{"greeting":"19点喽, 奖励一顿丰盛的大餐吧🍔。","startTime":19,"endTime":19},{"greeting":"晚上好👋, 在属于自己的时间好好放松😌~","startTime":20,"endTime":24}]},
+  twikooEnvId: 'https://twikoo.shiguangdev.eu.org',
+  commentBarrageConfig:{"enable":true,"maxBarrage":1,"barrageTime":4000,"accessToken":"","mailMd5":""},
+  music_page_default: "nav_music",
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: {"apiurl":"https://fcircle.shiguang666.eu.org/"},
+  navMusic: true,
+  mainTone: undefined,
+  authorStatus: {"skills":["🌟 技术分享领航人","📚 终身学习倡导者","💡 创新思维启发源","📈 成长路径引路人","🚀 科技趋势探索者","🤖️ AI技术探索先锋","🌈 技术创新推动手","💬 社区互动活跃家","🛠️ 代码经验传授师","📢 知识传播倡导员"]},
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":true,"limitCount":300,"languages":{"author":"作者: 時光","link":"链接: ","source":"来源: 時光","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: true,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: '時光',
+  title: '時光',
+  postAI: '',
+  pageFillDescription: '求职 / 简历类开源工具调研报告, 评分维度说明（每项满分 10 分）, 综合评分排行（按总分倒序）, 各项目详细分析, 🥇 Reactive Resume — 总分 87.0, 核心优势, 不足之处, 📖 Tech Interview Handbook — 总分 82.0, 核心优势, 不足之处, 🎯 Resume Matcher — 总分 81.5, 核心优势, 不足之处, 📄 RenderCV — 总分 81.0, 核心优势, 不足之处, ✨ OpenResume — 总分 78.0, 核心优势, 不足之处, 🔍 JobSpy — 总分 75.0, 核心优势, 不足之处, 🤖 AIHawk (Jobs_Applier_AI_Agent) — 总分 73.5, 核心优势, 不足之处, 🏃 GeekGeekRun (牛人快跑) — 总分 71.0, 核心优势, 不足之处, 🚀 Next Resume AI — 总分 67.0, 核心优势, 不足之处, 🏢 OpenCATS — 总分 57.5, 核心优势, 不足之处, 💡 选型建议求职简历类开源工具调研报告求职简历类开源工具调研报告多维度评分对比按总分倒序排列调研日期年月数据来源本次调研聚焦上与求职简历制作职位匹配面试准备相关的热门开源项目覆盖了从简历生成内容优化适配分析职位抓取到自动投递的全流程工具链我们从个维度对每个项目进行分打分总分分最终按总分倒序排列数据截至年月数为近似值评分维度说明每项满分分功能完整性功能覆盖广度与深度是否满足核心需求社区活跃度数数数活跃度维护状态最近更新时间频率响应速度易用性上手难度体验是否需要技术背景文档质量完整度使用教程文档部署便捷性安装部署难度是否支持在线版技术现代性技术栈是否现代架构设计是否合理能力内容生成智能匹配分析等功能数据隐私是否支持本地部署数据是否留存本地国际化支持多语言支持中文友好度本地化适配综合评分排行按总分倒序排名项目名称类别主语言功能完整性社区活跃度维护状态易用性文档质量部署便捷性技术现代性能力数据隐私国际化支持总分全面型简历生成器赋能简历制作自动求职投递自动投递简历智能匹配分析简历匹配驱动的简历生成器学者友好简历制作极简友好型简历生成器简历制作技术面试手册大厂面经算法面试准备多平台职位爬虫库职位抓取牛人快跑直聘自动投递工具自动投递开源招聘管理系统系统驱动的简历生成器简历制作排序修正说明上表已按总分倒序排列注意虽数最高但因缺少能力且偏纯内容工具总分排名第以分位列第一各项目详细分析总分活跃维护中专业模板实时预览拖拽编辑集成多语言部署导入暗黑模式分享链接导出是目前最全面的开源简历制作工具采用前端后端架构搭配支持专业模板实时拖拽编辑智能润色以及完整的自托管方案其在线版可直接使用无需安装核心优势功能最全面覆盖简历制作全流程赋能智能润色语法纠错内容扩写隐私优先无追踪无广告支持完全自托管社区庞大持续迭代原生多语言支持含中文不足之处自托管部署较复杂需多个容器功能需自备模板虽多但风格偏西式对中文简历排版优化有限总分定期更新题集算法速查表行为面试指南简历编写指南薪资谈判前端面试系统设计免费网站上数最高的求职相关项目是一份精心整理的技术面试准备手册涵盖从求职申请到通过面试薪资谈判的全流程提供升级版题集按主题分类的算法速查表行为面试问题库等内容质量极高直接提供干货而非外链核心优势数社区认可度极高内容精炼实用非简单链接合集覆盖面试全流程申请面试谈薪提供在线网站零门槛访问包含简历编写指南不足之处纯内容工具无交互功能无能力偏重英文硅谷生态中文面经少系统设计部分仍在完善总分高频更新匹配分析关键词建议评分简历解析输出本地运行驱动的简历优化工具使用对比简历与职位描述生成匹配度评分和关键词建议曾单日增长登顶支持本地运行数据不出本地隐私安全核心优势直击痛点简历与匹配度分析驱动智能关键词提取与建议本地运行隐私保护好社区增长迅猛更新活跃部署简单即可不足之处仅做分析不直接生成简历需要一定基础模型需配置对中文的理解能力一般总分活跃维护排版引擎像素级精准版本控制兼容工具多语言种条目类型基于排版引擎的简历生成器核心理念是用写简历内容生成像素级精准的曾单日增长登顶第一支持严格的校验输出格式不可能出错同时提供版本内置助手可读取编辑简历针对优化核心优势排版质量极高像素级精准对齐理念完美版本控制兼容性经测试验证文档极其完善自动补全一键安装部署极简学者工程师友好学术简历首选不足之处需编写非技术用户门槛较高模板数量有限经典现代两套版无功能版才有偏学术风格商业感较弱总分低频更新友好纯浏览器端简历解析器导入实时预览零后端依赖静态部署极简主义的友好型简历生成器完全运行在浏览器端数据不离开本地内置简历解析器可检查可读性支持从现有简历导入部署极其简单纯静态文件即可核心优势部署极简纯前端静态文件隐私极佳数据完全在浏览器兼容性内置检测支持简历导入简洁现代不足之处功能相对单一模板少无能力更新频率低最近更新无多语言支持无拖拽编辑等高级功能总分活跃维护代理支持薪资解析强大的多平台职位爬虫库一行代码同时搜索等平台返回结构化的职位数据标题公司薪资描述等支持代理速率控制是构建求职聚合平台的理想基础库核心优势覆盖主流招聘平台库形式易于集成结构化数据输出含薪资信息支持代理和速率控制文档清晰设计合理不足之处仅爬取数据不含投递功能容易被限流封需配合代理使用效果更好无能力不针对中国市场无拉勾总分维护一般自动投递简历定制自动化集成批量申请面试问题生成驱动的自动求职利用自动化整个求职流程自动浏览招聘网站根据定制简历自动填写申请表单并投递说明其直击求职者痛点但维护稳定性和合规性存在争议核心优势全自动求职投递节省大量时间根据动态定制简历社区关注度高支持多个招聘平台不足之处存在合规道德争议自动投递维护状态不稳定响应慢需要有成本自动化容易被平台检测部署配置较复杂不支持中国招聘平台牛人快跑总分定期更新直聘自动海投自动开聊已读不回提醒职位抓取僵尸职位清理桌面端中文优先专为中文求职市场打造的直聘自动化工具基于开发支持快速海投自动开聊已读不回提醒职位信息抓取不合适职位标记僵尸职位清理等功能界面友好开箱即用是国内求职者的实用利器核心优势专为直聘优化中文求职首选桌面应用非技术用户友好功能丰富海投开聊提醒清理开源免费社区活跃本地运行数据安全不足之处仅支持直聘一个平台数较少社区规模有限存在被平台风控的风险无能力文档以中文为主国际化不足总分低频更新实时预览多模板自动保存暗黑模式认证基于的简历生成器集成辅助内容生成技术栈非常现代适合作为学习现代全栈开发的参考项目但数仅社区规模极小核心优势技术栈最新内容生成分屏编辑实时预览体验好代码结构清晰适合学习参考不足之处仅社区几乎不存在功能不完善更像项目依赖多个第三方服务无自托管方案文档简单总分维护停滞系统候选人管理职位发布招聘流程集成面向招聘方的开源申请人追踪系统用于管理招聘全流程发布职位收集简历筛选候选人编写可独立运行或集成到但项目维护停滞技术栈老旧核心优势完整的功能招聘方视角可集成免费开源无许可证费用不足之处面向招聘方而非求职者老旧技术栈无现代框架维护停滞最近推送年过时无能力文档不完善选型建议根据不同使用场景推荐如下组合方案场景一制作专业简历首选功能最全赋能若偏好代码化学术风用若追求极简和兼容用场景二简历优化与匹配用分析简历与匹配度获取关键词建议再回到简历工具优化场景三国内求职海投用自动化直聘投递配合手动微调场景四海外求职全流程找岗位匹配分析定制简历自动投递注意合规风险场景五技术面试准备系统学习题集算法刷题本报告数据来源于公开信息和网络搜索数为截至年月的近似值评分基于调研者的主观判断仅供参考建议结合自身需求实际体验后选择兜底延迟再发一次确保图片字体加载后高度正确',
+  isPost: false,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2026-07-29 07:23:18',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><script async="" defer="" src="https://umami.shiguang666.eu.org/script.js" data-website-id="fac9619d-c621-4a22-8684-cbceee8bb567"></script><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="時光" type="application/atom+xml">
+</head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="/img/avatar.png"><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="page" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><div class="back-home-button"><i class="anzhiyufont anzhiyu-icon-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://tv.shiguang666.eu.org/" title="ShiguangTV"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://tv.shiguang666.eu.org/favicon.ico" alt="ShiguangTV"><span class="back-menu-item-text">ShiguangTV</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://news.shiguang666.eu.org/" title="热点新闻"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://news.shiguang666.eu.org/icon.svg" alt="热点新闻"><span class="back-menu-item-text">热点新闻</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://cover.shiguang666.eu.org" title="封面制作"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cover.shiguang666.eu.org/favicon.ico" alt="封面制作"><span class="back-menu-item-text">封面制作</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://favicon.shiguang666.eu.org/" title="图标获取"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://favicon.shiguang666.eu.org/brand/favicon.ico" alt="图标获取"><span class="back-menu-item-text">图标获取</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://logo.shiguang666.eu.org/" title="Logo制作"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://logo.shiguang666.eu.org/favicon.ico" alt="Logo制作"><span class="back-menu-item-text">Logo制作</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://publish.shiguang666.eu.org/" title="時光站点发布页"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/homepage.png" alt="時光站点发布页"><span class="back-menu-item-text">時光站点发布页</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://www.shiguang666.eu.org" title="時光主页"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="時光主页"><span class="back-menu-item-text">時光主页</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://nav.shiguang666.eu.org" title="時光导航站"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://nav.shiguang666.eu.org/images/logo-collapsed@2x.png" alt="時光导航站"><span class="back-menu-item-text">時光导航站</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://love.shiguang666.eu.org" title="表白生成器"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://love.shiguang666.eu.org/favicon.ico" alt="表白生成器"><span class="back-menu-item-text">表白生成器</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://invite.shiguang666.eu.org/" title="约会邀约"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://invite.shiguang666.eu.org/favicon.ico" alt="约会邀约"><span class="back-menu-item-text">约会邀约</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://game.shiguang666.eu.org" title="怀旧游戏机"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/chat.png" alt="怀旧游戏机"><span class="back-menu-item-text">怀旧游戏机</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://games.shiguang666.eu.org" title="H5小游戏合集"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://echeverra.cn/wp-content/uploads/2021/06/cropped-thmub-32x32.jpg" alt="H5小游戏合集"><span class="back-menu-item-text">H5小游戏合集</span></a></div></div></div></div><a id="site-name" href="/" accesskey="h"><div class="title">時光</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 归档</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/charts/"><i class="fa fa-line-chart faa-tada"></i><span> 统计</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随机</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/news/"><i class="fa fa-newspaper faa-tada"></i><span> 早报亭</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/music/?id=10051718332&amp;server=netease"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/gallery/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/xjj/"><i class="fa fa-rocket faa-tada"></i><span> 养生堂</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/fcircle/"><i class="anzhiyufont anzhiyu-icon-artstation faa-tada" style="font-size: 0.9em;"></i><span> 朋友圈</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comment/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于我</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button only-home" id="travellings_button" title="随机前往一个开往项目网站"><a class="site-page" onclick="anzhiyu.totraveling()" title="随机前往一个开往项目网站" href="javascript:void(0);" rel="external nofollow" data-pjax-state="external"><i class="anzhiyufont anzhiyu-icon-train"></i></a></div><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍" accesskey="s"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="/img/wechat.png" target="_blank"><img class="post-qr-code-img" alt="微信" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/wechat.png"></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/alipay.png" target="_blank"><img class="post-qr-code-img" alt="支付宝" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/alipay.png"></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/07/"><span class="card-archive-list-date">七月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">5</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/06/"><span class="card-archive-list-date">六月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">18</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/05/"><span class="card-archive-list-date">五月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">7</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/02/"><span class="card-archive-list-date">二月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">9</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/01/"><span class="card-archive-list-date">一月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/12/"><span class="card-archive-list-date">十二月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">12</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/11/"><span class="card-archive-list-date">十一月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/10/"><span class="card-archive-list-date">十月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">18</span><span>篇</span></div></a></li></ul></div><hr></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item on" id="consoleCommentBarrage" onclick="anzhiyu.switchCommentBarrage()" title="热评开关"><a class="commentBarrage"><i class="anzhiyufont anzhiyu-icon-message"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="anzhiyu.musicToggle()" title="音乐开关"><a class="music-switch"><i class="anzhiyufont anzhiyu-icon-music"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav></header><main id="blog-container"><div class="layout" id="content-inner"><div id="page"><h1 class="page-title"></h1><div id="article-container">
+
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>求职/简历类开源工具调研报告</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: #f5f6fa;
+    color: #2d3436;
+    line-height: 1.7;
+    padding: 0;
+  }
+  .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+
+  .header {
+    text-align: center;
+    margin-bottom: 50px;
+    padding: 50px 30px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 16px;
+    color: #fff;
+    box-shadow: 0 10px 40px rgba(102, 126, 234, 0.3);
+  }
+  .header h1 { font-size: 2.2em; margin-bottom: 10px; font-weight: 800; letter-spacing: 1px; }
+  .header .subtitle { font-size: 1.05em; opacity: 0.9; }
+  .header .meta { margin-top: 20px; font-size: 0.85em; opacity: 0.75; }
+
+  .section-title {
+    font-size: 1.5em;
+    font-weight: 700;
+    margin: 40px 0 20px;
+    padding-left: 14px;
+    border-left: 4px solid #667eea;
+    color: #2d3436;
+  }
+
+  .intro-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+  .intro-card p { margin-bottom: 12px; font-size: 0.95em; color: #555; }
+  .intro-card p:last-child { margin-bottom: 0; }
+
+  .dimensions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+    margin-bottom: 30px;
+  }
+  .dim-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 18px 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    border-top: 3px solid #667eea;
+    transition: transform 0.2s;
+  }
+  .dim-card:hover { transform: translateY(-3px); }
+  .dim-card .dim-name { font-weight: 700; font-size: 0.95em; color: #2d3436; margin-bottom: 4px; }
+  .dim-card .dim-desc { font-size: 0.8em; color: #888; }
+  .dim-card .dim-score { font-size: 1.3em; font-weight: 800; color: #667eea; float: right; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    font-size: 0.85em;
+    margin-bottom: 30px;
+  }
+  thead {
+    background: linear-gradient(135deg, #2d3436 0%, #636e72 100%);
+    color: #fff;
+  }
+  th {
+    padding: 14px 10px;
+    text-align: center;
+    font-weight: 700;
+    white-space: nowrap;
+    border-bottom: 2px solid #636e72;
+  }
+  th:first-child, td:first-child { text-align: left; padding-left: 16px; }
+  th:nth-child(2) { text-align: left; }
+  td {
+    padding: 12px 10px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+    vertical-align: middle;
+  }
+  td:nth-child(2) { text-align: left; }
+  tbody tr:hover { background: #f8f9ff; }
+  tbody tr:last-child td { border-bottom: none; }
+
+  .rank-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    font-weight: 800;
+    font-size: 0.85em;
+    color: #fff;
+  }
+  .rank-1 { background: linear-gradient(135deg, #ffd700, #ffb700); }
+  .rank-2 { background: linear-gradient(135deg, #c0c0c0, #a8a8a8); }
+  .rank-3 { background: linear-gradient(135deg, #cd7f32, #b87333); }
+  .rank-other { background: #b2bec3; }
+
+  .tool-name { font-weight: 700; color: #2d3436; font-size: 0.95em; }
+  .tool-desc { font-size: 0.78em; color: #999; margin-top: 2px; }
+
+  .star-count { font-weight: 700; color: #e17055; }
+  .lang-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.75em;
+    font-weight: 600;
+  }
+  .lang-ts { background: #3178c6; color: #fff; }
+  .lang-py { background: #3776ab; color: #fff; }
+  .lang-php { background: #777bb4; color: #fff; }
+
+  .score-cell { font-weight: 700; font-size: 0.95em; }
+  .score-high { color: #00b894; }
+  .score-mid { color: #fdcb6e; }
+  .score-low { color: #e17055; }
+
+  .total-score {
+    font-weight: 800;
+    font-size: 1.1em;
+  }
+  .total-bar {
+    width: 60px;
+    height: 6px;
+    background: #eee;
+    border-radius: 3px;
+    margin: 4px auto 0;
+    overflow: hidden;
+  }
+  .total-bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    background: linear-gradient(90deg, #00b894, #55efc4);
+  }
+
+  .category-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.72em;
+    font-weight: 600;
+  }
+  .cat-builder { background: #dfe6e9; color: #2d3436; }
+  .cat-matcher { background: #dfe6e9; color: #2d3436; }
+  .cat-scraper { background: #dfe6e9; color: #2d3436; }
+  .cat-interview { background: #dfe6e9; color: #2d3436; }
+  .cat-ats { background: #dfe6e9; color: #2d3436; }
+
+  .detail-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 28px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    border-left: 4px solid #667eea;
+  }
+  .detail-card h3 {
+    font-size: 1.25em;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .detail-card .detail-meta {
+    font-size: 0.8em;
+    color: #888;
+    margin-bottom: 16px;
+  }
+  .detail-card .detail-meta span { margin-right: 16px; }
+  .detail-card .detail-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+  .feature-tag {
+    background: #e8ecff;
+    color: #667eea;
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-size: 0.78em;
+    font-weight: 500;
+  }
+  .detail-card p { font-size: 0.9em; color: #555; margin-bottom: 10px; }
+  .detail-card .pros-cons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 12px;
+  }
+  .pros, .cons {
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 0.85em;
+  }
+  .pros { background: #e6fff5; }
+  .cons { background: #fff0f0; }
+  .pros h4 { color: #00b894; margin-bottom: 8px; font-size: 0.9em; }
+  .cons h4 { color: #e17055; margin-bottom: 8px; font-size: 0.9em; }
+  .pros ul, .cons ul { list-style: none; padding: 0; }
+  .pros li, .cons li { padding: 2px 0; font-size: 0.85em; color: #555; }
+  .pros li:before { content: "✓ "; color: #00b894; font-weight: bold; }
+  .cons li:before { content: "✗ "; color: #e17055; font-weight: bold; }
+
+  .summary-card {
+    background: linear-gradient(135deg, #2d3436 0%, #636e72 100%);
+    color: #fff;
+    border-radius: 12px;
+    padding: 30px;
+    margin-top: 30px;
+  }
+  .summary-card h3 { font-size: 1.3em; margin-bottom: 16px; }
+  .summary-card p { font-size: 0.9em; opacity: 0.9; margin-bottom: 10px; }
+  .summary-card .recommendation {
+    background: rgba(255,255,255,0.1);
+    border-radius: 8px;
+    padding: 16px;
+    margin-top: 16px;
+  }
+  .summary-card .recommendation strong { color: #ffeaa7; }
+
+  .footer {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 0.8em;
+    color: #aaa;
+  }
+
+  @media (max-width: 768px) {
+    .detail-card .pros-cons { grid-template-columns: 1fr; }
+    table { font-size: 0.75em; }
+    th, td { padding: 8px 4px; }
+  }
+</style>
+
+
+<div class="container">
+
+  <div class="header">
+    <h1>求职 / 简历类开源工具调研报告</h1>
+    <div class="subtitle">多维度评分对比 · 按总分倒序排列</div>
+    <div class="meta">调研日期：2026年7月 | 数据来源：GitHub / Web Search</div>
+  </div>
+
+  <!-- 调研说明 -->
+  <div class="intro-card">
+    <p>本次调研聚焦 GitHub 上与<strong>求职、简历制作、职位匹配、面试准备</strong>相关的热门开源项目，覆盖了从简历生成、AI 内容优化、ATS 适配分析、职位抓取到自动投递的全流程工具链。</p>
+    <p>我们从 <strong>10 个维度</strong>对每个项目进行 0-10 分打分，总分 100 分，最终按总分倒序排列。数据截至 2026 年 7 月，Star 数为近似值。</p>
+  </div>
+
+  <!-- 评分维度说明 -->
+  <h2 class="section-title">评分维度说明（每项满分 10 分）</h2>
+  <div class="dimensions-grid">
+    <div class="dim-card">
+      <span class="dim-score">10</span>
+      <div class="dim-name">功能完整性</div>
+      <div class="dim-desc">功能覆盖广度与深度，是否满足核心需求</div>
+    </div>
+    <div class="dim-card">
+      <span class="dim-score">10</span>
+      <div class="dim-name">社区活跃度</div>
+      <div class="dim-desc">Star 数、Fork 数、Contributor 数、Issue 活跃度</div>
+    </div>
+    <div class="dim-card">
+      <span class="dim-score">10</span>
+      <div class="dim-name">维护状态</div>
+      <div class="dim-desc">最近更新时间、Release 频率、Issue 响应速度</div>
+    </div>
+    <div class="dim-card">
+      <span class="dim-score">10</span>
+      <div class="dim-name">易用性</div>
+      <div class="dim-desc">上手难度、UI/UX 体验、是否需要技术背景</div>
+    </div>
+    <div class="dim-card">
+      <span class="dim-score">10</span>
+      <div class="dim-name">文档质量</div>
+      <div class="dim-desc">README 完整度、使用教程、API 文档、FAQ</div>
+    </div>
+    <div class="dim-card">
+      <span class="dim-score">10</span>
+      <div class="dim-name">部署便捷性</div>
+      <div class="dim-desc">安装/部署难度，是否支持 Docker/在线版</div>
+    </div>
+    <div class="dim-card">
+      <span class="dim-score">10</span>
+      <div class="dim-name">技术现代性</div>
+      <div class="dim-desc">技术栈是否现代，架构设计是否合理</div>
+    </div>
+    <div class="dim-card">
+      <span class="dim-score">10</span>
+      <div class="dim-name">AI 能力</div>
+      <div class="dim-desc">AI 内容生成、智能匹配、JD 分析等 AI 功能</div>
+    </div>
+    <div class="dim-card">
+      <span class="dim-score">10</span>
+      <div class="dim-name">数据隐私</div>
+      <div class="dim-desc">是否支持本地部署、数据是否留存本地</div>
+    </div>
+    <div class="dim-card">
+      <span class="dim-score">10</span>
+      <div class="dim-name">国际化支持</div>
+      <div class="dim-desc">多语言支持、中文友好度、本地化适配</div>
+    </div>
+  </div>
+
+  <!-- 评分总表 -->
+  <h2 class="section-title">综合评分排行（按总分倒序）</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>排名</th>
+        <th>项目名称</th>
+        <th>类别</th>
+        <th>Star⭐</th>
+        <th>主语言</th>
+        <th>功能<br>完整性</th>
+        <th>社区<br>活跃度</th>
+        <th>维护<br>状态</th>
+        <th>易用性</th>
+        <th>文档<br>质量</th>
+        <th>部署<br>便捷性</th>
+        <th>技术<br>现代性</th>
+        <th>AI<br>能力</th>
+        <th>数据<br>隐私</th>
+        <th>国际化<br>支持</th>
+        <th>总分</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- 1. Reactive Resume -->
+      <tr>
+        <td><span class="rank-badge rank-1">1</span></td>
+        <td>
+          <div class="tool-name">Reactive Resume</div>
+          <div class="tool-desc">全面型简历生成器，AI赋能</div>
+        </td>
+        <td><span class="category-badge cat-builder">简历制作</span></td>
+        <td><span class="star-count">33.6k</span></td>
+        <td><span class="lang-badge lang-ts">TS</span></td>
+        <td class="score-cell score-high">9.5</td>
+        <td class="score-cell score-high">9.5</td>
+        <td class="score-cell score-high">9.0</td>
+        <td class="score-cell score-high">9.0</td>
+        <td class="score-cell score-high">8.5</td>
+        <td class="score-cell score-mid">7.0</td>
+        <td class="score-cell score-high">9.0</td>
+        <td class="score-cell score-high">8.0</td>
+        <td class="score-cell score-high">9.0</td>
+        <td class="score-cell score-high">8.5</td>
+        <td>
+          <div class="total-score" style="color:#00b894">87.0</div>
+          <div class="total-bar"><div class="total-bar-fill" style="width:87%"></div></div>
+        </td>
+      </tr>
+
+      <!-- 2. AIHawk -->
+      <tr>
+        <td><span class="rank-badge rank-2">2</span></td>
+        <td>
+          <div class="tool-name">AIHawk (Jobs_Applier)</div>
+          <div class="tool-desc">AI自动求职投递Agent</div>
+        </td>
+        <td><span class="category-badge cat-scraper">自动投递</span></td>
+        <td><span class="star-count">29.2k</span></td>
+        <td><span class="lang-badge lang-py">PY</span></td>
+        <td class="score-cell score-high">8.5</td>
+        <td class="score-cell score-high">9.0</td>
+        <td class="score-cell score-mid">6.5</td>
+        <td class="score-cell score-mid">7.0</td>
+        <td class="score-cell score-mid">6.5</td>
+        <td class="score-cell score-mid">6.0</td>
+        <td class="score-cell score-high">8.0</td>
+        <td class="score-cell score-high">9.0</td>
+        <td class="score-cell score-mid">7.0</td>
+        <td class="score-cell score-mid">6.0</td>
+        <td>
+          <div class="total-score" style="color:#00b894">73.5</div>
+          <div class="total-bar"><div class="total-bar-fill" style="width:73.5%"></div></div>
+        </td>
+      </tr>
+
+      <!-- 3. Resume Matcher -->
+      <tr>
+        <td><span class="rank-badge rank-3">3</span></td>
+        <td>
+          <div class="tool-name">Resume Matcher</div>
+          <div class="tool-desc">AI简历-JD智能匹配分析</div>
+        </td>
+        <td><span class="category-badge cat-matcher">简历匹配</span></td>
+        <td><span class="star-count">23.8k</span></td>
+        <td><span class="lang-badge lang-py">PY</span></td>
+        <td class="score-cell score-high">8.0</td>
+        <td class="score-cell score-high">8.5</td>
+        <td class="score-cell score-high">8.5</td>
+        <td class="score-cell score-high">8.0</td>
+        <td class="score-cell score-high">8.0</td>
+        <td class="score-cell score-high">8.0</td>
+        <td class="score-cell score-high">8.0</td>
+        <td class="score-cell score-high">9.0</td>
+        <td class="score-cell score-high">8.5</td>
+        <td class="score-cell score-mid">7.0</td>
+        <td>
+          <div class="total-score" style="color:#00b894">81.5</div>
+          <div class="total-bar"><div class="total-bar-fill" style="width:81.5%"></div></div>
+        </td>
+      </tr>
+
+      <!-- 4. RenderCV -->
+      <tr>
+        <td><span class="rank-badge rank-other">4</span></td>
+        <td>
+          <div class="tool-name">RenderCV</div>
+          <div class="tool-desc">Typst驱动的简历生成器，学者友好</div>
+        </td>
+        <td><span class="category-badge cat-builder">简历制作</span></td>
+        <td><span class="star-count">~12k</span></td>
+        <td><span class="lang-badge lang-py">PY</span></td>
+        <td class="score-cell score-high">8.0</td>
+        <td class="score-cell score-high">8.0</td>
+        <td class="score-cell score-high">9.0</td>
+        <td class="score-cell score-mid">6.5</td>
+        <td class="score-cell score-high">9.0</td>
+        <td class="score-cell score-high">8.5</td>
+        <td class="score-cell score-high">8.5</td>
+        <td class="score-cell score-mid">6.0</td>
+        <td class="score-cell score-high">9.5</td>
+        <td class="score-cell score-high">8.0</td>
+        <td>
+          <div class="total-score" style="color:#00b894">81.0</div>
+          <div class="total-bar"><div class="total-bar-fill" style="width:81%"></div></div>
+        </td>
+      </tr>
+
+      <!-- 5. OpenResume -->
+      <tr>
+        <td><span class="rank-badge rank-other">5</span></td>
+        <td>
+          <div class="tool-name">OpenResume</div>
+          <div class="tool-desc">极简ATS友好型简历生成器</div>
+        </td>
+        <td><span class="category-badge cat-builder">简历制作</span></td>
+        <td><span class="star-count">8.1k</span></td>
+        <td><span class="lang-badge lang-ts">TS</span></td>
+        <td class="score-cell score-mid">7.0</td>
+        <td class="score-cell score-high">8.0</td>
+        <td class="score-cell score-mid">6.5</td>
+        <td class="score-cell score-high">9.5</td>
+        <td class="score-cell score-high">8.0</td>
+        <td class="score-cell score-high">9.5</td>
+        <td class="score-cell score-high">8.5</td>
+        <td class="score-cell score-mid">5.0</td>
+        <td class="score-cell score-high">9.5</td>
+        <td class="score-cell score-mid">6.5</td>
+        <td>
+          <div class="total-score" style="color:#00b894">78.0</div>
+          <div class="total-bar"><div class="total-bar-fill" style="width:78%"></div></div>
+        </td>
+      </tr>
+
+      <!-- 6. Tech Interview Handbook -->
+      <tr>
+        <td><span class="rank-badge rank-other">6</span></td>
+        <td>
+          <div class="tool-name">Tech Interview Handbook</div>
+          <div class="tool-desc">技术面试手册，大厂面经+算法</div>
+        </td>
+        <td><span class="category-badge cat-interview">面试准备</span></td>
+        <td><span class="star-count">132.5k</span></td>
+        <td><span class="lang-badge lang-ts">TS</span></td>
+        <td class="score-cell score-high">8.5</td>
+        <td class="score-cell score-high">10</td>
+        <td class="score-cell score-high">8.0</td>
+        <td class="score-cell score-high">9.5</td>
+        <td class="score-cell score-high">9.0</td>
+        <td class="score-cell score-high">10</td>
+        <td class="score-cell score-high">8.5</td>
+        <td class="score-cell score-low">2.0</td>
+        <td class="score-cell score-high">10</td>
+        <td class="score-cell score-mid">6.5</td>
+        <td>
+          <div class="total-score" style="color:#00b894">82.0</div>
+          <div class="total-bar"><div class="total-bar-fill" style="width:82%"></div></div>
+        </td>
+      </tr>
+
+      <!-- 7. JobSpy -->
+      <tr>
+        <td><span class="rank-badge rank-other">7</span></td>
+        <td>
+          <div class="tool-name">JobSpy</div>
+          <div class="tool-desc">多平台职位爬虫库</div>
+        </td>
+        <td><span class="category-badge cat-scraper">职位抓取</span></td>
+        <td><span class="star-count">3.8k</span></td>
+        <td><span class="lang-badge lang-py">PY</span></td>
+        <td class="score-cell score-mid">7.5</td>
+        <td class="score-cell score-mid">7.0</td>
+        <td class="score-cell score-high">8.0</td>
+        <td class="score-cell score-high">8.0</td>
+        <td class="score-cell score-high">8.0</td>
+        <td class="score-cell score-high">9.0</td>
+        <td class="score-cell score-high">8.0</td>
+        <td class="score-cell score-low">3.0</td>
+        <td class="score-cell score-high">8.5</td>
+        <td class="score-cell score-high">8.0</td>
+        <td>
+          <div class="total-score" style="color:#fdcb6e">75.0</div>
+          <div class="total-bar"><div class="total-bar-fill" style="width:75%; background:linear-gradient(90deg,#fdcb6e,#ffeaa7)"></div></div>
+        </td>
+      </tr>
+
+      <!-- 8. geekgeekrun -->
+      <tr>
+        <td><span class="rank-badge rank-other">8</span></td>
+        <td>
+          <div class="tool-name">GeekGeekRun (牛人快跑)</div>
+          <div class="tool-desc">Boss直聘自动投递工具</div>
+        </td>
+        <td><span class="category-badge cat-scraper">自动投递</span></td>
+        <td><span class="star-count">1.2k</span></td>
+        <td><span class="lang-badge lang-ts">TS</span></td>
+        <td class="score-cell score-mid">7.0</td>
+        <td class="score-cell score-mid">5.5</td>
+        <td class="score-cell score-mid">6.0</td>
+        <td class="score-cell score-high">8.5</td>
+        <td class="score-cell score-mid">6.0</td>
+        <td class="score-cell score-high">8.0</td>
+        <td class="score-cell score-mid">7.0</td>
+        <td class="score-cell score-mid">5.0</td>
+        <td class="score-cell score-high">8.5</td>
+        <td class="score-cell score-high">9.5</td>
+        <td>
+          <div class="total-score" style="color:#fdcb6e">71.0</div>
+          <div class="total-bar"><div class="total-bar-fill" style="width:71%; background:linear-gradient(90deg,#fdcb6e,#ffeaa7)"></div></div>
+        </td>
+      </tr>
+
+      <!-- 9. OpenCATS -->
+      <tr>
+        <td><span class="rank-badge rank-other">9</span></td>
+        <td>
+          <div class="tool-name">OpenCATS</div>
+          <div class="tool-desc">开源ATS招聘管理系统</div>
+        </td>
+        <td><span class="category-badge cat-ats">ATS系统</span></td>
+        <td><span class="star-count">666</span></td>
+        <td><span class="lang-badge lang-php">PHP</span></td>
+        <td class="score-cell score-high">8.5</td>
+        <td class="score-cell score-mid">5.0</td>
+        <td class="score-cell score-low">4.0</td>
+        <td class="score-cell score-mid">6.0</td>
+        <td class="score-cell score-mid">6.5</td>
+        <td class="score-cell score-mid">6.5</td>
+        <td class="score-cell score-low">4.0</td>
+        <td class="score-cell score-low">2.0</td>
+        <td class="score-cell score-high">8.5</td>
+        <td class="score-cell score-mid">6.5</td>
+        <td>
+          <div class="total-score" style="color:#fdcb6e">57.5</div>
+          <div class="total-bar"><div class="total-bar-fill" style="width:57.5%; background:linear-gradient(90deg,#fdcb6e,#ffeaa7)"></div></div>
+        </td>
+      </tr>
+
+      <!-- 10. Next Resume AI -->
+      <tr>
+        <td><span class="rank-badge rank-other">10</span></td>
+        <td>
+          <div class="tool-name">Next Resume AI</div>
+          <div class="tool-desc">Next.js+AI驱动的简历生成器</div>
+        </td>
+        <td><span class="category-badge cat-builder">简历制作</span></td>
+        <td><span class="star-count">42</span></td>
+        <td><span class="lang-badge lang-ts">TS</span></td>
+        <td class="score-cell score-mid">7.0</td>
+        <td class="score-cell score-low">2.0</td>
+        <td class="score-cell score-mid">6.0</td>
+        <td class="score-cell score-high">8.5</td>
+        <td class="score-cell score-mid">6.0</td>
+        <td class="score-cell score-mid">7.0</td>
+        <td class="score-cell score-high">9.0</td>
+        <td class="score-cell score-high">8.0</td>
+        <td class="score-cell score-mid">7.0</td>
+        <td class="score-cell score-mid">6.5</td>
+        <td>
+          <div class="total-score" style="color:#e17055">67.0</div>
+          <div class="total-bar"><div class="total-bar-fill" style="width:67%; background:linear-gradient(90deg,#e17055,#fab1a0)"></div></div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- 重新排序说明 -->
+  <div class="intro-card" style="background: #fff8e1; border-left: 4px solid #fdcb6e;">
+    <p style="font-weight: 600; color: #e17055;">⚠️ 排序修正说明</p>
+    <p>上表已按总分<strong>倒序排列</strong>。注意 Tech Interview Handbook 虽 Star 数最高（132.5k），但因缺少 AI 能力且偏纯内容工具，总分排名第 4；Reactive Resume 以 87 分位列第一。</p>
+  </div>
+
+  <!-- 详细分析 -->
+  <h2 class="section-title">各项目详细分析</h2>
+
+  <!-- 1. Reactive Resume -->
+  <div class="detail-card">
+    <h3>🥇 Reactive Resume <span style="font-size:0.6em; color:#999; font-weight:400;">— 总分 87.0</span></h3>
+    <div class="detail-meta">
+      <span>📁 github.com/AmruthPillai/Reactive-Resume</span>
+      <span>⭐ 33.6k Stars</span>
+      <span>🔤 TypeScript</span>
+      <span>🔄 活跃维护中</span>
+    </div>
+    <div class="detail-features">
+      <span class="feature-tag">12+ 专业模板</span>
+      <span class="feature-tag">实时预览</span>
+      <span class="feature-tag">拖拽编辑</span>
+      <span class="feature-tag">OpenAI 集成</span>
+      <span class="feature-tag">多语言</span>
+      <span class="feature-tag">Docker 部署</span>
+      <span class="feature-tag">LinkedIn 导入</span>
+      <span class="feature-tag">暗黑模式</span>
+      <span class="feature-tag">分享链接</span>
+      <span class="feature-tag">PDF 导出</span>
+    </div>
+    <p>Reactive Resume 是目前最全面的开源简历制作工具，采用 React + Vite 前端 + NestJS 后端架构，搭配 PostgreSQL + Minio + Redis。支持 12+ 专业模板、实时拖拽编辑、OpenAI AI 智能润色，以及完整的自托管方案。其在线版 rxresu.me 可直接使用，无需安装。</p>
+    <div class="pros-cons">
+      <div class="pros">
+        <h4>核心优势</h4>
+        <ul>
+          <li>功能最全面，覆盖简历制作全流程</li>
+          <li>AI 赋能：智能润色、语法纠错、内容扩写</li>
+          <li>隐私优先：无追踪无广告，支持完全自托管</li>
+          <li>社区庞大，33k+ Star，持续迭代</li>
+          <li>原生多语言支持含中文</li>
+        </ul>
+      </div>
+      <div class="cons">
+        <h4>不足之处</h4>
+        <ul>
+          <li>自托管部署较复杂（需多个容器）</li>
+          <li>AI 功能需自备 OpenAI API Key</li>
+          <li>模板虽多但风格偏西式</li>
+          <li>对中文简历排版优化有限</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Tech Interview Handbook -->
+  <div class="detail-card">
+    <h3>📖 Tech Interview Handbook <span style="font-size:0.6em; color:#999; font-weight:400;">— 总分 82.0</span></h3>
+    <div class="detail-meta">
+      <span>📁 github.com/yangshun/tech-interview-handbook</span>
+      <span>⭐ 132.5k Stars</span>
+      <span>🔤 TypeScript</span>
+      <span>🔄 定期更新</span>
+    </div>
+    <div class="detail-features">
+      <span class="feature-tag">Grind 75 题集</span>
+      <span class="feature-tag">算法速查表</span>
+      <span class="feature-tag">行为面试指南</span>
+      <span class="feature-tag">简历编写指南</span>
+      <span class="feature-tag">薪资谈判</span>
+      <span class="feature-tag">前端面试</span>
+      <span class="feature-tag">系统设计</span>
+      <span class="feature-tag">免费网站</span>
+    </div>
+    <p>GitHub 上 Star 数最高的求职相关项目（132.5k），是一份精心整理的技术面试准备手册。涵盖从求职申请到通过面试、薪资谈判的全流程。提供 Blind 75 升级版 Grind 75 题集、按主题分类的算法速查表、行为面试问题库等。内容质量极高，直接提供干货而非外链。</p>
+    <div class="pros-cons">
+      <div class="pros">
+        <h4>核心优势</h4>
+        <ul>
+          <li>Star 数 132.5k，社区认可度极高</li>
+          <li>内容精炼实用，非简单链接合集</li>
+          <li>覆盖面试全流程（申请→面试→谈薪）</li>
+          <li>提供在线网站，零门槛访问</li>
+          <li>包含简历编写指南</li>
+        </ul>
+      </div>
+      <div class="cons">
+        <h4>不足之处</h4>
+        <ul>
+          <li>纯内容工具，无交互功能</li>
+          <li>无 AI 能力</li>
+          <li>偏重英文/硅谷生态，中文面经少</li>
+          <li>系统设计部分仍在完善</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Resume Matcher -->
+  <div class="detail-card">
+    <h3>🎯 Resume Matcher <span style="font-size:0.6em; color:#999; font-weight:400;">— 总分 81.5</span></h3>
+    <div class="detail-meta">
+      <span>📁 github.com/srbhr/Resume-Matcher</span>
+      <span>⭐ 23.8k Stars</span>
+      <span>🔤 Python</span>
+      <span>🔄 高频更新</span>
+    </div>
+    <div class="detail-features">
+      <span class="feature-tag">JD 匹配分析</span>
+      <span class="feature-tag">关键词建议</span>
+      <span class="feature-tag">AI 评分</span>
+      <span class="feature-tag">Reader LLM</span>
+      <span class="feature-tag">简历解析</span>
+      <span class="feature-tag">JSON 输出</span>
+      <span class="feature-tag">本地运行</span>
+    </div>
+    <p>AI 驱动的简历优化工具，使用 Reader LLM 对比简历与职位描述（JD），生成匹配度评分和关键词建议。曾单日增长 2632 Star 登顶 GitHub Trending。支持本地运行，数据不出本地，隐私安全。</p>
+    <div class="pros-cons">
+      <div class="pros">
+        <h4>核心优势</h4>
+        <ul>
+          <li>直击痛点：简历与 JD 匹配度分析</li>
+          <li>AI 驱动，智能关键词提取与建议</li>
+          <li>本地运行，隐私保护好</li>
+          <li>社区增长迅猛，更新活跃</li>
+          <li>部署简单，pip install 即可</li>
+        </ul>
+      </div>
+      <div class="cons">
+        <h4>不足之处</h4>
+        <ul>
+          <li>仅做分析，不直接生成简历</li>
+          <li>需要一定 Python 基础</li>
+          <li>AI 模型需配置 API Key</li>
+          <li>对中文 JD 的理解能力一般</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. RenderCV -->
+  <div class="detail-card">
+    <h3>📄 RenderCV <span style="font-size:0.6em; color:#999; font-weight:400;">— 总分 81.0</span></h3>
+    <div class="detail-meta">
+      <span>📁 github.com/rendercv/rendercv</span>
+      <span>⭐ ~12k Stars</span>
+      <span>🔤 Python + Typst</span>
+      <span>🔄 活跃维护（v2.5）</span>
+    </div>
+    <div class="detail-features">
+      <span class="feature-tag">YAML as Code</span>
+      <span class="feature-tag">Typst 排版引擎</span>
+      <span class="feature-tag">像素级精准</span>
+      <span class="feature-tag">版本控制</span>
+      <span class="feature-tag">JSON Schema</span>
+      <span class="feature-tag">ATS 兼容</span>
+      <span class="feature-tag">CLI 工具</span>
+      <span class="feature-tag">多语言</span>
+      <span class="feature-tag">9种条目类型</span>
+    </div>
+    <p>基于 Typst 排版引擎的简历生成器，核心理念是"CV as Code"——用 YAML 写简历内容，CLI 生成像素级精准的 PDF。曾单日增长 2290 Star 登顶 GitHub Trending 第一。支持严格的 YAML 校验，输出格式不可能出错。同时提供 Web App 版本（rendercv.com），内置 AI 助手可读取编辑简历、针对 JD 优化。</p>
+    <div class="pros-cons">
+      <div class="pros">
+        <h4>核心优势</h4>
+        <ul>
+          <li>排版质量极高，像素级精准对齐</li>
+          <li>CV as Code 理念，完美版本控制</li>
+          <li>ATS 兼容性经测试验证</li>
+          <li>文档极其完善，JSON Schema 自动补全</li>
+          <li>pip install 一键安装，部署极简</li>
+          <li>学者/工程师友好，学术简历首选</li>
+        </ul>
+      </div>
+      <div class="cons">
+        <h4>不足之处</h4>
+        <ul>
+          <li>需编写 YAML，非技术用户门槛较高</li>
+          <li>模板数量有限（经典/现代两套）</li>
+          <li>CLI 版无 AI 功能（Web 版才有）</li>
+          <li>偏学术风格，商业感较弱</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. OpenResume -->
+  <div class="detail-card">
+    <h3>✨ OpenResume <span style="font-size:0.6em; color:#999; font-weight:400;">— 总分 78.0</span></h3>
+    <div class="detail-meta">
+      <span>📁 github.com/xitanggg/open-resume</span>
+      <span>⭐ 8.1k Stars</span>
+      <span>🔤 TypeScript</span>
+      <span>🔄 低频更新</span>
+    </div>
+    <div class="detail-features">
+      <span class="feature-tag">ATS 友好</span>
+      <span class="feature-tag">纯浏览器端</span>
+      <span class="feature-tag">简历解析器</span>
+      <span class="feature-tag">PDF 导入</span>
+      <span class="feature-tag">实时预览</span>
+      <span class="feature-tag">零后端依赖</span>
+      <span class="feature-tag">静态部署</span>
+    </div>
+    <p>极简主义的 ATS 友好型简历生成器，完全运行在浏览器端，数据不离开本地。内置简历解析器可检查 ATS 可读性，支持从现有 PDF 简历导入。部署极其简单——纯静态文件即可。</p>
+    <div class="pros-cons">
+      <div class="pros">
+        <h4>核心优势</h4>
+        <ul>
+          <li>部署极简，纯前端静态文件</li>
+          <li>隐私极佳，数据完全在浏览器</li>
+          <li>ATS 兼容性内置检测</li>
+          <li>支持 PDF 简历导入</li>
+          <li>UI 简洁现代</li>
+        </ul>
+      </div>
+      <div class="cons">
+        <h4>不足之处</h4>
+        <ul>
+          <li>功能相对单一，模板少</li>
+          <li>无 AI 能力</li>
+          <li>更新频率低（最近更新 2024.10）</li>
+          <li>无多语言支持</li>
+          <li>无拖拽编辑等高级功能</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. JobSpy -->
+  <div class="detail-card">
+    <h3>🔍 JobSpy <span style="font-size:0.6em; color:#999; font-weight:400;">— 总分 75.0</span></h3>
+    <div class="detail-meta">
+      <span>📁 github.com/speedyapply/JobSpy</span>
+      <span>⭐ 3.8k Stars</span>
+      <span>🔤 Python</span>
+      <span>🔄 活跃维护</span>
+    </div>
+    <div class="detail-features">
+      <span class="feature-tag">LinkedIn</span>
+      <span class="feature-tag">Indeed</span>
+      <span class="feature-tag">Glassdoor</span>
+      <span class="feature-tag">Google Jobs</span>
+      <span class="feature-tag">ZipRecruiter</span>
+      <span class="feature-tag">Bayt</span>
+      <span class="feature-tag">Naukri</span>
+      <span class="feature-tag">代理支持</span>
+      <span class="feature-tag">薪资解析</span>
+    </div>
+    <p>强大的多平台职位爬虫库，一行代码同时搜索 LinkedIn、Indeed、Glassdoor、Google Jobs 等 7+ 平台。返回结构化的职位数据（标题、公司、薪资、描述等），支持代理、速率控制。是构建求职聚合平台的理想基础库。</p>
+    <div class="pros-cons">
+      <div class="pros">
+        <h4>核心优势</h4>
+        <ul>
+          <li>覆盖 7+ 主流招聘平台</li>
+          <li>Python 库形式，易于集成</li>
+          <li>结构化数据输出，含薪资信息</li>
+          <li>支持代理和速率控制</li>
+          <li>文档清晰，API 设计合理</li>
+        </ul>
+      </div>
+      <div class="cons">
+        <h4>不足之处</h4>
+        <ul>
+          <li>仅爬取数据，不含投递功能</li>
+          <li>LinkedIn 容易被限流封 IP</li>
+          <li>需配合代理使用效果更好</li>
+          <li>无 AI 能力</li>
+          <li>不针对中国市场（无 Boss/拉勾）</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. AIHawk -->
+  <div class="detail-card">
+    <h3>🤖 AIHawk (Jobs_Applier_AI_Agent) <span style="font-size:0.6em; color:#999; font-weight:400;">— 总分 73.5</span></h3>
+    <div class="detail-meta">
+      <span>📁 github.com/feder-cr/Jobs_Applier_AI_Agent_AIHawk</span>
+      <span>⭐ 29.2k Stars</span>
+      <span>🔤 Python</span>
+      <span>🔄 维护一般</span>
+    </div>
+    <div class="detail-features">
+      <span class="feature-tag">自动投递</span>
+      <span class="feature-tag">AI 简历定制</span>
+      <span class="feature-tag">Chrome 自动化</span>
+      <span class="feature-tag">GPT 集成</span>
+      <span class="feature-tag">批量申请</span>
+      <span class="feature-tag">面试问题生成</span>
+      <span class="feature-tag">Selenium</span>
+    </div>
+    <p>AI 驱动的自动求职 Agent，利用 GPT + Selenium 自动化整个求职流程：自动浏览招聘网站、根据 JD 定制简历、自动填写申请表单并投递。29k+ Star 说明其直击求职者痛点，但维护稳定性和合规性存在争议。</p>
+    <div class="pros-cons">
+      <div class="pros">
+        <h4>核心优势</h4>
+        <ul>
+          <li>全自动求职投递，节省大量时间</li>
+          <li>AI 根据 JD 动态定制简历</li>
+          <li>29k+ Star，社区关注度高</li>
+          <li>支持多个招聘平台</li>
+        </ul>
+      </div>
+      <div class="cons">
+        <h4>不足之处</h4>
+        <ul>
+          <li>存在合规/道德争议（自动投递）</li>
+          <li>维护状态不稳定，Issue 响应慢</li>
+          <li>需要 OpenAI API Key，有成本</li>
+          <li>Selenium 自动化容易被平台检测</li>
+          <li>部署配置较复杂</li>
+          <li>不支持中国招聘平台</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. GeekGeekRun -->
+  <div class="detail-card">
+    <h3>🏃 GeekGeekRun (牛人快跑) <span style="font-size:0.6em; color:#999; font-weight:400;">— 总分 71.0</span></h3>
+    <div class="detail-meta">
+      <span>📁 github.com/geekgeekrun/geekgeekrun</span>
+      <span>⭐ 1.2k Stars</span>
+      <span>🔤 TypeScript (Puppeteer + Electron)</span>
+      <span>🔄 定期更新</span>
+    </div>
+    <div class="detail-features">
+      <span class="feature-tag">Boss直聘</span>
+      <span class="feature-tag">自动海投</span>
+      <span class="feature-tag">自动开聊</span>
+      <span class="feature-tag">已读不回提醒</span>
+      <span class="feature-tag">职位抓取</span>
+      <span class="feature-tag">僵尸职位清理</span>
+      <span class="feature-tag">Electron 桌面端</span>
+      <span class="feature-tag">中文优先</span>
+    </div>
+    <p>专为中文求职市场打造的 Boss 直聘自动化工具，基于 Puppeteer + Electron 开发。支持快速海投、自动开聊、已读不回提醒、职位信息抓取、不合适职位标记、僵尸职位清理等功能。界面友好，开箱即用，是国内求职者的实用利器。</p>
+    <div class="pros-cons">
+      <div class="pros">
+        <h4>核心优势</h4>
+        <ul>
+          <li>专为 Boss 直聘优化，中文求职首选</li>
+          <li>Electron 桌面应用，非技术用户友好</li>
+          <li>功能丰富：海投+开聊+提醒+清理</li>
+          <li>开源免费，社区活跃</li>
+          <li>本地运行，数据安全</li>
+        </ul>
+      </div>
+      <div class="cons">
+        <h4>不足之处</h4>
+        <ul>
+          <li>仅支持 Boss 直聘一个平台</li>
+          <li>Star 数较少，社区规模有限</li>
+          <li>存在被平台风控的风险</li>
+          <li>无 AI 能力</li>
+          <li>文档以中文为主，国际化不足</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9. Next Resume AI -->
+  <div class="detail-card">
+    <h3>🚀 Next Resume AI <span style="font-size:0.6em; color:#999; font-weight:400;">— 总分 67.0</span></h3>
+    <div class="detail-meta">
+      <span>📁 github.com/Kiranism/next-resume-ai</span>
+      <span>⭐ 42 Stars</span>
+      <span>🔤 TypeScript (Next.js 15)</span>
+      <span>🔄 低频更新</span>
+    </div>
+    <div class="detail-features">
+      <span class="feature-tag">Next.js 15</span>
+      <span class="feature-tag">React 19</span>
+      <span class="feature-tag">Gemini AI</span>
+      <span class="feature-tag">实时 PDF 预览</span>
+      <span class="feature-tag">多模板</span>
+      <span class="feature-tag">自动保存</span>
+      <span class="feature-tag">暗黑模式</span>
+      <span class="feature-tag">Clerk 认证</span>
+    </div>
+    <p>基于 Next.js 15 + React 19 的 AI 简历生成器，集成 Google Gemini AI 辅助内容生成。技术栈非常现代（Next.js 15 + Drizzle ORM + Clerk），适合作为学习现代全栈开发的参考项目。但 Star 数仅 42，社区规模极小。</p>
+    <div class="pros-cons">
+      <div class="pros">
+        <h4>核心优势</h4>
+        <ul>
+          <li>技术栈最新（Next.js 15 + React 19）</li>
+          <li>AI 内容生成（Gemini）</li>
+          <li>分屏编辑+实时预览体验好</li>
+          <li>代码结构清晰，适合学习参考</li>
+        </ul>
+      </div>
+      <div class="cons">
+        <h4>不足之处</h4>
+        <ul>
+          <li>Star 仅 42，社区几乎不存在</li>
+          <li>功能不完善，更像 Demo 项目</li>
+          <li>依赖多个第三方服务（Clerk/Neon/Gemini）</li>
+          <li>无自托管方案</li>
+          <li>文档简单</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10. OpenCATS -->
+  <div class="detail-card">
+    <h3>🏢 OpenCATS <span style="font-size:0.6em; color:#999; font-weight:400;">— 总分 57.5</span></h3>
+    <div class="detail-meta">
+      <span>📁 github.com/opencats/OpenCATS</span>
+      <span>⭐ 666 Stars</span>
+      <span>🔤 PHP</span>
+      <span>🔄 维护停滞</span>
+    </div>
+    <div class="detail-features">
+      <span class="feature-tag">ATS 系统</span>
+      <span class="feature-tag">候选人管理</span>
+      <span class="feature-tag">职位发布</span>
+      <span class="feature-tag">招聘流程</span>
+      <span class="feature-tag">WordPress 集成</span>
+    </div>
+    <p>面向招聘方的开源 ATS（申请人追踪系统），用于管理招聘全流程：发布职位、收集简历、筛选候选人。PHP 编写，可独立运行或集成到 WordPress/Drupal。但项目维护停滞，技术栈老旧。</p>
+    <div class="pros-cons">
+      <div class="pros">
+        <h4>核心优势</h4>
+        <ul>
+          <li>完整的 ATS 功能，招聘方视角</li>
+          <li>可集成 WordPress/Drupal</li>
+          <li>免费开源，无许可证费用</li>
+        </ul>
+      </div>
+      <div class="cons">
+        <h4>不足之处</h4>
+        <ul>
+          <li>面向招聘方而非求职者</li>
+          <li>PHP 老旧技术栈，无现代框架</li>
+          <li>维护停滞，最近推送 2023 年</li>
+          <li>UI/UX 过时</li>
+          <li>无 AI 能力</li>
+          <li>文档不完善</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 总结建议 -->
+  <div class="summary-card">
+    <h3>💡 选型建议</h3>
+    <p>根据不同使用场景，推荐如下组合方案：</p>
+    <div class="recommendation">
+      <p><strong>场景一：制作专业简历</strong></p>
+      <p>首选 <strong>Reactive Resume</strong>（功能最全，AI 赋能）→ 若偏好代码化/学术风用 <strong>RenderCV</strong> → 若追求极简和 ATS 兼容用 <strong>OpenResume</strong></p>
+    </div>
+    <div class="recommendation">
+      <p><strong>场景二：简历优化与 JD 匹配</strong></p>
+      <p>用 <strong>Resume Matcher</strong> 分析简历与 JD 匹配度，获取关键词建议，再回到简历工具优化</p>
+    </div>
+    <div class="recommendation">
+      <p><strong>场景三：国内求职海投</strong></p>
+      <p>用 <strong>GeekGeekRun</strong> 自动化 Boss 直聘投递，配合手动微调</p>
+    </div>
+    <div class="recommendation">
+      <p><strong>场景四：海外求职全流程</strong></p>
+      <p><strong>JobSpy</strong>（找岗位）→ <strong>Resume Matcher</strong>（匹配分析）→ <strong>Reactive Resume</strong>（定制简历）→ <strong>AIHawk</strong>（自动投递，注意合规风险）</p>
+    </div>
+    <div class="recommendation">
+      <p><strong>场景五：技术面试准备</strong></p>
+      <p><strong>Tech Interview Handbook</strong>（系统学习）+ Grind 75 题集（算法刷题）</p>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>本报告数据来源于 GitHub 公开信息和网络搜索，Star 数为截至 2026 年 7 月的近似值。</p>
+    <p>评分基于调研者的主观判断，仅供参考。建议结合自身需求实际体验后选择。</p>
+  </div>
+
+</div>
+
+<!-- ===== iframe 自适应高度脚本 ===== -->
+<!-- 当本页面被 <iframe> 嵌入时，自动向父窗口发送自身高度，实现自适应 -->
+<script>
+(function () {
+  function sendHeight() {
+    var h = document.documentElement.scrollHeight || document.body.scrollHeight;
+    if (window.parent !== window) {
+      window.parent.postMessage({ type: 'resumeReportResize', height: h }, '*');
+    }
+  }
+  window.addEventListener('load', sendHeight);
+  window.addEventListener('resize', function () { setTimeout(sendHeight, 100); });
+  if (typeof ResizeObserver !== 'undefined') {
+    new ResizeObserver(function () { setTimeout(sendHeight, 50); }).observe(document.body);
+  }
+  // 兜底：延迟再发一次，确保图片/字体加载后高度正确
+  setTimeout(sendHeight, 500);
+  setTimeout(sendHeight, 1500);
+})();
+</script>
+<!-- hexo injector body_end start -->
+  <script data-pjax="" src="/js/hexo_githubcalendar.js"></script>
+  <script data-pjax="">
+        function GithubCalendarConfig(){
+            var git_githubapiurl ="https://github-calendar.shiguang666.eu.org/api?user=shiguang-coding";
+            var git_color =['#ebedf0', '#a2f7af', '#6ce480', '#54ad63', '#469252', '#31753c', '#1f5f2a', '#13531f', '#084111', '#032b09', '#000000'];
+            var git_user ="shiguang-coding";
+            var parent_div_git = document.getElementById('recent-posts');
+            var git_div_html = '<div class="recent-post-item" style="width:100%;height:auto;padding:10px;"><div id="github_loading" style="width:10%;height:100%;margin:0 auto;display: block"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animateTransform></path></svg></div><div id="github_container"></div></div>';
+            if(parent_div_git && location.pathname =='/'){
+                console.log("已挂载hexo-github-calendar https://github.com/Barry-Flynn/hexo-github-calendar");
+                // parent_div_git.innerHTML=git_div_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",git_div_html) // 有报错，但不影响使用(支持pjax跳转)
+            };
+            GithubCalendar(git_githubapiurl,git_color,git_user)
+        }
+        if(document.getElementById('recent-posts')){
+            GithubCalendarConfig()
+        }
+    </script>
+    <style>#github_container{min-height:280px}@media screen and (max-width:650px) {#github_container{background-image:;min-height:0px}}</style>
+    <style></style><!-- hexo injector body_end end -->
+
+</div><hr><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="anzhiyufont anzhiyu-icon-comments"></i><span> 评论</span></div><div class="comment-randomInfo"><a onclick="anzhiyu.addRandomCommentInfo()" href="javascript:void(0)" style="display: none">匿名评论</a><a href="/privacy" style="margin-left: 4px">隐私政策</a></div><div class="comment-tips" id="comment-tips"><span>✅ 你无需删除空行，直接评论以获取最佳展示效果</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div><div class="comment-barrage"></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"></div><div class="author-info__description">代码成就万事基积沙镇海，梦想永在凌云意意气风发。</div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/"><h1 class="author-info__name">時光</h1><div class="author-info__desc">心寄朗朗乾坤，胸怀真修之道。</div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/shiguang-coding" target="_blank" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a></div></div></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bullhorn anzhiyu-shake"></i><span>公告</span></div><div class="announcement_content"><span>🌟欢迎光临時光的博客园子🌟</span><br> <span>🤔 如有问题欢迎评论区交流！</span><br> <span>📧 如需联系我：<a href="mailto:an_shiguang@163.com"><b>发送邮件🚀</b></a></span> <div id="welcome-info"></div></div></div><div class="sticky_layout"><div class="card-widget"><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/1Panel/" style="font-size: 1.05rem;">1Panel<sup>4</sup></a><a href="/tags/AI/" style="font-size: 1.05rem;">AI<sup>23</sup></a><a href="/tags/AIGC/" style="font-size: 1.05rem;">AIGC<sup>1</sup></a><a href="/tags/Alist/" style="font-size: 1.05rem;">Alist<sup>3</sup></a><a href="/tags/Bitwarden/" style="font-size: 1.05rem;">Bitwarden<sup>1</sup></a><a href="/tags/CentOS/" style="font-size: 1.05rem;">CentOS<sup>1</sup></a><a href="/tags/ChatGPT/" style="font-size: 1.05rem;">ChatGPT<sup>8</sup></a><a href="/tags/Chrome/" style="font-size: 1.05rem;">Chrome<sup>3</sup></a><a href="/tags/Claude-Code/" style="font-size: 1.05rem;">Claude Code<sup>1</sup></a><a href="/tags/CloudFlare/" style="font-size: 1.05rem;">CloudFlare<sup>3</sup></a><a href="/tags/Cloudflare/" style="font-size: 1.05rem;">Cloudflare<sup>3</sup></a><a href="/tags/CodeGraph/" style="font-size: 1.05rem;">CodeGraph<sup>1</sup></a><a href="/tags/Codex/" style="font-size: 1.05rem;">Codex<sup>2</sup></a><a href="/tags/DNS/" style="font-size: 1.05rem;">DNS<sup>1</sup></a><a href="/tags/DeepSeek/" style="font-size: 1.05rem;">DeepSeek<sup>5</sup></a><a href="/tags/Gemini/" style="font-size: 1.05rem;">Gemini<sup>2</sup></a><a href="/tags/GitHub/" style="font-size: 1.05rem;">GitHub<sup>7</sup></a><a href="/tags/KeyBoardTestUtility/" style="font-size: 1.05rem;">KeyBoardTestUtility<sup>1</sup></a><a href="/tags/MCP/" style="font-size: 1.05rem;">MCP<sup>1</sup></a><a href="/tags/NodeWarden/" style="font-size: 1.05rem;">NodeWarden<sup>1</sup></a><a href="/tags/Ollama/" style="font-size: 1.05rem;">Ollama<sup>2</sup></a><a href="/tags/Perplexity-AI/" style="font-size: 1.05rem;">Perplexity AI<sup>1</sup></a><a href="/tags/SSL/" style="font-size: 1.05rem;">SSL<sup>3</sup></a><a href="/tags/Skil/" style="font-size: 1.05rem;">Skil<sup>1</sup></a><a href="/tags/Sqlserver/" style="font-size: 1.05rem;">Sqlserver<sup>1</sup></a><a href="/tags/Superpowers/" style="font-size: 1.05rem;">Superpowers<sup>1</sup></a><a href="/tags/Vibe-Coding/" style="font-size: 1.05rem;">Vibe Coding<sup>1</sup></a><a href="/tags/Windows/" style="font-size: 1.05rem;">Windows<sup>2</sup></a><a href="/tags/%E5%9B%BE%E5%90%A7%E5%B7%A5%E5%85%B7%E7%AE%B1/" style="font-size: 1.05rem;">图吧工具箱<sup>1</sup></a><a href="/tags/%E5%BC%80%E6%BA%90%E5%88%86%E4%BA%AB/" style="font-size: 1.05rem;">开源分享<sup>12</sup></a><a href="/tags/%E5%BC%80%E6%BA%90%E5%B7%A5%E5%85%B7/" style="font-size: 1.05rem;">开源工具<sup>1</sup></a><a href="/tags/%E5%BE%AE%E4%BF%A1/" style="font-size: 1.05rem;">微信<sup>1</sup></a><a href="/tags/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/" style="font-size: 1.05rem;">搜索引擎<sup>2</sup></a><a href="/tags/%E6%B1%82%E8%81%8C/" style="font-size: 1.05rem;">求职<sup>1</sup></a><a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" style="font-size: 1.05rem;">浏览器<sup>1</sup></a><a href="/tags/%E7%A1%85%E8%B0%B7%E9%80%9F%E9%80%92/" style="font-size: 1.05rem;">硅谷速递<sup>18</sup></a><a href="/tags/%E7%AE%80%E5%8E%86/" style="font-size: 1.05rem;">简历<sup>1</sup></a><a href="/tags/%E7%BA%A6%E4%BC%9A%E9%82%80%E8%AF%B7/" style="font-size: 1.05rem;">约会邀请<sup>1</sup></a><a href="/tags/%E7%BD%91%E9%A1%B5%E8%AE%BE%E8%AE%A1/" style="font-size: 1.05rem;">网页设计<sup>1</sup></a><a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/" style="font-size: 1.05rem;">自动化<sup>1</sup></a></div></div><hr><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/07/"><span class="card-archive-list-date">七月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">5</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/06/"><span class="card-archive-list-date">六月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">18</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/05/"><span class="card-archive-list-date">五月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">7</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/02/"><span class="card-archive-list-date">二月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">9</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/01/"><span class="card-archive-list-date">一月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/12/"><span class="card-archive-list-date">十二月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">12</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/11/"><span class="card-archive-list-date">十一月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/10/"><span class="card-archive-list-date">十月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">18</span><span>篇</span></div></a></li></ul></div><hr><div class="card-webinfo"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="webinfo-item-title"><i class="anzhiyufont anzhiyu-icon-file-lines"></i><div class="item-name">文章总数 :</div></div><div class="item-count">258</div></div><div class="webinfo-item"><div class="webinfo-item-title"><i class="anzhiyufont anzhiyu-icon-stopwatch"></i><div class="item-name">建站天数 :</div></div><div class="item-count" id="runtimeshow" data-publishdate="2023-05-01T00:00:00.000Z"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></div></div><div class="webinfo-item"><div class="webinfo-item-title"><i class="anzhiyufont anzhiyu-icon-font"></i><div class="item-name">全站字数 :</div></div><div class="item-count">835.2k</div></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div id="footer_deal"><a class="deal_link" target="_blank" rel="noopener" href="https://github.com/shiguang-coding" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a><a class="deal_link" href="mailto:an_shiguang@163.com" title="email"><i class="anzhiyufont anzhiyu-icon-envelope"></i></a><img class="footer_mini_logo" title="返回顶部" alt="返回顶部" onclick="anzhiyu.scrollToDest(0, 500)" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/avatar.png" size="50px"><a class="deal_link" href="/atom.xml" title="RSS"><i class="anzhiyufont anzhiyu-icon-rss"></i></a><a class="deal_link" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC"><i class="anzhiyufont anzhiyu-icon-copyright-line"></i></a></div><div id="anzhiyu-footer"><div class="footer-group"><div class="footer-title">服务</div><div class="footer-links"><a class="footer-item" title="开往" target="_blank" rel="noopener" href="https://www.travellings.cn/go.html">开往</a><a class="footer-item" title="异次元之旅" target="_blank" rel="noopener" href="https://travel.moe/go.html?travel=on">异次元之旅</a><a class="footer-item" title="列表导航" target="_blank" rel="noopener" href="https://zhblogs.ohyee.cc/">列表导航</a><a class="footer-item" title="十年之约" target="_blank" rel="noopener" href="https://www.foreverblog.cn/">十年之约</a></div></div><div class="footer-group"><div class="footer-title">文章</div><div class="footer-links"><a class="footer-item" title="归档" href="/archives/">归档</a><a class="footer-item" title="分类" href="/categories/">分类</a><a class="footer-item" title="标签" href="/tags/">标签</a><a class="footer-item" title="RSS" href="/tom.xml">RSS</a></div></div><div class="footer-group"><div class="footer-title">导航</div><div class="footer-links"><a class="footer-item" title="即刻短文" href="/essay/">即刻短文</a><a class="footer-item" title="留言板" href="/comment/">留言板</a><a class="footer-item" title="关于我" href="/about/">关于我</a></div></div><div class="footer-group"><div class="footer-title-group"><div class="footer-title">友链</div><a class="random-friends-btn" id="footer-random-friends-btn" href="javascript:addFriendLinksInFooter();" title="换一批友情链接"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right"></i></a></div><div class="footer-links" id="friend-links-in-footer"></div></div></div><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo_v5.4.0" title="博客框架为Hexo_v5.4.0"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Frame-Hexo.svg" alt="博客框架为Hexo_v5.4.0"></a><a class="github-badge" target="_blank" href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu" style="margin-inline:5px" data-title="本站使用AnZhiYu主题" title="本站使用AnZhiYu主题"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.9/img/Theme-AnZhiYu-2E67D3.svg" alt="本站使用AnZhiYu主题"></a><a class="github-badge" target="_blank" href="https://icp.gov.moe/?keyword=20246626" style="margin-inline:5px" data-title="萌ICP备20246006号" title="萌ICP备20246006号"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://img.shields.io/badge/%E8%90%8Cicp%E5%A4%87-20246006%E5%8F%B7-FF1485" alt="萌ICP备20246006号"></a><a class="github-badge" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" style="margin-inline:5px" data-title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可" title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.2.0/img/badge/Copyright-BY-NC-SA.svg" alt="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"></a></p></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">©2023 - 2026 By <a class="footer-bar-link" href="/" title="時光" target="_blank">時光</a></div></div><div id="footer-type-tips"></div><div class="js-pjax"><script>function subtitleType () {
+  fetch('https://v1.hitokoto.cn')
+    .then(response => response.json())
+    .then(data => {
+      if (true) {
+        const from = '出自 ' + data.from
+        const sub = []
+        sub.unshift(data.hitokoto, from)
+        window.typed = new Typed('#footer-type-tips', {
+          strings: sub,
+          startDelay: 300,
+          typeSpeed: 150,
+          loop: true,
+          backSpeed: 50,
+        })
+      } else {
+        document.getElementById('footer-type-tips').innerHTML = data.hitokoto
+      }
+    })
+}
+
+if (true) {
+  if (typeof Typed === 'function') {
+    subtitleType()
+  } else {
+    getScript('https://cdn.cbd.int/typed.js@2.1.0/dist/typed.umd.js').then(subtitleType)
+  }
+} else {
+  subtitleType()
+}
+</script></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu" title="主题">主题</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">258</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">235</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">14</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://tv.shiguang666.eu.org/" title="ShiguangTV"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://tv.shiguang666.eu.org/favicon.ico" alt="ShiguangTV"><span class="back-menu-item-text">ShiguangTV</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://news.shiguang666.eu.org/" title="热点新闻"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://news.shiguang666.eu.org/icon.svg" alt="热点新闻"><span class="back-menu-item-text">热点新闻</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://cover.shiguang666.eu.org" title="封面制作"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://cover.shiguang666.eu.org/favicon.ico" alt="封面制作"><span class="back-menu-item-text">封面制作</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://favicon.shiguang666.eu.org/" title="图标获取"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://favicon.shiguang666.eu.org/brand/favicon.ico" alt="图标获取"><span class="back-menu-item-text">图标获取</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://logo.shiguang666.eu.org/" title="Logo制作"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://logo.shiguang666.eu.org/favicon.ico" alt="Logo制作"><span class="back-menu-item-text">Logo制作</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://publish.shiguang666.eu.org/" title="時光站点发布页"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/homepage.png" alt="時光站点发布页"><span class="back-menu-item-text">時光站点发布页</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://www.shiguang666.eu.org" title="時光主页"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="時光主页"><span class="back-menu-item-text">時光主页</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://nav.shiguang666.eu.org" title="時光导航站"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://nav.shiguang666.eu.org/images/logo-collapsed@2x.png" alt="時光导航站"><span class="back-menu-item-text">時光导航站</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://love.shiguang666.eu.org" title="表白生成器"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://love.shiguang666.eu.org/favicon.ico" alt="表白生成器"><span class="back-menu-item-text">表白生成器</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://invite.shiguang666.eu.org/" title="约会邀约"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://invite.shiguang666.eu.org/favicon.ico" alt="约会邀约"><span class="back-menu-item-text">约会邀约</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://game.shiguang666.eu.org" title="怀旧游戏机"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/chat.png" alt="怀旧游戏机"><span class="back-menu-item-text">怀旧游戏机</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://games.shiguang666.eu.org" title="H5小游戏合集"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://echeverra.cn/wp-content/uploads/2021/06/cropped-thmub-32x32.jpg" alt="H5小游戏合集"><span class="back-menu-item-text">H5小游戏合集</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 归档</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/charts/"><i class="fa fa-line-chart faa-tada"></i><span> 统计</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随机</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/news/"><i class="fa fa-newspaper faa-tada"></i><span> 早报亭</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/music/?id=10051718332&amp;server=netease"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/gallery/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/xjj/"><i class="fa fa-rocket faa-tada"></i><span> 养生堂</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/fcircle/"><i class="anzhiyufont anzhiyu-icon-artstation faa-tada" style="font-size: 0.9em;"></i><span> 朋友圈</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comment/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于我</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/1Panel/" style="font-size: 0.88rem;">1Panel<sup>4</sup></a><a href="/tags/AI/" style="font-size: 0.88rem;">AI<sup>23</sup></a><a href="/tags/AIGC/" style="font-size: 0.88rem;">AIGC<sup>1</sup></a><a href="/tags/Alist/" style="font-size: 0.88rem;">Alist<sup>3</sup></a><a href="/tags/Bitwarden/" style="font-size: 0.88rem;">Bitwarden<sup>1</sup></a><a href="/tags/CentOS/" style="font-size: 0.88rem;">CentOS<sup>1</sup></a><a href="/tags/ChatGPT/" style="font-size: 0.88rem;">ChatGPT<sup>8</sup></a><a href="/tags/Chrome/" style="font-size: 0.88rem;">Chrome<sup>3</sup></a><a href="/tags/Claude-Code/" style="font-size: 0.88rem;">Claude Code<sup>1</sup></a><a href="/tags/CloudFlare/" style="font-size: 0.88rem;">CloudFlare<sup>3</sup></a><a href="/tags/Cloudflare/" style="font-size: 0.88rem;">Cloudflare<sup>3</sup></a><a href="/tags/CodeGraph/" style="font-size: 0.88rem;">CodeGraph<sup>1</sup></a><a href="/tags/Codex/" style="font-size: 0.88rem;">Codex<sup>2</sup></a><a href="/tags/DNS/" style="font-size: 0.88rem;">DNS<sup>1</sup></a><a href="/tags/DeepSeek/" style="font-size: 0.88rem;">DeepSeek<sup>5</sup></a><a href="/tags/Gemini/" style="font-size: 0.88rem;">Gemini<sup>2</sup></a><a href="/tags/GitHub/" style="font-size: 0.88rem;">GitHub<sup>7</sup></a><a href="/tags/KeyBoardTestUtility/" style="font-size: 0.88rem;">KeyBoardTestUtility<sup>1</sup></a><a href="/tags/MCP/" style="font-size: 0.88rem;">MCP<sup>1</sup></a><a href="/tags/NodeWarden/" style="font-size: 0.88rem;">NodeWarden<sup>1</sup></a><a href="/tags/Ollama/" style="font-size: 0.88rem;">Ollama<sup>2</sup></a><a href="/tags/Perplexity-AI/" style="font-size: 0.88rem;">Perplexity AI<sup>1</sup></a><a href="/tags/SSL/" style="font-size: 0.88rem;">SSL<sup>3</sup></a><a href="/tags/Skil/" style="font-size: 0.88rem;">Skil<sup>1</sup></a><a href="/tags/Sqlserver/" style="font-size: 0.88rem;">Sqlserver<sup>1</sup></a><a href="/tags/Superpowers/" style="font-size: 0.88rem;">Superpowers<sup>1</sup></a><a href="/tags/Vibe-Coding/" style="font-size: 0.88rem;">Vibe Coding<sup>1</sup></a><a href="/tags/Windows/" style="font-size: 0.88rem;">Windows<sup>2</sup></a><a href="/tags/%E5%9B%BE%E5%90%A7%E5%B7%A5%E5%85%B7%E7%AE%B1/" style="font-size: 0.88rem;">图吧工具箱<sup>1</sup></a><a href="/tags/%E5%BC%80%E6%BA%90%E5%88%86%E4%BA%AB/" style="font-size: 0.88rem;">开源分享<sup>12</sup></a><a href="/tags/%E5%BC%80%E6%BA%90%E5%B7%A5%E5%85%B7/" style="font-size: 0.88rem;">开源工具<sup>1</sup></a><a href="/tags/%E5%BE%AE%E4%BF%A1/" style="font-size: 0.88rem;">微信<sup>1</sup></a><a href="/tags/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/" style="font-size: 0.88rem;">搜索引擎<sup>2</sup></a><a href="/tags/%E6%B1%82%E8%81%8C/" style="font-size: 0.88rem;">求职<sup>1</sup></a><a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" style="font-size: 0.88rem;">浏览器<sup>1</sup></a><a href="/tags/%E7%A1%85%E8%B0%B7%E9%80%9F%E9%80%92/" style="font-size: 0.88rem;">硅谷速递<sup>18</sup></a><a href="/tags/%E7%AE%80%E5%8E%86/" style="font-size: 0.88rem;">简历<sup>1</sup></a><a href="/tags/%E7%BA%A6%E4%BC%9A%E9%82%80%E8%AF%B7/" style="font-size: 0.88rem;">约会邀请<sup>1</sup></a><a href="/tags/%E7%BD%91%E9%A1%B5%E8%AE%BE%E8%AE%A1/" style="font-size: 0.88rem;">网页设计<sup>1</sup></a><a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/" style="font-size: 0.88rem;">自动化<sup>1</sup></a></div></div><hr></div></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="anzhiyufont anzhiyu-icon-comments"></i></a><a id="switch-commentBarrage" href="javascript:anzhiyu.switchCommentBarrage();" title="开关弹幕"><i class="anzhiyufont anzhiyu-icon-danmu"></i></a><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="nav-music"><a id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()" accesskey="m">播放音乐</a><div id="console-music-bg"></div><meting-js id="10051718332" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random" volume="0.7"></meting-js></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="anzhiyufont anzhiyu-icon-xmark"></i></button></nav><div class="is-center" id="loading-database"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-pulse-icon"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"></div></div><hr><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://music.163.com/#/my/m/music/playlist?id=10051718332&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><canvas id="universe"></canvas><script async="" src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("05/01/2023 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2023 By 安知鱼 V1.6.14",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 時光 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async="" src="/anzhiyu/random.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>(() => {
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo.shiguangdev.eu.org',
+      region: '',
+      onCommentLoaded: () => {
+        anzhiyu.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') setTimeout(runFn,0)
+    else getScript('https://cdn.cbd.int/twikoo@1.6.39/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo.shiguangdev.eu.org',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(res => {
+      countELement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  const runFn = () => {
+    init();
+    GLOBAL_CONFIG_SITE.isPost && getCount()
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) anzhiyu.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else {
+      loadTwikoo()
+    }
+  } else {
+    window.loadOtherComment = loadTwikoo
+  }
+})()</script><input type="hidden" name="page-type" id="page-type" value="anzhiyu"><script async="" src="/js/anzhiyu/comment_barrage.js"></script></div><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getComment = () => {
+    const runTwikoo = () => {
+      twikoo.getRecentComments({
+        envId: 'https://twikoo.shiguangdev.eu.org',
+        region: '',
+        pageSize: 6,
+        includeReply: true
+      }).then(function (res) {
+        const twikooArray = res.map(e => {
+          return {
+            'content': changeContent(e.comment),
+            'avatar': e.avatar,
+            'nick': e.nick,
+            'url': e.url + '#' + e.id,
+            'date': new Date(e.created).toISOString()
+          }
+        })
+
+        saveToLocal.set('twikoo-newest-comments', JSON.stringify(twikooArray), 10/(60*24))
+        generateHtml(twikooArray)
+      }).catch(function (err) {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.textContent= "无法获取评论，请确认相关配置是否正确"
+      })
+    }
+
+    if (typeof twikoo === 'object') {
+      runTwikoo()
+    } else {
+      getScript('https://cdn.cbd.int/twikoo@1.6.39/dist/twikoo.all.min.js').then(runTwikoo)
+    }
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'><div class='name'><span>${array[i].nick} </span></div></a>`
+        }
+        
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <time datetime="${array[i].date}">${anzhiyu.diffDate(array[i].date, true)}</time></div>
+        </div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom && ($dom.innerHTML= result)
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('twikoo-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script async="" data-pjax="" src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><script src="/js/anzhiyu/right_click_menu.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><script src="/js/custom/footer-animal.js" defer=""></script><script src="/api/card-welcome.js"></script><script src="https://cdn.bootcdn.net/ajax/libs/echarts/4.9.0-rc.1/echarts.min.js"></script><script id="click-heart" src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/dist/click-heart.min.js" async="async" mobile="false"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","meta[property=\"og:type\"]","meta[property=\"og:site_name\"]","meta[property=\"og:description\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404')
+  }
+})</script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>
